@@ -1,0 +1,1901 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce Predictive Search\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-08 17:39+0700\n"
+"PO-Revision-Date: 2016-11-08 17:39+0700\n"
+"Last-Translator: Nguyen Cong Tuan <mr.nguyencongtuan@gmail.com>\n"
+"Language-Team: Michael Busch IT Consulting <translations@mbitcon.com>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Textdomain-Support: yes\n"
+"X-Language: de_DE\n"
+"X-Source-Language: en_US\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: admin/admin-interface.php:178
+msgid "Great! You have the latest version installed."
+msgstr ""
+
+#: admin/admin-interface.php:243
+msgid "Settings successfully saved."
+msgstr "Einstellungen erfolgreich gespeichert"
+
+#: admin/admin-interface.php:251
+msgid "Error: Settings can not save."
+msgstr "Fehler: Einstellungen können nicht gespeichert werden."
+
+#: admin/admin-interface.php:259
+msgid "Settings successfully reseted."
+msgstr "Einstellungen erfolgreich zurückgesetzt."
+
+#: admin/admin-interface.php:280
+msgid "Thin"
+msgstr "Schmal"
+
+#: admin/admin-interface.php:281
+msgid "Thin/Italic"
+msgstr "Schmal/Kursiv"
+
+#: admin/admin-interface.php:282
+msgid "Normal"
+msgstr "Normal"
+
+#: admin/admin-interface.php:283
+msgid "Italic"
+msgstr "Kursiv"
+
+#: admin/admin-interface.php:284
+msgid "Bold"
+msgstr "Fett"
+
+#: admin/admin-interface.php:285
+msgid "Bold/Italic"
+msgstr "Fett/Kursiv"
+
+#: admin/admin-interface.php:295
+msgid "Solid"
+msgstr "Durchgehend"
+
+#: admin/admin-interface.php:296
+msgid "Double"
+msgstr "doppelt"
+
+#: admin/admin-interface.php:297
+msgid "Dashed"
+msgstr "Gestrichelt"
+
+#: admin/admin-interface.php:298
+msgid "Dotted"
+msgstr "Punktiert"
+
+#: admin/admin-interface.php:299
+msgid "Groove"
+msgstr "Wellig"
+
+#: admin/admin-interface.php:300
+msgid "Ridge"
+msgstr "Ridge"
+
+#: admin/admin-interface.php:301
+msgid "Inset"
+msgstr "Inset"
+
+#: admin/admin-interface.php:302
+msgid "Outset"
+msgstr "Outset"
+
+#: admin/admin-interface.php:1626 admin/admin-interface.php:1870
+#: admin/admin-interface.php:1970 admin/admin-interface.php:2139
+#: admin/admin-interface.php:2229 admin/admin-interface.php:2258
+#: admin/settings/all-results-page-settings.php:209
+#: admin/settings/all-results-page-settings.php:220
+#: admin/settings/all-results-page-settings.php:231
+#: admin/settings/all-results-page-settings.php:242
+#: admin/settings/all-results-page-settings.php:253
+#: admin/settings/global-settings.php:318
+#: admin/settings/global-settings.php:336
+#: admin/settings/global-settings.php:401
+#: admin/settings/global-settings.php:418
+#: admin/settings/global-settings.php:424
+#: admin/settings/global-settings.php:430
+#: admin/settings/global-settings.php:459
+msgid "ON"
+msgstr "AN"
+
+#: admin/admin-interface.php:1627 admin/admin-interface.php:1871
+#: admin/admin-interface.php:1971 admin/admin-interface.php:2140
+#: admin/admin-interface.php:2230 admin/admin-interface.php:2259
+#: admin/settings/all-results-page-settings.php:210
+#: admin/settings/all-results-page-settings.php:221
+#: admin/settings/all-results-page-settings.php:232
+#: admin/settings/all-results-page-settings.php:243
+#: admin/settings/all-results-page-settings.php:254
+#: admin/settings/global-settings.php:319
+#: admin/settings/global-settings.php:337
+#: admin/settings/global-settings.php:402
+#: admin/settings/global-settings.php:419
+#: admin/settings/global-settings.php:425
+#: admin/settings/global-settings.php:431
+#: admin/settings/global-settings.php:460
+msgid "OFF"
+msgstr "AUS"
+
+#: admin/admin-interface.php:1632
+#, fuzzy
+msgid "Google Fonts API"
+msgstr "-- Google-Schriften --"
+
+#: admin/admin-interface.php:1644
+msgid ""
+"ON to connect to Google Fonts API and have auto font updates direct from "
+"Google."
+msgstr ""
+
+#: admin/admin-interface.php:1648
+#, php-format
+msgid ""
+"Enter your existing Google Fonts API Key below. Don't have a key? Visit <a "
+"href='%s' target='_blank'>Google Developer API</a> to create a key"
+msgstr ""
+
+#: admin/admin-interface.php:1665
+#, fuzzy
+msgid "Google Fonts API Key"
+msgstr "-- Google-Schriften --"
+
+#: admin/admin-interface.php:1668
+msgid "Your Google API Key is valid and automatic font updates are enabled."
+msgstr ""
+
+#: admin/admin-interface.php:1669
+msgid "Please enter a valid Google API Key."
+msgstr ""
+
+#: admin/admin-interface.php:1688
+msgid "Check New Version"
+msgstr ""
+
+#: admin/admin-interface.php:1699
+msgid "Check Now"
+msgstr ""
+
+#: admin/admin-interface.php:1876
+msgid "Open Box Display"
+msgstr ""
+
+#: admin/admin-interface.php:1889
+msgid ""
+"ON and each admin panel setting box OPEN | CLOSED position are saved each "
+"time changes are SAVED."
+msgstr ""
+
+# @ woops
+#: admin/admin-interface.php:2294
+msgid "Width"
+msgstr "Breite"
+
+# @ woops
+#: admin/admin-interface.php:2296
+msgid "Height"
+msgstr "Höhe"
+
+#: admin/admin-interface.php:2298
+msgid "Hard Crop"
+msgstr "Harter Zuschnitt"
+
+#: admin/admin-interface.php:2391
+msgid "-- Default Fonts --"
+msgstr "-- Standardschriften --"
+
+#: admin/admin-interface.php:2402
+msgid "-- Google Fonts --"
+msgstr "-- Google-Schriften --"
+
+#: admin/admin-interface.php:2443
+msgid "Preview your customized typography settings"
+msgstr "Vorschau Ihrer angepassten Schrifteinstellungen"
+
+#: admin/admin-interface.php:2552 admin/admin-interface.php:2786
+msgid "Preview your customized border settings"
+msgstr "Vorschau Ihrer angepassten Rahmeneinstellungen"
+
+#: admin/admin-interface.php:2553 admin/admin-interface.php:2720
+msgid "0px = No Border"
+msgstr ""
+
+#: admin/admin-interface.php:2561 admin/admin-interface.php:2777
+msgid "Rounded"
+msgstr "Abgerundet"
+
+#: admin/admin-interface.php:2562 admin/admin-interface.php:2778
+msgid "Square"
+msgstr "Eckig"
+
+#: admin/admin-interface.php:2572 admin/admin-interface.php:2791
+msgid "Top Left Corner"
+msgstr "Obere linke Ecke"
+
+#: admin/admin-interface.php:2592 admin/admin-interface.php:2811
+msgid "Top Right Corner"
+msgstr "Obere rechte Ecke"
+
+#: admin/admin-interface.php:2612 admin/admin-interface.php:2831
+msgid "Bottom Right Corner"
+msgstr "Untere rechte Ecke"
+
+#: admin/admin-interface.php:2632 admin/admin-interface.php:2851
+msgid "Bottom Left Corner"
+msgstr "Untere linke Ecke"
+
+#: admin/admin-interface.php:2719
+msgid "Preview your customized border styles settings"
+msgstr "Vorschau Ihrer angepassten Rahmeneinstellungen"
+
+#: admin/admin-interface.php:2901
+msgid "YES"
+msgstr "JA"
+
+#: admin/admin-interface.php:2902
+msgid "NO"
+msgstr "NEIN"
+
+#: admin/admin-interface.php:2917
+msgid "Horizontal Shadow"
+msgstr "Horizontaler Schatten"
+
+#: admin/admin-interface.php:2935
+msgid "Vertical Shadow"
+msgstr "Vertikaler Schatten"
+
+#: admin/admin-interface.php:2953
+msgid "Blur Distance"
+msgstr "Verwischungsdistanz"
+
+#: admin/admin-interface.php:2971
+msgid "Spread Size"
+msgstr "Verschiebungsgröße"
+
+#: admin/admin-interface.php:2989
+msgid "INNER"
+msgstr "INNERHALB"
+
+#: admin/admin-interface.php:2990
+msgid "OUTER"
+msgstr "AUSSERHALB"
+
+#: admin/admin-interface.php:3008
+msgid "Preview your customized box shadow settings"
+msgstr "Vorschau Ihrer angepassten Schatteneinstellungen"
+
+#: admin/admin-interface.php:3276
+msgid "Save changes"
+msgstr "Änderungen speichern"
+
+# @ woops
+#: admin/admin-interface.php:3277
+msgid "Reset Settings"
+msgstr "Einstellungen zurücksetzen"
+
+# @ woops
+#: admin/admin-pages/predictive-search-page.php:63
+#: admin/admin-pages/predictive-search-page.php:64
+msgid "Predictive Search"
+msgstr "Predictive Search"
+
+#: admin/admin-ui.php:109 admin/admin-ui.php:112
+msgid "Premium Version Enhanced Features"
+msgstr ""
+
+# @ woops
+#: admin/admin-ui.php:113
+msgid "WooCommerce Predictive Search Premium"
+msgstr "WooCommerce Predictive Search Premium"
+
+#: admin/admin-ui.php:114
+msgid ""
+"Quick Video showing the main (not all) enhanced features that are built into "
+"the WooCommerce Predictive Search Premium version"
+msgstr ""
+
+#: admin/admin-ui.php:115
+msgid "Developer Support and Premium Features"
+msgstr ""
+
+#: admin/admin-ui.php:116
+msgid ""
+"Limited Time Offer. Purchase the Premium Version Lifetime License. That is a "
+"Lifetime of maintenance updates, feature upgrades and developer support for "
+"a once only fee. Offer ending soon."
+msgstr ""
+
+#: admin/admin-ui.php:117
+msgid "Get Premium Features and Support"
+msgstr ""
+
+#: admin/admin-ui.php:265
+#, fuzzy, php-format
+msgid ""
+"Advanced Settings - Upgrade to the <a href=\"%s\" target=\"_blank\">%s "
+"License</a> to activate these settings."
+msgstr ""
+"Führen Sie ein Upgrade auf <a href=\"%s\" target=\"_blank\">%s</a> durch, um "
+"diese Einstellungen zu aktivieren"
+
+#: admin/admin-ui.php:268
+msgid "Pro Version"
+msgstr "Pro Version"
+
+#: admin/admin-ui.php:318 admin/admin-ui.php:337
+msgid "You should check now to see if have any new version is available"
+msgstr ""
+
+#: admin/admin-ui.php:320
+#, php-format
+msgid ""
+"Connection Failure! Please try again. If this issue persists please create a "
+"support request on the plugin <a href=\"%s\" target=\"_blank\">a3rev support "
+"forum</a>."
+msgstr ""
+
+#: admin/admin-ui.php:328
+#, php-format
+msgid ""
+"There is a new version <span class=\"a3rev-ui-new-plugin-version\">%s</span> "
+"available, <a href=\"%s\" target=\"_blank\">update now</a> or download "
+"direct from <a href=\"%s\" target=\"_blank\">My Account</a> on a3rev.com"
+msgstr ""
+
+#: admin/includes/uploader/class-uploader.php:101
+msgid "Upload"
+msgstr "Hochladen"
+
+#: admin/includes/uploader/class-uploader.php:121
+msgid "View File"
+msgstr "Datei ansehen"
+
+#: admin/settings/all-results-page-settings.php:81
+msgid "All Results Pages successfully saved."
+msgstr "Einstellungen Ergebnisseite erfolgreich gespeichert."
+
+#: admin/settings/all-results-page-settings.php:82
+msgid "Error: All Results Pages can not save."
+msgstr ""
+"Fehler: Die Einstellungen für die Ergebnisseite konnten nicht gespeichert "
+"werden."
+
+#: admin/settings/all-results-page-settings.php:83
+msgid "All Results Pages successfully reseted."
+msgstr "Einstellungen für die Ergebnisseite erfolgreich zurückgesetzt."
+
+#: admin/settings/all-results-page-settings.php:136
+#: admin/tabs/all-results-pages-tab.php:78
+msgid "All Results Pages"
+msgstr "Einstellungen Ergebnisseite"
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:180
+msgid "Search results page settings"
+msgstr "Einstellungen für Suchergebnisseite"
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:186
+msgid "Results"
+msgstr "Ergebnisse"
+
+#: admin/settings/all-results-page-settings.php:187
+msgid ""
+"The number of results to show before endless scroll click to see more "
+"results."
+msgstr ""
+"Anzahl der Ergebnisse, die anzeigt werden sollen, bevor durch Klick weitere "
+"Ergebnisse geladen werden."
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:194
+msgid "Description character count"
+msgstr "Zeichenzahl der Beschreibung"
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:195
+msgid ""
+"The number of characters from product descriptions that shows with each "
+"search result."
+msgstr ""
+"Anzahl der Zeichen in den Beschreibungen, die für die Suchergebnisse anzeigt "
+"werden."
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:202
+#: classes/class-wpml-functions.php:63 templates/popup/item.php:16
+#: templates/results-page/item.php:13
+msgid "SKU"
+msgstr "SKU"
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:203
+msgid "ON to show product SKU with search results"
+msgstr "AN um alle Produkt SKUs in den Suchergebnissen anzuzeigen"
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:213
+#: classes/class-wpml-functions.php:65 templates/popup/item.php:17
+#: templates/results-page/item.php:14
+msgid "Price"
+msgstr "Preis"
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:214
+msgid "ON to show product price with search results"
+msgstr "AN um Preise in den Suchergebnissen anzeigen"
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:224
+msgid "Add to cart"
+msgstr "In den Warenkorb"
+
+#: admin/settings/all-results-page-settings.php:225
+msgid "On to show Add to cart button with search results"
+msgstr ""
+"AN um Schaltfläche \"In den Warenkorb\" in den Suchergebnissen anzuzeigen"
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:235
+#: classes/class-wpml-functions.php:59
+#: widget/wc-predictive-search-widgets.php:137
+msgid "Product Categories"
+msgstr "Produktkategorien"
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:236
+msgid "On to show categories with search results"
+msgstr "AN um Kategorien in den Suchergebnissen anzuzeigen"
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:246
+#: classes/class-wpml-functions.php:60
+#: widget/wc-predictive-search-widgets.php:138
+msgid "Product Tags"
+msgstr "Produkt-Tags"
+
+# @ woops
+#: admin/settings/all-results-page-settings.php:247
+msgid "On to show tags with search results"
+msgstr "AN um Tags in den Suchergebnissen anzuzeigen"
+
+#: admin/settings/global-settings.php:82
+msgid "Global Settings successfully saved."
+msgstr "Globale Einstellungen erfolgreich gespeichert."
+
+#: admin/settings/global-settings.php:83
+msgid "Error: Global Settings can not save."
+msgstr "Fehler: Globale Einstellungen konnten nicht gespeichert werden."
+
+#: admin/settings/global-settings.php:84
+msgid "Global Settings successfully reseted."
+msgstr "Globale Einstellungen erfolgreich zurückgesetzt."
+
+#: admin/settings/global-settings.php:186
+#: admin/tabs/global-settings-tab.php:78
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: admin/settings/global-settings.php:281
+msgid "Plugin Framework Global Settings"
+msgstr ""
+
+#: admin/settings/global-settings.php:289
+msgid "Customize Admin Setting Box Display"
+msgstr ""
+
+#: admin/settings/global-settings.php:290
+msgid ""
+"By default each admin panel will open with all Setting Boxes in the CLOSED "
+"position."
+msgstr ""
+
+#: admin/settings/global-settings.php:297
+#, fuzzy
+msgid "Google Fonts"
+msgstr "-- Google-Schriften --"
+
+#: admin/settings/global-settings.php:298
+msgid ""
+"By Default Google Fonts are pulled from a static JSON file in this plugin. "
+"This file is updated but does not have the latest font releases from Google."
+msgstr ""
+
+#: admin/settings/global-settings.php:305
+msgid "House Keeping"
+msgstr "Aufräumen"
+
+#: admin/settings/global-settings.php:309
+#, fuzzy
+msgid "Clean Up On Deletion"
+msgstr "Saubermachen nach dem Entfernen"
+
+#: admin/settings/global-settings.php:310
+#, fuzzy
+msgid ""
+"On deletion (not deactivate) the plugin will completely remove all tables "
+"and data it created, leaving no trace it was ever here."
+msgstr ""
+"Markiere dieses Feld, um nach dem Entfernen des Plugins (Nicht nach dem "
+"Deaktivieren) alle zugehörigen Tabellen und Daten zu löschen. Bei einem "
+"Upgrade auf die Pro-Version ist dies <span class=\"description\">nicht "
+"empfehlenswert</span>"
+
+#: admin/settings/global-settings.php:323
+#, fuzzy
+msgid "Search Results No-Cache"
+msgstr "Suchergebnisse sortieren nach"
+
+#: admin/settings/global-settings.php:324
+msgid ""
+"While testing different setting and the results in search box dropdown you "
+"need to switch ON Results No-Cache On. Search box dropdown results are "
+"cached in local store for frontend users for faster delivery on repeat "
+"searches. Be sure to turn this OFF when you are finished testing."
+msgstr ""
+
+# @ woops
+#: admin/settings/global-settings.php:330
+#, fuzzy
+msgid "Results No-Cache"
+msgstr "Ergebnisse"
+
+# @ woops
+#: admin/settings/global-settings.php:341
+#, fuzzy
+msgid "Predictive Search Mode"
+msgstr "Predictive Search"
+
+#: admin/settings/global-settings.php:342
+msgid ""
+"<strong>IMPORTANT!</strong> Remember to turn ON the No-Cache option so that "
+"you see the difference between the 2 search modes when testing."
+msgstr ""
+
+#: admin/settings/global-settings.php:348
+#, fuzzy
+msgid "Search Mode"
+msgstr "Im Suchfeld anzuzeigender Text"
+
+#: admin/settings/global-settings.php:349
+msgid ""
+"STRICT MODE will return exact match results. Example if user types 'out' the "
+"results will include all items that have 'out' at the start of a word such "
+"as 'outside', 'outsized' etc. This gives 100% relevant results every time "
+"but can lead to a lot of 'Nothing Found' results depending on how customers "
+"search your site."
+msgstr ""
+
+#: admin/settings/global-settings.php:350
+msgid ""
+"BROAD MODE just like Strict mode will return results that have the search "
+"term at the start but will also search within a word. Example if user types "
+"'out' all items that have 'out' at the start will be returned plus all that "
+"have 'out' within a word such as 'fadeout', 'about' etc. Results are not as "
+"accurate as STRICT MODE but there will be less 'Nothing Found' results."
+msgstr ""
+
+#: admin/settings/global-settings.php:357
+msgid "STRICT"
+msgstr ""
+
+#: admin/settings/global-settings.php:358
+msgid "BROAD"
+msgstr ""
+
+#: admin/settings/global-settings.php:362
+msgid "Search Page Configuration"
+msgstr "Einstellungen für die Suchergebnisseite"
+
+#: admin/settings/global-settings.php:364
+msgid ""
+"Predictive Search has detected the WPML plugin. On install a search page was "
+"auto created for each language in use. Please use the WPML String "
+"Translations plugin to make translation for plugin text for each page. If "
+"adding another language after installing Predictive Search you have to "
+"manually create a search page for it."
+msgstr ""
+"Predictive Search hat das WPML-Plugin erkannt. Bei der Installation wurde "
+"eine Suchergebnisseite automatisch für jede aktive Sprache erstellt. Bitte "
+"nutzen Sie das WPML Zeichenketten-Übersetzungs-Plugin (https://wpml.org/"
+"documentation/getting-started-guide/string-translation/) um für jede Seite "
+"Plugin Textübersetzungen zu erstellen. Falls Sie nach der Installation von "
+"Predicitve Search eine weitere Sprache hinzufügen, müssen Sie manuell eine "
+"Suchergenisseite für die Sprache erstellen."
+
+# @ woops
+#: admin/settings/global-settings.php:364
+msgid ""
+"A search results page needs to be selected so that WooCommerce Predictive "
+"Search knows where to show search results. This page should have been "
+"created upon installation of the plugin, if not you need to create it."
+msgstr ""
+"Es muss eine Seite festgelegt werden, auf der WooCommerce Predictive Search "
+"die Ergebnisse anzeigt. Diese Seite sollte bereits bei der Installation des "
+"Plugins erstellt worden sein. Falls nicht, lege bitte eine Seite dafür an."
+
+# @ woops
+#: admin/settings/global-settings.php:369
+msgid "Search Page"
+msgstr "Suchseite"
+
+# @ woops
+#: admin/settings/global-settings.php:370
+msgid "Page contents:"
+msgstr "Seiteninhalt:"
+
+# @ woops
+#: admin/settings/global-settings.php:376
+#, fuzzy
+msgid "Predictive Search Focus Keywords"
+msgstr "Predictive Search"
+
+#: admin/settings/global-settings.php:387
+msgid "Special Characters"
+msgstr "Sonderzeichen"
+
+#: admin/settings/global-settings.php:388
+msgid ""
+"Select any special characters that are used on this site. Selecting a "
+"character will mean that results will be returned when user search input "
+"includes or excludes the special character. <strong>IMPORTANT!</strong> Do "
+"not turn this feature on unless needed. If ON - only select actual "
+"characters used in Product Titles, SKU, Category Names etc - each special "
+"character selected creates 1 extra query per search object, per product, "
+"post or page."
+msgstr ""
+"Wählen Siedie auf Ihrer Seite verwendeten Sonderzeichen aus. Wenn Sie ein "
+"Zeichen hier wählen, bedeuted das, dass Ergebnisse angezeigt werden wann "
+"immer eine Nutzer Suche dieses Sonderzeichen ein- oder auschließt. <strong> "
+"WICHTIG!</strong> Schalten Sie dieses Feature nur ein, wenn Sie es wirklich "
+"benötigen. Wenn in Stellung AN - Suchen Sie nur nach tatsächlich verendeten "
+"Zeichen in Produktiteln, SKU, Kategorienamen, etc. - Jedes ausgewählte "
+"Sonderzeichenerzeugt eine zusätzliche Datenbankabfrage pro Suchobjekt, pro "
+"Produkt, Beitrag oder Seite."
+
+#: admin/settings/global-settings.php:394
+msgid "Special Character Function"
+msgstr "Sonderzeichen-Funktion"
+
+#: admin/settings/global-settings.php:410
+#, fuzzy
+msgid "Character Syntax"
+msgstr "Zeichen auswählen"
+
+#: admin/settings/global-settings.php:417
+msgid "IGNORE. ON to ignore or skip over special characters in the string."
+msgstr ""
+
+#: admin/settings/global-settings.php:423
+msgid "REMOVE. ON to remove or see special characters as a space."
+msgstr ""
+
+#: admin/settings/global-settings.php:423
+msgid "recommended"
+msgstr ""
+
+#: admin/settings/global-settings.php:429
+msgid "BOTH. On to use ignore and remove for special characters."
+msgstr ""
+
+#: admin/settings/global-settings.php:437
+msgid "Select Characters"
+msgstr "Zeichen auswählen"
+
+# @ woops
+#: admin/settings/global-settings.php:445
+msgid "Exclude From Predictive Search"
+msgstr "Von der Suche ausschließen"
+
+#: admin/settings/global-settings.php:451
+msgid "Exclude Out Of Stock"
+msgstr ""
+
+#: admin/settings/global-settings.php:452
+#, fuzzy
+msgid "ON to exclude out of stock products from search results"
+msgstr ""
+"Produktkategorien, Produktschlagwörter aus den Suchergebnissen ausschließen."
+
+# @ woops
+#: admin/settings/global-settings.php:463
+msgid "Exclude Products"
+msgstr "Produkte ausschließen"
+
+# @ woops
+#: admin/settings/global-settings.php:466
+msgid "Choose Products"
+msgstr "Produkte auswählen"
+
+# @ woops
+#: admin/settings/global-settings.php:472
+msgid "Exclude Posts"
+msgstr "Beiträge ausschließen"
+
+# @ woops
+#: admin/settings/global-settings.php:475
+msgid "Choose Posts"
+msgstr "Beiträge auswählen"
+
+# @ woops
+#: admin/settings/global-settings.php:481
+msgid "Exclude Pages"
+msgstr "Seiten ausschließen"
+
+# @ woops
+#: admin/settings/global-settings.php:484
+msgid "Choose Pages"
+msgstr "Seiten auswählen"
+
+#: admin/settings/global-settings.php:491
+#, fuzzy
+msgid "Google Analytics Site Search Integration"
+msgstr "Integration von Google Analytics Site Search."
+
+#: admin/settings/header-template-settings.php:82
+#, fuzzy
+msgid "Header Template Settings successfully saved."
+msgstr "Globale Einstellungen erfolgreich gespeichert."
+
+#: admin/settings/header-template-settings.php:83
+#, fuzzy
+msgid "Error: Header Template Settings can not save."
+msgstr "Fehler: Globale Einstellungen konnten nicht gespeichert werden."
+
+#: admin/settings/header-template-settings.php:84
+#, fuzzy
+msgid "Header Template Settings successfully reseted."
+msgstr "Globale Einstellungen erfolgreich zurückgesetzt."
+
+#: admin/settings/header-template-settings.php:139
+#: admin/tabs/header-template-tab.php:78
+msgid "Header Template"
+msgstr ""
+
+#: admin/settings/header-template-settings.php:182
+msgid "HEADER TEMPLATE PREMIUM"
+msgstr ""
+
+#: admin/settings/performance-settings.php:82
+#, fuzzy
+msgid "Performance Settings successfully saved."
+msgstr "Globale Einstellungen erfolgreich gespeichert."
+
+#: admin/settings/performance-settings.php:83
+#, fuzzy
+msgid "Error: Performance Settings can not save."
+msgstr "Fehler: Globale Einstellungen konnten nicht gespeichert werden."
+
+#: admin/settings/performance-settings.php:84
+#, fuzzy
+msgid "Performance Settings successfully reseted."
+msgstr "Globale Einstellungen erfolgreich zurückgesetzt."
+
+#: admin/settings/performance-settings.php:147
+#: admin/tabs/performance-settings-tab.php:78
+msgid "Performance"
+msgstr ""
+
+# @ woops
+#: admin/settings/performance-settings.php:187
+#, fuzzy
+msgid "Start Sync"
+msgstr "Predictive Search"
+
+#: admin/settings/performance-settings.php:229
+msgid "Continue Sync"
+msgstr ""
+
+#: admin/settings/performance-settings.php:233
+#: admin/settings/performance-settings.php:408
+msgid "Re Sync"
+msgstr ""
+
+#: admin/settings/performance-settings.php:241
+msgid "Manual Database Sync"
+msgstr "Manuelle Datenbanksynchronisation"
+
+#: admin/settings/performance-settings.php:242
+msgid ""
+"Predictive Search database is auto updated whenever a product or post is "
+"published or updated. Please run a Manual database sync if you upload "
+"products by csv or feel that Predictive Search results are showing old "
+"data.  Will sync the Predictive Search database with your current "
+"WooCommerce and WordPress databases"
+msgstr ""
+"Die Predictive Search Datenbank wird immer dann automatisch aktualisiert, "
+"wenn ein Produkt oder Beitrag veröffentlicht oder aktualisiert wird. Lassen "
+"Sie eine manuelle Datenbanksynchronisation laufen, wenn Sie Produkte per CSV "
+"importiert haben oder wenn Sie das Gefühl haben, dass die Suchergebnisse "
+"veraltete Daten anzeigen. Es wird eine Synchronisation zwischen Ihrer "
+"Predictive Search -Datenbank und der der aktuellen WooCommerce und Wordpress "
+"Datenbank durchgeführt."
+
+#: admin/settings/performance-settings.php:248
+msgid "Sync Search Data"
+msgstr "Suchdaten synchronisieren"
+
+# @ woops
+#: admin/settings/performance-settings.php:255
+#, fuzzy
+msgid "Products Synced"
+msgstr "Produktname"
+
+#: admin/settings/performance-settings.php:258
+msgid "Syncing Products..."
+msgstr ""
+
+# @ woops
+#: admin/settings/performance-settings.php:259
+#, fuzzy
+msgid "Synced Products"
+msgstr "Produkte ausschließen"
+
+# @ woops
+#: admin/settings/performance-settings.php:274
+#, fuzzy
+msgid "Product SKUs Synced"
+msgstr "Produktname"
+
+#: admin/settings/performance-settings.php:274
+#: admin/settings/performance-settings.php:293
+#: admin/settings/performance-settings.php:312
+msgid "PREMIUM"
+msgstr ""
+
+# @ woops
+#: admin/settings/performance-settings.php:277
+#, fuzzy
+msgid "Syncing Product SKUs..."
+msgstr "Produkte ausschließen"
+
+# @ woops
+#: admin/settings/performance-settings.php:278
+#, fuzzy
+msgid "Synced Product SKUs"
+msgstr "Produkte ausschließen"
+
+# @ woops
+#: admin/settings/performance-settings.php:293
+#, fuzzy
+msgid "Product Categories Synced"
+msgstr "Produktkategorien"
+
+# @ woops
+#: admin/settings/performance-settings.php:296
+#, fuzzy
+msgid "Syncing Product Categories..."
+msgstr "Produktkategorien"
+
+# @ woops
+#: admin/settings/performance-settings.php:297
+#, fuzzy
+msgid "Synced Product Categories"
+msgstr "Produktkategorien"
+
+# @ woops
+#: admin/settings/performance-settings.php:312
+#, fuzzy
+msgid "Product Tags Synced"
+msgstr "Produktname"
+
+# @ woops
+#: admin/settings/performance-settings.php:315
+#, fuzzy
+msgid "Syncing Product Tags..."
+msgstr "Produkt-Tags"
+
+# @ woops
+#: admin/settings/performance-settings.php:316
+#, fuzzy
+msgid "Synced Product Tags"
+msgstr "Produkte ausschließen"
+
+#: admin/settings/performance-settings.php:331
+msgid "Posts Synced"
+msgstr ""
+
+#: admin/settings/performance-settings.php:334
+msgid "Syncing Posts..."
+msgstr ""
+
+# @ woops
+#: admin/settings/performance-settings.php:335
+#, fuzzy
+msgid "Synced Posts"
+msgstr "Beiträge ausschließen"
+
+#: admin/settings/performance-settings.php:350
+msgid "Pages Synced"
+msgstr ""
+
+#: admin/settings/performance-settings.php:353
+msgid "Syncing Pages..."
+msgstr ""
+
+# @ woops
+#: admin/settings/performance-settings.php:354
+#, fuzzy
+msgid "Synced Pages"
+msgstr "Seiten ausschließen"
+
+#: admin/settings/performance-settings.php:371
+msgid "Syncing Data..."
+msgstr ""
+
+#: admin/settings/performance-settings.php:372
+#: admin/settings/performance-settings.php:373
+#, fuzzy
+msgid "Synced Data"
+msgstr "Suchdaten synchronisieren"
+
+# @ woops
+#: admin/settings/performance-settings.php:377
+#, fuzzy
+msgid "Search Performance Settings"
+msgstr "Einstellungen für Suchergebnisseite"
+
+#: admin/settings/search-box-settings.php:82
+#, fuzzy
+msgid "Search Box Settings successfully saved."
+msgstr "Einstellungen erfolgreich gespeichert"
+
+#: admin/settings/search-box-settings.php:83
+#, fuzzy
+msgid "Error: Search Box Settings can not save."
+msgstr "Fehler: Einstellungen können nicht gespeichert werden."
+
+#: admin/settings/search-box-settings.php:84
+#, fuzzy
+msgid "Search Box Settings successfully reseted."
+msgstr "Einstellungen erfolgreich zurückgesetzt."
+
+#: admin/settings/search-box-settings.php:154 admin/tabs/search-box-tab.php:78
+#, fuzzy
+msgid "Search Box"
+msgstr "Im Suchfeld anzuzeigender Text"
+
+# @ woops
+#: admin/settings/search-box-settings.php:198
+msgid "Global Search Box Text"
+msgstr "Text im Eingabefeld der globalen Suche"
+
+#: admin/settings/search-box-settings.php:205
+msgid "Dropdown Results Animation"
+msgstr ""
+
+# @ woops
+#: admin/settings/search-box-settings.php:216
+#, fuzzy
+msgid "Search In Category Feature"
+msgstr "Produktkategorien"
+
+#: admin/settings/search-box-settings.php:239
+msgid ""
+"Enter the translated search box text for each language for WPML to show it "
+"correct on the front end."
+msgstr ""
+"Geben Sie den übersetzten Suchfeldtext für jede Sprache für WPML ein, um ihn "
+"im Frontend korrekt anzuzeigen."
+
+#: admin/settings/search-box-settings.php:246
+#: admin/settings/search-box-settings.php:260
+msgid "Text to Show"
+msgstr "Anzuzeigender Text"
+
+# @ woops
+#: admin/settings/search-box-settings.php:248
+#: admin/settings/search-box-settings.php:262
+msgid "&lt;empty&gt; shows nothing"
+msgstr "&lt;Leer&gt; = es wird nichts angezeigt"
+
+#: admin/settings/search-function-settings.php:81
+#, fuzzy
+msgid "Search Function Settings successfully saved."
+msgstr "Einstellungen erfolgreich gespeichert"
+
+#: admin/settings/search-function-settings.php:82
+#, fuzzy
+msgid "Error: Search Function Settings can not save."
+msgstr "Fehler: Einstellungen können nicht gespeichert werden."
+
+#: admin/settings/search-function-settings.php:83
+#, fuzzy
+msgid "Search Function Settings successfully reseted."
+msgstr "Einstellungen erfolgreich zurückgesetzt."
+
+#: admin/settings/search-function-settings.php:138
+#: admin/tabs/search-function-tab.php:78
+#, fuzzy
+msgid "Search Function"
+msgstr "Sonderzeichen-Funktion"
+
+#: admin/settings/search-function-settings.php:182
+msgid "PREMIUM FEATURE"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:82
+#, fuzzy
+msgid "Widget Template Settings successfully saved."
+msgstr "Globale Einstellungen erfolgreich gespeichert."
+
+#: admin/settings/sidebar-template-settings.php:83
+#, fuzzy
+msgid "Error: Widget Template Settings can not save."
+msgstr "Fehler: Globale Einstellungen konnten nicht gespeichert werden."
+
+#: admin/settings/sidebar-template-settings.php:84
+#, fuzzy
+msgid "Widget Template Settings successfully reseted."
+msgstr "Globale Einstellungen erfolgreich zurückgesetzt."
+
+#: admin/settings/sidebar-template-settings.php:139
+#: admin/tabs/sidebar-template-tab.php:78
+msgid "Widget Template"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:182
+#, fuzzy
+msgid "Search Box Container"
+msgstr "Sonderzeichen-Funktion"
+
+#: admin/settings/sidebar-template-settings.php:188
+#, fuzzy
+msgid "Search Box Alignment"
+msgstr "Im Suchfeld anzuzeigender Text"
+
+#: admin/settings/sidebar-template-settings.php:190
+msgid "Alignment within the widget area container"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:195
+msgid "None"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:196
+#: admin/settings/sidebar-template-settings.php:235
+#: admin/settings/sidebar-template-settings.php:262
+msgid "Left"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:197
+msgid "Center"
+msgstr ""
+
+# @ woops
+#: admin/settings/sidebar-template-settings.php:198
+#: admin/settings/sidebar-template-settings.php:240
+#: admin/settings/sidebar-template-settings.php:267
+#, fuzzy
+msgid "Right"
+msgstr "Höhe"
+
+#: admin/settings/sidebar-template-settings.php:202
+#, fuzzy
+msgid "Search Box Width"
+msgstr "Im Suchfeld anzuzeigender Text"
+
+#: admin/settings/sidebar-template-settings.php:203
+msgid "of width of widget area container"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:212
+#, fuzzy
+msgid "Search Box Height"
+msgstr "Im Suchfeld anzuzeigender Text"
+
+#: admin/settings/sidebar-template-settings.php:220
+#, fuzzy
+msgid "Search Box Margin"
+msgstr "Im Suchfeld anzuzeigender Text"
+
+#: admin/settings/sidebar-template-settings.php:225
+#: admin/settings/sidebar-template-settings.php:252
+msgid "Top"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:230
+#: admin/settings/sidebar-template-settings.php:257
+msgid "Bottom"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:247
+#, fuzzy
+msgid "Search Box Margin (Mobiles)"
+msgstr "Im Suchfeld anzuzeigender Text"
+
+#: admin/settings/sidebar-template-settings.php:274
+#, fuzzy
+msgid "Search Box Border"
+msgstr "Im Suchfeld anzuzeigender Text"
+
+#: admin/settings/sidebar-template-settings.php:280
+msgid "Search Box Border Focus"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:286
+#, fuzzy
+msgid "Border Shadow"
+msgstr "Vertikaler Schatten"
+
+#: admin/settings/sidebar-template-settings.php:293
+msgid "Search in Category Dropdown"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:311
+msgid "Alignment"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:312
+#, fuzzy
+msgid "If set LEFT then Predictive Search Icon on RIGHT "
+msgstr "WooCommerce Predictive Search per Shortcode einfügen."
+
+#: admin/settings/sidebar-template-settings.php:318
+msgid "LEFT"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:319
+msgid "RIGHT"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:322
+msgid "Maximum Width"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:323
+msgid "% width of Search Box"
+msgstr ""
+
+# @ woops
+#: admin/settings/sidebar-template-settings.php:332
+#, fuzzy
+msgid "Category Font"
+msgstr "Kategorie"
+
+#: admin/settings/sidebar-template-settings.php:338
+msgid "Down Icon Size"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:348
+msgid "Down Icon Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:354
+#: admin/settings/sidebar-template-settings.php:395
+msgid "Background Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:360
+#: admin/settings/sidebar-template-settings.php:407
+#, fuzzy
+msgid "Vertical Side Border"
+msgstr "Vertikaler Schatten"
+
+#: admin/settings/sidebar-template-settings.php:367
+#, fuzzy
+msgid "Search Icon"
+msgstr "Sonderzeichen-Funktion"
+
+#: admin/settings/sidebar-template-settings.php:373
+#, fuzzy
+msgid "Search Icon Size"
+msgstr "Sonderzeichen-Funktion"
+
+#: admin/settings/sidebar-template-settings.php:383
+#, fuzzy
+msgid "Search Icon Colour"
+msgstr "Sonderzeichen-Funktion"
+
+#: admin/settings/sidebar-template-settings.php:389
+msgid "Search Icon Hover Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:401
+msgid "Background Hover Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:414
+#, fuzzy
+msgid "Search Input Box"
+msgstr "Sonderzeichen-Funktion"
+
+#: admin/settings/sidebar-template-settings.php:420
+msgid "Input Font"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:426
+msgid "Input Padding"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:431
+#: admin/settings/sidebar-template-settings.php:506
+#: admin/settings/sidebar-template-settings.php:542
+#: admin/settings/sidebar-template-settings.php:636
+msgid "Top/Bottom"
+msgstr ""
+
+# @ woops
+#: admin/settings/sidebar-template-settings.php:436
+#: admin/settings/sidebar-template-settings.php:511
+#: admin/settings/sidebar-template-settings.php:547
+#: admin/settings/sidebar-template-settings.php:641
+#, fuzzy
+msgid "Left/Right"
+msgstr "Höhe"
+
+#: admin/settings/sidebar-template-settings.php:443
+msgid "Input Background Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:449
+msgid "Loading Icon Size"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:459
+msgid "Loading Icon Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:466
+#, fuzzy
+msgid "Results Dropdown Container"
+msgstr "Suchergebnisse sortieren nach"
+
+#: admin/settings/sidebar-template-settings.php:472
+msgid "Dropdown Wide"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:478
+msgid "Input Wide"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:479
+msgid "Full Wide"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:482
+msgid "Container Border"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:489
+msgid "Results Dropdown Section Titles"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:495
+#, fuzzy
+msgid "Title Font"
+msgstr "-- Google-Schriften --"
+
+#: admin/settings/sidebar-template-settings.php:501
+msgid "Title Padding"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:518
+msgid "Container Border Bottom"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:524
+msgid "Container Background"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:531
+#, fuzzy
+msgid "Results Dropdown Items"
+msgstr "Suchergebnisse sortieren nach"
+
+#: admin/settings/sidebar-template-settings.php:537
+msgid "Item Padding"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:554
+msgid "Item Border Bottom"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:560
+msgid "Item Border Bottom Hover Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:566
+msgid "Item Background Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:572
+msgid "Item Background Hover Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:578
+msgid "Item Image Size"
+msgstr ""
+
+# @ woops
+#: admin/settings/sidebar-template-settings.php:588
+#, fuzzy
+msgid "Product Name Font"
+msgstr "Produktname"
+
+# @ woops
+#: admin/settings/sidebar-template-settings.php:594
+#, fuzzy
+msgid "Product Name Hover Colour"
+msgstr "Produktname"
+
+#: admin/settings/sidebar-template-settings.php:600
+#, fuzzy
+msgid "Product Price Font"
+msgstr "Produktpreise anzeigen"
+
+#: admin/settings/sidebar-template-settings.php:606
+msgid "Product Price Hover Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:612
+msgid "Product Description Font"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:618
+msgid "Product Description Hover Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:625
+#, fuzzy
+msgid "Results Dropdown Footer"
+msgstr "Suchergebnisse sortieren nach"
+
+#: admin/settings/sidebar-template-settings.php:631
+msgid "Footer Padding"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:648
+msgid "Footer Background Colour"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:654
+msgid "See More Text"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:657
+#, fuzzy, php-format
+msgid "See more search results for '%s' in:"
+msgstr "Weitere Ergebnisse anzeigen für"
+
+#: admin/settings/sidebar-template-settings.php:660
+msgid "See More Font"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:666
+msgid "More Link Font"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:672
+msgid "More Icon Size"
+msgstr ""
+
+#: admin/settings/sidebar-template-settings.php:682
+msgid "More Icon Colour"
+msgstr ""
+
+# Permalink der Suchergebnisseite
+#: admin/wc-predictive-search-init.php:8 admin/wc-predictive-search-init.php:9
+msgctxt "page_slug"
+msgid "woocommerce-search"
+msgstr "woocommerce-suche"
+
+# @ woops
+#: admin/wc-predictive-search-init.php:8 admin/wc-predictive-search-init.php:9
+msgid "Woocommerce Predictive Search"
+msgstr "Woocommerce Predictive Search"
+
+# @ woops
+#: classes/class-wc-predictive-search-filter.php:52
+msgid "Documentation"
+msgstr "Dokumentation"
+
+# @ woops
+#: classes/class-wc-predictive-search-filter.php:53
+msgid "Support"
+msgstr "Support"
+
+# @ woops
+#: classes/class-wc-predictive-search-filter.php:60
+#, fuzzy
+msgid "Go to Support Forum"
+msgstr "Support"
+
+#: classes/class-wc-predictive-search-filter.php:67
+msgid "Is this plugin is just what you needed? If so"
+msgstr ""
+
+#: classes/class-wc-predictive-search-filter.php:68
+msgid "Submit Review for Plugin on WordPress"
+msgstr ""
+
+# @ woops
+#: classes/class-wc-predictive-search-filter.php:75
+#, fuzzy
+msgid "WooCommerce Predictive Search Pro"
+msgstr "WooCommerce Predictive Search"
+
+#: classes/class-wc-predictive-search-filter.php:82
+msgid "Free WooCommerce Plugins"
+msgstr ""
+
+#: classes/class-wc-predictive-search-filter.php:89
+msgid "Free WordPress Plugins"
+msgstr ""
+
+#: classes/class-wc-predictive-search-filter.php:96
+msgid "Connect with us via"
+msgstr ""
+
+#: classes/class-wc-predictive-search-filter.php:97
+msgid "a3rev Facebook"
+msgstr ""
+
+#: classes/class-wc-predictive-search-filter.php:98
+msgid "a3rev Twitter"
+msgstr ""
+
+# @ woops
+#: classes/class-wc-predictive-search-shortcodes.php:102
+#: classes/class-wpml-functions.php:72
+msgid "Loading More Results..."
+msgstr "Weitere Ergebnisse laden..."
+
+# @ woops
+#: classes/class-wc-predictive-search-shortcodes.php:104
+#: classes/class-wpml-functions.php:73
+msgid "No More Results to Show"
+msgstr "Keine weiteren Ergebnisse"
+
+#: classes/class-wc-predictive-search-shortcodes.php:107
+#: classes/class-wpml-functions.php:74
+msgid "Fetching search results..."
+msgstr "Suchergebnissen werden ermittelt..."
+
+# @ woops
+#: classes/class-wc-predictive-search-shortcodes.php:109
+#: classes/class-wpml-functions.php:75
+msgid "No Results to Show"
+msgstr "Leider nichts gefunden"
+
+#: classes/class-wc-predictive-search-synch.php:59
+msgid "Thanks for upgrading to latest version of WooCommerce Predictive Search"
+msgstr ""
+
+#: classes/class-wc-predictive-search-synch.php:60
+#: classes/class-wc-predictive-search-synch.php:63
+#: classes/class-wc-predictive-search-synch.php:66
+msgid ""
+"The setup is almost done. Just one more step and you are ready to go. Please "
+"run database Sync to populate your Search engine database."
+msgstr ""
+
+# @ woops
+#: classes/class-wc-predictive-search-synch.php:62
+#, fuzzy
+msgid "Thanks for installing WooCommerce Predictive Search"
+msgstr "WooCommerce Predictive Search"
+
+#: classes/class-wc-predictive-search-synch.php:76
+msgid "Sync Now"
+msgstr "Jetzt synchronisieren"
+
+# @ woops
+#: classes/class-wpml-functions.php:57
+#: includes/class-wc-predictive-search.php:205
+#: includes/class-wc-predictive-search.php:214
+#: includes/class-wc-predictive-search.php:220
+#: widget/wc-predictive-search-widgets.php:19
+msgid "Product Name"
+msgstr "Produktname"
+
+# @ woops
+#: classes/class-wpml-functions.php:58
+#: widget/wc-predictive-search-widgets.php:136
+msgid "Product SKU"
+msgstr "Produkt-SKU"
+
+# @ woops
+#: classes/class-wpml-functions.php:61
+#: includes/class-wc-predictive-search.php:284
+#: includes/class-wc-predictive-search.php:293
+#: includes/class-wc-predictive-search.php:299
+#: widget/wc-predictive-search-widgets.php:20
+msgid "Posts"
+msgstr "Beiträge"
+
+# @ woops
+#: classes/class-wpml-functions.php:62
+#: includes/class-wc-predictive-search.php:284
+#: includes/class-wc-predictive-search.php:293
+#: includes/class-wc-predictive-search.php:299
+#: widget/wc-predictive-search-widgets.php:21
+msgid "Pages"
+msgstr "Seiten"
+
+# @ woops
+#: classes/class-wpml-functions.php:64
+msgid "Priced"
+msgstr "Mit Preis"
+
+# @ woops
+#: classes/class-wpml-functions.php:66 templates/results-page/item.php:19
+msgid "Category"
+msgstr "Kategorie"
+
+# @ woops
+#: classes/class-wpml-functions.php:67 templates/results-page/item.php:28
+msgid "Tags"
+msgstr "Tags"
+
+#: classes/class-wpml-functions.php:68 includes/class-legacy-api.php:132
+msgid "Nothing found for that name. Try a different spelling or name."
+msgstr ""
+"Für diesen Begriff wurde nichts gefunden, versuchen Sie es mit einer anderen "
+"Schreibweise oder einem anderen Begriff."
+
+#: classes/class-wpml-functions.php:69 templates/results-page/header.php:13
+msgid "Viewing all"
+msgstr "Anzeige aller Ergebnisse im Feld"
+
+#: classes/class-wpml-functions.php:70 templates/results-page/header.php:15
+msgid "search results for your search query"
+msgstr "für Ihren Suchbegriff"
+
+#: classes/class-wpml-functions.php:71 templates/results-page/header.php:29
+msgid "Sort Search Results by"
+msgstr "Suchergebnisse sortieren nach"
+
+# @ woops
+#: classes/class-wpml-functions.php:76 templates/results-page/footer.php:14
+msgid "Nothing Found! Please refine your search and try again."
+msgstr "Nichts zu finden! Bitte andere Suchbegriffe verwenden."
+
+#: templates/search-bar/predictive-search-form-sidebar.php:37
+msgid "Go"
+msgstr ""
+
+#: widget/wc-predictive-search-widgets.php:30
+msgid ""
+"User sees search results as they type in a dropdown - links through to 'All "
+"Search Results Page' that features endless scroll."
+msgstr ""
+"Ergebnisse werden während der Eingabe in einem Dropdown angezeigt mit "
+"Verweis auf die Suchergebnisseite mit allen Ergebissen mit Endlos-Scroll-"
+"Funktion."
+
+# @ woops
+#: widget/wc-predictive-search-widgets.php:33
+msgid "WooCommerce Predictive Search"
+msgstr "WooCommerce Predictive Search"
+
+#: widget/wc-predictive-search-widgets.php:165
+msgid "Title:"
+msgstr "Titel:"
+
+#: widget/wc-predictive-search-widgets.php:174
+msgid "Search box text message"
+msgstr "Im Suchfeld anzuzeigender Text"
+
+# @ woops
+#: widget/wc-predictive-search-widgets.php:181
+msgid "Search box text message:"
+msgstr "Im Suchfeld anzuzeigender Text:"
+
+# @ woops
+#: widget/wc-predictive-search-widgets.php:183
+msgid ""
+"Activate search 'types' for this widget by entering the number of results to "
+"show in the widget dropdown. &lt;empty&gt; = not activated. Sort order by "
+"drag and drop"
+msgstr ""
+"Such-Modus für dieses Widget durch Eingabe der Anzahl im Dropdown "
+"anzuzeigender Ergebnisse festlegen. &lt;Leer&gt; = nicht aktiviert. "
+"Reihenfolge ändern mit Drag&Drop"
+
+#: widget/wc-predictive-search-widgets.php:187
+#: widget/wc-predictive-search-widgets.php:196
+#: widget/wc-predictive-search-widgets.php:200
+msgid "Premium Feature!"
+msgstr ""
+
+#: widget/wc-predictive-search-widgets.php:192
+#, fuzzy
+msgid "Select Template:"
+msgstr "Zeichen auswählen"
+
+#: widget/wc-predictive-search-widgets.php:194
+#, fuzzy
+msgid "Widget"
+msgstr "Ridge"
+
+#: widget/wc-predictive-search-widgets.php:195
+msgid "Header"
+msgstr ""
+
+# @ woops
+#: widget/wc-predictive-search-widgets.php:199
+#, fuzzy
+msgid "Search in Product Category"
+msgstr "Produktkategorien"
+
+#: widget/wc-predictive-search-widgets.php:203
+#, fuzzy
+msgid "Show Results Images"
+msgstr "Einstellungen Ergebnisseite"
+
+#: widget/wc-predictive-search-widgets.php:206
+#, fuzzy
+msgid "Show Results Prices"
+msgstr "Produktpreise anzeigen"
+
+# @ woops
+#: widget/wc-predictive-search-widgets.php:209
+#, fuzzy
+msgid "Show Results Description"
+msgstr "Zeichenzahl in den Beschreibungen der Ergebnisse"
+
+#: widget/wc-predictive-search-widgets.php:212
+#, fuzzy
+msgid "Character Count:"
+msgstr "Zeichen auswählen"
+
+#~ msgid ""
+#~ "<strong>SUCCESS</strong>! Your Predictive Search Database has been "
+#~ "successfully updated."
+#~ msgstr ""
+#~ "<strong>ERFOLG</strong>! Ihre Predictive Search Datenbank wurde "
+#~ "erfolgreich aktualisiert."
+
+#~ msgid "You have synced"
+#~ msgstr "Synchronisierung durchgeführt"
+
+#~ msgid "%s Product"
+#~ msgid_plural "%s Products"
+#~ msgstr[0] "%s Produkt"
+#~ msgstr[1] "%s Produkte"
+
+#~ msgid "%s Post"
+#~ msgid_plural "%s Posts"
+#~ msgstr[0] "%s Beitrag"
+#~ msgstr[1] "%s Beiträge"
+
+#~ msgid "%s Page"
+#~ msgid_plural "%s Pages"
+#~ msgstr[0] "%s Seite"
+#~ msgstr[1] "%s Seiten"
+
+#~ msgid "Settings inside this yellow border are %s Features."
+#~ msgstr "Einstellungen innerhalb dieses gleben Rahmens sind %s Features."
+
+#~ msgid "Exclude Content Settings successfully saved."
+#~ msgstr "Einstellungen für auszuschließende Inhalte erfolgreich gespeichert."
+
+#~ msgid "Error: Exclude Content Settings can not save."
+#~ msgstr ""
+#~ "Fehler: Einstellungen für auszuschließende Inhalte konnten nicht "
+#~ "gespeichert werden."
+
+#~ msgid "Exclude Content Settings successfully reseted."
+#~ msgstr ""
+#~ "Einstellungen für auszuschließende Inhalte erfolgreich zurückgesetzt."
+
+# @ woops
+#~ msgid "Exclude Content"
+#~ msgstr "Inhalte ausschließen"
+
+#~ msgid "in"
+#~ msgstr "in"
+
+# @ woops
+#, fuzzy
+#~ msgid "Predictive Search Premium"
+#~ msgstr "Predictive Search"
+
+#~ msgid ""
+#~ "<strong>WANT MORE?</strong> - WooCommerce Predictive Search Premium gives "
+#~ "a much deeper store catalog search"
+#~ msgstr ""
+#~ "<strong>Sie wollen mehr?</strong> - WooCommerce Predictive Search Premium "
+#~ "bietet Ihnen viel mehr Funktionalität in der Shop-Katalogsuche"
+
+#~ msgid "Features"
+#~ msgstr "Features"
+
+#~ msgid ""
+#~ "Search options includes Product Categories, Product SKU's, Product Tags."
+#~ msgstr ""
+#~ "Die Suchoptionen beinhalten Produktkategorien, Artikelnummern(SKUs), "
+#~ "Produkt Schlagwörter (Tags)."
+
+#~ msgid ""
+#~ "Full Site search optimization with Predictive Search 'Focus Keywords'."
+#~ msgstr ""
+#~ "Optimierung der Inhalte dieser Site mit Schlüsselwörtern für Predictive "
+#~ "Search."
+
+#~ msgid "Full integration with Yoast SEO or All in One SEO plugins."
+#~ msgstr "Volle Integration mit Yoast SEO oder ALL in One SEO Plugins."
+
+# @ woops
+#, fuzzy
+#~ msgid "Insert Predictive Search boxes by shortcode."
+#~ msgstr "WooCommerce Predictive Search"
+
+#, fuzzy
+#~ msgid "Exclude Product Cats, Product Tags from search results."
+#~ msgstr ""
+#~ "Produktkategorien, Produktschlagwörter aus den Suchergebnissen "
+#~ "ausschließen."
+
+#~ msgid ""
+#~ "Predictive Search PHP Function for adding the search box in any non "
+#~ "widget area - example the header."
+#~ msgstr ""
+#~ "Predictive Search PHP-Funktion um das Suchfeld in jeder Nicht-Widget-Area "
+#~ "einzufügen - z.B. im Header."
+
+#~ msgid ""
+#~ "Smart Search function with Widgets, Shortcode and the search Function."
+#~ msgstr "Smart-Search Funktion mit Widgets, Shortcode und Suchfunktion."
+
+#~ msgid "Search Engine Performance enhancement settings for larger sites."
+#~ msgstr "Verbesserung der Suchmaschinenperformance für größere Webseiten."
+
+#~ msgid "View this plugins"
+#~ msgstr "Ansehen der Plugin "
+
+#~ msgid "documentation"
+#~ msgstr "Ansehen der Plugin - "
+
+#~ msgid "Visit this plugins"
+#~ msgstr "Besuchen Sie das Plugin "
+
+# @ woops
+#, fuzzy
+#~ msgid "WooCommerce Product Sort & Display"
+#~ msgstr "WooCommerce Predictive Search"
+
+# @ woops
+#, fuzzy
+#~ msgid "WooCommerce Products Quick View"
+#~ msgstr "WooCommerce Predictive Search"
+
+# @ woops
+#, fuzzy
+#~ msgid "WooCommerce Dynamic Products Gallery"
+#~ msgstr "WooCommerce Predictive Search"
+
+# @ woops
+#, fuzzy
+#~ msgid "WooCommerce Compare Products"
+#~ msgstr "Produkte auswählen"
+
+# @ woops
+#, fuzzy
+#~ msgid "WooCommerce Widget Product Slideshow"
+#~ msgstr "WooCommerce Predictive Search"
+
+# @ woops
+#, fuzzy
+#~ msgid "Exclude Product Categories"
+#~ msgstr "Produktkategorien"
+
+# @ woops
+#, fuzzy
+#~ msgid "Choose Product Categories"
+#~ msgstr "Produktkategorien"
+
+# @ woops
+#, fuzzy
+#~ msgid "Exclude Product Tags"
+#~ msgstr "Produkte ausschließen"
+
+# @ woops
+#, fuzzy
+#~ msgid "Choose Product Tags"
+#~ msgstr "Produkte auswählen"
+
+#, fuzzy
+#~ msgid "Google Analytics Settings successfully saved."
+#~ msgstr "Globale Einstellungen erfolgreich gespeichert."
+
+#, fuzzy
+#~ msgid "Error: Google Analytics Settings can not save."
+#~ msgstr "Fehler: Globale Einstellungen konnten nicht gespeichert werden."
+
+#, fuzzy
+#~ msgid "Google Analytics Settings successfully reseted."
+#~ msgstr "Globale Einstellungen erfolgreich zurückgesetzt."
+
+#, fuzzy
+#~ msgid "characters"
+#~ msgstr "Zeichen auswählen"
+
+# @ woops
+#, fuzzy
+#~ msgid "Predictive Search Function"
+#~ msgstr "Predictive Search"
+
+# @ woops
+#, fuzzy
+#~ msgid "Product tag"
+#~ msgstr "Produkt-Tags"
+
+# @ woops
+#, fuzzy
+#~ msgid "Post"
+#~ msgstr "Beiträge"
+
+# @ woops
+#, fuzzy
+#~ msgid "Page"
+#~ msgstr "Seiten"
+
+#, fuzzy
+#~ msgid "On to show Product prices"
+#~ msgstr "Produktpreise anzeigen"
+
+# @ woops
+#, fuzzy
+#~ msgid "Description Characters"
+#~ msgstr "Zeichenzahl der Beschreibung"
+
+# @ woops
+#, fuzzy
+#~ msgid ""
+#~ "Number of characters from product description to show in search field "
+#~ "drop-down. Default value is \"100\"."
+#~ msgstr ""
+#~ "Anzahl der Zeichen in den Beschreibungen, die für die Suchergebnisse "
+#~ "anzeigt werden."
+
+# @ woops
+#, fuzzy
+#~ msgid "Global search"
+#~ msgstr "Text im Eingabefeld der globalen Suche"
+
+# @ woops
+#, fuzzy
+#~ msgid "Hide from Predictive Search results"
+#~ msgstr "Von der Suche ausschließen"
+
+#, fuzzy
+#~ msgid "Show in Predictive Search results"
+#~ msgstr "Predictive Search Premium"
+
+# @ woops
+#, fuzzy
+#~ msgid "Hide from Predictive Search results."
+#~ msgstr "Von der Suche ausschließen"
+
+# @ woops
+#, fuzzy
+#~ msgid "Number of product description characters"
+#~ msgstr "Zeichenzahl in den Beschreibungen der Ergebnisse"
+
+# @ woops
+#, fuzzy
+#~ msgid "Search All Products"
+#~ msgstr "Produkte ausschließen"
+
+#~ msgid "Use this Image"
+#~ msgstr "Dieses Bild verwenden"
+
+#~ msgid "Use as"
+#~ msgstr "Verwenden als"
+
+#~ msgid "Previously Uploaded"
+#~ msgstr "Bereits hochgeladen"
