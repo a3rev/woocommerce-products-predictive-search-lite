@@ -34,12 +34,13 @@ class WC_Predictive_Search_Admin_Init extends WC_Predictive_Search_Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function init() {
 
-		$this->add_admin_menu();
+		add_action( 'plugins_loaded', array( $this, 'add_admin_menu' ), 7 );
 
 		// Filter to add admin pages for Amin UI process
 		add_filter( $this->plugin_name . '_admin_pages', array( $this, 'add_admin_pages' ) );
 
-		add_action( 'admin_menu', array( $this, 'register_admin_menu' ) );
+		$menu_hook = 'admin_menu';
+		add_action( $menu_hook, array( $this, 'register_admin_menu' ) );
 
 		add_action( 'plugins_loaded', array( $this, 'get_all_settings' ), 8 );
 	}
@@ -121,7 +122,7 @@ class WC_Predictive_Search_Admin_Init extends WC_Predictive_Search_Admin_UI
 
 					case 'menu':
 
-						$menu_page = add_menu_page( esc_html( $menu_item['page_title'] ), esc_html( $menu_item['menu_title'] ), $menu_item['capability'], $menu_item['menu_slug'] , $menu_item['function'], $menu_item['icon_url'], $menu_item['position'] );
+						$menu_page = add_menu_page( esc_html( $menu_item['page_title'] ), $menu_item['menu_title'], $menu_item['capability'], $menu_item['menu_slug'] , $menu_item['function'], $menu_item['icon_url'], $menu_item['position'] );
 
 						if ( isset( $menu_item['script_function'] ) && trim( $menu_item['script_function'] ) != ''  )
 							add_action( "admin_print_scripts-" . $menu_page, $menu_item['script_function'] );
@@ -130,7 +131,7 @@ class WC_Predictive_Search_Admin_Init extends WC_Predictive_Search_Admin_UI
 
 					case 'submenu':
 
-						$submenu_page = add_submenu_page( $menu_item['parent_slug'] , esc_html( $menu_item['page_title'] ), esc_html( $menu_item['menu_title'] ), $menu_item['capability'], $menu_item['menu_slug'] , $menu_item['function'] );
+						$submenu_page = add_submenu_page( $menu_item['parent_slug'] , esc_html( $menu_item['page_title'] ), $menu_item['menu_title'], $menu_item['capability'], $menu_item['menu_slug'] , $menu_item['function'] );
 
 						if ( isset( $menu_item['script_function'] ) && trim( $menu_item['script_function'] ) != ''  )
 							add_action( "admin_print_scripts-" . $submenu_page, $menu_item['script_function'] );
@@ -192,14 +193,14 @@ class WC_Predictive_Search_Admin_Init extends WC_Predictive_Search_Admin_UI
 
 			if ( ! is_array( $tabs ) || count( $tabs ) < 1 ) {
 			?>
-			<h2>
+			<h1>
 			<?php
 					if ( $page_data !== false) {
 						echo esc_html( $page_data['page_title'] );
 						if ( isset( $page_data['view_doc'] ) ) echo $page_data['view_doc'];
 					}
 			?>
-			</h2>
+			</h1>
             <div style="width:100%; float:left;">
             <?php if ( isset( $page_data['callback_function'] ) && ! empty( $page_data['callback_function'] ) ) call_user_func( $page_data['callback_function'] ); ?>
             </div>

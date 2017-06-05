@@ -59,6 +59,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 		
 		if ( is_admin() && isset( $_REQUEST['page'] ) && in_array( $_REQUEST['page'], $admin_pages ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_script_load' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'register_modal_scripts' ), 0 );
 			do_action( $this->plugin_name . '_init_scripts' );
 
 			add_action( 'admin_print_scripts', array( $this, 'admin_localize_printed_scripts' ), 5 );
@@ -82,6 +83,13 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 	public function register_fontawesome_style() {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		wp_register_style( 'font-awesome-styles', $this->admin_plugin_url() . '/assets/css/font-awesome' . $suffix . '.css', array(), '4.5.0', 'all' );
+	}
+
+	public function register_modal_scripts() {
+		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+		wp_register_style( 'bootstrap-modal', $this->admin_plugin_url() . '/assets/css/modal' . $suffix . '.css', array(), '4.0.0', 'all' );
+		wp_register_script( 'bootstrap-util', $this->admin_plugin_url() . '/assets/js/bootstrap/util' . $suffix . '.js', array( 'jquery' ), '4.0.0', false );
+		wp_register_script( 'bootstrap-modal', $this->admin_plugin_url() . '/assets/js/bootstrap/modal' . $suffix . '.js', array( 'jquery', 'bootstrap-util' ), '4.0.0', false );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -317,7 +325,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 		
 		foreach ( $options as $value ) {
 			if ( ! isset( $value['type'] ) ) continue;
-			if ( in_array( $value['type'], array( 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
+			if ( in_array( $value['type'], array( 'row', 'column', 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
 			if ( ! isset( $value['id'] ) || trim( $value['id'] ) == '' ) continue;
 			if ( ! isset( $value['default'] ) ) $value['default'] = '';
 			
@@ -417,7 +425,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 		// Get settings for option value is stored as a record or it's spearate option
 		foreach ( $options as $value ) {
 			if ( ! isset( $value['type'] ) ) continue;
-			if ( in_array( $value['type'], array( 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
+			if ( in_array( $value['type'], array( 'row', 'column', 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
 			if ( ! isset( $value['id'] ) || trim( $value['id'] ) == '' ) continue;
 			if ( ! isset( $value['default'] ) ) $value['default'] = '';
 			
@@ -493,7 +501,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 				
 				foreach ( $options as $value ) {
 					if ( ! isset( $value['type'] ) ) continue;
-					if ( in_array( $value['type'], array( 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
+					if ( in_array( $value['type'], array( 'row', 'column', 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
 					if ( ! isset( $value['id'] ) || trim( $value['id'] ) == '' ) continue;
 					if ( ! isset( $value['default'] ) ) $value['default'] = '';
 					if ( ! isset( $value['free_version'] ) ) $value['free_version'] = false;
@@ -543,7 +551,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 		// Get settings for option value is stored as a record or it's spearate option
 		foreach ( $options as $value ) {
 			if ( ! isset( $value['type'] ) ) continue;
-			if ( in_array( $value['type'], array( 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
+			if ( in_array( $value['type'], array( 'row', 'column', 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
 
 			// Save for global settings of plugin framework
 			switch ( $value['type'] ) {
@@ -864,7 +872,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 				if ( $free_version ) {
 					foreach ( $options as $value ) {
 						if ( ! isset( $value['type'] ) ) continue;
-						if ( in_array( $value['type'], array( 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
+						if ( in_array( $value['type'], array( 'row', 'column', 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
 						if ( ! isset( $value['id'] ) || trim( $value['id'] ) == '' ) continue;
 						
 						switch ( $value['type'] ) {
@@ -908,7 +916,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 		// Update settings default for option value is stored as a record or it's spearate option
 		foreach ( $options as $value ) {
 			if ( ! isset( $value['type'] ) ) continue;
-			if ( in_array( $value['type'], array( 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
+			if ( in_array( $value['type'], array( 'row', 'column', 'heading', 'ajax_submit', 'ajax_multi_submit' ) ) ) continue;
 			if ( ! isset( $value['id'] ) || trim( $value['id'] ) == '' ) continue;
 			if ( ! isset( $value['default'] ) ) $value['default'] = '';
 			if ( ! isset( $value['free_version'] ) ) $value['free_version'] = false;
@@ -1103,7 +1111,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 	 * @return void
 	 * ========================================================================
 	 * Option Array Structure :
-	 * type					=> heading | ajax_submit | ajax_multi_submit | google_api_key | onoff_toggle_box | text | email | number | password | color | bg_color | textarea | select | multiselect | radio | onoff_radio | checkbox | onoff_checkbox 
+	 * type					=> row | column | heading | ajax_submit | ajax_multi_submit | google_api_key | onoff_toggle_box | text | email | number | password | color | bg_color | textarea | select | multiselect | radio | onoff_radio | checkbox | onoff_checkbox 
 	 *						   | switcher_checkbox | image_size | single_select_page | typography | border | border_styles | border_corner | box_shadow 
 	 *						   | slider | upload | wp_editor | array_textfields | 
 	 *
@@ -1274,7 +1282,11 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 		<div class="a3rev_panel_container" style="visibility:hidden; height:0; overflow:hidden;" >
         <form action="" method="post">
 		<?php do_action( $this->plugin_name . '-' . trim( $form_key ) . '_settings_start' ); ?>
+		<div class="a3rev_panel_row"> <!-- Open Panel Row -->
 		<?php
+		$had_first_row = false;
+		$had_first_column = false;
+		$closed_panel_inner = false;
 		$count_heading = 0;
 		$end_heading_id = false;
 		$header_box_opening = false;
@@ -1475,8 +1487,111 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 				$id_attribute		= esc_attr( $option_name ) . '_' . $id_attribute;
 			}
 
+			// Update id attribute if current element is child of array
+			if ( $child_key != false ) {
+				$id_attribute .= '_' . $child_key;
+			}
+
 			// Switch based on type
 			switch( $value['type'] ) {
+
+				// Row
+				case 'row':
+
+					if ( $end_heading_id !== false && ! $closed_panel_inner ) {
+						if ( trim( $end_heading_id ) != '' ) do_action( $this->plugin_name . '_settings_' . sanitize_title( $end_heading_id ) . '_end' );
+						echo '</table>' . "\n\n";
+						echo '</div>' . "\n\n";
+						if ( trim( $end_heading_id ) != '' ) do_action( $this->plugin_name . '_settings_' . sanitize_title( $end_heading_id ) . '_after' );
+
+						$closed_panel_inner = true;
+					}
+
+					if ( $header_sub_box_opening ) {
+						$header_sub_box_opening = false;
+
+						// close box inside
+						echo '</div>' . "\n\n";
+
+						// close panel box
+						echo '</div>' . "\n\n";
+					}
+
+					if ( $header_box_opening ) {
+						$header_box_opening = false;
+
+						// close box inside
+						echo '</div>' . "\n\n";
+
+						// close panel box
+						echo '</div>' . "\n\n";
+					}
+
+					if ( $had_first_column ) {
+						// close panel column
+						echo '</div>' . "\n\n";
+					}
+
+					if ( $had_first_row ) {
+						// close panel row
+						echo '</div>' . "\n\n";
+
+						// open panel column
+						echo '<div class="a3rev_panel_row">' . "\n\n";
+					}
+
+					$had_first_column = false;
+					$had_first_row    = true;
+
+				break;
+
+				// Column
+				case 'column':
+
+					if ( $end_heading_id !== false && ! $closed_panel_inner ) {
+						if ( trim( $end_heading_id ) != '' ) do_action( $this->plugin_name . '_settings_' . sanitize_title( $end_heading_id ) . '_end' );
+						echo '</table>' . "\n\n";
+						echo '</div>' . "\n\n";
+						if ( trim( $end_heading_id ) != '' ) do_action( $this->plugin_name . '_settings_' . sanitize_title( $end_heading_id ) . '_after' );
+
+						$closed_panel_inner = true;
+					}
+
+					if ( $header_sub_box_opening ) {
+						$header_sub_box_opening = false;
+
+						// close box inside
+						echo '</div>' . "\n\n";
+
+						// close panel box
+						echo '</div>' . "\n\n";
+					}
+
+					if ( $header_box_opening ) {
+						$header_box_opening = false;
+
+						// close box inside
+						echo '</div>' . "\n\n";
+
+						// close panel box
+						echo '</div>' . "\n\n";
+					}
+
+					if ( $had_first_column ) {
+						// close panel column
+						echo '</div>' . "\n\n";
+
+						// open panel column
+						echo '<div class="a3rev_panel_column">' . "\n\n";
+					} else {
+						// open panel column
+						echo '<div class="a3rev_panel_column">' . "\n\n";
+					}
+
+					$had_first_column = true;
+					$had_first_row    = true;
+
+				break;
 
 				// Heading
 				case 'heading':
@@ -1492,7 +1607,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 					}
 
 					$count_heading++;
-					if ( $count_heading > 1 )  {
+					if ( $count_heading > 1 && ! $closed_panel_inner )  {
 						if ( trim( $end_heading_id ) != '' ) do_action( $this->plugin_name . '_settings_' . sanitize_title( $end_heading_id ) . '_end' );
 						echo '</table>' . "\n\n";
 						echo '</div>' . "\n\n";
@@ -1612,6 +1727,8 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 						echo wpautop( wptexturize( $value['desc'] ) );
 						echo '</div>' . "\n\n";
 					}
+
+					$closed_panel_inner = false;
 
 					echo '<table class="form-table">' . "\n\n";
 
@@ -2898,8 +3015,8 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
                                     name="<?php echo $name_attribute; ?>[enable]"
                                     id="<?php echo $id_attribute; ?>"
                                     class="a3rev-ui-box_shadow-enable a3rev-ui-onoff_checkbox <?php echo esc_attr( $value['class'] ); ?>"
-                                    checked_label="<?php _e( 'YES', 'woocommerce-predictive-search' ); ?>"
-                                    unchecked_label="<?php _e( 'NO', 'woocommerce-predictive-search' ); ?>"
+                                    checked_label="<?php _e( 'ON', 'woocommerce-predictive-search' ); ?>"
+                                    unchecked_label="<?php _e( 'OFF', 'woocommerce-predictive-search' ); ?>"
                                     type="checkbox"
                                     value="1"
                                     <?php checked( 1, $enable ); ?>
@@ -3243,7 +3360,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 			}
 		}
 		
-		if ( $end_heading_id !== false ) {
+		if ( $end_heading_id !== false && ! $closed_panel_inner ) {
 			if ( trim( $end_heading_id ) != '' ) do_action( $this->plugin_name . '_settings_' . sanitize_title( $end_heading_id ) . '_end' );
 				echo '</table>' . "\n\n";
 				echo '</div>' . "\n\n";
@@ -3270,7 +3387,13 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 			echo '</div>' . "\n\n";
 		}
 
+		if ( $had_first_column ) {
+			// close panel column
+			echo '</div>' . "\n\n";
+		}
+
 		?>
+			</div> <!-- Close Panel Row -->
 		<?php do_action( $this->plugin_name . '-' . trim( $form_key ) . '_settings_end' ); ?>
             <p class="submit">
                     <input type="submit" value="<?php _e('Save changes', 'woocommerce-predictive-search' ); ?>" class="button button-primary" name="bt_save_settings" />
