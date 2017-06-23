@@ -86,6 +86,7 @@ include 'classes/class-wc-predictive-search-backbone.php';
 include 'widget/wc-predictive-search-widgets.php';
 
 include 'classes/class-wc-predictive-search-synch.php';
+include 'classes/class-wc-predictive-search-schedule.php';
 
 // Editor
 include 'tinymce3/tinymce.php';

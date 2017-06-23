@@ -238,14 +238,25 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
 
 			array(
-            	'name' 		=> __( 'Manual Database Sync', 'woocommerce-predictive-search' ),
+            	'name' 		=> __( 'Database Sync', 'woocommerce-predictive-search' ),
             	'desc'		=> __( 'Predictive Search database is auto updated whenever a product or post is published or updated. Please run a Manual database sync if you upload products by csv or feel that Predictive Search results are showing old data.  Will sync the Predictive Search database with your current WooCommerce and WordPress databases', 'woocommerce-predictive-search' ),
             	'id'		=> 'predictive_search_synch_data',
                 'type' 		=> 'heading',
 				'is_box'	=> true,
            	),
            	array(
-				'name'             => __( 'Sync Search Data', 'woocommerce-predictive-search' ),
+				'name' 		=> __( 'Auto Sync Daily', 'woocommerce-predictive-search' ),
+				'id' 		=> 'woocommerce_search_allow_auto_sync_data',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'yes',
+				'checked_value'		=> 'yes',
+				'unchecked_value'	=> 'no',
+				'checked_label'		=> __( 'ON', 'woocommerce-predictive-search' ),
+				'unchecked_label' 	=> __( 'OFF', 'woocommerce-predictive-search' ),
+				'separate_option'   => true,
+			),
+           	array(
+				'name'             => __( 'Manual Sync Search Data', 'woocommerce-predictive-search' ),
 				'id'               => 'woocommerce_search_sync_data',
 				'type'             => 'ajax_multi_submit',
 				'statistic_column' => 2,
