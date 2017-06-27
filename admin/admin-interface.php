@@ -112,9 +112,11 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 		wp_register_script( 'jquery-tiptip', $this->admin_plugin_url() . '/assets/js/tipTip/jquery.tipTip' . $suffix . '.js', array( 'jquery' ), true, true );
 		wp_register_script( 'a3rev-metabox-ui', $this->admin_plugin_url() . '/assets/js/data-meta-boxes.js', array( 'jquery' ), true, true );
 		wp_register_script( 'jquery-rwd-image-maps', $this->admin_plugin_url() . '/assets/js/rwdImageMaps/jquery.rwdImageMaps.min.js', array( 'jquery' ), true, true );
+		wp_register_script( 'jquery-datetime-picker', $this->admin_plugin_url() . '/assets/js/datetimepicker/jquery.datetimepicker.js', array( 'jquery' ), true, true );
 		
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'wp-color-picker' );
+		wp_enqueue_script( 'jquery-datetime-picker' );
 		if ( is_rtl() ) {
 			wp_enqueue_script( 'jquery-ui-slider-rtl' );
 		} else {
@@ -233,6 +235,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 			wp_enqueue_style( 'a3rev-admin-flat-ui-style', $this->admin_plugin_url() . '/assets/css/admin-flat-ui-style' . $suffix . '.css' );
 		}
 		wp_enqueue_style( 'wp-color-picker' );
+		wp_enqueue_style( 'jquery-datetime-picker', $this->admin_plugin_url() . '/assets/css/jquery.datetimepicker.css' );
 		wp_enqueue_style( 'a3rev-chosen-new-style', $this->admin_plugin_url() . '/assets/js/chosen/chosen' . $suffix . '.css' );
 		wp_enqueue_style( 'a3rev-tiptip-style', $this->admin_plugin_url() . '/assets/js/tipTip/tipTip.css' );
 		wp_enqueue_style( 'a3rev-metabox-ui-style', $this->admin_plugin_url() . '/assets/css/a3_admin_metabox.css' );
@@ -1111,9 +1114,10 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 	 * @return void
 	 * ========================================================================
 	 * Option Array Structure :
-	 * type					=> row | column | heading | ajax_submit | ajax_multi_submit | google_api_key | onoff_toggle_box | text | email | number | password | color | bg_color | textarea | select | multiselect | radio | onoff_radio | checkbox | onoff_checkbox 
+	 * type					=> row | column | heading | ajax_submit | ajax_multi_submit | google_api_key | onoff_toggle_box 
+	 * 						   | text | email | number | password | color | bg_color | textarea | select | multiselect | radio | onoff_radio | checkbox | onoff_checkbox 
 	 *						   | switcher_checkbox | image_size | single_select_page | typography | border | border_styles | border_corner | box_shadow 
-	 *						   | slider | upload | wp_editor | array_textfields | 
+	 *						   | slider | upload | wp_editor | array_textfields | time_picker
 	 *
 	 * id					=> text
 	 * name					=> text
@@ -1231,6 +1235,13 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 	 * 								),
 	 *								...
 	 *							)
+	 * 
+	 * time_step			=> number : apply for time_picker only
+	 * time_min				=> text : apply for time_picker only
+	 * time_max				=> text : apply for time_picker only
+	 * time_allow			=> text : apply for time_picker only
+	 *						   ---------------- example ---------------------
+	 * 							[ '9:00', '11:00', '12:00', '21:00' ]
 	 *
 	 */
 	 
@@ -3304,6 +3315,34 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 						</td>
 					</tr><?php
 					
+				break;
+
+				// Time Picker Control
+				case 'time_picker':
+				
+					$class = 'a3rev-ui-' . sanitize_title( $value['type'] ) . ' ' . esc_attr( $value['class'] );
+
+					?><tr valign="top">
+						<th scope="row" class="titledesc">
+                        	<?php echo $tip; ?>
+							<label for="<?php echo $id_attribute; ?>"><?php echo esc_html( $value['name'] ); ?></label>
+						</th>
+						<td class="forminp forminp-<?php echo sanitize_title( $value['type'] ) ?>">
+                        	<input
+                        		readonly="readonly"
+								name="<?php echo $name_attribute; ?>"
+								id="<?php echo $id_attribute; ?>"
+								type="text"
+								value="<?php echo esc_attr( $option_value ); ?>"
+								class="<?php echo $class; ?>"
+								<?php if ( ! empty( $value['time_step'] ) ) { ?>data-time_step="<?php echo esc_attr( $value['time_step'] ); ?>"<?php } ?>
+								<?php if ( ! empty( $value['time_min'] ) ) { ?>data-time_min="<?php echo esc_attr( $value['time_min'] ); ?>"<?php } ?>
+								<?php if ( ! empty( $value['time_max'] ) ) { ?>data-time_max="<?php echo esc_attr( $value['time_max'] ); ?>"<?php } ?>
+								<?php if ( ! empty( $value['time_allow'] ) ) { ?>data-time_max="<?php echo esc_attr( $value['time_allow'] ); ?>"<?php } ?>
+								/> <?php echo $description; ?>
+						</td>
+					</tr><?php
+									
 				break;
 	
 				// Default: run an action

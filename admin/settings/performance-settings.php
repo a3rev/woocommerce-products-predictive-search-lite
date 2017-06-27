@@ -88,6 +88,8 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
 
+		add_action( $this->plugin_name . '-' . $this->form_key . '_before_settings_save', array( $this, 'before_save_settings' ) );
+
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'after_save_settings' ) );
 	}
 	
@@ -109,6 +111,49 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 		global $wc_predictive_search_admin_interface;
 		
 		$wc_predictive_search_admin_interface->reset_settings( $this->form_fields, $this->option_name, false );
+	}
+
+	/*-----------------------------------------------------------------------------------*/
+	/* before_save_settings()
+	/*
+	/*-----------------------------------------------------------------------------------*/
+	public function before_save_settings() {
+		$old_schedule_time = get_option( 'woocommerce_search_schedule_time_sync_data', '00:00' );
+		$new_schedule_time = $old_schedule_time;
+		if ( isset( $_POST['woocommerce_search_schedule_time_sync_data'] ) && '' != $_POST['woocommerce_search_schedule_time_sync_data'] ) {
+			$new_schedule_time = date( 'H:i', strtotime( $_POST['woocommerce_search_schedule_time_sync_data'] ) );
+		}
+
+		$new_allow_auto_sync_data = 'yes';
+		if ( ! isset( $_POST['woocommerce_search_allow_auto_sync_data'] ) || 'yes' != $_POST['woocommerce_search_allow_auto_sync_data'] ) {
+			$new_allow_auto_sync_data = 'no';
+		}
+
+		if ( 'no' != $new_allow_auto_sync_data ) {
+
+			/*
+			* registered event
+			* if Auto Sync Daily is set 'ON' and Schedule Time is changed
+			*/
+			if ( $old_schedule_time != $new_schedule_time || ! wp_next_scheduled( 'wc_predictive_search_sync_data_scheduled_jobs' ) ) {
+				wp_clear_scheduled_hook( 'wc_predictive_search_sync_data_scheduled_jobs' );
+
+				$next_day = date( 'Y-m-d', strtotime('+1 day') );
+				$next_time = strtotime( $next_day . ' ' . $new_schedule_time .':00' );
+				$next_time = get_option( 'gmt_offset' ) > 0 ? $next_time - ( 60 * 60 * get_option( 'gmt_offset' ) ) : $next_time +
+( 60 * 60 * get_option( 'gmt_offset' ) );
+
+				wp_schedule_event( $next_time, 'daily', 'wc_predictive_search_sync_data_scheduled_jobs' );
+			}
+
+		} else {
+
+			/*
+			* deregistered event
+			* if Auto Sync Daily is set 'OFF'
+			*/
+			wp_clear_scheduled_hook( 'wc_predictive_search_sync_data_scheduled_jobs' );
+		}
 	}
 
 	/*-----------------------------------------------------------------------------------*/
@@ -234,6 +279,20 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 			}
 		}
 
+		$auto_synced_completed_time = get_option( 'wc_predictive_search_auto_synced_completed_time', false );
+		if ( false !== $auto_synced_completed_time ) {
+			$auto_synced_completed_time = date_i18n( get_option( 'date_format' ) . ' - ' . get_option( 'time_format' ), $auto_synced_completed_time );
+		} else {
+			$auto_synced_completed_time = '';
+		}
+
+		$manual_synced_completed_time = get_option( 'wc_predictive_search_manual_synced_completed_time', false );
+		if ( false !== $manual_synced_completed_time ) {
+			$manual_synced_completed_time = date_i18n( get_option( 'date_format' ) . ' - ' . get_option( 'time_format' ), $manual_synced_completed_time );
+		} else {
+			$manual_synced_completed_time = '';
+		}
+
   		// Define settings
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
 
@@ -246,6 +305,7 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
            	),
            	array(
 				'name' 		=> __( 'Auto Sync Daily', 'woocommerce-predictive-search' ),
+				'class'		=> 'woocommerce_search_allow_auto_sync_data',
 				'id' 		=> 'woocommerce_search_allow_auto_sync_data',
 				'type' 		=> 'onoff_checkbox',
 				'default'	=> 'yes',
@@ -255,6 +315,41 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 				'unchecked_label' 	=> __( 'OFF', 'woocommerce-predictive-search' ),
 				'separate_option'   => true,
 			),
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'allow_auto_sync_data_container',
+           	),
+           	array(
+				'name' 		=> __( 'Schedule Time', 'woocommerce-predictive-search' ),
+				'id' 		=> 'woocommerce_search_schedule_time_sync_data',
+				'type' 		=> 'time_picker',
+				'default'	=> '00:00',
+				'desc'		=> ( '' != $auto_synced_completed_time ? '<span style="color:#46b450;font-style:normal;">' .__( 'Last Scheduled Full Database Sync completed', 'woocommerce-predictive-search' ) . ' ' . $auto_synced_completed_time . '</span>' : '' ),
+				'separate_option'   => true,
+			),
+			array(
+                'type' 		=> 'heading',
+                'name'		=> __( 'Email Notifications', 'woocommerce-predictive-search' ),
+				'class'		=> 'allow_auto_sync_data_container',
+           	),
+			array(
+				'name' 		=> __( 'Error notification recipient(s)', 'woocommerce-predictive-search' ),
+				'id' 		=> 'woocommerce_search_schedule_error_recipients',
+				'type' 		=> 'text',
+				'desc'		=> sprintf( __( 'Blank for default: %s', 'woocommerce-predictive-search' ), get_option( 'admin_email' ) ),
+				'separate_option'   => true,
+			),
+			array(
+				'name' 		=> __( 'Sync Complete recipients(s)', 'woocommerce-predictive-search' ),
+				'id' 		=> 'woocommerce_search_schedule_success_recipients',
+				'type' 		=> 'text',
+				'separate_option'   => true,
+			),
+
+           	array(
+           		'name'		=> __( 'Manual Sync', 'woocommerce-predictive-search' ),
+                'type' 		=> 'heading',
+           	),
            	array(
 				'name'             => __( 'Manual Sync Search Data', 'woocommerce-predictive-search' ),
 				'id'               => 'woocommerce_search_sync_data',
@@ -381,7 +476,7 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 				'resubmit'			=> $synced_full_data,
 				'progressing_text'  => __( 'Syncing Data...', 'woocommerce-predictive-search' ),
 				'completed_text'    => __( 'Synced Data', 'woocommerce-predictive-search' ),
-				'successed_text'    => __( 'Synced Data', 'woocommerce-predictive-search' ),
+				'successed_text'    => sprintf( __( 'Last manual Full Database Sync completed <span class="built-time">%s</span>', 'woocommerce-predictive-search' ), $manual_synced_completed_time ),
 			),
 
 			array(
@@ -409,11 +504,30 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 		.a3-ps-synched-pages {
 			color: #0073aa;
 		}
+		<?php 
+		$manual_synced_completed_time = get_option( 'wc_predictive_search_manual_synced_completed_time', false );
+		if ( false !== $manual_synced_completed_time ) {
+		?>
+		#predictive_search_synch_data .a3rev-ui-ajax_multi_submit-successed {
+			display: inline;
+		}
+		<?php } ?>
 	</style>
 <script>
 (function($) {
 
 	$(document).ready(function() {
+
+		if ( $("input.woocommerce_search_allow_auto_sync_data:checked").val() != 'yes') {
+			$('.allow_auto_sync_data_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px' } );
+		}
+
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.woocommerce_search_allow_auto_sync_data', function( event, value, status ) {
+			$('.allow_auto_sync_data_container').attr('style','display:none;');
+			if ( status == 'true' ) {
+				$(".allow_auto_sync_data_container").slideDown();
+			}
+		});
 
 		$(document).on( 'a3rev-ui-ajax_multi_submit-end', '#woocommerce_search_sync_data', function( event, bt_ajax_submit, multi_ajax ) {
 			bt_ajax_submit.html('<?php echo __( 'Re Sync', 'woocommerce-predictive-search' ); ?>');
@@ -423,6 +537,7 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 				url: '<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>',
 				data: { action: 'wc_predictive_search_sync_end' },
 				success: function ( response ) {
+					$('#predictive_search_synch_data_box_inside').find('.built-time').html( response.date );
 				}
 			});
 		});

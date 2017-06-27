@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, WooCommerce Predictive Search, WooCommerce, Predictive Search, Live Search, e-commerce,  wordpress ecommerce
 Requires at least: 4.5
 Tested up to: 4.8.0
-Stable tag: 4.0.3
+Stable tag: 4.1.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -166,6 +166,15 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 4.1.0 - 2017/06/27 =
+* Feature - Added Daily Auto Database Sync option
+* Feature - Added Time Picker for setting daily Auto Sync time
+* Feature - Added Auto synch email success and error notifications
+* Feature - Added date and time stamp for last successful auto sync
+* Feature - Added date and time stamp for Manual Sync
+* Tweak - Tested for compatibility with WooCommerce 3.0.9
+* Tweak - Updated description text on Database Sync Option box
 
 = 4.0.3 - 2017/06/05 =
 * Tweak - Tested for compatibility with WordPress major version 4.8.0
@@ -671,6 +680,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 4.1.0 =
+Feature Upgrade. 5 new Schedule Auto Database Sync features plus compatibility with WooCommerce version 3.0.9
 
 = 4.0.3 =
 Maintenance Update. 2 code tweaks for compatibility with WordPress major version 4.8.0

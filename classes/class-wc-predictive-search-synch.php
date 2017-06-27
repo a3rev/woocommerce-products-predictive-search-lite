@@ -185,8 +185,9 @@ class WC_Predictive_Search_Synch
 
 	public function wc_predictive_search_sync_end_ajax() {
 		update_option( 'wc_predictive_search_synced_posts_data', 1 );
+		update_option( 'wc_predictive_search_manual_synced_completed_time', current_time( 'timestamp' ) );
 
-		echo json_encode( array( 'status' => 'OK' ) );
+		wp_send_json( array( 'status' => 'OK', 'date' => date_i18n( get_option( 'date_format' ) . ' - ' . get_option( 'time_format' ) ) ) );
 
 		die();
 	}
