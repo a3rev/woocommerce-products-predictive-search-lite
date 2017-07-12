@@ -49,19 +49,22 @@ class WC_Predictive_Search_Schedule
 		// Set status of auto synced is 'run' for when cron job start process
 		update_option( 'wc_predictive_search_auto_synced_posts_data', 0 );
 
-		/*
-		 * Add single event after 60 minutes when cron job start process for
-		 * to send ERROR email to admin if status of auto synced still is not completed
-		 */
-		wp_schedule_single_event( time() + ( 60 * 60 ), 'wc_predictive_search_auto_sync_detect_error' );
-
 		wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_products' );
 	}
 
 	public function auto_sync_products() {
 		global $wc_ps_synch;
 
+		/*
+		 * Add single event after 60 minutes when cron job start process for
+		 * to send ERROR email to admin if status of auto synced still is not completed
+		 */
+		wp_schedule_single_event( time() + ( 60 * 60 ), 'wc_predictive_search_auto_sync_detect_error' );
+
 		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'product' );
+
+		// Remove the event send ERROR email if don't get limited execute time or php error
+		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error' );
 
 		// If status is continue then register sync products again for continue
 		// If status is complete then register sync product skus
@@ -70,19 +73,30 @@ class WC_Predictive_Search_Schedule
 		} else {
 			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_product_skus' );
 		}
+
+
 	}
 
 	public function auto_sync_product_skus() {
 		global $wc_ps_synch;
 
+		/*
+		 * Add single event after 60 minutes when cron job start process for
+		 * to send ERROR email to admin if status of auto synced still is not completed
+		 */
+		wp_schedule_single_event( time() + ( 60 * 60 ), 'wc_predictive_search_auto_sync_detect_error' );
+
 		$result = $wc_ps_synch->wc_predictive_search_sync_product_skus();
+
+		// Remove the event send ERROR email if don't get limited execute time or php error
+		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error' );
 
 		// If status is continue then register sync products skus again for continue
 		// If status is complete then register sync product categories
 		if ( isset( $result['status'] ) && 'continue' == $result['status'] ) {
 			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_product_skus' );
 		} else {
-			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_product_categories' );
+			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_posts' );
 		}
 	}
 
@@ -97,7 +111,16 @@ class WC_Predictive_Search_Schedule
 	public function auto_sync_posts() {
 		global $wc_ps_synch;
 
+		/*
+		 * Add single event after 60 minutes when cron job start process for
+		 * to send ERROR email to admin if status of auto synced still is not completed
+		 */
+		wp_schedule_single_event( time() + ( 60 * 60 ), 'wc_predictive_search_auto_sync_detect_error' );
+
 		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'post' );
+
+		// Remove the event send ERROR email if don't get limited execute time or php error
+		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error' );
 
 		// If status is continue then register sync posts again for continue
 		// If status is complete then register sync pages
@@ -111,14 +134,23 @@ class WC_Predictive_Search_Schedule
 	public function auto_sync_pages() {
 		global $wc_ps_synch;
 
+		/*
+		 * Add single event after 60 minutes when cron job start process for
+		 * to send ERROR email to admin if status of auto synced still is not completed
+		 */
+		wp_schedule_single_event( time() + ( 60 * 60 ), 'wc_predictive_search_auto_sync_detect_error' );
+
 		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'page' );
+
+		// Remove the event send ERROR email if don't get limited execute time or php error
+		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error' );
 
 		// If status is continue then register sync pages again for continue
 		// If status is complete then register sync relationships
 		if ( isset( $result['status'] ) && 'continue' == $result['status'] ) {
 			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_pages' );
 		} else {
-			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_relationships' );
+			wp_schedule_single_event( time(), 'wc_predictive_search_auto_end_sync' );
 		}
 	}
 
@@ -136,6 +168,7 @@ class WC_Predictive_Search_Schedule
 		// Send Success email to admin
 		$this->auto_sync_success_email();
 
+		// Remove the event send ERROR email if synced full database
 		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error' );
 	}
 
