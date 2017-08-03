@@ -3,8 +3,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, WooCommerce Predictive Search, WooCommerce, Predictive Search, Live Search, e-commerce,  wordpress ecommerce
 Requires at least: 4.5
-Tested up to: 4.8.0
-Stable tag: 4.1.1
+Tested up to: 4.8.1
+Stable tag: 4.1.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -166,6 +166,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 4.1.2 - 2017/08/03 =
+* Tweak - Update sync code to also check for outofstock products on post meta as well as post term
+* Tweak - Test for compatibility with WordPress version 4.8.1 
 
 = 4.1.1 - 2017/07/12 =
 * Tweak - Registry event - Send Error Email - for each sync Object data so that it does not send email error although Synced full database
@@ -684,6 +688,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 4.1.2 =
+Maintenance Update. 1 code tweak for hide outofstock products and compatibility with WordPress version 4.8.1
 
 = 4.1.1 =
 Feature Upgrade. 1 auto database sync code tweak and compatibility with WooCommerce 3.1.1
