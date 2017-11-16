@@ -357,23 +357,11 @@ class WC_Predictive_Search_Synch
 				}
 
 				// Migrate Product Out of Stock
-				$terms      = get_the_terms( $post_id, 'product_visibility' );
-				$term_names = is_array( $terms ) ? wp_list_pluck( $terms, 'name' ) : array();
-				$outofstock = in_array( 'outofstock', $term_names );
-
-				if ( ! $outofstock ) {
-					$stock_status = get_post_meta( $post_id, '_stock_status', true );
-					if ( ! empty( $stock_status ) && 'outofstock' == trim( $stock_status ) ) {
-						$outofstock = true;
-					} else {
-						$outofstock = false;
-					}
-				}
-
-				if ( $outofstock ) {
-					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
-				} else {
+				$the_product = wc_get_product( $post_id );
+				if ( $the_product->is_in_stock() ) {
 					$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
+				} else {
+					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
 				}
 			}
 		}
@@ -435,23 +423,11 @@ class WC_Predictive_Search_Synch
 				$wc_ps_product_sku_data->update_item( $post_id, $sku, 0 );
 
 				// Migrate Product Out of Stock
-				$terms      = get_the_terms( $post_id, 'product_visibility' );
-				$term_names = is_array( $terms ) ? wp_list_pluck( $terms, 'name' ) : array();
-				$outofstock = in_array( 'outofstock', $term_names );
-
-				if ( ! $outofstock ) {
-					$stock_status = get_post_meta( $post_id, '_stock_status', true );
-					if ( ! empty( $stock_status ) && 'outofstock' == trim( $stock_status ) ) {
-						$outofstock = true;
-					} else {
-						$outofstock = false;
-					}
-				}
-
-				if ( $outofstock ) {
-					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
-				} else {
+				$the_product = wc_get_product( $post_id );
+				if ( $the_product->is_in_stock() ) {
 					$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
+				} else {
+					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
 				}
 			}
 
@@ -519,23 +495,11 @@ class WC_Predictive_Search_Synch
 				}
 
 				// Migrate Product Out of Stock
-				$terms      = get_the_terms( $post_id, 'product_visibility' );
-				$term_names = is_array( $terms ) ? wp_list_pluck( $terms, 'name' ) : array();
-				$outofstock = in_array( 'outofstock', $term_names );
-
-				if ( ! $outofstock ) {
-					$stock_status = get_post_meta( $post_id, '_stock_status', true );
-					if ( ! empty( $stock_status ) && 'outofstock' == trim( $stock_status ) ) {
-						$outofstock = true;
-					} else {
-						$outofstock = false;
-					}
-				}
-
-				if ( $outofstock ) {
-					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
-				} else {
+				$the_product = wc_get_product( $post_id );
+				if ( $the_product->is_in_stock() ) {
 					$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
+				} else {
+					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
 				}
 			}
 		}

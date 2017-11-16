@@ -11,7 +11,7 @@ function wc_predictive_install(){
 	global $wc_predictive_search;
 	$wc_predictive_search->install_databases();
 
-	update_option('wc_predictive_search_lite_version', '4.1.3');
+	update_option('wc_predictive_search_lite_version', '4.1.4');
 
 	global $wc_predictive_search_admin_init;
 	delete_metadata( 'user', 0, $wc_predictive_search_admin_init->plugin_name . '-' . 'plugin_framework_global_box' . '-' . 'opened', '', true );
@@ -144,6 +144,6 @@ function woo_ps_lite_upgrade_plugin() {
 		include( WOOPS_DIR. '/includes/updates/update-4.0.0.php' );
 	}
 
-    update_option('wc_predictive_search_lite_version', '4.1.3');
+    update_option('wc_predictive_search_lite_version', '4.1.4');
 }
 ?>
