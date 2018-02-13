@@ -225,6 +225,7 @@ class WC_Predictive_Search_Admin_Init extends WC_Predictive_Search_Admin_UI
 							echo 'nav-tab-active';
 							$tab_data = $tab;
 						}
+						echo ' ' . esc_attr( sanitize_title( $tab['name'] ) );
 						echo '">' . $tab['label'] . '</a>';
 					}
 

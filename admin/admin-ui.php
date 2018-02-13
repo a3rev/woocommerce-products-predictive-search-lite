@@ -30,19 +30,16 @@ class WC_Predictive_Search_Admin_UI
 	 * @var string
 	 * You must change to correct plugin name that you are working
 	 */
-	public $plugin_name = 'woo_predictive_search';
 
-	public $google_api_key_option = 'woo_predictive_search_google_api_key';
-
-	public $toggle_box_open_option = 'woo_predictive_search_toggle_box_open';
-
-	public $is_free_plugin = true;
-
-	public $version_transient = 'woo_predictive_search_licinfo';
-
-	public $plugin_option_key = 'wc_predictive_search_plugin';
-
-	public $support_url = 'https://wordpress.org/support/plugin/woocommerce-predictive-search/';
+	public $framework_version      = '2.0.2';
+	public $plugin_name            = WOOPS_KEY;
+	public $plugin_path            = WOOPS_NAME;
+	public $google_api_key_option  = WOOPS_KEY . '_google_api_key';
+	public $toggle_box_open_option = WOOPS_KEY . '_toggle_box_open';
+	public $version_transient      = WOOPS_KEY . '_licinfo';
+	public $is_free_plugin         = true;
+	
+	public $support_url            = 'https://wordpress.org/support/plugin/woocommerce-predictive-search/';
 
 
 	/**
@@ -55,7 +52,7 @@ class WC_Predictive_Search_Admin_UI
 	 * @var string
 	 * You must change to correct pro plugin page url on a3rev site
 	 */
-	public $pro_plugin_page_url = 'http://a3rev.com/shop/woocommerce-predictive-search/';
+	public $pro_plugin_page_url = 'https://a3rev.com/shop/woocommerce-predictive-search/';
 
 	/**
 	 * @var string
@@ -323,11 +320,11 @@ class WC_Predictive_Search_Admin_UI
 				if ( FALSE !== stristr( $version_transient, '||' )
 					&& is_array( $version_info )
 					&& isset( $version_info[1] ) && $version_info[1] == 'valid'
-					&& version_compare( get_option('wc_predictive_search_lite_version') , $version_info[0], '<' ) ) {
+					&& version_compare( WOOPS_VERSION , $version_info[0], '<' ) ) {
 
 						$version_message = sprintf( __( 'There is a new version <span class="a3rev-ui-new-plugin-version">%s</span> available, <a href="%s" target="_blank">update now</a> or download direct from <a href="%s" target="_blank">My Account</a> on a3rev.com', 'woocommerce-predictive-search' ),
 							$version_info[0],
-							wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' . WOOPS_NAME ), 'upgrade-plugin_' . WOOPS_NAME ),
+							wp_nonce_url( self_admin_url( 'update.php?action=upgrade-plugin&plugin=' . $this->plugin_path ), 'upgrade-plugin_' . $this->plugin_path ),
 							'https://a3rev.com/my-account/downloads/'
 						);
 				}

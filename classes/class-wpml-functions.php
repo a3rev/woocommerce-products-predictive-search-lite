@@ -32,7 +32,7 @@ class WC_Predictive_Search_WPML_Functions
 	 */
 	public function wpml_ict_t() {
 		
-		$plugin_name = 'woo_predictive_search';
+		$plugin_name = WOOPS_KEY;
 
 		add_filter( $plugin_name . '_' . 'wc_predictive_search_sidebar_template_settings' . '_get_settings', array( $this, 'ict_t_sidebar_template_settings' ) );
 		

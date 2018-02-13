@@ -642,15 +642,25 @@ class WC_Predictive_Search_Functions
 	/**
 	 * Get product thumbnail url
 	 */
-	public static function get_product_thumbnail_url( $post_id, $post_parent = 0, $size = 'shop_catalog', $placeholder_width = 0, $placeholder_height = 0  ) {
+	public static function get_product_thumbnail_url( $post_id, $post_parent = 0, $size = 'woocommerce_thumbnail', $placeholder_width = 0, $placeholder_height = 0  ) {
 		global $woocommerce;
 		$woocommerce_db_version = get_option( 'woocommerce_db_version', null );
-		$shop_catalog = ( ( version_compare( $woocommerce_db_version, '2.1', '<' ) ) ? $woocommerce->get_image_size( 'shop_catalog' ) : wc_get_image_size( 'shop_catalog' ) );
-		if ( is_array( $shop_catalog ) && isset( $shop_catalog['width'] ) && $placeholder_width == 0 ) {
-			$placeholder_width = $shop_catalog['width'];
+
+		if ( version_compare( $woocommerce_db_version, '2.1.0', '<' ) ) {
+			// bw compat. for less than WC 2.1.0
+			$woocommerce_thumbnail = $woocommerce->get_image_size( 'shop_catalog' );
+		} elseif ( version_compare( $woocommerce_db_version, '3.3.0', '<' ) ) {
+			// bw compat. for less than WC 3.3.0
+			$woocommerce_thumbnail = wc_get_image_size( 'shop_catalog' );
+		} else {
+			$woocommerce_thumbnail = wc_get_image_size( 'woocommerce_thumbnail' );
 		}
-		if ( is_array( $shop_catalog ) && isset( $shop_catalog['height'] ) && $placeholder_height == 0 ) {
-			$placeholder_height = $shop_catalog['height'];
+
+		if ( is_array( $woocommerce_thumbnail ) && isset( $woocommerce_thumbnail['width'] ) && $placeholder_width == 0 ) {
+			$placeholder_width = $woocommerce_thumbnail['width'];
+		}
+		if ( is_array( $woocommerce_thumbnail ) && isset( $woocommerce_thumbnail['height'] ) && $placeholder_height == 0 ) {
+			$placeholder_height = $woocommerce_thumbnail['height'];
 		}
 
 		$mediumSRC = '';

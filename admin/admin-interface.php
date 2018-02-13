@@ -102,15 +102,15 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 		$rtl = is_rtl() ? '.rtl' : '';
 		
 		wp_register_script( 'chosen', $this->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
-		wp_register_script( 'a3rev-chosen-new', $this->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
-		wp_register_script( 'a3rev-style-checkboxes', $this->admin_plugin_url() . '/assets/js/iphone-style-checkboxes' . $rtl . '.js', array('jquery'), true, false );
+		wp_register_script( 'a3rev-chosen-new', $this->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), $this->framework_version, false );
+		wp_register_script( 'a3rev-style-checkboxes', $this->admin_plugin_url() . '/assets/js/iphone-style-checkboxes' . $rtl . '.js', array('jquery'), $this->framework_version, false );
 		wp_register_script( 'jquery-ui-slider-rtl', $this->admin_plugin_url() . '/assets/js/ui-slider/jquery.ui.slider.rtl' . $suffix . '.js', array('jquery'), true, true );
 		
-		wp_register_script( 'a3rev-admin-ui-script', $this->admin_plugin_url() . '/assets/js/admin-ui-script.js', array('jquery'), true, true );
-		wp_register_script( 'a3rev-typography-preview', $this->admin_plugin_url() . '/assets/js/a3rev-typography-preview.js',  array('jquery'), false, true );
-		wp_register_script( 'a3rev-settings-preview', $this->admin_plugin_url() . '/assets/js/a3rev-settings-preview.js',  array('jquery'), false, true );
+		wp_register_script( 'a3rev-admin-ui-script', $this->admin_plugin_url() . '/assets/js/admin-ui-script.js', array('jquery'), $this->framework_version, true );
+		wp_register_script( 'a3rev-typography-preview', $this->admin_plugin_url() . '/assets/js/a3rev-typography-preview.js',  array('jquery'), $this->framework_version, true );
+		wp_register_script( 'a3rev-settings-preview', $this->admin_plugin_url() . '/assets/js/a3rev-settings-preview.js',  array('jquery'), $this->framework_version, true );
 		wp_register_script( 'jquery-tiptip', $this->admin_plugin_url() . '/assets/js/tipTip/jquery.tipTip' . $suffix . '.js', array( 'jquery' ), true, true );
-		wp_register_script( 'a3rev-metabox-ui', $this->admin_plugin_url() . '/assets/js/data-meta-boxes.js', array( 'jquery' ), true, true );
+		wp_register_script( 'a3rev-metabox-ui', $this->admin_plugin_url() . '/assets/js/data-meta-boxes.js', array( 'jquery' ), $this->framework_version, true );
 		wp_register_script( 'jquery-rwd-image-maps', $this->admin_plugin_url() . '/assets/js/rwdImageMaps/jquery.rwdImageMaps.min.js', array( 'jquery' ), true, true );
 		wp_register_script( 'jquery-datetime-picker', $this->admin_plugin_url() . '/assets/js/datetimepicker/jquery.datetimepicker.js', array( 'jquery' ), true, true );
 		
@@ -178,9 +178,6 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 					delete_transient( $transient_name );
 
 					$new_version = '';
-					if ( class_exists( 'WC_Predictive_Search_Upgrade' ) ) {
-						$new_version = WC_Predictive_Search_Upgrade::get_version_info();
-					}
 
 					$version_message = $this->get_version_message();
 					$has_new_version = 1;
@@ -188,20 +185,19 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 						$version_message = __( 'Great! You have the latest version installed.', 'woocommerce-predictive-search' );
 						$has_new_version = 0;
 					} else {
-						delete_option('woocommerce_search_lite_clean_on_deletion');
+						delete_option( $this->plugin_name . '_clean_on_deletion');
 						if ( is_array( $new_version ) && 'valid' == $new_version['is_valid_key'] ) {
 							$current_update_plugins = get_site_transient( 'update_plugins' );
 							if ( isset( $current_update_plugins->response ) ) {
-								$plugin_name = WOOPS_NAME;
-								if ( empty( $current_update_plugins->response[$plugin_name] ) ) {
-									$current_update_plugins->response[$plugin_name] = new stdClass();
+								if ( empty( $current_update_plugins->response[$this->plugin_path] ) ) {
+									$current_update_plugins->response[$this->plugin_path] = new stdClass();
 								}
-								$current_update_plugins->response[$plugin_name]->url = "http://www.a3rev.com";
-								$current_update_plugins->response[$plugin_name]->slug = get_option( $this->plugin_option_key );
-								$current_update_plugins->response[$plugin_name]->package = $new_version["url"];
-								$current_update_plugins->response[$plugin_name]->new_version = $new_version['version'];
-								$current_update_plugins->response[$plugin_name]->upgrade_notice = $new_version['upgrade_notice'];
-								$current_update_plugins->response[$plugin_name]->id = "0";
+								$current_update_plugins->response[$this->plugin_path]->url = "http://www.a3rev.com";
+								$current_update_plugins->response[$this->plugin_path]->slug = $this->plugin_name;
+								$current_update_plugins->response[$this->plugin_path]->package = $new_version["url"];
+								$current_update_plugins->response[$this->plugin_path]->new_version = $new_version['version'];
+								$current_update_plugins->response[$this->plugin_path]->upgrade_notice = $new_version['upgrade_notice'];
+								$current_update_plugins->response[$this->plugin_path]->id = "0";
 								set_site_transient( 'update_plugins', $current_update_plugins );
 							}
 						}
@@ -229,20 +225,20 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 		
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		
-		wp_enqueue_style( 'a3rev-admin-ui-style', $this->admin_plugin_url() . '/assets/css/admin-ui-style' . $suffix . '.css' );
+		wp_enqueue_style( 'a3rev-admin-ui-style', $this->admin_plugin_url() . '/assets/css/admin-ui-style' . $suffix . '.css', array(), $this->framework_version );
 		
 		if ( version_compare( $wp_version, '3.8', '>=' ) ) {
-			wp_enqueue_style( 'a3rev-admin-flat-ui-style', $this->admin_plugin_url() . '/assets/css/admin-flat-ui-style' . $suffix . '.css' );
+			wp_enqueue_style( 'a3rev-admin-flat-ui-style', $this->admin_plugin_url() . '/assets/css/admin-flat-ui-style' . $suffix . '.css', array(), $this->framework_version );
 		}
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'jquery-datetime-picker', $this->admin_plugin_url() . '/assets/css/jquery.datetimepicker.css' );
-		wp_enqueue_style( 'a3rev-chosen-new-style', $this->admin_plugin_url() . '/assets/js/chosen/chosen' . $suffix . '.css' );
+		wp_enqueue_style( 'a3rev-chosen-new-style', $this->admin_plugin_url() . '/assets/js/chosen/chosen' . $suffix . '.css', array(), $this->framework_version );
 		wp_enqueue_style( 'a3rev-tiptip-style', $this->admin_plugin_url() . '/assets/js/tipTip/tipTip.css' );
-		wp_enqueue_style( 'a3rev-metabox-ui-style', $this->admin_plugin_url() . '/assets/css/a3_admin_metabox.css' );
+		wp_enqueue_style( 'a3rev-metabox-ui-style', $this->admin_plugin_url() . '/assets/css/a3_admin_metabox.css', array(), $this->framework_version );
 
 		if ( is_rtl() ) {
-			wp_enqueue_style( 'a3rev-admin-ui-style-rtl', $this->admin_plugin_url() . '/assets/css/admin-ui-style.rtl' . $suffix . '.css' );
-			wp_enqueue_style( 'a3rev-metabox-ui-style-rtl', $this->admin_plugin_url() . '/assets/css/a3_admin_metabox.rtl' . $suffix . '.css' );
+			wp_enqueue_style( 'a3rev-admin-ui-style-rtl', $this->admin_plugin_url() . '/assets/css/admin-ui-style.rtl' . $suffix . '.css', array(), $this->framework_version );
+			wp_enqueue_style( 'a3rev-metabox-ui-style-rtl', $this->admin_plugin_url() . '/assets/css/a3_admin_metabox.rtl' . $suffix . '.css', array(), $this->framework_version );
 		}
 		
 	} // End admin_css_load()
@@ -699,6 +695,11 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 								}
 							}
 						}
+
+						// Set Default value if this field is required and has default value and option value is empty
+						if ( isset ( $text_field['required'] ) && $text_field['required'] && empty( $option_value ) && ! empty( $text_field['default'] ) ) {
+							$option_value = $text_field['default'];
+						}
 						
 						if ( strstr( $text_field['id'], '[' ) ) {
 							// Set keys and value
@@ -807,6 +808,12 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 			}
 			
 			if ( !in_array( $value['type'], array( 'array_textfields' ) ) ) {
+
+				// Set Default value if this field is required and has default value and option value is empty
+				if ( isset ( $value['required'] ) && $value['required'] && empty( $option_value ) && ! empty( $value['default'] ) ) {
+					$option_value = $value['default'];
+				}
+
 				if ( strstr( $value['id'], '[' ) ) {
 					// Set keys and value
 					$key = key( $option_array[ $id_attribute ] );
@@ -1128,6 +1135,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 	 * 						   array( 'enable' => 1, 'color' => '#515151' ) : apply bg_color only
 	 *						   array( 'width' => '125', 'height' => '125', 'crop' => 1 ) : apply image_size only
 	 *						   array( 'size' => '9px', line_height => '1.4em', 'face' => 'Arial', 'style' => 'normal', 'color' => '#515151' ) : apply for typography only 
+	 * required 			=> true | false : apply for all types
 	 *						   array( 'width' => '1px', 'style' => 'normal', 'color' => '#515151', 'corner' => 'rounded' | 'square' , 'top_left_corner' => 3, 
 	 *									'top_right_corner' => 3, 'bottom_left_corner' => 3, 'bottom_right_corner' => 3 ) : apply for border only
 	  *						   array( 'width' => '1px', 'style' => 'normal', 'color' => '#515151' ) : apply for border_styles only
@@ -1804,30 +1812,29 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 
 				// Manual Check New Version when click on the button instead of wait for daily
 				case 'manual_check_version':
-					$version_message = $this->get_version_message();
-					$new_version_class = '';
-					if ( '' != trim( $version_message ) ) {
-						$new_version_class = 'a3rev-ui-new-version-message';
+
+					$check_version_class = 'a3rev-ui-new-version-message';
+
+					if ( is_multisite() ) {
+						$version_message = __( 'Sorry, this feature just for Network Admin.', 'woocommerce-predictive-search' );
+					} else {
+						global $a3_dashboard_plugin_requirement;
+
+						if ( ! $a3_dashboard_plugin_requirement->is_installed() ) {
+							$version_message = sprintf( __( 'You need to install and activate the <a title="" href="%s" target="_parent">a3rev Dashboard plugin</a> for manage version and get auto upgrade to latest version.', 'woocommerce-predictive-search' ), $a3_dashboard_plugin_requirement->install_url() );
+						} elseif ( ! $a3_dashboard_plugin_requirement->is_activated() ) {
+							$version_message = sprintf( __( 'You need to activate the <a title="" href="%s" target="_parent">a3rev Dashboard plugin</a> for manage version and get auto upgrade to latest version.', 'woocommerce-predictive-search' ), $a3_dashboard_plugin_requirement->activate_url() );
+						} elseif ( function_exists( 'is_a3_club_membership' ) && ! is_a3_club_membership() ) {
+							$version_message = sprintf( __( 'You need to go to <a title="" href="%s">a3 Dashboard Main page</a> for login before check for Update. Use your account creds on <a href="https://a3rev.com" target="_parent">a3rev.com</a> to login.', 'woocommerce-predictive-search' ), self_admin_url( 'admin.php?page=a3rev-dashboard' ) );
+						} else {
+							$check_version_class = 'a3rev-ui-latest-version-message';
+							$version_message = sprintf( __( 'Go to <a href="%s">a3 Dashboard Main page</a> and hit on <strong>CHECK NOW</strong> button to manual check for Update.', 'woocommerce-predictive-search' ), self_admin_url( 'admin.php?page=a3rev-dashboard' ) );
+						}
 					}
 
 					?><tr valign="top">
-						<th scope="row" class="titledesc">
-                        	<?php echo $tip; ?>
-							<label><?php echo __( 'Check New Version', 'woocommerce-predictive-search' ); ?></label>
-						</th>
-						<td class="forminp forminp-manual_check_version">
-							<?php echo $description; ?>
-
-							<input
-								data-transient-name="<?php echo $this->version_transient; ?>"
-								name="<?php echo $this->plugin_name . '-check-version'; ?>"
-                                id="<?php echo $this->plugin_name . '-check-version'; ?>"
-								class="button button-primary a3rev-ui-manual_check_version"
-                                type="button"
-								value="<?php echo __( 'Check Now', 'woocommerce-predictive-search' ); ?>"
-								/> <span class="a3rev-ui-version-checking"> </span>
-								<p class="a3rev-ui-check-version-message <?php echo $new_version_class; ?>"><?php echo $version_message; ?></p>
-
+						<td colspan="2">
+							<p class="a3rev-ui-check-version-message <?php echo $check_version_class; ?>"><?php echo $version_message; ?></p>
 						</td>
 					</tr><?php
 

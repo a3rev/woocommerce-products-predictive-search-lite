@@ -2,7 +2,6 @@
 /**
  * Register Activation Hook
  */
-update_option('wc_predictive_search_plugin', 'woo_predictive_search');
 function wc_predictive_install(){
 	global $wpdb;
 	$woocommerce_search_page_id = WC_Predictive_Search_Functions::create_page( _x('woocommerce-search', 'page_slug', 'woocommerce-predictive-search' ), 'woocommerce_search_page_id', __('Woocommerce Predictive Search', 'woocommerce-predictive-search' ), '[woocommerce_search]' );
@@ -11,7 +10,7 @@ function wc_predictive_install(){
 	global $wc_predictive_search;
 	$wc_predictive_search->install_databases();
 
-	update_option('wc_predictive_search_lite_version', '4.1.4');
+	update_option('wc_predictive_search_lite_version', WOOPS_VERSION );
 
 	global $wc_predictive_search_admin_init;
 	delete_metadata( 'user', 0, $wc_predictive_search_admin_init->plugin_name . '-' . 'plugin_framework_global_box' . '-' . 'opened', '', true );
@@ -36,8 +35,6 @@ function woops_init() {
 		$wc_predictive_search_less->plugin_build_sass();
 
 		update_option( 'wc_predictive_search_just_confirm', 1 );
-		wp_redirect( admin_url( 'admin.php?page=woo-predictive-search&tab=performance-settings&box_open=predictive_search_synch_data#predictive_search_synch_data', 'relative' ) );
-		exit;
 	}
 
 	wc_predictive_search_plugin_textdomain();
@@ -144,6 +141,6 @@ function woo_ps_lite_upgrade_plugin() {
 		include( WOOPS_DIR. '/includes/updates/update-4.0.0.php' );
 	}
 
-    update_option('wc_predictive_search_lite_version', '4.1.4');
+    update_option('wc_predictive_search_lite_version', WOOPS_VERSION );
 }
 ?>

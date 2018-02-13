@@ -45,6 +45,33 @@ class WC_PS_PostMeta_Data
 		$wpdb->tables[] = 'ps_postmeta';
 	}
 
+
+	/**
+	 * Predictive Search Post Meta Table - return sql
+	 *
+	 * @return void
+	 */
+	public function exclude_outofstock_sql() {
+
+		global $wpdb;
+
+		$sql   = array();
+		$join  = array();
+		$where = array();
+
+		$join[]      = " LEFT JOIN {$wpdb->ps_postmeta} AS ppm1 ON ( pp.post_id=ppm1.ps_post_id AND ppm1.meta_key = '_stock_status' ) ";
+		//$join[]      = " LEFT JOIN {$wpdb->ps_postmeta} AS ppm2 ON ( pp.post_id=ppm2.ps_post_id ) ";
+
+		$sql['join'] = $join;
+
+		//$where[]                = " AND ( ppm1.ps_post_id IS NULL OR ( ppm2.meta_key = '_stock_status' AND ppm2.meta_value NOT LIKE 'outofstock' ) ) ";
+		$where[]                = " AND ( ppm1.ps_post_id IS NULL ) ";
+
+		$sql['where']           = $where;
+
+		return $sql;
+	}
+
 	/**
 	 * Get Predictive Search Array Items Exclude by Out of Stock
 	 */

@@ -62,7 +62,10 @@ class WC_PS_Posts_Data
 		$groupby = array();
 		$orderby = array();
 
+		$where[] = " 1=1 ";
+
 		$items_excluded = $wc_ps_exclude_data->get_array_items( $post_type );
+
 		if ( 'page' == $post_type ) {
 			global $woocommerce_search_page_id;
 			$items_excluded = array_merge( array( (int) $woocommerce_search_page_id ), $items_excluded );
@@ -71,8 +74,9 @@ class WC_PS_Posts_Data
 		$woocommerce_search_exclude_out_stock = get_option('woocommerce_search_exclude_out_stock');
 		if ( 'yes' == $woocommerce_search_exclude_out_stock && in_array( $post_type, array( 'product', 'product_variation' ) ) ) {
 			global $wc_ps_postmeta_data;
-			$items_out_of_stock = $wc_ps_postmeta_data->get_array_products_out_of_stock();
-			$items_excluded = array_merge( $items_out_of_stock, $items_excluded );
+			$exclude_outofstock_sql = $wc_ps_postmeta_data->exclude_outofstock_sql();
+			$join                   = array_merge( $join, $exclude_outofstock_sql['join'] );
+			$where                  = array_merge( $where, $exclude_outofstock_sql['where'] );
 		}
 
 		$id_excluded    = '';
@@ -92,7 +96,7 @@ class WC_PS_Posts_Data
 
 		$sql['join']   = $join;
 
-		$where[] = $wpdb->prepare( " pp.post_type = %s", $post_type );
+		$where[] = $wpdb->prepare( " AND pp.post_type = %s", $post_type );
 
 		if ( '' != trim( $id_excluded ) ) {
 			$where[] = " AND pp.post_id NOT IN ({$id_excluded}) ";

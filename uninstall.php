@@ -8,19 +8,19 @@
 if( ! defined( 'WP_UNINSTALL_PLUGIN' ) )
 	exit();
 
-global $wpdb;
+$plugin_key = 'woo_predictive_search';
 
 // Delete Google Font
-delete_option('woo_predictive_search_google_api_key' . '_enable');
-delete_transient('woo_predictive_search_google_api_key' . '_status');
-delete_option('woo_predictive_search' . '_google_font_list');
+delete_option( $plugin_key . '_google_api_key' . '_enable' );
+delete_transient( $plugin_key . '_google_api_key' . '_status' );
+delete_option( $plugin_key . '_google_font_list' );
 
-if ( get_option('woocommerce_search_lite_clean_on_deletion') == 'yes' ) {
-	delete_option('woo_predictive_search_google_api_key');
-    delete_option('woo_predictive_search_toggle_box_open');
-    delete_option('woo_predictive_search' . '-custom-boxes');
+if ( get_option( $plugin_key . '_clean_on_deletion' ) == 'yes' ) {
+	delete_option( $plugin_key . '_google_api_key' );
+	delete_option( $plugin_key . '_toggle_box_open' );
+	delete_option( $plugin_key . '-custom-boxes' );
 
-    delete_metadata( 'user', 0, 'woo_predictive_search' . '-' . 'plugin_framework_global_box' . '-' . 'opened', '', true );
+	delete_metadata( 'user', 0,  $plugin_key . '-' . 'plugin_framework_global_box' . '-' . 'opened', '', true );
 
 	delete_option('woocommerce_search_text_lenght');
 	delete_option('woocommerce_search_result_items');
@@ -70,11 +70,11 @@ if ( get_option('woocommerce_search_lite_clean_on_deletion') == 'yes' ) {
 	delete_option('wc_predictive_search_had_sync_posts_data');
 	delete_option('wc_predictive_search_synced_posts_data');
 
-	delete_option('woocommerce_search_lite_clean_on_deletion');
-
 	delete_post_meta_by_key('_predictive_search_focuskw');
 
 	wp_delete_post( get_option('woocommerce_search_page_id') , true );
+
+	global $wpdb;
 
 	$wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . 'ps_posts');
 	$wpdb->query('DROP TABLE IF EXISTS ' . $wpdb->prefix . 'ps_postmeta');
@@ -89,4 +89,6 @@ if ( get_option('woocommerce_search_lite_clean_on_deletion') == 'yes' ) {
 			WHERE s.id IN ({$str})");
 		$wpdb->query("DELETE FROM {$wpdb->prefix}icl_string_positions WHERE string_id IN ({$str})");
 	}
+
+	delete_option( $plugin_key . '_clean_on_deletion' );
 }

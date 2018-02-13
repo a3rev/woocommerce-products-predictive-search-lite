@@ -223,6 +223,13 @@ class WC_Predictive_Search
 				);
 			}
 
+			if ( version_compare( WC_VERSION, '3.3.0', '<' ) ) {
+				// bw compat. for less than WC 3.3.0
+				$thumbnail_size_name = 'shop_catalog';
+			} else {
+				$thumbnail_size_name = 'woocommerce_thumbnail';
+			}
+
 			$current_db_version = get_option( 'woocommerce_db_version', null );
 
 			foreach ( $search_products as $current_product ) {
@@ -251,7 +258,7 @@ class WC_Predictive_Search
 					'title'       => $current_product->post_title,
 					'keyword'     => $current_product->post_title,
 					'url'         => $product->get_permalink(),
-					'image_url'   => WC_Predictive_Search_Functions::get_product_thumbnail_url( $product_id, 0, 'shop_catalog', 64, 64 ),
+					'image_url'   => WC_Predictive_Search_Functions::get_product_thumbnail_url( $product_id, 0, $thumbnail_size_name, 64, 64 ),
 					'description' => $product_description,
 					'stock'       => $availability_html,
 					'type'        => 'product'
@@ -306,6 +313,13 @@ class WC_Predictive_Search
 				);
 			}
 
+			if ( version_compare( WC_VERSION, '3.3.0', '<' ) ) {
+				// bw compat. for less than WC 3.3.0
+				$thumbnail_size_name = 'shop_catalog';
+			} else {
+				$thumbnail_size_name = 'woocommerce_thumbnail';
+			}
+
 			foreach ( $search_posts as $item ) {
 
 				$post_data = get_post( $item->post_id );
@@ -316,7 +330,7 @@ class WC_Predictive_Search
 					'title'       => $item->post_title,
 					'keyword'     => $item->post_title,
 					'url'         => get_permalink( $item->post_id ),
-					'image_url'   => WC_Predictive_Search_Functions::get_product_thumbnail_url( $item->post_id, 0, 'shop_catalog', 64, 64 ),
+					'image_url'   => WC_Predictive_Search_Functions::get_product_thumbnail_url( $item->post_id, 0, $thumbnail_size_name, 64, 64 ),
 					'description' => $item_description,
 					'type'        => $post_type
 				);

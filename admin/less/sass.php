@@ -5,11 +5,11 @@ if (!defined('ABSPATH'))
 
 class WC_Predictive_Search_Less
 {
-	public $plugin_name = 'woo_predictive_search';
-	public $css_file_name = 'wc_predictive_search';
-	public $plugin_folder = WOOPS_FOLDER;
-	public $plugin_dir = WOOPS_DIR;
-
+    public $plugin_name   = WOOPS_KEY;
+    public $css_file_name = 'wc_predictive_search';
+    public $plugin_folder = WOOPS_FOLDER;
+    public $plugin_dir    = WOOPS_DIR;
+    
     /*-----------------------------------------------------------------------------------*/
     /* Constructor */
     /*-----------------------------------------------------------------------------------*/
