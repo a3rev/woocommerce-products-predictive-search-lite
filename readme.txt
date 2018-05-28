@@ -3,8 +3,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, WooCommerce Predictive Search, WooCommerce, Predictive Search, Live Search, e-commerce,  wordpress ecommerce
 Requires at least: 4.5
-Tested up to: 4.9.4
-Stable tag: 4.1.5
+Tested up to: 4.9.6
+Stable tag: 4.1.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -166,6 +166,15 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 4.1.6 - 2018/05/28 =
+* This maintenance update is for compatibility with WordPress 4.9.6 and WooCommerce 3.4.0 and the new GDPR compliance requirements for users in the EU 
+* Tweak - Test for compatibility with WooCommerce 3.4.0
+* Tweak - Test for compatibility with WordPress 4.9.6
+* Tweak - Check for any issues with GDPR compliance. None Found
+* Tweak - Capture Auto and manual PS database sync errors with on page log printout for debugging issues
+* Framework - Add error_text field for Multi Ajax Submit, this field will show if Ajax throws an error
+* Dev - Include PS Errors Log class for handling all plugin errors
 
 = 4.1.5 - 2018/02/13 =
 * Maintenance Update. Under the bonnet tweaks to keep your plugin running smoothly and is the foundation for new features to be developed this year 
@@ -709,6 +718,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 4.1.6 =
+Maintenance Update. Compatibility with WordPress 4.9.6, WooCommerce 3.4.0 and the new GDPR compliance requirements for users in the EU. Plus new Error logging for PS Database sync
 
 = 4.1.5 =
 Maintenance Update. This version updates the Plugin Framework to v 2.0.2, adds full compatibility with a3rev Dashboard, WordPress v 4.9.4 and WooCoomerce v 3.3.1

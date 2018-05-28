@@ -255,6 +255,18 @@ function wc_ps_get_results_footer_tpl() {
 	);
 }
 
+/**
+ * wc_ps_error_modal_tpl()
+ *
+ * @return void
+ */
+function wc_ps_error_modal_tpl( $args = array() ) {
+
+	wc_ps_get_template( 'admin/error-log-modal.php',
+		apply_filters( 'wc_ps_error_modal_tpl_args', $args )
+	);
+}
+
 function wc_ps_get_product_categories() {
 	global $wc_predictive_search_cache;
 	$categories_list       = false;

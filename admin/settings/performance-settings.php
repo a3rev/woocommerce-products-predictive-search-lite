@@ -86,6 +86,8 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_end', array( $this, 'include_script' ) );
 
+		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_end', array( $this, 'error_logs_container' ) );
+
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
 
 		add_action( $this->plugin_name . '-' . $this->form_key . '_before_settings_save', array( $this, 'before_save_settings' ) );
@@ -293,6 +295,10 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 			$manual_synced_completed_time = '';
 		}
 
+		// If have Error log on Sync
+		global $wc_ps_errors_log;
+		$auto_synced_error_log   = trim( $wc_ps_errors_log->get_error( 'auto_sync' ) );
+
   		// Define settings
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
 
@@ -324,7 +330,7 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 				'id' 		=> 'woocommerce_search_schedule_time_sync_data',
 				'type' 		=> 'time_picker',
 				'default'	=> '00:00',
-				'desc'		=> ( '' != $auto_synced_completed_time ? '<span style="color:#46b450;font-style:normal;">' .__( 'Last Scheduled Full Database Sync completed', 'woocommerce-predictive-search' ) . ' ' . $auto_synced_completed_time . '</span>' : '' ),
+				'desc'		=> ( '' != $auto_synced_completed_time ? '<span style="color:#46b450;font-style:normal;">' .__( 'Last Scheduled Full Database Sync completed', 'woocommerce-predictive-search' ) . ' ' . $auto_synced_completed_time . '</span>' : '' ) . ( '' != $auto_synced_error_log ? '<span style="color:#f00;font-style:normal; display: block;">' .__( 'ERROR: Latest auto sync has failed to complete', 'woocommerce-predictive-search' ) . ' - <a data-toggle="modal" href="#auto_sync-modal">'. __( 'View Error Log', 'woocommerce-predictive-search' ) .'</a></span>' : '' ),
 				'separate_option'   => true,
 			),
 			array(
@@ -356,6 +362,25 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 				'type'             => 'ajax_multi_submit',
 				'statistic_column' => 2,
 				'multi_submit' => array(
+					array(
+						'item_id'          => 'start_sync',
+						'item_name'        => __( 'Sync Initied', 'woocommerce-predictive-search' ),
+						'current_items'    => 0,
+						'total_items'      => 1,
+						'progressing_text' => __( 'Start Syncing...', 'woocommerce-predictive-search' ),
+						'completed_text'   => __( 'Sync Initied', 'woocommerce-predictive-search' ),
+						'submit_data'      => array(
+							'ajax_url'  => admin_url( 'admin-ajax.php', 'relative' ),
+							'ajax_type' => 'POST',
+							'data'      => array(
+								'action'   => 'wc_predictive_search_start_sync',
+							)
+						),
+						'show_statistic'       => false,
+						'statistic_customizer' => array(
+							'current_color' => '#96587d',
+						),
+					),
 					array(
 						'item_id'          => 'sync_products',
 						'item_name'        => __( 'Products Synced', 'woocommerce-predictive-search' ),
@@ -471,12 +496,13 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 						)
 					),
 				),
-				'separate_option'   => true,
-				'button_name'       => $sync_button_text,
-				'resubmit'			=> $synced_full_data,
-				'progressing_text'  => __( 'Syncing Data...', 'woocommerce-predictive-search' ),
-				'completed_text'    => __( 'Synced Data', 'woocommerce-predictive-search' ),
-				'successed_text'    => sprintf( __( 'Last manual Full Database Sync completed <span class="built-time">%s</span>', 'woocommerce-predictive-search' ), $manual_synced_completed_time ),
+				'separate_option'  => true,
+				'button_name'      => $sync_button_text,
+				'resubmit'         => $synced_full_data,
+				'progressing_text' => __( 'Syncing Data...', 'woocommerce-predictive-search' ),
+				'completed_text'   => __( 'Synced Data', 'woocommerce-predictive-search' ),
+				'successed_text'   => sprintf( __( 'Last manual Full Database Sync completed <span class="built-time">%s</span>', 'woocommerce-predictive-search' ), $manual_synced_completed_time ),
+				'errors_text'      => '<span style="color:#f00;font-style:normal; display: block;">' .__( 'ERROR: Latest manual sync has failed to complete', 'woocommerce-predictive-search' ) . ' - <a data-toggle="modal" href="#manual_sync-modal">'. __( 'View Error Log', 'woocommerce-predictive-search' ) .'</a></span>',
 			),
 
 			array(
@@ -490,6 +516,68 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 				'is_box'	=> true,
            	),
         ));
+	}
+
+	public function error_logs_container() {
+		if ( ! wp_script_is( 'bootstrap-modal', 'registered' ) 
+			&& ! wp_script_is( 'bootstrap-modal', 'enqueued' ) ) {
+			global $wc_predictive_search_admin_interface;
+			$wc_predictive_search_admin_interface->register_modal_scripts();
+		}
+
+		wp_enqueue_style( 'bootstrap-modal' );
+
+		// Don't include modal script if bootstrap is loaded by theme or plugins
+		if ( wp_script_is( 'bootstrap', 'registered' ) 
+			|| wp_script_is( 'bootstrap', 'enqueued' ) ) {
+			
+			wp_enqueue_script( 'bootstrap' );
+			
+			return;
+		}
+
+		wp_enqueue_script( 'bootstrap-modal' );
+
+		global $wc_ps_errors_log;
+		$auto_synced_error_log   = trim( $wc_ps_errors_log->get_error( 'auto_sync' ) );
+		$manual_synced_error_log = trim( $wc_ps_errors_log->get_error( 'manual_sync' ) );
+
+		if ( '' != $auto_synced_error_log ) {
+			echo $wc_ps_errors_log->error_modal( 'auto_sync', $auto_synced_error_log );
+		}
+
+		echo '<div class="manual_sync_error_container">';
+		echo $wc_ps_errors_log->error_modal( 'manual_sync', $manual_synced_error_log );
+		echo '</div>';
+?>
+<style type="text/css">
+	.a3rev_panel_container .a3rev-ui-ajax_multi_submit-control .a3rev-ui-ajax_multi_submit-errors {
+		<?php if ( '' != $manual_synced_error_log ) { ?>
+		display: inline;
+		<?php } ?>
+	}
+</style>
+<script>
+(function($) {
+
+	$(document).ready(function() {
+
+		$(document).on( 'a3rev-ui-ajax_multi_submit-errors', '#woocommerce_search_sync_data', function( event, bt_ajax_submit, multi_ajax ) {
+			$.ajax({
+				type: 'POST',
+				url: '<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>',
+				data: { action: 'wc_predictive_search_manual_sync_error' },
+				success: function ( response ) {
+					$('.manual_sync_error_container').html( response );
+				}
+			});
+		});
+
+	});
+
+})(jQuery);
+</script>
+<?php
 	}
 
 	public function include_script() {

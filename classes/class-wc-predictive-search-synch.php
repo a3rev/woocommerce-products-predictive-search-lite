@@ -6,6 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 <?php
 class WC_Predictive_Search_Synch
 {
+
+	public $error_id = 'manual_sync';
+
 	public function __construct() {
 
 		// Synch for post
@@ -23,6 +26,8 @@ class WC_Predictive_Search_Synch
 
 		if ( is_admin() ) {
 			// AJAX sync data
+			add_action('wp_ajax_wc_predictive_search_start_sync', array( $this, 'wc_predictive_search_start_sync_ajax' ) );
+			add_action('wp_ajax_nopriv_wc_predictive_search_start_sync', array( $this, 'wc_predictive_search_start_sync_ajax' ) );
 			add_action('wp_ajax_wc_predictive_search_sync_products', array( $this, 'wc_predictive_search_sync_products_ajax' ) );
 			add_action('wp_ajax_nopriv_wc_predictive_search_sync_products', array( $this, 'wc_predictive_search_sync_products_ajax' ) );
 
@@ -46,6 +51,9 @@ class WC_Predictive_Search_Synch
 
 			add_action('wp_ajax_wc_predictive_search_sync_end', array( $this, 'wc_predictive_search_sync_end_ajax' ) );
 			add_action('wp_ajax_nopriv_wc_predictive_search_sync_end', array( $this, 'wc_predictive_search_sync_end_ajax' ) );
+
+			add_action('wp_ajax_wc_predictive_search_manual_sync_error', array( $this, 'wc_predictive_search_manual_sync_error_ajax' ) );
+			add_action('wp_ajax_nopriv_wc_predictive_search_manual_sync_error', array( $this, 'wc_predictive_search_manual_sync_error_ajax' ) );
 		}
 	}
 
@@ -111,7 +119,29 @@ class WC_Predictive_Search_Synch
 		return array( 'status' => $status, 'current_items' => $current_skus, 'total_items' => $total_skus );
 	}
 
-	public function wc_predictive_search_sync_posts( $post_type = 'product' ) {
+	public function wc_predictive_search_start_sync( $error_id = '' ) {
+		global $wc_ps_errors_log;
+		$wc_ps_errors_log->delete_error( $error_id );
+
+		$status = 'completed';
+
+		return array( 'status' => $status, 'current_items' => 1, 'total_items' => 1 );
+	}
+
+	public function wc_predictive_search_sync_posts( $post_type = 'product', $error_id = '' ) {
+
+		// Log Errors 
+		global $wc_ps_errors_log;
+
+		$error_type = __( 'Products Failed', 'woocommerce-predictive-search' );
+		if ( 'post' == $post_type ) {
+			$error_type = __( 'Posts Failed', 'woocommerce-predictive-search' );
+		} elseif ( 'page' == $post_type ) {
+			$error_type = __( 'Pages Failed', 'woocommerce-predictive-search' );
+		}
+
+		$wc_ps_errors_log->log_errors( $error_id, $error_type );
+
 		$end_time = time() + 16;
 
 		$this->migrate_posts( $post_type, $end_time );
@@ -119,7 +149,15 @@ class WC_Predictive_Search_Synch
 		return $this->get_sync_posts_statistic( $post_type );
 	}
 
-	public function wc_predictive_search_sync_product_skus() {
+	public function wc_predictive_search_sync_product_skus( $error_id = '' ) {
+
+		// Log Errors 
+		global $wc_ps_errors_log;
+
+		$error_type = __( 'SKU Failed', 'woocommerce-predictive-search' );
+
+		$wc_ps_errors_log->log_errors( $error_id, $error_type );
+
 		$end_time = time() + 16;
 
 		$this->migrate_skus( $end_time );
@@ -127,8 +165,16 @@ class WC_Predictive_Search_Synch
 		return $this->get_sync_product_skus_statistic();
 	}
 
+	public function wc_predictive_search_start_sync_ajax() {
+		$result = $this->wc_predictive_search_start_sync( $this->error_id );
+
+		echo json_encode( $result );
+
+		die();
+	}
+
 	public function wc_predictive_search_sync_products_ajax() {
-		$result = $this->wc_predictive_search_sync_posts( 'product' );
+		$result = $this->wc_predictive_search_sync_posts( 'product', $this->error_id );
 
 		echo json_encode( $result );
 
@@ -136,7 +182,7 @@ class WC_Predictive_Search_Synch
 	}
 
 	public function wc_predictive_search_sync_product_skus_ajax() {
-		$result = $this->wc_predictive_search_sync_product_skus();
+		$result = $this->wc_predictive_search_sync_product_skus( $this->error_id );
 
 		echo json_encode( $result );
 
@@ -168,7 +214,7 @@ class WC_Predictive_Search_Synch
 	}
 
 	public function wc_predictive_search_sync_posts_ajax() {
-		$result = $this->wc_predictive_search_sync_posts( 'post' );
+		$result = $this->wc_predictive_search_sync_posts( 'post', $this->error_id );
 
 		echo json_encode( $result );
 
@@ -176,11 +222,19 @@ class WC_Predictive_Search_Synch
 	}
 
 	public function wc_predictive_search_sync_pages_ajax() {
-		$result = $this->wc_predictive_search_sync_posts( 'page' );
+		$result = $this->wc_predictive_search_sync_posts( 'page', $this->error_id );
 
 		echo json_encode( $result );
 
 		die();
+	}
+
+	public function wc_predictive_search_manual_sync_error_ajax() {
+		global $wc_ps_errors_log;
+
+		$manual_synced_error_log = trim( $wc_ps_errors_log->get_error( 'manual_sync' ) );
+
+		echo $wc_ps_errors_log->error_modal( 'manual_sync', $manual_synced_error_log );
 	}
 
 	public function wc_predictive_search_sync_end_ajax() {

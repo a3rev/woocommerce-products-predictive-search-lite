@@ -6,6 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 <?php
 class WC_Predictive_Search_Schedule
 {
+	public $error_id = 'auto_sync';
+
 	public function __construct() {
 
 		// Register the schedule
@@ -46,10 +48,14 @@ class WC_Predictive_Search_Schedule
 	}
 
 	public function auto_sync_search_data() {
+		global $wc_ps_synch;
+
+		$wc_ps_synch->wc_predictive_search_start_sync( $this->error_id );
+
 		// Set status of auto synced is 'run' for when cron job start process
 		update_option( 'wc_predictive_search_auto_synced_posts_data', 0 );
 
-		wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_products' );
+		wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_sync_products' );
 	}
 
 	public function auto_sync_products() {
@@ -61,7 +67,7 @@ class WC_Predictive_Search_Schedule
 		 */
 		wp_schedule_single_event( time() + ( 60 * 60 ), 'wc_predictive_search_auto_sync_detect_error' );
 
-		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'product' );
+		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'product', $this->error_id );
 
 		// Remove the event send ERROR email if don't get limited execute time or php error
 		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error' );
@@ -69,9 +75,9 @@ class WC_Predictive_Search_Schedule
 		// If status is continue then register sync products again for continue
 		// If status is complete then register sync product skus
 		if ( isset( $result['status'] ) && 'continue' == $result['status'] ) {
-			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_products' );
+			wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_sync_products' );
 		} else {
-			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_product_skus' );
+			wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_sync_product_skus' );
 		}
 
 
@@ -86,7 +92,7 @@ class WC_Predictive_Search_Schedule
 		 */
 		wp_schedule_single_event( time() + ( 60 * 60 ), 'wc_predictive_search_auto_sync_detect_error' );
 
-		$result = $wc_ps_synch->wc_predictive_search_sync_product_skus();
+		$result = $wc_ps_synch->wc_predictive_search_sync_product_skus( $this->error_id );
 
 		// Remove the event send ERROR email if don't get limited execute time or php error
 		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error' );
@@ -94,18 +100,18 @@ class WC_Predictive_Search_Schedule
 		// If status is continue then register sync products skus again for continue
 		// If status is complete then register sync product categories
 		if ( isset( $result['status'] ) && 'continue' == $result['status'] ) {
-			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_product_skus' );
+			wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_sync_product_skus' );
 		} else {
-			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_posts' );
+			wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_sync_posts' );
 		}
 	}
 
 	public function auto_sync_product_categories() {
-		wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_product_tags' );
+		wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_sync_product_tags' );
 	}
 
 	public function auto_sync_product_tags() {
-		wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_posts' );
+		wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_sync_posts' );
 	}
 
 	public function auto_sync_posts() {
@@ -117,7 +123,7 @@ class WC_Predictive_Search_Schedule
 		 */
 		wp_schedule_single_event( time() + ( 60 * 60 ), 'wc_predictive_search_auto_sync_detect_error' );
 
-		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'post' );
+		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'post', $this->error_id );
 
 		// Remove the event send ERROR email if don't get limited execute time or php error
 		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error' );
@@ -125,9 +131,9 @@ class WC_Predictive_Search_Schedule
 		// If status is continue then register sync posts again for continue
 		// If status is complete then register sync pages
 		if ( isset( $result['status'] ) && 'continue' == $result['status'] ) {
-			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_posts' );
+			wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_sync_posts' );
 		} else {
-			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_pages' );
+			wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_sync_pages' );
 		}
 	}
 
@@ -140,7 +146,7 @@ class WC_Predictive_Search_Schedule
 		 */
 		wp_schedule_single_event( time() + ( 60 * 60 ), 'wc_predictive_search_auto_sync_detect_error' );
 
-		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'page' );
+		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'page', $this->error_id );
 
 		// Remove the event send ERROR email if don't get limited execute time or php error
 		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error' );
@@ -148,14 +154,14 @@ class WC_Predictive_Search_Schedule
 		// If status is continue then register sync pages again for continue
 		// If status is complete then register sync relationships
 		if ( isset( $result['status'] ) && 'continue' == $result['status'] ) {
-			wp_schedule_single_event( time(), 'wc_predictive_search_auto_sync_pages' );
+			wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_sync_pages' );
 		} else {
-			wp_schedule_single_event( time(), 'wc_predictive_search_auto_end_sync' );
+			wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_end_sync' );
 		}
 	}
 
 	public function auto_sync_relationships() {
-		wp_schedule_single_event( time(), 'wc_predictive_search_auto_end_sync' );
+		wp_schedule_single_event( time() + 5, 'wc_predictive_search_auto_end_sync' );
 	}
 
 	public function auto_end_sync() {
