@@ -75,6 +75,14 @@ add_action('widgets_init', 'register_widget_woops_predictive_search');
 // Add shortcode [woocommerce_search]
 add_shortcode('woocommerce_search', array('WC_Predictive_Search_Shortcodes', 'parse_shortcode_search_result'));
 
+// Add Predictive Search Meta Box to all post type
+add_action( 'add_meta_boxes', array('WC_Predictive_Search_Meta','create_custombox'), 9 );
+
+// Save Predictive Search Meta Box to all post type
+if(in_array(basename($_SERVER['PHP_SELF']), array('post.php', 'page.php', 'page-new.php', 'post-new.php'))){
+	add_action( 'save_post', array('WC_Predictive_Search_Meta','save_custombox' ), 11 );
+}
+
 
 // Check upgrade functions
 add_action( 'init', 'woo_ps_lite_upgrade_plugin' );

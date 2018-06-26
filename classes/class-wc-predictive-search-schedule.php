@@ -222,25 +222,31 @@ class WC_Predictive_Search_Schedule
 		$from_email = get_option( 'admin_email' );
 		$from_name = get_option( 'blogname' );
 
+		global $wc_ps_errors_log;
+		global $wc_predictive_search_admin_init;
+
+		$auto_synced_error_log = trim( $wc_ps_errors_log->get_error( 'auto_sync' ) );
+
 		$headers = array();
 		$headers[] = 'MIME-Version: 1.0';
 		$headers[] = 'Content-type: text/html; charset='. get_option('blog_charset');
 		$headers[] = 'From: '.$from_name.' <'.$from_email.'>';
 
 		$subject = sprintf( __( 'Predictive Search Database Sync ERROR: %s', 'woocommerce-predictive-search' ), home_url() );
-		$content = '<p>'. __( 'There was a problem with the Daily Predictive Search full Database sync. It has NOT COMPLETED for the site', 'woocommerce-predictive-search' );
+		$content = '<p>'. __( 'There was a problem with the Scheduled WooCommerce Predictive Search Database sync. It did NOT COMPLETE on the site:', 'woocommerce-predictive-search' );
 		$content .= sprintf( '<br><a href="%s" target="_blank">%s</a>', home_url(), home_url() );
 		$content .= '</p>';
 
-		$content .= '<p>'. __( 'Please log into the site and run a manual sync', 'woocommerce-predictive-search' );
+		$content = '<p>'. __( 'Error log for Debugging:', 'woocommerce-predictive-search' );
+		$content .= '<br>'. $auto_synced_error_log;
+		$content .= '</p>';
+
+		$content .= '<p>'. __( 'Please login to the site and try running a manual sync', 'woocommerce-predictive-search' );
 		$content .= sprintf( '<br><a href="%s" target="_blank">%s</a>', admin_url( 'admin.php?page=woo-predictive-search&tab=performance-settings&box_open=predictive_search_synch_data' ), admin_url( 'admin.php?page=woo-predictive-search&tab=performance-settings&box_open=predictive_search_synch_data' ) );
 		$content .= '</p>';
 
-		$content .= '<p>'. __( "If the sync won't complete or the auto sync fails again tomorrow, please raise a support ticket on the plugins forum.", 'woocommerce-predictive-search' );
-		$content .= sprintf( '<br><a href="%s" target="_blank">%s</a>', 'https://a3rev.com/forums/forum/woocommerce-plugins/predictive-search/', 'https://a3rev.com/forums/forum/woocommerce-plugins/predictive-search/' );
-		$content .= '</p>';
-
-		$content .= '<p>'. __( 'NOTE! You must be logged into your a3rev Software customer account to be able to post a support request.', 'woocommerce-predictive-search' );
+		$content .= '<p>'. __( "If the manual sync won't complete or it fails again tomorrow, please open a support ticket and copy and paste the error log into the ticket.", 'woocommerce-predictive-search' );
+		$content .= sprintf( '<br><a href="%s" target="_blank">%s</a>', $wc_predictive_search_admin_init->support_url, $wc_predictive_search_admin_init->support_url );
 		$content .= '</p>';
 
 		wp_mail( $to_email, $subject, $content, $headers, '' );

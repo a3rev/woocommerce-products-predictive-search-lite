@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, WooCommerce Predictive Search, WooCommerce, Predictive Search, Live Search, e-commerce,  wordpress ecommerce
 Requires at least: 4.5
 Tested up to: 4.9.6
-Stable tag: 4.1.6
+Stable tag: 4.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -166,6 +166,14 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 4.2.0 - 2018/06/26 =
+* This Feature update adds Hide From Predictive Search Results to Post and Page edit Publish Meta boxes, includes Sync error log into notification emails and updates on bootstrap modal and plugin framework, plus compatibility with WooCommerce 3.4.3
+* Feature - Add Hide from Predictive Search Results option on Product, Post and Page Publish Meta box
+* Tweak - Include Error log into Sync Failed Email Notifications
+* Framework - Update Modal script and style to version 4.1.1
+* Framework - Update a3rev Plugin Framework to version 2.0.5
+* Tweak - Test for compatibility with WooCommerce 3.4.3
 
 = 4.1.6 - 2018/05/28 =
 * This maintenance update is for compatibility with WordPress 4.9.6 and WooCommerce 3.4.0 and the new GDPR compliance requirements for users in the EU 
@@ -718,6 +726,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 4.2.0 =
+Feature update adds Hide From Predictive Search Results to Post and Page edit Publish Meta boxes, includes Sync error log into notification emails and updates on bootstrap modal and plugin framework, plus compatibility with WooCommerce 3.4.3
 
 = 4.1.6 =
 Maintenance Update. Compatibility with WordPress 4.9.6, WooCommerce 3.4.0 and the new GDPR compliance requirements for users in the EU. Plus new Error logging for PS Database sync
