@@ -90,8 +90,29 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 	public function register_modal_scripts() {
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		wp_register_style( 'bootstrap-modal', $this->admin_plugin_url() . '/assets/css/modal' . $suffix . '.css', array(), '4.1.1', 'all' );
-		wp_register_script( 'bootstrap-util', $this->admin_plugin_url() . '/assets/js/bootstrap/util' . $suffix . '.js', array( 'jquery' ), '4.1.1', false );
+
+		if ( ! wp_script_is( 'bootstrap-util', 'registered' ) ) {
+			wp_register_script( 'bootstrap-util', $this->admin_plugin_url() . '/assets/js/bootstrap/util' . $suffix . '.js', array( 'jquery' ), '4.1.1', false );
+		}
+
 		wp_register_script( 'bootstrap-modal', $this->admin_plugin_url() . '/assets/js/bootstrap/modal' . $suffix . '.js', array( 'jquery', 'bootstrap-util' ), '4.1.1', false );
+	}
+
+	public function register_popover_scripts() {
+		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+		wp_enqueue_style( 'bootstrap-popover', $this->admin_plugin_url() . '/assets/css/popover' . $suffix . '.css', array(), '4.1.1', 'all' );
+
+		wp_register_script( 'bootstrap-popper', $this->admin_plugin_url() . '/assets/js/bootstrap/popper.min.js', array( 'jquery' ), '4.1.1', false );
+
+		if ( ! wp_script_is( 'bootstrap-tooltip', 'registered' ) ) {
+			wp_register_script( 'bootstrap-tooltip', $this->admin_plugin_url() . '/assets/js/bootstrap/tooltip' . $suffix . '.js', array( 'jquery' ), '4.1.1', false );
+		}
+
+		if ( ! wp_script_is( 'bootstrap-util', 'registered' ) ) {
+			wp_register_script( 'bootstrap-util', $this->admin_plugin_url() . '/assets/js/bootstrap/util' . $suffix . '.js', array( 'jquery' ), '4.1.1', false );
+		}
+
+		wp_register_script( 'bootstrap-popover', $this->admin_plugin_url() . '/assets/js/bootstrap/popover' . $suffix . '.js', array( 'jquery', 'bootstrap-popper', 'bootstrap-util', 'bootstrap-tooltip' ), '4.1.1', false );
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -102,16 +123,18 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 		
 		$suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
 		$rtl = is_rtl() ? '.rtl' : '';
+
+		$this->register_popover_scripts();
 		
 		wp_register_script( 'chosen', $this->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), true, false );
 		wp_register_script( 'a3rev-chosen-new', $this->admin_plugin_url() . '/assets/js/chosen/chosen.jquery' . $suffix . '.js', array( 'jquery' ), $this->framework_version, false );
+		wp_register_script( 'a3rev-chosen-ajaxify', $this->admin_plugin_url() . '/assets/js/chosen/chosen.ajaxify.js', array( 'jquery', 'a3rev-chosen-new' ), $this->framework_version, false );
 		wp_register_script( 'a3rev-style-checkboxes', $this->admin_plugin_url() . '/assets/js/iphone-style-checkboxes' . $rtl . '.js', array('jquery'), $this->framework_version, false );
 		wp_register_script( 'jquery-ui-slider-rtl', $this->admin_plugin_url() . '/assets/js/ui-slider/jquery.ui.slider.rtl' . $suffix . '.js', array('jquery'), true, true );
 		
-		wp_register_script( 'a3rev-admin-ui-script', $this->admin_plugin_url() . '/assets/js/admin-ui-script.js', array('jquery'), $this->framework_version, true );
+		wp_register_script( 'a3rev-admin-ui-script', $this->admin_plugin_url() . '/assets/js/admin-ui-script.js', array('jquery', 'bootstrap-popover' ), $this->framework_version, true );
 		wp_register_script( 'a3rev-typography-preview', $this->admin_plugin_url() . '/assets/js/a3rev-typography-preview.js',  array('jquery'), $this->framework_version, true );
 		wp_register_script( 'a3rev-settings-preview', $this->admin_plugin_url() . '/assets/js/a3rev-settings-preview.js',  array('jquery'), $this->framework_version, true );
-		wp_register_script( 'jquery-tiptip', $this->admin_plugin_url() . '/assets/js/tipTip/jquery.tipTip' . $suffix . '.js', array( 'jquery' ), true, true );
 		wp_register_script( 'a3rev-metabox-ui', $this->admin_plugin_url() . '/assets/js/data-meta-boxes.js', array( 'jquery' ), $this->framework_version, true );
 		wp_register_script( 'jquery-rwd-image-maps', $this->admin_plugin_url() . '/assets/js/rwdImageMaps/jquery.rwdImageMaps.min.js', array( 'jquery' ), true, true );
 		wp_register_script( 'jquery-datetime-picker', $this->admin_plugin_url() . '/assets/js/datetimepicker/jquery.datetimepicker.js', array( 'jquery' ), true, true );
@@ -125,12 +148,11 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 			wp_enqueue_script( 'jquery-ui-slider' );
 		}
 		wp_enqueue_script( 'chosen' );
-		wp_enqueue_script( 'a3rev-chosen-new' );
+		wp_enqueue_script( 'a3rev-chosen-ajaxify' );
 		wp_enqueue_script( 'a3rev-style-checkboxes' );
 		wp_enqueue_script( 'a3rev-admin-ui-script' );
 		wp_enqueue_script( 'a3rev-typography-preview' );
 		wp_enqueue_script( 'a3rev-settings-preview' );
-		wp_enqueue_script( 'jquery-tiptip' );
 		wp_enqueue_script( 'a3rev-metabox-ui' );
 
 	} // End admin_script_load()
@@ -235,7 +257,6 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_style( 'jquery-datetime-picker', $this->admin_plugin_url() . '/assets/css/jquery.datetimepicker.css' );
 		wp_enqueue_style( 'a3rev-chosen-new-style', $this->admin_plugin_url() . '/assets/js/chosen/chosen' . $suffix . '.css', array(), $this->framework_version );
-		wp_enqueue_style( 'a3rev-tiptip-style', $this->admin_plugin_url() . '/assets/js/tipTip/tipTip.css' );
 		wp_enqueue_style( 'a3rev-metabox-ui-style', $this->admin_plugin_url() . '/assets/css/a3_admin_metabox.css', array(), $this->framework_version );
 
 		if ( is_rtl() ) {
@@ -1160,6 +1181,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 	 * checked_label		=> text : apply for onoff_checkbox, switcher_checkbox only ( set it to show the text instead ON word default )
 	 * unchecked_label		=> text : apply for onoff_checkbox, switcher_checkbox only ( set it to show the text instead OFF word default  )
 	 * options				=> array : apply for select, multiselect, radio types
+	 * options_url		 	=> url : apply for select, multiselect
 	 *
 	 * onoff_options		=> array : apply for onoff_radio only
 	 *						   ---------------- example ---------------------
@@ -1459,7 +1481,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 	
 			} elseif ( $tip ) {
 	
-				$tip = '<div class="help_tip a3-plugin-ui-icon a3-plugin-ui-help-icon" data-tip="' . esc_attr( $tip ) . '"></div>';
+				$tip = '<div class="help_tip a3-plugin-ui-icon a3-plugin-ui-help-icon" data-trigger="hover" data-content="' . esc_attr( $tip ) . '"></div>';
 	
 			}
 			
@@ -1893,6 +1915,12 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 					$errors_text      = $value['errors_text'];
 					$statistic_column = isset( $value['statistic_column'] ) ? $value['statistic_column'] : 1;
 
+					$notice          = isset( $value['notice'] ) ? $value['notice'] : '';
+					$confirm_message = '';
+					if ( isset( $value['confirm_run'] ) && $value['confirm_run']['allow'] ) {
+						$confirm_message = isset( $value['confirm_run']['message'] ) ? $value['confirm_run']['message'] : '';
+					}
+
 					$multi_current_items = 0;
 					$multi_total_items   = 0;
 
@@ -1933,11 +1961,17 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 									class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-button <?php echo esc_attr( $value['class'] ); ?>"
 									style="<?php echo esc_attr( $value['css'] ); ?>"
 									<?php echo implode( ' ', $custom_attributes ); ?>
+								<?php if ( ! empty( $confirm_message ) ) { ?>
+									data-confirm_message="<?php echo esc_attr( $confirm_message ); ?>"
+								<?php } ?> 
 								><?php echo $button_name; ?></button>
 								<span class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-successed"><?php echo $successed_text; ?></span>
 								<span class="a3rev-ui-<?php echo sanitize_title( $value['type'] ) ?>-errors"><?php echo $errors_text; ?></span>
 
 								<!-- Progress Bar -->
+								<?php if ( ! empty( $notice ) ) { ?>
+								<div class="a3rev-ui-progress-notice"><?php echo $notice; ?></div>
+								<?php } ?>
 								<div class="a3rev-ui-progress-bar-wrap">
 									<div class="a3rev-ui-progress-inner" data-current="<?php echo $multi_current_items; ?>" data-total="<?php echo $multi_total_items; ?>" ></div>
 									<div class="a3rev-ui-progressing-text"><?php echo $progressing_text; ?></div>
@@ -2161,6 +2195,12 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 						$value['class'] .= ' chzn-rtl';
 					}
 					if ( ! isset( $value['options'] ) ) $value['options'] = array();
+
+					$is_ajax = false;
+					if ( isset( $value['options_url'] ) && ! empty( $value['options_url'] ) ) {
+						$is_ajax = true;
+						$value['class'] .= ' chzn-select-ajaxify';
+					}
 		
 					?><tr valign="top">
 						<th scope="row" class="titledesc">
@@ -2176,6 +2216,11 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 								data-placeholder="<?php echo esc_html( $value['placeholder'] ); ?>"
 								<?php echo implode( ' ', $custom_attributes ); ?>
 								<?php if ( $value['type'] == 'multiselect' ) echo 'multiple="multiple"'; ?>
+								<?php if ( $is_ajax ) {
+									echo 'options_url="'.esc_url( $value['options_url'] ).'"';
+									echo 'data-no_results_text="Please enter 3 or more characters"';
+								}
+								?>
 								>
 								<?php
 								if ( is_array( $value['options'] ) && count( $value['options'] ) > 0 ) {
@@ -3535,7 +3580,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 			// open box handle
 			echo '<div data-form-key="custom-boxes" data-box-id="'. esc_attr( $heading_box_id ) .'" class="a3rev_panel_box_handle" >' . "\n\n";
 
-			echo ( ! empty( $options['name'] ) ) ? '<h3 class="a3-plugin-ui-panel-box '. $toggle_box_class . ' ' . $opened_class . '">'. esc_html( $options['name'] ) .' '. $view_doc .'</h3>' : '';
+			echo ( ! empty( $options['name'] ) ) ? '<h3 class="a3-plugin-ui-panel-box '. $toggle_box_class . ' ' . $opened_class . '">'. $options['name'] .' '. $view_doc .'</h3>' : '';
 
 			if ( stristr( $options['class'], 'pro_feature_fields' ) !== false && ! empty( $options['id'] ) ) $this->upgrade_top_message( true, sanitize_title( $options['id'] ) );
 			elseif ( stristr( $options['class'], 'pro_feature_fields' ) !== false ) $this->upgrade_top_message( true );

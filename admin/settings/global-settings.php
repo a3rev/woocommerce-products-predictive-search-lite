@@ -233,28 +233,8 @@ class WC_Predictive_Search_Global_Settings extends WC_Predictive_Search_Admin_UI
 		$pages_excluded        = array();
 		
 		if ( is_admin() && in_array (basename($_SERVER['PHP_SELF']), array('admin.php') ) && isset( $_GET['page'] ) && $_GET['page'] == 'woo-predictive-search' && ( ! isset( $_GET['tab'] ) || $_GET['tab'] == 'global-settings' ) ) {
-			
-			$results_products = $wpdb->get_results("SELECT ID, post_title FROM ".$wpdb->prefix."posts WHERE post_type='product' AND post_status='publish' ORDER BY post_title ASC");
-			if ($results_products) {
-				foreach($results_products as $product_data) {
-					$all_products[$product_data->ID] = $product_data->post_title;
-				}
-			}
-			$results_posts = $wpdb->get_results("SELECT ID, post_title FROM ".$wpdb->prefix."posts WHERE post_type='post' AND post_status='publish' ORDER BY post_title ASC");
-			if ($results_posts) {
-				foreach($results_posts as $post_data) {
-					$all_posts[$post_data->ID] = $post_data->post_title;
-				}
-			}
-			$results_pages = $wpdb->get_results("SELECT ID, post_title FROM ".$wpdb->prefix."posts WHERE post_type='page' AND post_status='publish' ORDER BY post_title ASC");
-			if ($results_pages) {
-				foreach($results_pages as $page_data) {
-					$all_pages[$page_data->ID] = $page_data->post_title;
-				}
-			}
 
 			if ( isset( $_POST['bt_save_settings'] ) )  {
-				$products_excluded = array();
 				if ( isset( $_POST['woocommerce_search_exclude_products'] ) ) {
 					$products_excluded     = $_POST['woocommerce_search_exclude_products'];
 				}
@@ -270,6 +250,34 @@ class WC_Predictive_Search_Global_Settings extends WC_Predictive_Search_Admin_UI
 				$products_excluded     = $wpdb->get_col( $wpdb->prepare( "SELECT object_id FROM {$wpdb->prefix}ps_exclude WHERE object_type = %s ", 'product' ) );
 				$posts_excluded        = $wpdb->get_col( $wpdb->prepare( "SELECT object_id FROM {$wpdb->prefix}ps_exclude WHERE object_type = %s ", 'post' ) );
 				$pages_excluded        = $wpdb->get_col( $wpdb->prepare( "SELECT object_id FROM {$wpdb->prefix}ps_exclude WHERE object_type = %s ", 'page' ) );
+			}
+
+			if ( ! empty( $products_excluded ) ) {
+				$results = $wpdb->get_results("SELECT post_id, post_title FROM ".$wpdb->prefix."ps_posts WHERE post_type='product' AND post_id IN (" . implode(',', $products_excluded ) . ") ORDER BY post_title ASC");
+				if ($results) {
+					foreach($results as $item_data) {
+						$all_products[$item_data->post_id] = $item_data->post_title;
+					}
+				}
+			}
+
+
+			if ( ! empty( $posts_excluded ) ) {
+				$results = $wpdb->get_results("SELECT post_id, post_title FROM ".$wpdb->prefix."ps_posts WHERE post_type='post' AND post_id IN (" . implode(',', $posts_excluded ) . ") ORDER BY post_title ASC");
+				if ($results) {
+					foreach($results as $item_data) {
+						$all_posts[$item_data->post_id] = $item_data->post_title;
+					}
+				}
+			}
+
+			if ( ! empty( $pages_excluded ) ) {
+				$results = $wpdb->get_results("SELECT post_id, post_title FROM ".$wpdb->prefix."ps_posts WHERE post_type='page' AND post_id IN (" . implode(',', $pages_excluded ) . ") ORDER BY post_title ASC");
+				if ($results) {
+					foreach($results as $item_data) {
+						$all_pages[$item_data->post_id] = $item_data->post_title;
+					}
+				}
 			}
 
 		}
@@ -463,28 +471,31 @@ class WC_Predictive_Search_Global_Settings extends WC_Predictive_Search_Admin_UI
 				'name' 		=> __( 'Exclude Products', 'woocommerce-predictive-search' ),
 				'id' 		=> 'woocommerce_search_exclude_products',
 				'type' 		=> 'multiselect',
-				'placeholder' => __( 'Choose Products', 'woocommerce-predictive-search' ),
+				'placeholder' => __( 'Search Products', 'woocommerce-predictive-search' ),
 				'css'		=> 'width:600px; min-height:80px;',
 				'options'	=> $all_products,
 				'default'	=> $products_excluded,
+				'options_url' => admin_url( 'admin-ajax.php?action=wc_ps_get_exclude_options&type=product&keyword=', 'relative' ),
 			),
 			array(  
 				'name' 		=> __( 'Exclude Posts', 'woocommerce-predictive-search' ),
 				'id' 		=> 'woocommerce_search_exclude_posts',
 				'type' 		=> 'multiselect',
-				'placeholder' => __( 'Choose Posts', 'woocommerce-predictive-search' ),
+				'placeholder' => __( 'Search Posts', 'woocommerce-predictive-search' ),
 				'css'		=> 'width:600px; min-height:80px;',
 				'options'	=> $all_posts,
 				'default'	=> $posts_excluded,
+				'options_url' => admin_url( 'admin-ajax.php?action=wc_ps_get_exclude_options&type=post&keyword=', 'relative' ),
 			),
 			array(  
 				'name' 		=> __( 'Exclude Pages', 'woocommerce-predictive-search' ),
 				'id' 		=> 'woocommerce_search_exclude_pages',
 				'type' 		=> 'multiselect',
-				'placeholder' => __( 'Choose Pages', 'woocommerce-predictive-search' ),
+				'placeholder' => __( 'Search Pages', 'woocommerce-predictive-search' ),
 				'css'		=> 'width:600px; min-height:80px;',
 				'options'	=> $all_pages,
 				'default'	=> $pages_excluded,
+				'options_url' => admin_url( 'admin-ajax.php?action=wc_ps_get_exclude_options&type=page&keyword=', 'relative' ),
 			),
 
 			array(

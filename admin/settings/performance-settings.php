@@ -295,6 +295,26 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 			$manual_synced_completed_time = '';
 		}
 
+		$have_confirm = false;
+
+		$products_sync_title = __( 'Products Synced', 'woocommerce-predictive-search' ); 
+		if ( 0 == get_option( 'wc_predictive_search_auto_synced_products_successed', 1 ) ) {
+			$products_sync_title = __( 'Syncing Products...', 'woocommerce-predictive-search' );
+			$have_confirm = true;
+		}
+
+		$posts_sync_title = __( 'Posts Synced', 'woocommerce-predictive-search' ); 
+		if ( 0 == get_option( 'wc_predictive_search_auto_synced_posts_successed', 1 ) ) {
+			$posts_sync_title = __( 'Syncing Posts...', 'woocommerce-predictive-search' ); 
+			$have_confirm = true;
+		}
+
+		$pages_sync_title = __( 'Pages Synced', 'woocommerce-predictive-search' ); 
+		if ( 0 == get_option( 'wc_predictive_search_auto_synced_pages_successed', 1 ) ) {
+			$pages_sync_title = __( 'Syncing Pages...', 'woocommerce-predictive-search' ); 
+			$have_confirm = true;
+		}
+
 		// If have Error log on Sync
 		global $wc_ps_errors_log;
 		$auto_synced_error_log   = trim( $wc_ps_errors_log->get_error( 'auto_sync' ) );
@@ -383,7 +403,7 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 					),
 					array(
 						'item_id'          => 'sync_products',
-						'item_name'        => __( 'Products Synced', 'woocommerce-predictive-search' ),
+						'item_name'        => $products_sync_title,
 						'current_items'    => ( ! empty( $current_products ) ) ? (int) $current_products : 0,
 						'total_items'      => ( ! empty( $total_products ) ) ? (int) $total_products : 0,
 						'progressing_text' => __( 'Syncing Products...', 'woocommerce-predictive-search' ),
@@ -459,7 +479,7 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 					),
 					array(
 						'item_id'          => 'sync_posts',
-						'item_name'        => __( 'Posts Synced', 'woocommerce-predictive-search' ),
+						'item_name'        => $posts_sync_title,
 						'current_items'    => ( ! empty( $current_posts ) ) ? (int) $current_posts : 0,
 						'total_items'      => ( ! empty( $total_posts ) ) ? (int) $total_posts : 0,
 						'progressing_text' => __( 'Syncing Posts...', 'woocommerce-predictive-search' ),
@@ -478,7 +498,7 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 					),
 					array(
 						'item_id'          => 'sync_pages',
-						'item_name'        => __( 'Pages Synced', 'woocommerce-predictive-search' ),
+						'item_name'        => $pages_sync_title,
 						'current_items'    => ( ! empty( $current_pages ) ) ? (int) $current_pages : 0,
 						'total_items'      => ( ! empty( $total_pages ) ) ? (int) $total_pages : 0,
 						'progressing_text' => __( 'Syncing Pages...', 'woocommerce-predictive-search' ),
@@ -503,6 +523,11 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 				'completed_text'   => __( 'Synced Data', 'woocommerce-predictive-search' ),
 				'successed_text'   => sprintf( __( 'Last manual Full Database Sync completed <span class="built-time">%s</span>', 'woocommerce-predictive-search' ), $manual_synced_completed_time ),
 				'errors_text'      => '<span style="color:#f00;font-style:normal; display: block;">' .__( 'ERROR: Latest manual sync has failed to complete', 'woocommerce-predictive-search' ) . ' - <a data-toggle="modal" href="#manual_sync-modal">'. __( 'View Error Log', 'woocommerce-predictive-search' ) .'</a></span>',
+				'confirm_run' 	   => array(
+					'allow'   => $have_confirm,
+					'message' => __( 'WARNING! Auto sync is currently running. Starting a Manual Sync will cancel the Auto sync and Manual Sync will start from the beginning again. Are you Sure you want to do this?', 'woocommerce-predictive-search' ),
+				),
+				'notice' 		   => __( 'You need to leave this page open for the sync to complete.', 'woocommerce-predictive-search' ),
 			),
 
 			array(

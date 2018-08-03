@@ -31,7 +31,7 @@ class WC_Predictive_Search_Admin_UI
 	 * You must change to correct plugin name that you are working
 	 */
 
-	public $framework_version      = '2.0.5';
+	public $framework_version      = '2.0.7';
 	public $plugin_name            = WOOPS_KEY;
 	public $plugin_path            = WOOPS_NAME;
 	public $google_api_key_option  = '';

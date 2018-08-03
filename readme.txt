@@ -3,8 +3,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, WooCommerce Predictive Search, WooCommerce, Predictive Search, Live Search, e-commerce,  wordpress ecommerce
 Requires at least: 4.5
-Tested up to: 4.9.6
-Stable tag: 4.2.0
+Tested up to: 4.9.8
+Stable tag: 4.2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -166,6 +166,22 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 4.2.1 - 2018/08/03 =
+* This maintenance update focuses on reworking the Daily Auto sync feature to resolve sync failures reported by some users. Also a refactor of the exclude from predictive search function on settings page. Includes compatibility with WordPress 4.9.8 and WooCommerce 3.4.4
+* Tweak - Continue Auto Sync if it is stopped by plugin, theme or WordPress upgrade
+* Tweak - Remove Auto sync fail email notification PHP timeout trigger
+* Tweak - Do not empty full PS database when start run on main schedule Auto Sync. Empty on separate PS table when Auto Sync is running on each object
+* Tweak - Show static current status of object that auto sync is running when access to the Performance tab.
+* Tweak - Show confirm popup if admin click on Manual Sync button while Auto Sync is running in background
+* Tweak - Terminate Auto Sync if admin confirm run Manual Sync
+* Tweak - Add notice about need to keep page open when running a manual sync
+* Refactor - Settings > Exclude from Predictive Search. Find Products, Posts, Pages with via Search instead of get all items. Massive saving in resources when opening setting on big sites. 
+* Tweak - Get list data for exclude feature from Predictive Search database instead of WordPress / WooCommerce databases
+* Tweak - Test for compatibility with WooCommerce 3.4.4
+* Tweak - Test for compatibility with WordPress 4.9.8
+* Framework - Convert old tooltip script to bootstrap tooltip
+* Framework - Update a3rev Plugin Framework to version 2.0.7
 
 = 4.2.0 - 2018/06/26 =
 * This Feature update adds Hide From Predictive Search Results to Post and Page edit Publish Meta boxes, includes Sync error log into notification emails and updates on bootstrap modal and plugin framework, plus compatibility with WooCommerce 3.4.3
@@ -726,6 +742,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 4.2.1 =
+This maintenance update focuses on reworking the Daily Auto sync feature to resolve sync failures reported by some users. Also a refactor of the exclude from predictive search function on settings page. Includes compatibility with WordPress 4.9.8 and WooCommerce 3.4.4
 
 = 4.2.0 =
 Feature update adds Hide From Predictive Search Results to Post and Page edit Publish Meta boxes, includes Sync error log into notification emails and updates on bootstrap modal and plugin framework, plus compatibility with WooCommerce 3.4.3

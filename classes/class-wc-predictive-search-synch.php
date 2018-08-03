@@ -119,16 +119,22 @@ class WC_Predictive_Search_Synch
 		return array( 'status' => $status, 'current_items' => $current_skus, 'total_items' => $total_skus );
 	}
 
-	public function wc_predictive_search_start_sync( $error_id = '' ) {
+	public function wc_predictive_search_start_sync( $error_id = '', $sync_type = 'manual' ) {
 		global $wc_ps_errors_log;
 		$wc_ps_errors_log->delete_error( $error_id );
+
+		if ( 'auto' !== $sync_type ) {
+			// Stop child schedule of Auto Sync if have run Manual Sync for data is not conflicted
+			global $wc_ps_schedule;
+			$wc_ps_schedule->stop_child_schedule_events_auto_sync();
+		}
 
 		$status = 'completed';
 
 		return array( 'status' => $status, 'current_items' => 1, 'total_items' => 1 );
 	}
 
-	public function wc_predictive_search_sync_posts( $post_type = 'product', $error_id = '' ) {
+	public function wc_predictive_search_sync_posts( $post_type = 'product', $error_id = '', $sync_type = 'manual' ) {
 
 		// Log Errors 
 		global $wc_ps_errors_log;
@@ -144,12 +150,12 @@ class WC_Predictive_Search_Synch
 
 		$end_time = time() + 16;
 
-		$this->migrate_posts( $post_type, $end_time );
+		$this->migrate_posts( $post_type, $end_time, $sync_type );
 
 		return $this->get_sync_posts_statistic( $post_type );
 	}
 
-	public function wc_predictive_search_sync_product_skus( $error_id = '' ) {
+	public function wc_predictive_search_sync_product_skus( $error_id = '', $sync_type = 'manual' ) {
 
 		// Log Errors 
 		global $wc_ps_errors_log;
@@ -160,7 +166,7 @@ class WC_Predictive_Search_Synch
 
 		$end_time = time() + 16;
 
-		$this->migrate_skus( $end_time );
+		$this->migrate_skus( $end_time, $sync_type );
 
 		return $this->get_sync_product_skus_statistic();
 	}
@@ -251,7 +257,7 @@ class WC_Predictive_Search_Synch
 		add_action( 'delete_post', array( $this, 'synch_delete_post' ) );
 	}
 
-	public function empty_posts() {
+	public function empty_full_data() {
 		global $wc_ps_posts_data;
 		global $wc_ps_postmeta_data;
 		global $wc_ps_product_sku_data;
@@ -269,7 +275,7 @@ class WC_Predictive_Search_Synch
 		update_option( 'wc_ps_upgraded_to_new_sync_data', 1 );
 	}
 
-	public function migrate_posts( $post_types = array( 'product' ), $end_time = 0 ) {
+	public function migrate_posts( $post_types = array( 'product' ), $end_time = 0, $sync_type = 'manual' ) {
 		global $wpdb;
 		global $wc_ps_posts_data;
 		global $wc_ps_postmeta_data;
@@ -284,14 +290,14 @@ class WC_Predictive_Search_Synch
 		// Check if synch data is stopped at latest run then continue synch without empty all the tables
 		$synced_data = get_option( 'wc_predictive_search_synced_posts_data', 0 );
 
-		if ( 0 == $synced_data ) {
+		if ( 0 == $synced_data || 'auto' === $sync_type ) {
 			// continue synch data from stopped post ID
 			$stopped_ID = $wc_ps_posts_data->get_latest_post_id( $post_types );
 			if ( empty( $stopped_ID ) || is_null( $stopped_ID ) ) {
 				$stopped_ID = 0;
 			}
 		} else {
-			$this->empty_posts();
+			$this->empty_full_data();
 			$stopped_ID = 0;
 		}
 
@@ -338,7 +344,7 @@ class WC_Predictive_Search_Synch
 		}
 	}
 
-	public function migrate_skus( $end_time = 0 ) {
+	public function migrate_skus( $end_time = 0, $sync_type = 'manual' ) {
 		global $wpdb;
 		global $wc_ps_postmeta_data;
 		global $wc_ps_product_sku_data;
@@ -348,7 +354,7 @@ class WC_Predictive_Search_Synch
 		// Check if synch data is stopped at latest run then continue synch without empty all the tables
 		$synced_data = get_option( 'wc_predictive_search_synced_posts_data', 0 );
 
-		if ( 0 == $synced_data ) {
+		if ( 0 == $synced_data || 'auto' === $sync_type ) {
 			// continue synch data from stopped post ID
 			$stopped_ID = $wc_ps_product_sku_data->get_latest_post_id();
 			if ( empty( $stopped_ID ) || is_null( $stopped_ID ) ) {
