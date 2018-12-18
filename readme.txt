@@ -3,8 +3,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, WooCommerce Predictive Search, WooCommerce, Predictive Search, Live Search, e-commerce,  wordpress ecommerce
 Requires at least: 4.5
-Tested up to: 4.9.8
-Stable tag: 4.2.1
+Tested up to: 5.0.2
+Stable tag: 4.2.2
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -166,6 +166,19 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 4.2.2 - 2018/12/18 =
+* This maintenance update is for compatibility with WordPress 5.0.2, WooCommerce 3.5.2 and PHP 7.3. Also includes performance updates to the plugin framework. 
+* Tweak - Editor sidebar global Predictive Search Keyword metabox works with both Gutenberg and Classic Editor
+* Tweak - Test for compatibility with WordPress 5.0.2 and WordPress 4.9.9
+* Tweak - Test for compatibility with WooCommerce 3.5.2
+* Tweak - Create new structure for future development of Gutenberg Blocks
+* Framework - Performance improvement.  Replace wp_remote_fopen  with file_get_contents for get web fonts
+* Framework - Performance improvement. Define new variable `is_load_google_fonts` if admin does not require to load google fonts
+* Framework - Register style name for dynamic style of plugin for use with Gutenberg block
+* Framework - Update Modal script and style to version 4.1.1
+* Framework - Update a3rev Plugin Framework to version 2.1.0
+* Framework - Test and update for compatibility with PHP 7.3
 
 = 4.2.1 - 2018/08/03 =
 * This maintenance update focuses on reworking the Daily Auto sync feature to resolve sync failures reported by some users. Also a refactor of the exclude from predictive search function on settings page. Includes compatibility with WordPress 4.9.8 and WooCommerce 3.4.4
@@ -742,6 +755,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 4.2.2 =
+This maintenance update is for compatibility with WordPress 5.0.2, WooCommerce 3.5.2 and PHP 7.3. It also includes performance updates to the plugin framework.
 
 = 4.2.1 =
 This maintenance update focuses on reworking the Daily Auto sync feature to resolve sync failures reported by some users. Also a refactor of the exclude from predictive search function on settings page. Includes compatibility with WordPress 4.9.8 and WooCommerce 3.4.4
