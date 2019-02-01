@@ -418,7 +418,7 @@ class WC_Predictive_Search_Synch
 
 				// Migrate Product Out of Stock
 				$the_product = wc_get_product( $post_id );
-				if ( $the_product->is_in_stock() ) {
+				if ( $the_product && $the_product->is_in_stock() ) {
 					$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
 				} else {
 					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
@@ -484,7 +484,7 @@ class WC_Predictive_Search_Synch
 
 				// Migrate Product Out of Stock
 				$the_product = wc_get_product( $post_id );
-				if ( $the_product->is_in_stock() ) {
+				if ( $the_product && $the_product->is_in_stock() ) {
 					$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
 				} else {
 					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
@@ -556,7 +556,7 @@ class WC_Predictive_Search_Synch
 
 				// Migrate Product Out of Stock
 				$the_product = wc_get_product( $post_id );
-				if ( $the_product->is_in_stock() ) {
+				if ( $the_product && $the_product->is_in_stock() ) {
 					$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
 				} else {
 					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );

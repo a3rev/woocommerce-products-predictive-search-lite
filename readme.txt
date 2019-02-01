@@ -3,8 +3,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, WooCommerce Predictive Search, WooCommerce, Predictive Search, Live Search, e-commerce,  wordpress ecommerce
 Requires at least: 4.5
-Tested up to: 5.0.2
-Stable tag: 4.2.2
+Tested up to: 5.1.0
+Stable tag: 4.2.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -166,6 +166,12 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 4.2.3 - 2019/02/01 =
+* This maintenance update is for compatibility with WordPress 5.1 and WooCommerce 3.5.4 it resolves an issue with product database sync with older versions of WC.
+* Tweak - Check is product before call is_in_stock when run products sync
+* Tweak - Test for compatibility with WordPress 5.1
+* Tweak - Test for compatibility with WooCommerce 3.5.4
 
 = 4.2.2 - 2018/12/18 =
 * This maintenance update is for compatibility with WordPress 5.0.2, WooCommerce 3.5.2 and PHP 7.3. Also includes performance updates to the plugin framework. 
@@ -755,6 +761,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 4.2.3 =
+Maintenance update is for compatibility with WordPress 5.1 and WooCommerce 3.5.4 it resolves an issue with product database sync with older versions of WC.
 
 = 4.2.2 =
 This maintenance update is for compatibility with WordPress 5.0.2, WooCommerce 3.5.2 and PHP 7.3. It also includes performance updates to the plugin framework.
