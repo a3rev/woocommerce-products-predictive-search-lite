@@ -359,7 +359,7 @@ class WC_Predictive_Search
 
 		if ( is_null( $cats_excluded ) ) {
 			global $wc_ps_exclude_data;
-			$cats_excluded = $wc_ps_exclude_data->get_array_items( 'product_cat' );
+			$cats_excluded = apply_filters( 'wc_ps_items_excluded', $wc_ps_exclude_data->get_array_items( 'product_cat' ), 'product_cat' );
 		}
 
 		if ( version_compare( $wp_version, '4.5.0', '<' ) ) {

@@ -64,7 +64,7 @@ class WC_PS_Posts_Data
 
 		$where[] = " 1=1 ";
 
-		$items_excluded = $wc_ps_exclude_data->get_array_items( $post_type );
+		$items_excluded = apply_filters( 'wc_ps_items_excluded', $wc_ps_exclude_data->get_array_items( $post_type ), $post_type );
 
 		if ( 'page' == $post_type ) {
 			global $woocommerce_search_page_id;

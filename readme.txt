@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, WooCommerce Predictive Search, WooCommerce, Predictive Search, Live Search, e-commerce,  wordpress ecommerce
 Requires at least: 4.5
 Tested up to: 5.1.0
-Stable tag: 4.2.3
+Stable tag: 4.2.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -166,6 +166,11 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 4.2.4 - 2019/02/02 =
+* Developer update. This upgrade defines a new hook that allows developers to filter the search results that are shown to users, example filter by role. See docs for notes and example code
+* Developer - Define new hook tag wc_ps_items_excluded  for filter on excluding Product, Post, Page, from search results, example filter results by role
+* Credit - Thanks to Mario for the suggestion
 
 = 4.2.3 - 2019/02/01 =
 * This maintenance update is for compatibility with WordPress 5.1 and WooCommerce 3.5.4 it resolves an issue with product database sync with older versions of WC.
@@ -761,6 +766,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 4.2.4 =
+Developer update. This upgrade defines a new hook that allows developers to filter the search results that are shown to users, example filter by role. See docs for notes and example code
 
 = 4.2.3 =
 Maintenance update is for compatibility with WordPress 5.1 and WooCommerce 3.5.4 it resolves an issue with product database sync with older versions of WC.
