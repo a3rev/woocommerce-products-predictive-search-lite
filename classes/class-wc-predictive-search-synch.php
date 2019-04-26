@@ -57,6 +57,14 @@ class WC_Predictive_Search_Synch
 		}
 	}
 
+	public function is_wc_36_or_larger() {
+		if ( version_compare( WC_VERSION, '3.6.0', '>=' ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public function start_sync_data_notice() {
 		$had_sync_posts_data = get_option( 'wc_predictive_search_had_sync_posts_data', 0 );
 		$is_upgraded_new_sync_data = get_option( 'wc_ps_upgraded_to_new_sync_data', 0 );
@@ -405,7 +413,12 @@ class WC_Predictive_Search_Synch
 
 				$post_id     = $item->ID;
 				$post_parent = $item->post_parent;
-				$sku         = get_post_meta( $post_id, '_sku', true );
+
+				if ( $this->is_wc_36_or_larger() ) {
+					$sku = $wpdb->get_var( $wpdb->prepare( "SELECT sku FROM {$wpdb->prefix}wc_product_meta_lookup WHERE product_id=%d", $post_id ) );
+				} else {
+					$sku = get_post_meta( $post_id, '_sku', true );
+				}
 
 				if ( empty( $sku ) || '' == trim( $sku ) ) {
 					$sku = '';
@@ -416,12 +429,14 @@ class WC_Predictive_Search_Synch
 					$wc_ps_product_sku_data->insert_item( $post_id, $sku, $post_parent );
 				}
 
-				// Migrate Product Out of Stock
-				$the_product = wc_get_product( $post_id );
-				if ( $the_product && $the_product->is_in_stock() ) {
-					$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
-				} else {
-					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
+				if ( ! $this->is_wc_36_or_larger() ) {
+					// Migrate Product Out of Stock
+					$the_product = wc_get_product( $post_id );
+					if ( $the_product && $the_product->is_in_stock() ) {
+						$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
+					} else {
+						$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
+					}
 				}
 			}
 		}
@@ -429,6 +444,10 @@ class WC_Predictive_Search_Synch
 
 	// This function just for auto update to version 3.2.0
 	public function migrate_products_out_of_stock() {
+		if ( $this->is_wc_36_or_larger() ) {
+			return false;
+		}
+
 		global $wpdb;
 		global $wc_ps_postmeta_data;
 
@@ -476,18 +495,25 @@ class WC_Predictive_Search_Synch
 			$wc_ps_posts_data->update_item( $post_id, $post->post_title, $post->post_type );
 
 			if ( 'product' == $post->post_type ) {
-				$sku = get_post_meta( $post_id, '_sku', true );
+				if ( $this->is_wc_36_or_larger() ) {
+					$sku = $wpdb->get_var( $wpdb->prepare( "SELECT sku FROM {$wpdb->prefix}wc_product_meta_lookup WHERE product_id=%d", $post_id ) );
+				} else {
+					$sku = get_post_meta( $post_id, '_sku', true );
+				}
 				if ( empty( $sku ) || '' == trim( $sku ) ) {
 					$sku = '';
 				}
 				$wc_ps_product_sku_data->update_item( $post_id, $sku, 0 );
 
-				// Migrate Product Out of Stock
-				$the_product = wc_get_product( $post_id );
-				if ( $the_product && $the_product->is_in_stock() ) {
-					$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
-				} else {
-					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
+
+				if ( ! $this->is_wc_36_or_larger() ) {
+					// Migrate Product Out of Stock
+					$the_product = wc_get_product( $post_id );
+					if ( $the_product && $the_product->is_in_stock() ) {
+						$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
+					} else {
+						$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
+					}
 				}
 			}
 
@@ -538,11 +564,19 @@ class WC_Predictive_Search_Synch
 			}
 
 			if ( in_array( $item->post_type, array( 'product', 'product_variation' ) ) ) {
-				$sku         = get_post_meta( $post_id, '_sku', true );
+				if ( $this->is_wc_36_or_larger() ) {
+					$sku = $wpdb->get_var( $wpdb->prepare( "SELECT sku FROM {$wpdb->prefix}wc_product_meta_lookup WHERE product_id=%d", $post_id ) );
+				} else {
+					$sku = get_post_meta( $post_id, '_sku', true );
+				}
 				$post_parent = $item->post_parent;
 
 				if ( ( empty( $sku ) || '' == trim( $sku ) ) && $post_parent > 0 ) {
-					$sku = get_post_meta( $post_parent, '_sku', true );
+					if ( $this->is_wc_36_or_larger() ) {
+						$sku = $wpdb->get_var( $wpdb->prepare( "SELECT sku FROM {$wpdb->prefix}wc_product_meta_lookup WHERE product_id=%d", $post_parent ) );
+					} else {
+						$sku = get_post_meta( $post_parent, '_sku', true );
+					}
 				}
 
 				if ( empty( $sku ) || '' == trim( $sku ) ) {
@@ -554,12 +588,14 @@ class WC_Predictive_Search_Synch
 					$wc_ps_product_sku_data->insert_item( $post_id, $sku, $post_parent );
 				}
 
-				// Migrate Product Out of Stock
-				$the_product = wc_get_product( $post_id );
-				if ( $the_product && $the_product->is_in_stock() ) {
-					$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
-				} else {
-					$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
+				if ( ! $this->is_wc_36_or_larger() ) {
+					// Migrate Product Out of Stock
+					$the_product = wc_get_product( $post_id );
+					if ( $the_product && $the_product->is_in_stock() ) {
+						$wc_ps_postmeta_data->delete_item_meta( $post_id, '_stock_status' );
+					} else {
+						$wc_ps_postmeta_data->update_item_meta( $post_id, '_stock_status', 'outofstock' );
+					}
 				}
 			}
 		}

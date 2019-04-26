@@ -3,8 +3,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, WooCommerce Predictive Search, WooCommerce, Predictive Search, Live Search, e-commerce,  wordpress ecommerce
 Requires at least: 4.5
-Tested up to: 5.1.0
-Stable tag: 4.2.4
+Tested up to: 5.1.1
+Stable tag: 4.2.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -166,6 +166,16 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 4.2.5 - 2019/04/26 =
+* This maintenance update has tweaks for compatibility with WordPress 5.2.0 and WooCommerce 3.6.0 major new versions whilst maintaining backward compatibility
+* Tweak - Test for compatibility with WordPress 5.2.0
+* Tweak - Test for compatibility with WooCommerce 3.6.2
+* Tweak - Custom style for search box svg icons when loaded by fontawesome script
+* Tweak - Update Sync feature to get Product Data from new custom lookup table released in WooCommerce v 3.6.0
+* Tweak - Update Search feature to query Product Out of Stock from new custom lookup table released in WooCommerce v 3.6.0
+* Tweak – Update get_woocommerce_term_meta to new WooCommerce 3.6.0 get_term_meta function
+* Tweak - Support for backward compatibility with WooCommerce v 3.5
 
 = 4.2.4 - 2019/02/02 =
 * Developer update. This upgrade defines a new hook that allows developers to filter the search results that are shown to users, example filter by role. See docs for notes and example code
@@ -766,6 +776,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 4.2.5 =
+This maintenance update has tweaks for compatibility with WordPress 5.2.0 and WooCommerce 3.6.0 major new versions whilst maintaining backward compatibility
 
 = 4.2.4 =
 Developer update. This upgrade defines a new hook that allows developers to filter the search results that are shown to users, example filter by role. See docs for notes and example code
