@@ -201,27 +201,6 @@ class WC_Predictive_Search_Input_Box_Settings extends WC_Predictive_Search_Admin
 				'is_box'	=> true,
            	),
 
-     		array(
-            	'name' 		=> __( 'Dropdown Results Animation', 'woocommerce-predictive-search' ),
-            	'desc'		=> '<img class="rwd_image_maps" src="'.WOOPS_IMAGES_URL.'/premium-results-animation.png" usemap="#resultsAnimationMap" style="width: auto; max-width: 100%;" border="0" />
-<map name="resultsAnimationMap" id="resultsAnimationMap">
-	<area shape="rect" coords="0,400,360,460" href="'.$this->pro_plugin_page_url.'" target="_blank" />
-</map>',
-                'type' 		=> 'heading',
-                'id'		=> 'predictive_search_animiation_box',
-                'is_box'	=> true,
-           	),
-
-           	array(
-            	'name' 		=> __( 'Search In Category Feature', 'woocommerce-predictive-search' ),
-            	'desc'		=> '<img class="rwd_image_maps" src="'.WOOPS_IMAGES_URL.'/premium-search-category-cache.png" usemap="#searchInCategoryMap" style="width: auto; max-width: 100%;" border="0" />
-<map name="searchInCategoryMap" id="searchInCategoryMap">
-	<area shape="rect" coords="410,160,930,230" href="'.$this->pro_plugin_page_url.'" target="_blank" />
-</map>',
-            	'id'		=> 'predictive_search_category_cache_box',
-                'type' 		=> 'heading',
-				'is_box'	=> true,
-           	),
         ));
 	}
 
@@ -266,9 +245,6 @@ class WC_Predictive_Search_Input_Box_Settings extends WC_Predictive_Search_Admin
 	}
 
 	public function include_script() {
-		wp_enqueue_script( 'jquery-rwd-image-maps' );
-	?>
-    <?php
 	}
 }
 

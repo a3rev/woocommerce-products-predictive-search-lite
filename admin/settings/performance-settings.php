@@ -529,17 +529,6 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 				),
 				'notice' 		   => __( 'You need to leave this page open for the sync to complete.', 'woocommerce-predictive-search' ),
 			),
-
-			array(
-            	'name' 		=> __( 'Search Performance Settings', 'woocommerce-predictive-search' ),
-                'type' 		=> 'heading',
-				'desc'		=> '<img class="rwd_image_maps" src="'.WOOPS_IMAGES_URL.'/premium-performance-settings.png" usemap="#performanceMap" style="width: auto; max-width: 100%;" border="0" />
-<map name="performanceMap" id="performanceMap">
-	<area shape="rect" coords="410,145,925,210" href="'.$this->pro_plugin_page_url.'" target="_blank" />
-</map>',
-				'id'		=> 'predictive_search_performance_settings',
-				'is_box'	=> true,
-           	),
         ));
 	}
 
@@ -660,7 +649,6 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 })(jQuery);
 </script>
     <?php
-    	wp_enqueue_script( 'jquery-rwd-image-maps' );
 	}
 }
 

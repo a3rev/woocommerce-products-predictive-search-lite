@@ -85,7 +85,7 @@ class WC_Predictive_Search_Hook_Filter
 			'css' => 'border: none; padding: 0; background: none;'
 		);
 
-		$free_woocommerce_box = '<a href="https://profiles.wordpress.org/a3rev/#content-plugins" target="_blank" alt="'.__('Free WooCommerce Plugins', 'woocommerce-predictive-search' ).'"><img src="'.WOOPS_IMAGES_URL.'/free-woocommerce-plugins.png" /></a>';
+		$free_woocommerce_box = '<a href="https://profiles.wordpress.org/a3rev/#content-plugins" target="_blank" alt="'.__('Free WooCommerce Plugins', 'woocommerce-predictive-search' ).'"><img src="'.WOOPS_IMAGES_URL.'/free-woocommerce-plugins.jpg" /></a>';
 
 		$boxes[] = array(
 			'content' => $free_woocommerce_box,

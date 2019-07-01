@@ -381,17 +381,6 @@ class WC_Predictive_Search_Global_Settings extends WC_Predictive_Search_Admin_UI
 			),
 
 			array(
-            	'name' 		=> __( 'Predictive Search Focus Keywords', 'woocommerce-predictive-search' ),
-				'desc'		=> '<img class="rwd_image_maps" src="'.WOOPS_IMAGES_URL.'/premium-focus-keywords.png" usemap="#focusKeywordsMap" style="width: auto; max-width: 100%;" border="0" />
-<map name="focusKeywordsMap" id="focusKeywordsMap">
-	<area shape="rect" coords="370,340,875,405" href="'.$this->pro_plugin_page_url.'" target="_blank" />
-</map>',
-                'type' 		=> 'heading',
-                'id'		=> 'predictive_search_focus_keywords_box',
-                'is_box'	=> true,
-           	),
-
-			array(
             	'name' 		=> __( 'Special Characters', 'woocommerce-predictive-search' ),
 				'desc'		=> __( 'Select any special characters that are used on this site. Selecting a character will mean that results will be returned when user search input includes or excludes the special character. <strong>IMPORTANT!</strong> Do not turn this feature on unless needed. If ON - only select actual characters used in Product Titles, SKU, Category Names etc - each special character selected creates 1 extra query per search object, per product, post or page.', 'woocommerce-predictive-search' ),
                 'type' 		=> 'heading',
@@ -498,22 +487,10 @@ class WC_Predictive_Search_Global_Settings extends WC_Predictive_Search_Admin_UI
 				'options_url' => admin_url( 'admin-ajax.php?action=wc_ps_get_exclude_options&type=page&keyword=', 'relative' ),
 			),
 
-			array(
-            	'name' 		=> __( 'Google Analytics Site Search Integration', 'woocommerce-predictive-search' ),
-                'type' 		=> 'heading',
-                'desc'		=> '<img class="rwd_image_maps" src="'.WOOPS_IMAGES_URL.'/premium-google-analytics.png" usemap="#googleAnalyticsMap" style="width: auto; max-width: 100%;" border="0" />
-<map name="googleAnalyticsMap" id="googleAnalyticsMap">
-	<area shape="rect" coords="500,505,915,560" href="'.$this->pro_plugin_page_url.'" target="_blank" />
-</map>',
-                'id'		=> 'predictive_search_google_analytics_box',
-                'is_box'	=> true,
-           	),
-
         ));
 	}
 
 	public function include_script() {
-		wp_enqueue_script( 'jquery-rwd-image-maps' );
 	?>
 <script>
 (function($) {

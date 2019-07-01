@@ -289,17 +289,6 @@ class WC_Predictive_Search_Sidebar_Template_Settings extends WC_Predictive_Searc
 				'default'	=> array( 'enable' => 0, 'h_shadow' => '0px' , 'v_shadow' => '1px', 'blur' => '0px' , 'spread' => '0px', 'color' => '#555555', 'inset' => 'inset' )
 			),
 
-			array(
-            	'name' 		=> __( 'Search in Category Dropdown', 'woocommerce-predictive-search' ),
-                'type' 		=> 'heading',
-                'desc'		=> '<img class="rwd_image_maps" src="'.WOOPS_IMAGES_URL.'/premium-search-in-category.png" usemap="#searchInCategoryMap" style="width: auto; max-width: 100%;" border="0" />
-<map name="searchInCategoryMap" id="searchInCategoryMap">
-	<area shape="rect" coords="445,120,890,180" href="'.$this->pro_plugin_page_url.'" target="_blank" />
-</map>',
-                'id'		=> 'predictive_search_category_dropdown_box',
-                'is_box'	=> true,
-           	),
-
            	array(
             	'name' 		=> '',
                 'type' 		=> 'heading',
@@ -739,7 +728,6 @@ class WC_Predictive_Search_Sidebar_Template_Settings extends WC_Predictive_Searc
 	}
 
 	public function include_script() {
-		wp_enqueue_script( 'jquery-rwd-image-maps' );
 	?>
 <script>
 (function($) {
