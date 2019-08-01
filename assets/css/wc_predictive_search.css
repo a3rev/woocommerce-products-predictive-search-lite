@@ -32,6 +32,9 @@
 .wc_ps_container * {
 	box-sizing: border-box !important;
 }
+.svg-inline--fa {
+    box-sizing: content-box !important;
+}
 .wc_ps_container {
     border-radius: 4px;
     border: 1px solid #cdcdcd;
@@ -128,6 +131,10 @@
 	text-align: center;
 	vertical-align: middle;
 	padding: 0 5px;
+	
+}
+.wc_ps_container svg.wc_ps_nav_submit_icon {
+	box-sizing: content-box !important;
 }
 .wc_ps_container .wc_ps_nav_submit:hover .wc_ps_nav_submit_icon {
 	color: #fff;
@@ -184,6 +191,9 @@
 	position: absolute;
 	right: 5px;
 	top: 0;
+}
+.wc_ps_container svg.wc_ps_searching_icon {
+	top: calc( 35px/2 - 14px/2 );
 }
 
 /* Search Bar Sizes */

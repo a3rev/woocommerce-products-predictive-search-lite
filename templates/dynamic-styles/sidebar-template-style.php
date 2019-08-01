@@ -81,6 +81,7 @@ extract( $wc_predictive_search_sidebar_template_settings );
 }
 @sidebar_loading_icon_size: <?php echo $sidebar_loading_icon_size; ?>px;
 @sidebar_loading_icon_color: <?php echo $sidebar_loading_icon_color; ?>;
+@sidebar_loading_icon_top_postition: ~"calc( @sidebar_container_height/2 - @sidebar_loading_icon_size/2 )";
 
 /* Sidebar PopUp Variables */
 .sidebar_popup_border() {
@@ -211,6 +212,10 @@ extract( $wc_predictive_search_sidebar_template_settings );
 		.wc_ps_searching_icon {
 			font-size: @sidebar_loading_icon_size;
 			color: @sidebar_loading_icon_color;
+		}
+
+		svg.wc_ps_searching_icon {
+			top: @sidebar_loading_icon_top_postition;
 		}
 	}
 }
