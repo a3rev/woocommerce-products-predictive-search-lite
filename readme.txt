@@ -1,10 +1,10 @@
 === Predictive Search for WooCommerce ===
 
 Contributors: a3rev, nguyencongtuan
-Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, e-commerce,  wordpress ecommerce
+Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 4.5
 Tested up to: 5.2.2
-Stable tag: 4.2.7
+Stable tag: 4.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -24,6 +24,14 @@ Predictive Search for WooCommerce engine delivers users instant and changing res
 * Full in plugin search box and search results dropdown style and layout options
 * Click through to see all search results on a designated page (features endless scroll)
 * Pretty URL for the All Search Results pages.
+
+= PAGE BUILDER / TEMPLATE COMPATIBLE =
+
+Predictive Search is compatibile with any WordPress themes that has widget areas, plus a growing number of page builders including:
+
+* NEW - Elementor Premium Template Builder - add the search box via the Predictive Search Widget to any area in an Elementor Template.
+
+More coming soon .....
 
 = PREDICTIVE SEARCH WIDGET =
 
@@ -166,6 +174,11 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 4.3.0 - 2019/08/03 =
+* This Feature Upgrade adds full compatibility with Elementor Premium Template builder. Now Add Predictive Search by Widget to any Elementor template.
+* Feature - Add Predictive Search by widget to any area of an Elementor template
+* Tweak - Add Validation value for widget ON/OFF checkbox for compatibility with Elementor Template Builder
 
 = 4.2.7 - 2019/08/01 =
 * This maintenance upgrade is to fix a style conflict with fontawesome icons
@@ -786,6 +799,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 4.3.0 =
+This Feature Upgrade adds full compatibility with Elementor Premium Template builder. Now Add Predictive Search by Widget to any Elementor template.
 
 = 4.2.7 =
 This maintenance upgrade is to fix a style conflict with fontawesome icons

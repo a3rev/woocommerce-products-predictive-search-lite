@@ -41,12 +41,12 @@ class WC_Predictive_Search_Widgets extends WP_Widget
 		if(!isset($instance['text_lenght']) || $instance['text_lenght'] < 0) $text_lenght = 100; 
 		else $text_lenght = $instance['text_lenght'];
 		$show_catdropdown = 0;
-		$show_price = empty($instance['show_price']) ? 0 : $instance['show_price'];
+		$show_price = !isset( $instance['show_price'] ) || empty($instance['show_price']) ? 0 : $instance['show_price'];
 		$widget_template = 'sidebar';
 
-		$show_image = empty($instance['show_image']) ? 0 : $instance['show_image'];
-		$show_desc = empty($instance['show_desc']) ? 0 : $instance['show_desc'];
-		$show_in_cat = empty($instance['show_in_cat']) ? 0 : $instance['show_in_cat'];
+		$show_image = !isset( $instance['show_image'] ) || empty($instance['show_image']) ? 0 : $instance['show_image'];
+		$show_desc = !isset( $instance['show_desc'] ) || empty($instance['show_desc']) ? 0 : $instance['show_desc'];
+		$show_in_cat = !isset( $instance['show_in_cat'] ) || empty($instance['show_in_cat']) ? 0 : $instance['show_in_cat'];
 
 		if ( class_exists('SitePress') ) {
 			$current_lang = ICL_LANGUAGE_CODE;
@@ -120,11 +120,11 @@ class WC_Predictive_Search_Widgets extends WP_Widget
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['number_items'] = $new_instance['number_items'];
 		$instance['text_lenght'] = strip_tags($new_instance['text_lenght']);
-		$instance['show_price'] = $new_instance['show_price'];
+		$instance['show_price'] = !isset( $new_instance['show_price'] ) ? 0 : $new_instance['show_price'];
 		$instance['search_box_text'] = $new_instance['search_box_text'];
-		$instance['show_image'] = $new_instance['show_image'];
-		$instance['show_desc'] = $new_instance['show_desc'];
-		$instance['show_in_cat'] = $new_instance['show_in_cat'];
+		$instance['show_image'] = !isset( $new_instance['show_image'] ) ? 0 : $new_instance['show_image'];
+		$instance['show_desc'] = !isset( $new_instance['show_desc'] ) ? 0 : $new_instance['show_desc'];
+		$instance['show_in_cat'] = !isset( $new_instance['show_in_cat'] ) ? 0 : $new_instance['show_in_cat'];
 		return $instance;
 	}
 
