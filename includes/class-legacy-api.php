@@ -208,7 +208,7 @@ class WC_Predictive_Search_Legacy_API {
 		}
 
 		$psp = 1;
-		$row = 10;
+		$row = 12;
 		$search_keyword = '';
 		$cat_in = 'all';
 		$search_in = 'product';

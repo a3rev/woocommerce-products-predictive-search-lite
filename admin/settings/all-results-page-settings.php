@@ -204,7 +204,7 @@ class WC_PS_All_Results_Page_Settings extends WC_Predictive_Search_Admin_UI
 				'id' 		=> 'woocommerce_search_result_items',
 				'type' 		=> 'text',
 				'css' 		=> 'width:40px;',
-				'default'	=> 10
+				'default'	=> 12
 			),
 			array(
 				'name' 		=> __( 'Display Type', 'woocommerce-predictive-search' ),

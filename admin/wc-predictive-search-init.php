@@ -149,6 +149,12 @@ function woo_ps_lite_upgrade_plugin() {
 		include( WOOPS_DIR. '/includes/updates/update-4.0.0.php' );
 	}
 
+	if ( version_compare( get_option('wc_predictive_search_lite_version'), '4.4.1', '<' ) ) {
+		update_option('wc_predictive_search_lite_version', '4.4.1');
+
+		update_option( 'woocommerce_search_result_items', 12 );
+	}
+
     update_option('wc_predictive_search_lite_version', WOOPS_VERSION );
 }
 ?>
