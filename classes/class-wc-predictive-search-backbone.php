@@ -121,6 +121,20 @@ class WC_Predictive_Search_Hook_Backbone
 		if ( class_exists('SitePress') ) {
 			$current_lang = ICL_LANGUAGE_CODE;
 		}
+
+		$results_display_type = get_option( 'woocommerce_search_result_display_type', 'grid' );
+		$grid_container_class = trim( get_option( 'woocommerce_search_result_grid_container_class', '.products' ) );
+		if ( empty( $grid_container_class ) ) {
+			$grid_container_class = '.products';
+		}
+
+		$grid_container = '';
+		if ( 'grid' === $results_display_type ) {
+			ob_start();
+			woocommerce_product_loop_start();
+        	woocommerce_product_loop_end();
+        	$grid_container = ob_get_clean();
+		}
 		
 		$search_keyword = '';
 		$search_in = 'product';
@@ -240,7 +254,7 @@ class WC_Predictive_Search_Hook_Backbone
 			$default_navigate = 'keyword/'.urlencode($search_keyword).'/search-in/'.$ps_current_search_in.'/cat-in/'.$cat_in.'/search-other/'.$search_other;
 		}
 
-		wp_localize_script( 'wc-predictive-search-results-backbone', 'wc_ps_results_vars', apply_filters( 'wc_ps_results_vars', array( 'default_navigate' => $default_navigate, 'search_in' => $ps_current_search_in, 'ps_lang' => $current_lang, 'legacy_api_url' => $legacy_api_url, 'search_page_path' => $search_page_path, 'permalink_structure' => get_option('permalink_structure' ) ) ) );
+		wp_localize_script( 'wc-predictive-search-results-backbone', 'wc_ps_results_vars', apply_filters( 'wc_ps_results_vars', array( 'display_type' => $results_display_type, 'grid_container' => $grid_container, 'grid_container_class' => $grid_container_class, 'default_navigate' => $default_navigate, 'search_in' => $ps_current_search_in, 'ps_lang' => $current_lang, 'legacy_api_url' => $legacy_api_url, 'search_page_path' => $search_page_path, 'permalink_structure' => get_option('permalink_structure' ) ) ) );
 	}
 }
 

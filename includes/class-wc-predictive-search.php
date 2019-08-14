@@ -197,8 +197,10 @@ class WC_Predictive_Search
 	/**
 	 * Get array product list
 	 */
-	public function get_product_results( $search_keyword, $row, $start = 0, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $product_term_id = 0, $text_lenght = 100, $current_lang = '', $include_header = true , $show_price = true, $show_sku = false, $show_addtocart = false, $show_categories = false, $show_tags = false ) {
+	public function get_product_results( $search_keyword, $row, $start = 0, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $product_term_id = 0, $text_lenght = 100, $current_lang = '', $include_header = true , $show_price = true, $show_sku = false, $show_addtocart = false, $show_categories = false, $show_tags = false, $in_results_page = false ) {
 		global $wpdb;
+
+		$results_display_type = get_option( 'woocommerce_search_result_display_type', 'grid' );
 
 		$have_product = $this->check_product_exsited( $search_keyword, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, 'product', $product_term_id, $current_lang );
 		if ( ! $have_product ) {
@@ -223,60 +225,81 @@ class WC_Predictive_Search
 				);
 			}
 
-			if ( version_compare( WC_VERSION, '3.3.0', '<' ) ) {
-				// bw compat. for less than WC 3.3.0
-				$thumbnail_size_name = 'shop_catalog';
+			if ( $in_results_page && 'grid' === $results_display_type ) {
+
+				foreach ( $search_products as $current_product ) {
+					ob_start();
+					$post_object = get_post( $current_product->post_id );
+
+					setup_postdata( $GLOBALS['post'] =& $post_object );
+
+					wc_get_template_part( 'content', 'product' );
+
+					$card_html = ob_get_clean();
+
+					$item_list['items'][] = array( 'card' => $card_html );
+
+					$row-- ;
+					if ( $row < 1 ) break;
+				}
+
 			} else {
-				$thumbnail_size_name = 'woocommerce_thumbnail';
-			}
 
-			$current_db_version = get_option( 'woocommerce_db_version', null );
-
-			foreach ( $search_products as $current_product ) {
-
-				$product_id = $current_product->post_id;
-				global $product;
-				global $post;
-
-				if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
-					$product = new WC_Product( $product_id );
-				} elseif ( version_compare( WC()->version, '2.2.0', '<' ) ) {
-					$product = get_product( $product_id );
+				if ( version_compare( WC_VERSION, '3.3.0', '<' ) ) {
+					// bw compat. for less than WC 3.3.0
+					$thumbnail_size_name = 'shop_catalog';
 				} else {
-					$product = wc_get_product( $product_id );
+					$thumbnail_size_name = 'woocommerce_thumbnail';
 				}
 
-				$post = get_post( $product_id );
+				$current_db_version = get_option( 'woocommerce_db_version', null );
 
-				$product_description = WC_Predictive_Search_Functions::woops_limit_words( strip_tags( WC_Predictive_Search_Functions::strip_shortcodes( strip_shortcodes ( $post->post_content ) ) ), $text_lenght, '...' );
-				if ( trim( $product_description ) == '' ) $product_description = WC_Predictive_Search_Functions::woops_limit_words( strip_tags( WC_Predictive_Search_Functions::strip_shortcodes( strip_shortcodes( $post->post_excerpt ) ) ), $text_lenght, '...' );
+				foreach ( $search_products as $current_product ) {
 
-				$availability      = $product->get_availability();
-				$availability_html = empty( $availability['availability'] ) ? '' : '<span class="stock ' . esc_attr( $availability['class'] ) . '">' . esc_html( $availability['availability'] ) . '</span>';
+					$product_id = $current_product->post_id;
+					global $product;
+					global $post;
 
-				$item_data = array(
-					'title'       => $current_product->post_title,
-					'keyword'     => $current_product->post_title,
-					'url'         => $product->get_permalink(),
-					'image_url'   => WC_Predictive_Search_Functions::get_product_thumbnail_url( $product_id, 0, $thumbnail_size_name, 64, 64 ),
-					'description' => $product_description,
-					'stock'       => $availability_html,
-					'type'        => 'product'
-				);
+					if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
+						$product = new WC_Product( $product_id );
+					} elseif ( version_compare( WC()->version, '2.2.0', '<' ) ) {
+						$product = get_product( $product_id );
+					} else {
+						$product = wc_get_product( $product_id );
+					}
 
-				if ( $show_price ) $item_data['price'] = $product->get_price_html();
-				if ( $show_sku ) {
-					global $wc_ps_product_sku_data;
-					$item_data['sku'] = stripslashes( $wc_ps_product_sku_data->get_item( $product_id ) );
+					$post = get_post( $product_id );
+
+					$product_description = WC_Predictive_Search_Functions::woops_limit_words( strip_tags( WC_Predictive_Search_Functions::strip_shortcodes( strip_shortcodes ( $post->post_content ) ) ), $text_lenght, '...' );
+					if ( trim( $product_description ) == '' ) $product_description = WC_Predictive_Search_Functions::woops_limit_words( strip_tags( WC_Predictive_Search_Functions::strip_shortcodes( strip_shortcodes( $post->post_excerpt ) ) ), $text_lenght, '...' );
+
+					$availability      = $product->get_availability();
+					$availability_html = empty( $availability['availability'] ) ? '' : '<span class="stock ' . esc_attr( $availability['class'] ) . '">' . esc_html( $availability['availability'] ) . '</span>';
+
+					$item_data = array(
+						'title'       => $current_product->post_title,
+						'keyword'     => $current_product->post_title,
+						'url'         => $product->get_permalink(),
+						'image_url'   => WC_Predictive_Search_Functions::get_product_thumbnail_url( $product_id, 0, $thumbnail_size_name, 64, 64 ),
+						'description' => $product_description,
+						'stock'       => $availability_html,
+						'type'        => 'product'
+					);
+
+					if ( $show_price ) $item_data['price'] = $product->get_price_html();
+					if ( $show_sku ) {
+						global $wc_ps_product_sku_data;
+						$item_data['sku'] = stripslashes( $wc_ps_product_sku_data->get_item( $product_id ) );
+					}
+					if ( $show_addtocart ) $item_data['addtocart']   = WC_Predictive_Search_Functions::get_product_addtocart( $product );
+					if ( $show_categories ) $item_data['categories'] = WC_Predictive_Search_Functions::get_terms_object( $product_id, 'product_cat' );
+					if ( $show_tags ) $item_data['tags']             = WC_Predictive_Search_Functions::get_terms_object( $product_id, 'product_tag' );
+
+					$item_list['items'][] = $item_data;
+
+					$row-- ;
+					if ( $row < 1 ) break;
 				}
-				if ( $show_addtocart ) $item_data['addtocart']   = WC_Predictive_Search_Functions::get_product_addtocart( $product );
-				if ( $show_categories ) $item_data['categories'] = WC_Predictive_Search_Functions::get_terms_object( $product_id, 'product_cat' );
-				if ( $show_tags ) $item_data['tags']             = WC_Predictive_Search_Functions::get_terms_object( $product_id, 'product_tag' );
-
-				$item_list['items'][] = $item_data;
-
-				$row-- ;
-				if ( $row < 1 ) break;
 			}
 		}
 

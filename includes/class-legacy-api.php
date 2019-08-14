@@ -245,7 +245,7 @@ class WC_Predictive_Search_Legacy_API {
 			$woocommerce_search_focus_plugin = false;
 
 			if ( $search_in == 'product' ) {
-				$item_list = $wc_predictive_search->get_product_results( $search_keyword, $row, $start, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $product_term_id, $text_lenght, $current_lang, false, $show_price, $show_sku, $show_addtocart, $show_categories, $show_tags );
+				$item_list = $wc_predictive_search->get_product_results( $search_keyword, $row, $start, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $product_term_id, $text_lenght, $current_lang, false, $show_price, $show_sku, $show_addtocart, $show_categories, $show_tags, true );
 			} elseif ( $search_in == 'post' ) {
 				$item_list = $wc_predictive_search->get_post_results( $search_keyword, $row, $start, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $post_term_id, $text_lenght, $current_lang, 'post', false , $show_categories, $show_tags );
 			} elseif ( $search_in == 'page' ) {

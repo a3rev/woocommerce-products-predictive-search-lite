@@ -82,9 +82,13 @@ class WC_PS_All_Results_Page_Settings extends WC_Predictive_Search_Admin_UI
 				'error_message'		=> __( 'Error: All Results Pages can not save.', 'woocommerce-predictive-search' ),
 				'reset_message'		=> __( 'All Results Pages successfully reseted.', 'woocommerce-predictive-search' ),
 			);
+
+		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_end', array( $this, 'include_script' ) );
 		
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
 		//add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
+
+		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'after_save_settings' ) );
 		
 	}
 	
@@ -106,6 +110,18 @@ class WC_PS_All_Results_Page_Settings extends WC_Predictive_Search_Admin_UI
 		global $wc_predictive_search_admin_interface;
 		
 		$wc_predictive_search_admin_interface->reset_settings( $this->form_fields, $this->option_name, false );
+	}
+
+	/*-----------------------------------------------------------------------------------*/
+	/* after_save_settings()
+	/* Process when clean on deletion option is un selected */
+	/*-----------------------------------------------------------------------------------*/
+	public function after_save_settings() {
+		if ( ( isset( $_POST['bt_save_settings'] ) || isset( $_POST['bt_reset_settings'] ) ) )  {
+			if ( empty( trim( $_POST['woocommerce_search_result_grid_container_class'] ) ) ) {
+				update_option( 'woocommerce_search_result_grid_container_class', '.products' );
+			}
+		}
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -190,6 +206,36 @@ class WC_PS_All_Results_Page_Settings extends WC_Predictive_Search_Admin_UI
 				'css' 		=> 'width:40px;',
 				'default'	=> 10
 			),
+			array(
+				'name' 		=> __( 'Display Type', 'woocommerce-predictive-search' ),
+				'desc'		=> '</span><span class="description predictive_search_result_display_type_grid">' . __( "Applies to Products, SKU, Categories and Tag Results on the All Results page. Post and Pages display as list view." ) . '</span><span>',
+				'class'		=> 'woocommerce_search_result_display_type',
+				'id' 		=> 'woocommerce_search_result_display_type',
+				'type' 		=> 'switcher_checkbox',
+				'default'	=> 'grid',
+				'checked_value'		=> 'grid',
+				'unchecked_value'	=> 'list',
+				'checked_label'		=> __( 'GRID VIEW', 'woocommerce-predictive-search' ),
+				'unchecked_label' 	=> __( 'LIST VIEW', 'woocommerce-predictive-search' ),
+			),
+
+			array(
+                'type' 		=> 'heading',
+				'class'		=> 'woocommerce_search_result_display_type_grid_container',
+           	),
+           	array(  
+				'name' 		=> __( 'Grid Container Class', 'woocommerce-predictive-search' ),
+				'desc' 		=> __("Leave empty or use default '.products' from WC template. If the Product Cards don't display the same as your theme it has a custom template. Find the custom CSS class name in the themes Shop page template and enter it here.", 'woocommerce-predictive-search' ),
+				'id' 		=> 'woocommerce_search_result_grid_container_class',
+				'type' 		=> 'text',
+				'default'	=> '.products'
+			),
+
+
+           	array(
+                'type' 		=> 'heading',
+				'class'		=> 'woocommerce_search_result_display_type_list_container',
+           	),
 			array(  
 				'name' 		=> __( 'Description character count', 'woocommerce-predictive-search' ),
 				'desc' 		=> __('The number of characters from product descriptions that shows with each search result.', 'woocommerce-predictive-search' ),
@@ -255,6 +301,41 @@ class WC_PS_All_Results_Page_Settings extends WC_Predictive_Search_Admin_UI
 			),
 		
         ));
+	}
+
+	public function include_script() {
+	?>
+<script>
+(function($) {
+
+	$(document).ready(function() {
+
+		if ( $("input.woocommerce_search_result_display_type:checked").val() != 'grid') {
+			$('.predictive_search_result_display_type_grid').hide();
+			$('.woocommerce_search_result_display_type_grid_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px' } );
+		} else {
+			$('.woocommerce_search_result_display_type_list_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px' } );
+		}
+
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.woocommerce_search_result_display_type', function( event, value, status ) {
+			$('.woocommerce_search_result_display_type_grid_container').attr('style','display:none;');
+			$('.woocommerce_search_result_display_type_list_container').attr('style','display:none;');
+			if ( status == 'true' ) {
+				$(".predictive_search_result_display_type_grid").attr('style','display: inline;');
+				$(".woocommerce_search_result_display_type_grid_container").slideDown();
+				$(".woocommerce_search_result_display_type_list_container").slideUp();
+			} else {
+				$(".predictive_search_result_display_type_grid").attr('style','display: none;');
+				$(".woocommerce_search_result_display_type_grid_container").slideUp();
+				$(".woocommerce_search_result_display_type_list_container").slideDown();
+			}
+		});
+
+	});
+
+})(jQuery);
+</script>
+    <?php
 	}
 	
 }

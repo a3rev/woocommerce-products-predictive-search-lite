@@ -24,6 +24,8 @@ if ( get_option( $plugin_key . '_clean_on_deletion' ) == 'yes' ) {
 
 	delete_option('woocommerce_search_text_lenght');
 	delete_option('woocommerce_search_result_items');
+	delete_option('woocommerce_search_result_display_type');
+	delete_option('woocommerce_search_result_grid_container_class');
 	delete_option('woocommerce_search_sku_enable');
 	delete_option('woocommerce_search_price_enable');
 	delete_option('woocommerce_search_addtocart_enable');

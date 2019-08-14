@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 4.5
 Tested up to: 5.2.2
-Stable tag: 4.3.0
+Stable tag: 4.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -174,6 +174,11 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 4.4.0 - 2019/08/14 =
+* This feature upgrade adds support for Grid View of results on All Results Page.
+* Feature - Support Grid view option for Search Result Page. Apply for Products, SKU, Product Category and Product Tag only
+* Tweak - Test for compatibility with WooCommerce 3.7.0
 
 = 4.3.0 - 2019/08/03 =
 * This Feature Upgrade adds full compatibility with Elementor Premium Template builder. Now Add Predictive Search by Widget to any Elementor template.
@@ -799,6 +804,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 4.4.0 =
+This feature adds support for Grid View of results on All Results Page. Settings are on the All Results tab - it is OFF by default. Needs to be turned ON to try it on your theme.
 
 = 4.3.0 =
 This Feature Upgrade adds full compatibility with Elementor Premium Template builder. Now Add Predictive Search by Widget to any Elementor template.
