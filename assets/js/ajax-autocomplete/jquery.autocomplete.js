@@ -207,7 +207,7 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 		hasFocus++;
 	}).blur(function() {
 		hasFocus = 0;
-		if (!config.mouseDownOnSelect) {
+		if (!config.mouseDownOnSelect && getWidth() > 1024 ) {
 			hideResults();
 		}
 	}).click(function() {
@@ -250,6 +250,20 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 		select.changeCategory(true);
 	});
 	
+	function getWidth() {
+		xWidth = null;
+
+		if(window.screen != null)
+			xWidth = window.screen.availWidth;
+
+		if(window.innerWidth != null)
+			xWidth = window.innerWidth;
+
+		if(document.body != null)
+			xWidth = document.body.clientWidth;
+
+		return xWidth;
+	}
 	
 	function selectCurrent() {
 		var selected = select.selected();
@@ -667,8 +681,14 @@ $.PS_Autocompleter.Select = function (options, input, select, config, wc_psearch
 		.addClass("predictive_results")
 		.addClass("predictive_results_" + options.widget_template)
 		.addClass(options.resultsClass)
+		.addClass(wc_ps_vars.is_rtl)
 		.css("position", "absolute")
 		.appendTo(document.body);
+
+		closeIcon = $("<span/>").addClass("ps_close dashicons dashicons-dismiss").appendTo(element).mousedown(function() {
+			element.hide();
+			active = -1;
+		});
 	
 		list = $("<ul/>").addClass("predictive_search_results").appendTo(element).mouseover( function(event) {
 			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI') {

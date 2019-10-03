@@ -14,7 +14,7 @@ $search_results_page = str_replace( array( 'http:', 'https:' ), '', get_permalin
 
 <?php do_action( 'wc_ps_search_form_before' ); ?>
 
-<div class="wc_ps_container wc_ps_sidebar_container" id="wc_ps_container_<?php echo $ps_id; ?>">
+<div class="wc_ps_container wc_ps_sidebar_container <?php echo is_rtl() ? 'rtl' : ''; ?>" id="wc_ps_container_<?php echo $ps_id; ?>">
 	<form
 		class="wc_ps_form"
 		id="wc_ps_form_<?php echo $ps_id; ?>"

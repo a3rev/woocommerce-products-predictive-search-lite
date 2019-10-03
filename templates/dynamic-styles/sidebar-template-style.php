@@ -83,6 +83,11 @@ extract( $wc_predictive_search_sidebar_template_settings );
 @sidebar_loading_icon_color: <?php echo $sidebar_loading_icon_color; ?>;
 @sidebar_loading_icon_top_postition: ~"calc( @sidebar_container_height/2 - @sidebar_loading_icon_size/2 )";
 
+/* Sidebar Close Icon Variables */
+@sidebar_close_icon_size: <?php echo $sidebar_close_icon_size; ?>px;
+@sidebar_close_icon_color: <?php echo $sidebar_close_icon_color; ?>;
+@sidebar_close_icon_margin: <?php echo $sidebar_close_icon_margin_top; ?>px <?php echo $sidebar_close_icon_margin_right; ?>px <?php echo $sidebar_close_icon_margin_bottom; ?>px <?php echo $sidebar_close_icon_margin_left; ?>px;
+
 /* Sidebar PopUp Variables */
 .sidebar_popup_border() {
 	<?php echo $wc_predictive_search_admin_interface->generate_border_css( $sidebar_popup_border ); ?>
@@ -352,6 +357,12 @@ extract( $wc_predictive_search_sidebar_template_settings );
 		.rs_cat > a {
 			color: @sidebar_popup_product_category_link_hover_color !important;
 		}
+	}
+
+	.ps_close {
+		font-size: @sidebar_close_icon_size;
+		color: @sidebar_close_icon_color;
+		margin: @sidebar_close_icon_margin;
 	}
 }
 

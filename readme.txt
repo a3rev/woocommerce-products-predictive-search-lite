@@ -3,8 +3,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 4.5
-Tested up to: 5.2.2
-Stable tag: 4.4.1
+Tested up to: 5.2.3
+Stable tag: 5.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -174,6 +174,15 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.0.0 - 2019/09/03 =
+* This feature upgrade is a major re-write of the Search box dropdown user interface in mobile phones. As massive improvement in the user experience on mobiles.
+* Feature - When tap Done on virtual keyboard on phone the keyboard closes but the search results dropdown remains open. Tapping Done used to close the keyboard and the dropdown.
+* Feature - NEW - Close Icon show at top of the mobile search box dropdown. Tap to close dropdown results.
+* Feature - On Widget and Header template add new Close Icon (Mobile Only) options box.
+* Feature - Added Icon size, colour and margin settings for the close icon
+* Feature - Added support for RTL for the close icon
+* Tweak - Remove zoom out action when tap in search box to start typing on mobile
 
 = 4.4.1 - 2019/08/14 =
 * This maintenance update is for a Tweak and a Fix for the 4.8.0 feature version released today
@@ -809,6 +818,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.0.0 =
+This feature upgrade is a major re-write of the Search box dropdown user interface in mobile phones. As massive improvement in the user experience on mobiles. Once upgraded you can tweak the close icon style from the plugins widget or header template settings.
 
 = 4.4.1 =
 This maintenance update is for a Tweak and a Fix for the 4.8.0 feature version released today

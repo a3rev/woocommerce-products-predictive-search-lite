@@ -105,7 +105,8 @@ class WC_Predictive_Search_Hook_Backbone
 				'is_debug'            => $ps_is_debug,
 				'legacy_api_url'      => $legacy_api_url,
 				'search_page_url'     => get_permalink( $woocommerce_search_page_id ),
-				'permalink_structure' => get_option('permalink_structure' )
+				'permalink_structure' => get_option('permalink_structure' ),
+				'is_rtl'			  => is_rtl() ? 'rtl' : '',
 			) )
 		);
 	}

@@ -221,3 +221,48 @@
 .wc_ps_container .wc_ps_nav_facade_label {
 	max-width: 100px;
 }
+
+@media only screen and (max-width: 680px) {
+	.wc_ps_shortcode_container {
+		max-width: 100% !important;
+		width: 100% !important;
+		box-sizing: border-box !important;
+		padding-left: 20px !important;
+		padding-right: 20px !important;
+		float: none !important;
+	}
+}
+
+.predictive_results .ps_close {
+	display: none !important;
+	position: absolute;
+    top: 0;
+    right: -15px;
+    z-index: 1000;
+    cursor: pointer;
+    font-size: 20px;
+    color: #ff0606;
+    padding: 0 15px 15px 15px;
+    box-sizing: content-box !important;
+    margin: 2px 10px 2px 0px;
+}
+
+/* For RTL */
+.predictive_results.rtl .ps_close {
+	left: -15px;
+	right: auto;
+}
+.predictive_results.rtl .ajax_search_content_title {
+	text-align: right;
+}
+
+@media only screen and (max-width: 1024px) {
+	.predictive_results .ps_close {
+	    display: table !important;
+	}
+}
+@media screen and (max-device-width : 1024px) {
+	.wc_ps_container .wc_ps_nav_field input.wc_ps_search_keyword {
+		font-size: 16px !important;
+	}
+}

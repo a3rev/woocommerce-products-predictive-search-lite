@@ -452,6 +452,56 @@ class WC_Predictive_Search_Sidebar_Template_Settings extends WC_Predictive_Searc
 			),
 
 			array(
+            	'name' 		=> __( 'Close Icon (mobile only)', 'woocommerce-predictive-search' ),
+                'type' 		=> 'heading',
+                'id'		=> 'predictive_close_icon_box',
+                'is_box'	=> true,
+           	),
+			array(
+				'name' 		=> __( 'Close Icon Size', 'woocommerce-predictive-search' ),
+				'desc' 		=> "px",
+				'id' 		=> 'sidebar_close_icon_size',
+				'type' 		=> 'slider',
+				'default'	=> 20,
+				'min'		=> 8,
+				'max'		=> 30,
+				'increment'	=> 1,
+			),
+			array(
+				'name' 		=> __( 'Close Icon Colour', 'woocommerce-predictive-search' ),
+				'id' 		=> 'sidebar_close_icon_color',
+				'type' 		=> 'color',
+				'default'	=> '#ff0606'
+			),
+			array(
+				'name' 		=> __( 'Close Icon Margin', 'woocommerce-predictive-search' ),
+				'id' 		=> 'sidebar_close_icon_margin',
+				'type' 		=> 'array_textfields',
+				'ids'		=> array(
+	 								array(  'id' 		=> 'sidebar_close_icon_margin_top',
+	 										'name' 		=> __( 'Top', 'woocommerce-predictive-search' ),
+	 										'class' 	=> '',
+	 										'css'		=> 'width:40px;',
+	 										'default'	=> '2' ),
+	 								array(  'id' 		=> 'sidebar_close_icon_margin_bottom',
+	 										'name' 		=> __( 'Bottom', 'woocommerce-predictive-search' ),
+	 										'class' 	=> '',
+	 										'css'		=> 'width:40px;',
+	 										'default'	=> '2' ),
+	 								array(  'id' 		=> 'sidebar_close_icon_margin_left',
+	 										'name' 		=> __( 'Left', 'woocommerce-predictive-search' ),
+	 										'class' 	=> '',
+	 										'css'		=> 'width:40px;',
+	 										'default'	=> '0' ),
+	 								array(  'id' 		=> 'sidebar_close_icon_margin_right',
+	 										'name' 		=> __( 'Right', 'woocommerce-predictive-search' ),
+	 										'class' 	=> '',
+	 										'css'		=> 'width:40px;',
+	 										'default'	=> '10' ),
+	 							)
+			),
+
+			array(
             	'name' 		=> __( 'Results Dropdown Container', 'woocommerce-predictive-search' ),
                 'type' 		=> 'heading',
                 'id'		=> 'predictive_search_popup_result_box',
