@@ -3,7 +3,7 @@
 Plugin Name: Predictive Search for WooCommerce
 Plugin URI: https://a3rev.com/shop/woocommerce-predictive-search/
 Description: With WooCommerce Predictive Search Lite you can add an awesome Predictive Products Search widget to any widgetized area on your site.
-Version: 5.0.0
+Version: 5.1.0
 Author: a3rev Software
 Author URI: https://www.a3rev.com/
 Requires at least: 4.5
@@ -40,8 +40,59 @@ if(!defined("WOO_PREDICTIVE_SEARCH_DOCS_URI"))
     define("WOO_PREDICTIVE_SEARCH_DOCS_URI", "https://docs.a3rev.com/user-guides/woocommerce/woo-predictive-search/");
 
 define( 'WOOPS_KEY', 'woo_predictive_search' );
-define( 'WOOPS_VERSION', '5.0.0' );
+define( 'WOOPS_VERSION', '5.1.0' );
 define( 'WOOPS_G_FONTS', true );
+
+if ( version_compare( PHP_VERSION, '5.6.0', '>=' ) ) {
+	require __DIR__ . '/vendor/autoload.php';
+
+	// Predictive Search API
+	global $wc_ps_legacy_api;
+	$wc_ps_legacy_api = new \A3Rev\WCPredictiveSearch\Legacy_API();
+
+	global $wc_ps_dashboard_ajax;
+	$wc_ps_dashboard_ajax = new \A3Rev\WCPredictiveSearch\Dashboard_AJAX();
+
+
+	// Predictive WPML
+	global $wc_predictive_search_wpml;
+	$wc_predictive_search_wpml = new \A3Rev\WCPredictiveSearch\WPML_Functions();
+
+	// Predictive Datas
+	global $wc_ps_product_sku_data;
+	$wc_ps_product_sku_data = new \A3Rev\WCPredictiveSearch\Data\SKU();
+
+	global $wc_ps_postmeta_data;
+	$wc_ps_postmeta_data = new \A3Rev\WCPredictiveSearch\Data\PostMeta();
+
+	global $wc_ps_exclude_data;
+	$wc_ps_exclude_data = new \A3Rev\WCPredictiveSearch\Data\Exclude();
+
+	global $wc_ps_posts_data;
+	$wc_ps_posts_data = new \A3Rev\WCPredictiveSearch\Data\Posts();
+
+	// Predictive Main
+	global $wc_predictive_search;
+	$wc_predictive_search = new \A3Rev\WCPredictiveSearch\Main();
+
+	// Predictive Error Logs
+	global $wc_ps_errors_log;
+	$wc_ps_errors_log = new \A3Rev\WCPredictiveSearch\Errors_Log();
+
+	// Predictive Back Bone
+	global $wc_ps_hook_backbone;
+	$wc_ps_hook_backbone = new \A3Rev\WCPredictiveSearch\Hook_Backbone();
+
+	// Predictive Schedule & Sync
+	global $wc_ps_sync;
+	$wc_ps_sync = new \A3Rev\WCPredictiveSearch\Sync();
+
+	global $wc_ps_schedule;
+	$wc_ps_schedule = new \A3Rev\WCPredictiveSearch\Schedule();
+
+} else {
+	return;
+}
 
 /**
  * Load Localisation files.
@@ -60,41 +111,16 @@ function wc_predictive_search_plugin_textdomain() {
 	load_plugin_textdomain( 'woocommerce-predictive-search', false, WOOPS_FOLDER . '/languages/' );
 }
 
-// Predictive Search API
-include('includes/class-legacy-api.php');
-include('includes/class-dashboard-ajax.php');
-
 
 include('admin/admin-ui.php');
 include('admin/admin-interface.php');
-
-include 'classes/class-wc-predictive-search-functions.php';
-include('classes/class-wpml-functions.php');
 
 include('admin/admin-pages/predictive-search-page.php');
 
 include('admin/admin-init.php');
 include('admin/less/sass.php');
 
-
-include 'classes/data/class-wc-ps-product-sku-data.php';
-include 'classes/data/class-wc-ps-postmeta-data.php';
-include 'classes/data/class-wc-ps-exclude-data.php';
-include 'classes/data/class-wc-ps-posts-data.php';
-
-include 'includes/class-wc-predictive-search.php';
-
 include 'includes/wc-predictive-template-functions.php';
-
-include 'classes/class-wc-predictive-search-errors-log.php';
-include 'classes/class-wc-predictive-search-filter.php';
-include 'classes/class-wc-predictive-search-shortcodes.php';
-include 'classes/class-wc-predictive-search-metabox.php';
-include 'classes/class-wc-predictive-search-backbone.php';
-include 'widget/wc-predictive-search-widgets.php';
-
-include 'classes/class-wc-predictive-search-synch.php';
-include 'classes/class-wc-predictive-search-schedule.php';
 
 // Editor
 include 'tinymce3/tinymce.php';
@@ -106,5 +132,3 @@ include 'admin/wc-predictive-search-init.php';
 * Call when the plugin is activated
 */
 register_activation_hook(__FILE__,'wc_predictive_install');
-
-?>

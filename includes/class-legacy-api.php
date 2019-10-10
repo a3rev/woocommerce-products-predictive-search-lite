@@ -5,9 +5,11 @@
  *
  */
 
+namespace A3Rev\WCPredictiveSearch;
+
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-class WC_Predictive_Search_Legacy_API {
+class Legacy_API {
 
 	/** @var string $base the route base */
 	protected $base = '/wc_ps_legacy_api';
@@ -64,7 +66,7 @@ class WC_Predictive_Search_Legacy_API {
 		$widget_template = 'sidebar';
 		$found_items = false;
 		$total_product = $total_post = $total_page = 0;
-		$items_search_default = WC_Predictive_Search_Widgets::get_items_search();
+		$items_search_default = Widgets::get_items_search();
 		$search_in_default = array();
 		foreach ( $items_search_default as $key => $data ) {
 			if ( $data['number'] > 0 ) {
@@ -258,6 +260,3 @@ class WC_Predictive_Search_Legacy_API {
 	}
 
 }
-
-global $wc_ps_legacy_api;
-$wc_ps_legacy_api = new WC_Predictive_Search_Legacy_API();

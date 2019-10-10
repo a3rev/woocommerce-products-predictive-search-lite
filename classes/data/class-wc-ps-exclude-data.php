@@ -1,7 +1,9 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
 
-class WC_PS_Exclude_Data
+namespace A3Rev\WCPredictiveSearch\Data;
+
+class Exclude
 {
 	public function install_database() {
 		global $wpdb;
@@ -109,7 +111,3 @@ class WC_PS_Exclude_Data
 	}
 
 }
-
-global $wc_ps_exclude_data;
-$wc_ps_exclude_data = new WC_PS_Exclude_Data();
-?>

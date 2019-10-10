@@ -1,7 +1,11 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
 
-class WC_PS_Posts_Data
+namespace A3Rev\WCPredictiveSearch\Data;
+
+use A3Rev\WCPredictiveSearch;
+
+class Posts
 {
 	public function install_database() {
 		global $wpdb;
@@ -103,13 +107,13 @@ class WC_PS_Posts_Data
 		}
 
 		$where_title = ' ( ';
-		$where_title .= WC_Predictive_Search_Functions::remove_special_characters_in_mysql( 'pp.post_title', $search_keyword );
+		$where_title .= WCPredictiveSearch\Functions::remove_special_characters_in_mysql( 'pp.post_title', $search_keyword );
 		if ( '' != $search_keyword_nospecial ) {
-			$where_title .= " OR ". WC_Predictive_Search_Functions::remove_special_characters_in_mysql( 'pp.post_title', $search_keyword_nospecial );
+			$where_title .= " OR ". WCPredictiveSearch\Functions::remove_special_characters_in_mysql( 'pp.post_title', $search_keyword_nospecial );
 		}
-		$search_keyword_no_s_letter = WC_Predictive_Search_Functions::remove_s_letter_at_end_word( $search_keyword );
+		$search_keyword_no_s_letter = WCPredictiveSearch\Functions::remove_s_letter_at_end_word( $search_keyword );
 		if ( $search_keyword_no_s_letter != false ) {
-			$where_title .= " OR ". WC_Predictive_Search_Functions::remove_special_characters_in_mysql( 'pp.post_title', $search_keyword_no_s_letter );
+			$where_title .= " OR ". WCPredictiveSearch\Functions::remove_special_characters_in_mysql( 'pp.post_title', $search_keyword_no_s_letter );
 		}
 		$where_title .= ' ) ';
 
@@ -259,7 +263,3 @@ class WC_PS_Posts_Data
 		return $wpdb->query( "TRUNCATE {$wpdb->ps_posts}" );
 	}
 }
-
-global $wc_ps_posts_data;
-$wc_ps_posts_data = new WC_PS_Posts_Data();
-?>

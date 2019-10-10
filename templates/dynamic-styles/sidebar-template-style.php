@@ -81,7 +81,7 @@ extract( $wc_predictive_search_sidebar_template_settings );
 }
 @sidebar_loading_icon_size: <?php echo $sidebar_loading_icon_size; ?>px;
 @sidebar_loading_icon_color: <?php echo $sidebar_loading_icon_color; ?>;
-@sidebar_loading_icon_top_postition: ~"calc( @sidebar_container_height/2 - @sidebar_loading_icon_size/2 )";
+@sidebar_loading_icon_top_postition: ~"calc( <?php echo $sidebar_search_box_height; ?>px/2 - <?php echo $sidebar_loading_icon_size; ?>px/2 )";
 
 /* Sidebar Close Icon Variables */
 @sidebar_close_icon_size: <?php echo $sidebar_close_icon_size; ?>px;
@@ -183,6 +183,10 @@ extract( $wc_predictive_search_sidebar_template_settings );
 		.wc_ps_nav_down_icon {
 			font-size: @sidebar_cat_down_icon_size;
 			color: @sidebar_cat_down_icon_color;
+
+			* {
+				color: @sidebar_cat_down_icon_color;
+			}
 		}
 	}
 
@@ -194,7 +198,8 @@ extract( $wc_predictive_search_sidebar_template_settings );
 		&:hover {
 			background-color: @sidebar_search_icon_bg_hover_color;
 
-			.wc_ps_nav_submit_icon {
+			.wc_ps_nav_submit_icon,
+			.wc_ps_nav_submit_icon * {
 				color: @sidebar_search_icon_hover_color;
 			}
 		}
@@ -202,6 +207,10 @@ extract( $wc_predictive_search_sidebar_template_settings );
 		.wc_ps_nav_submit_icon {
 			font-size: @sidebar_search_icon_size;
 			color: @sidebar_search_icon_color;
+
+			* {
+				color: @sidebar_search_icon_color;
+			}
 		}
 	}
 
@@ -221,6 +230,10 @@ extract( $wc_predictive_search_sidebar_template_settings );
 
 		svg.wc_ps_searching_icon {
 			top: @sidebar_loading_icon_top_postition;
+
+			* {
+				color: @sidebar_loading_icon_color;
+			}
 		}
 	}
 }

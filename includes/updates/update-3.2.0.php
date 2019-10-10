@@ -11,5 +11,5 @@ add_option( 'woocommerce_search_is_debug', 'no' );
 global $wc_predictive_search;
 $wc_predictive_search->install_databases();
 
-global $wc_ps_synch;
-$wc_ps_synch->migrate_products_out_of_stock();
+global $wc_ps_sync;
+$wc_ps_sync->migrate_products_out_of_stock();

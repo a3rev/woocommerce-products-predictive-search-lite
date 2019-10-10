@@ -1,10 +1,12 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCPredictiveSearch;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
-class WC_Predictive_Search_Synch
+
+class Sync
 {
 
 	public $error_id = 'manual_sync';
@@ -344,7 +346,7 @@ class WC_Predictive_Search_Synch
 				if ( '0' == $item_existed ) {
 					$post_title = $item->post_title;
 					if ( in_array( $item->post_type, array( 'product_variation' ) ) ) {
-						$post_title = WC_Predictive_Search_Functions::get_product_variation_name( $post_id );
+						$post_title = Functions::get_product_variation_name( $post_id );
 					}
 					$wc_ps_posts_data->insert_item( $post_id, $post_title, $item->post_type );
 				}
@@ -601,7 +603,3 @@ class WC_Predictive_Search_Synch
 		}
 	}
 }
-
-global $wc_ps_synch;
-$wc_ps_synch = new WC_Predictive_Search_Synch();
-?>

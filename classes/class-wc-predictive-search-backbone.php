@@ -7,7 +7,10 @@
  *
  * register_admin_screen()
  */
-class WC_Predictive_Search_Hook_Backbone
+
+namespace A3Rev\WCPredictiveSearch;
+
+class Hook_Backbone
 {
 	public function __construct() {
 		
@@ -258,7 +261,3 @@ class WC_Predictive_Search_Hook_Backbone
 		wp_localize_script( 'wc-predictive-search-results-backbone', 'wc_ps_results_vars', apply_filters( 'wc_ps_results_vars', array( 'display_type' => $results_display_type, 'grid_container' => $grid_container, 'grid_container_class' => $grid_container_class, 'default_navigate' => $default_navigate, 'search_in' => $ps_current_search_in, 'ps_lang' => $current_lang, 'legacy_api_url' => $legacy_api_url, 'search_page_path' => $search_page_path, 'permalink_structure' => get_option('permalink_structure' ) ) ) );
 	}
 }
-
-global $wc_ps_hook_backbone;
-$wc_ps_hook_backbone = new WC_Predictive_Search_Hook_Backbone();
-?>

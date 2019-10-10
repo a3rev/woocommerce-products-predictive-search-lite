@@ -12,7 +12,10 @@
  * auto_create_page_for_wpml()
  * strip_shortcodes()
  */
-class WC_Predictive_Search_Functions
+
+namespace A3Rev\WCPredictiveSearch;
+
+class Functions
 {
 
 	public static function symbol_entities() {
@@ -350,7 +353,7 @@ class WC_Predictive_Search_Functions
 				$trid = $sitepress->get_element_trid( $original_id, 'post_page' );
 				foreach ( $active_languages as $language ) {
 					if ( $language['code'] == $source_lang_code ) continue;
-					WC_Predictive_Search_Functions::create_page_wpml( $trid, $language['code'], $source_lang_code, $slug.'-'.$language['code'], $page_title.' '.$language['display_name'], $page_content );
+					self::create_page_wpml( $trid, $language['code'], $source_lang_code, $slug.'-'.$language['code'], $page_title.' '.$language['display_name'], $page_content );
 				}
 			}
 		}
@@ -482,7 +485,7 @@ class WC_Predictive_Search_Functions
 
 			$current_db_version = get_option( 'woocommerce_db_version', null );
 			if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
-				$product = new WC_Product( $product_id );
+				$product = new \WC_Product( $product_id );
 			} elseif ( version_compare( WC()->version, '2.2.0', '<' ) ) {
 				$product = get_product( $product_id );
 			} else {
@@ -507,7 +510,7 @@ class WC_Predictive_Search_Functions
 
 			$current_db_version = get_option( 'woocommerce_db_version', null );
 			if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
-				$product = new WC_Product( $product_id );
+				$product = new \WC_Product( $product_id );
 			} elseif ( version_compare( WC()->version, '2.2.0', '<' ) ) {
 				$product = get_product( $product_id );
 			} else {
@@ -519,9 +522,9 @@ class WC_Predictive_Search_Functions
 
 		ob_start();
 		if (function_exists('woocommerce_template_loop_add_to_cart') ) {
-			add_filter( 'woocommerce_product_add_to_cart_url', array( 'WC_Predictive_Search_Functions', 'change_add_to_cart_url' ), 10, 2 );
+			add_filter( 'woocommerce_product_add_to_cart_url', array( __CLASS__, 'change_add_to_cart_url' ), 10, 2 );
 			woocommerce_template_loop_add_to_cart();
-			remove_filter( 'woocommerce_product_add_to_cart_url', array( 'WC_Predictive_Search_Functions', 'change_add_to_cart_url' ), 10, 2 );
+			remove_filter( 'woocommerce_product_add_to_cart_url', array( __CLASS__, 'change_add_to_cart_url' ), 10, 2 );
 		}
 		$product_addtocart_output = ob_get_clean();
 
@@ -538,7 +541,7 @@ class WC_Predictive_Search_Functions
 
 			$current_db_version = get_option( 'woocommerce_db_version', null );
 			if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
-				$variation = new WC_Product_Variation( $variation_id );
+				$variation = new \WC_Product_Variation( $variation_id );
 			} elseif ( version_compare( WC()->version, '2.2.0', '<' ) ) {
 				$variation = get_product( $variation_id );
 			} else {
@@ -754,4 +757,3 @@ class WC_Predictive_Search_Functions
 		return $url;
 	}
 }
-?>

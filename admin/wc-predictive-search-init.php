@@ -1,11 +1,14 @@
 <?php
+
+use A3Rev\WCPredictiveSearch;
+
 /**
  * Register Activation Hook
  */
 function wc_predictive_install(){
 	global $wpdb;
-	$woocommerce_search_page_id = WC_Predictive_Search_Functions::create_page( _x('woocommerce-search', 'page_slug', 'woocommerce-predictive-search' ), 'woocommerce_search_page_id', __('Woocommerce Predictive Search', 'woocommerce-predictive-search' ), '[woocommerce_search]' );
-	WC_Predictive_Search_Functions::auto_create_page_for_wpml( $woocommerce_search_page_id, _x('woocommerce-search', 'page_slug', 'woocommerce-predictive-search' ), __('Woocommerce Predictive Search', 'woocommerce-predictive-search' ), '[woocommerce_search]' );
+	$woocommerce_search_page_id = WCPredictiveSearch\Functions::create_page( _x('woocommerce-search', 'page_slug', 'woocommerce-predictive-search' ), 'woocommerce_search_page_id', __('Woocommerce Predictive Search', 'woocommerce-predictive-search' ), '[woocommerce_search]' );
+	WCPredictiveSearch\Functions::auto_create_page_for_wpml( $woocommerce_search_page_id, _x('woocommerce-search', 'page_slug', 'woocommerce-predictive-search' ), __('Woocommerce Predictive Search', 'woocommerce-predictive-search' ), '[woocommerce_search]' );
 
 	global $wc_predictive_search;
 	$wc_predictive_search->install_databases();
@@ -44,18 +47,18 @@ function woops_init() {
 add_action('init', 'woops_init');
 
 // Add custom style to dashboard
-add_action( 'admin_enqueue_scripts', array( 'WC_Predictive_Search_Hook_Filter', 'a3_wp_admin' ) );
+add_action( 'admin_enqueue_scripts', array( '\A3Rev\WCPredictiveSearch\Hook_Filter', 'a3_wp_admin' ) );
 
-add_action( 'plugins_loaded', array( 'WC_Predictive_Search_Hook_Filter', 'plugins_loaded' ), 8 );
+add_action( 'plugins_loaded', array( '\A3Rev\WCPredictiveSearch\Hook_Filter', 'plugins_loaded' ), 8 );
 
 // Add text on right of Visit the plugin on Plugin manager page
-add_filter( 'plugin_row_meta', array('WC_Predictive_Search_Hook_Filter', 'plugin_extra_links'), 10, 2 );
+add_filter( 'plugin_row_meta', array('\A3Rev\WCPredictiveSearch\Hook_Filter', 'plugin_extra_links'), 10, 2 );
 
 // Add extra link on left of Deactivate link on Plugin manager page
-add_action('plugin_action_links_' . WOOPS_NAME, array( 'WC_Predictive_Search_Hook_Filter', 'settings_plugin_links' ) );
+add_action('plugin_action_links_' . WOOPS_NAME, array( '\A3Rev\WCPredictiveSearch\Hook_Filter', 'settings_plugin_links' ) );
 
 function register_widget_woops_predictive_search() {
-	register_widget('WC_Predictive_Search_Widgets');
+	register_widget('\A3Rev\WCPredictiveSearch\Widgets');
 }
 
 // Need to call Admin Init to show Admin UI
@@ -63,24 +66,24 @@ global $wc_predictive_search_admin_init;
 $wc_predictive_search_admin_init->init();
 
 // Add upgrade notice to Dashboard pages
-add_filter( $wc_predictive_search_admin_init->plugin_name . '_plugin_extension_boxes', array( 'WC_Predictive_Search_Hook_Filter', 'plugin_extension_box' ) );
+add_filter( $wc_predictive_search_admin_init->plugin_name . '_plugin_extension_boxes', array( '\A3Rev\WCPredictiveSearch\Hook_Filter', 'plugin_extension_box' ) );
 
 // Custom Rewrite Rules
-add_filter( 'query_vars', array( 'WC_Predictive_Search_Functions', 'add_query_vars' ) );
-add_filter( 'rewrite_rules_array', array( 'WC_Predictive_Search_Functions', 'add_rewrite_rules' ) );
+add_filter( 'query_vars', array( '\A3Rev\WCPredictiveSearch\Functions', 'add_query_vars' ) );
+add_filter( 'rewrite_rules_array', array( '\A3Rev\WCPredictiveSearch\Functions', 'add_rewrite_rules' ) );
 
 // Registry widget
 add_action('widgets_init', 'register_widget_woops_predictive_search');
 
 // Add shortcode [woocommerce_search]
-add_shortcode('woocommerce_search', array('WC_Predictive_Search_Shortcodes', 'parse_shortcode_search_result'));
+add_shortcode('woocommerce_search', array('\A3Rev\WCPredictiveSearch\Shortcodes', 'parse_shortcode_search_result'));
 
 // Add Predictive Search Meta Box to all post type
-add_action( 'add_meta_boxes', array('WC_Predictive_Search_Meta','create_custombox'), 9 );
+add_action( 'add_meta_boxes', array('\A3Rev\WCPredictiveSearch\MetaBox','create_custombox'), 9 );
 
 // Save Predictive Search Meta Box to all post type
 if(in_array(basename($_SERVER['PHP_SELF']), array('post.php', 'page.php', 'page-new.php', 'post-new.php'))){
-	add_action( 'save_post', array('WC_Predictive_Search_Meta','save_custombox' ), 11 );
+	add_action( 'save_post', array('\A3Rev\WCPredictiveSearch\MetaBox','save_custombox' ), 11 );
 }
 
 
@@ -157,4 +160,17 @@ function woo_ps_lite_upgrade_plugin() {
 
     update_option('wc_predictive_search_lite_version', WOOPS_VERSION );
 }
-?>
+
+function wc_ps_ict_t_e( $name, $string ) {
+	global $wc_predictive_search_wpml;
+	$string = ( function_exists('icl_t') ? icl_t( $wc_predictive_search_wpml->plugin_wpml_name, $name, $string ) : $string );
+	
+	echo $string;
+}
+
+function wc_ps_ict_t__( $name, $string ) {
+	global $wc_predictive_search_wpml;
+	$string = ( function_exists('icl_t') ? icl_t( $wc_predictive_search_wpml->plugin_wpml_name, $name, $string ) : $string );
+	
+	return $string;
+}

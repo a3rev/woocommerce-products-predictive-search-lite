@@ -9,7 +9,10 @@
  * install_databases()
  * set_tables_wpdbfix()
  */
-class WC_Predictive_Search
+
+namespace A3Rev\WCPredictiveSearch;
+
+class Main
 {
 
 	public function __construct() {
@@ -261,7 +264,7 @@ class WC_Predictive_Search
 					global $post;
 
 					if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
-						$product = new WC_Product( $product_id );
+						$product = new \WC_Product( $product_id );
 					} elseif ( version_compare( WC()->version, '2.2.0', '<' ) ) {
 						$product = get_product( $product_id );
 					} else {
@@ -270,8 +273,8 @@ class WC_Predictive_Search
 
 					$post = get_post( $product_id );
 
-					$product_description = WC_Predictive_Search_Functions::woops_limit_words( strip_tags( WC_Predictive_Search_Functions::strip_shortcodes( strip_shortcodes ( $post->post_content ) ) ), $text_lenght, '...' );
-					if ( trim( $product_description ) == '' ) $product_description = WC_Predictive_Search_Functions::woops_limit_words( strip_tags( WC_Predictive_Search_Functions::strip_shortcodes( strip_shortcodes( $post->post_excerpt ) ) ), $text_lenght, '...' );
+					$product_description = Functions::woops_limit_words( strip_tags( Functions::strip_shortcodes( strip_shortcodes ( $post->post_content ) ) ), $text_lenght, '...' );
+					if ( trim( $product_description ) == '' ) $product_description = Functions::woops_limit_words( strip_tags( Functions::strip_shortcodes( strip_shortcodes( $post->post_excerpt ) ) ), $text_lenght, '...' );
 
 					$availability      = $product->get_availability();
 					$availability_html = empty( $availability['availability'] ) ? '' : '<span class="stock ' . esc_attr( $availability['class'] ) . '">' . esc_html( $availability['availability'] ) . '</span>';
@@ -280,7 +283,7 @@ class WC_Predictive_Search
 						'title'       => $current_product->post_title,
 						'keyword'     => $current_product->post_title,
 						'url'         => $product->get_permalink(),
-						'image_url'   => WC_Predictive_Search_Functions::get_product_thumbnail_url( $product_id, 0, $thumbnail_size_name, 64, 64 ),
+						'image_url'   => Functions::get_product_thumbnail_url( $product_id, 0, $thumbnail_size_name, 64, 64 ),
 						'description' => $product_description,
 						'stock'       => $availability_html,
 						'type'        => 'product'
@@ -291,9 +294,9 @@ class WC_Predictive_Search
 						global $wc_ps_product_sku_data;
 						$item_data['sku'] = stripslashes( $wc_ps_product_sku_data->get_item( $product_id ) );
 					}
-					if ( $show_addtocart ) $item_data['addtocart']   = WC_Predictive_Search_Functions::get_product_addtocart( $product );
-					if ( $show_categories ) $item_data['categories'] = WC_Predictive_Search_Functions::get_terms_object( $product_id, 'product_cat' );
-					if ( $show_tags ) $item_data['tags']             = WC_Predictive_Search_Functions::get_terms_object( $product_id, 'product_tag' );
+					if ( $show_addtocart ) $item_data['addtocart']   = Functions::get_product_addtocart( $product );
+					if ( $show_categories ) $item_data['categories'] = Functions::get_terms_object( $product_id, 'product_cat' );
+					if ( $show_tags ) $item_data['tags']             = Functions::get_terms_object( $product_id, 'product_tag' );
 
 					$item_list['items'][] = $item_data;
 
@@ -346,20 +349,20 @@ class WC_Predictive_Search
 			foreach ( $search_posts as $item ) {
 
 				$post_data = get_post( $item->post_id );
-				$item_description = WC_Predictive_Search_Functions::woops_limit_words( strip_tags( WC_Predictive_Search_Functions::strip_shortcodes( strip_shortcodes ( $post_data->post_content ) ) ), $text_lenght, '...' );
-				if ( trim( $item_description ) == '' ) $item_description = WC_Predictive_Search_Functions::woops_limit_words( strip_tags( WC_Predictive_Search_Functions::strip_shortcodes( strip_shortcodes( $post_data->post_excerpt ) ) ), $text_lenght, '...' );
+				$item_description = Functions::woops_limit_words( strip_tags( Functions::strip_shortcodes( strip_shortcodes ( $post_data->post_content ) ) ), $text_lenght, '...' );
+				if ( trim( $item_description ) == '' ) $item_description = Functions::woops_limit_words( strip_tags( Functions::strip_shortcodes( strip_shortcodes( $post_data->post_excerpt ) ) ), $text_lenght, '...' );
 
 				$item_data = array(
 					'title'       => $item->post_title,
 					'keyword'     => $item->post_title,
 					'url'         => get_permalink( $item->post_id ),
-					'image_url'   => WC_Predictive_Search_Functions::get_product_thumbnail_url( $item->post_id, 0, $thumbnail_size_name, 64, 64 ),
+					'image_url'   => Functions::get_product_thumbnail_url( $item->post_id, 0, $thumbnail_size_name, 64, 64 ),
 					'description' => $item_description,
 					'type'        => $post_type
 				);
 
-				if ( $show_categories ) $item_data['categories'] = WC_Predictive_Search_Functions::get_terms_object( $item->post_id, 'category' );
-				if ( $show_tags ) $item_data['tags']             = WC_Predictive_Search_Functions::get_terms_object( $item->post_id, 'post_tag' );
+				if ( $show_categories ) $item_data['categories'] = Functions::get_terms_object( $item->post_id, 'category' );
+				if ( $show_tags ) $item_data['tags']             = Functions::get_terms_object( $item->post_id, 'post_tag' );
 
 				$item_list['items'][] = $item_data;
 
@@ -456,8 +459,3 @@ class WC_Predictive_Search
 	}
 
 }
-
-global $wc_predictive_search;
-$wc_predictive_search = new WC_Predictive_Search();
-
-?>

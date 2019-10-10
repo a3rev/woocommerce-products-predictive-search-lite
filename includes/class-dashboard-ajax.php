@@ -1,12 +1,14 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
 
+namespace A3Rev\WCPredictiveSearch;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class WC_Predictive_Search_Dashboard_AJAX
+class Dashboard_AJAX
 {
 
 	public function __construct() {
@@ -88,8 +90,3 @@ class WC_Predictive_Search_Dashboard_AJAX
 	}
 
 }
-
-global $wc_ps_dashboard_ajax;
-$wc_ps_dashboard_ajax = new WC_Predictive_Search_Dashboard_AJAX();
-
-?>

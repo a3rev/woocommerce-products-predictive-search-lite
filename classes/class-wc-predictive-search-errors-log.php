@@ -1,10 +1,12 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCPredictiveSearch;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
-class WC_Predictive_Search_Errors_Log
+
+class Errors_Log
 {
 
 	public $error_prefix = 'wc_ps_error_';
@@ -65,7 +67,3 @@ class WC_Predictive_Search_Errors_Log
 		return $error_modal_output;
 	}
 }
-
-global $wc_ps_errors_log;
-$wc_ps_errors_log = new WC_Predictive_Search_Errors_Log();
-?>

@@ -10,12 +10,15 @@
  * create_custombox()
  * a3_people_metabox()
  */
-class WC_Predictive_Search_Meta
+
+namespace A3Rev\WCPredictiveSearch;
+
+class MetaBox
 {
 	public static function create_custombox() {
 		global $post;
 
-		add_action( 'post_submitbox_misc_actions', array( 'WC_Predictive_Search_Meta', 'hide_from_results_box' ) );
+		add_action( 'post_submitbox_misc_actions', array( __CLASS__, 'hide_from_results_box' ) );
 	}
 
 	public static function hide_from_results_box() {
@@ -81,4 +84,3 @@ class WC_Predictive_Search_Meta
 		}
 	}
 }
-?>

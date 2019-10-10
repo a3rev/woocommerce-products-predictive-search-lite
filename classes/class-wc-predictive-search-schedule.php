@@ -1,10 +1,12 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCPredictiveSearch;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
-class WC_Predictive_Search_Schedule
+
+class Schedule
 {
 	public $error_id = 'auto_sync';
 
@@ -48,9 +50,9 @@ class WC_Predictive_Search_Schedule
 	}
 
 	public function auto_sync_search_data() {
-		global $wc_ps_synch;
+		global $wc_ps_sync;
 
-		$wc_ps_synch->wc_predictive_search_start_sync( $this->error_id, 'auto' );
+		$wc_ps_sync->wc_predictive_search_start_sync( $this->error_id, 'auto' );
 
 		// Set status of auto synced is 'run' for when cron job start process
 		update_option( 'wc_predictive_search_auto_synced_full_data_successed', 0 );
@@ -59,7 +61,7 @@ class WC_Predictive_Search_Schedule
 	}
 
 	public function auto_sync_products() {
-		global $wc_ps_synch;
+		global $wc_ps_sync;
 
 		$is_starting_manual_sync = get_transient( 'wc_predictive_search_starting_manual_sync' );
 		if ( false !== $is_starting_manual_sync && (int) $is_starting_manual_sync > time() ) {
@@ -91,7 +93,7 @@ class WC_Predictive_Search_Schedule
 		 */
 		wp_schedule_single_event( time() + ( 60 * 5 ), 'wc_predictive_search_auto_sync_detect_error', array( 'products' ) );
 
-		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'product', $this->error_id, 'auto' );
+		$result = $wc_ps_sync->wc_predictive_search_sync_posts( 'product', $this->error_id, 'auto' );
 
 		// Remove the event send ERROR email if don't get limited execute time or php error
 		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error', array( 'products' ) );
@@ -111,7 +113,7 @@ class WC_Predictive_Search_Schedule
 	}
 
 	public function auto_sync_product_skus() {
-		global $wc_ps_synch;
+		global $wc_ps_sync;
 
 		$is_starting_manual_sync = get_transient( 'wc_predictive_search_starting_manual_sync' );
 		if ( false !== $is_starting_manual_sync && (int) $is_starting_manual_sync > time() ) {
@@ -135,7 +137,7 @@ class WC_Predictive_Search_Schedule
 		 */
 		wp_schedule_single_event( time() + ( 60 * 5 ), 'wc_predictive_search_auto_sync_detect_error', array( 'product_skus' ) );
 
-		$result = $wc_ps_synch->wc_predictive_search_sync_product_skus( $this->error_id, 'auto' );
+		$result = $wc_ps_sync->wc_predictive_search_sync_product_skus( $this->error_id, 'auto' );
 
 		// Remove the event send ERROR email if don't get limited execute time or php error
 		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error', array( 'product_skus' ) );
@@ -161,7 +163,7 @@ class WC_Predictive_Search_Schedule
 	}
 
 	public function auto_sync_posts() {
-		global $wc_ps_synch;
+		global $wc_ps_sync;
 
 		$is_starting_manual_sync = get_transient( 'wc_predictive_search_starting_manual_sync' );
 		if ( false !== $is_starting_manual_sync && (int) $is_starting_manual_sync > time() ) {
@@ -181,7 +183,7 @@ class WC_Predictive_Search_Schedule
 		 */
 		wp_schedule_single_event( time() + ( 60 * 5 ), 'wc_predictive_search_auto_sync_detect_error', array( 'posts' ) );
 
-		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'post', $this->error_id, 'auto' );
+		$result = $wc_ps_sync->wc_predictive_search_sync_posts( 'post', $this->error_id, 'auto' );
 
 		// Remove the event send ERROR email if don't get limited execute time or php error
 		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error', array( 'posts' ) );
@@ -199,7 +201,7 @@ class WC_Predictive_Search_Schedule
 	}
 
 	public function auto_sync_pages() {
-		global $wc_ps_synch;
+		global $wc_ps_sync;
 
 		$is_starting_manual_sync = get_transient( 'wc_predictive_search_starting_manual_sync' );
 		if ( false !== $is_starting_manual_sync && (int) $is_starting_manual_sync > time() ) {
@@ -219,7 +221,7 @@ class WC_Predictive_Search_Schedule
 		 */
 		wp_schedule_single_event( time() + ( 60 * 5 ), 'wc_predictive_search_auto_sync_detect_error', array( 'pages' ) );
 
-		$result = $wc_ps_synch->wc_predictive_search_sync_posts( 'page', $this->error_id, 'auto' );
+		$result = $wc_ps_sync->wc_predictive_search_sync_posts( 'page', $this->error_id, 'auto' );
 
 		// Remove the event send ERROR email if don't get limited execute time or php error
 		wp_clear_scheduled_hook( 'wc_predictive_search_auto_sync_detect_error', array( 'pages' ) );
@@ -372,7 +374,3 @@ class WC_Predictive_Search_Schedule
 	}
 
 }
-
-global $wc_ps_schedule;
-$wc_ps_schedule = new WC_Predictive_Search_Schedule();
-?>

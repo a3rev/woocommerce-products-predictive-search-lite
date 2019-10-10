@@ -1,7 +1,11 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
 
-class WC_PS_Product_SKU_Data
+namespace A3Rev\WCPredictiveSearch\Data;
+
+use A3Rev\WCPredictiveSearch;
+
+class SKU
 {
 	public function install_database() {
 		global $wpdb;
@@ -153,7 +157,3 @@ class WC_PS_Product_SKU_Data
 		return $wpdb->query( "TRUNCATE {$wpdb->ps_product_sku}" );
 	}
 }
-
-global $wc_ps_product_sku_data;
-$wc_ps_product_sku_data = new WC_PS_Product_SKU_Data();
-?>

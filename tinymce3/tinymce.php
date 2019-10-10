@@ -24,4 +24,3 @@ function wc_ps_add_tinymce_plugin($plugin_array) {
 
 // init process for button control
 add_action('init', 'wc_ps_addbuttons');
-?>

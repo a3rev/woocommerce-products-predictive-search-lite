@@ -9,7 +9,10 @@
  * parse_shortcode_search_result()
  * display_search()
  */
-class WC_Predictive_Search_Shortcodes 
+
+namespace A3Rev\WCPredictiveSearch;
+
+class Shortcodes 
 {
 
 	public static function parse_shortcode_search_result($attributes) {
@@ -24,7 +27,7 @@ class WC_Predictive_Search_Shortcodes
 		if (isset($wp_query->query_vars['keyword'])) $search_keyword = stripslashes( strip_tags( urldecode( $wp_query->query_vars['keyword'] ) ) );
 		else if (isset($_REQUEST['rs']) && trim($_REQUEST['rs']) != '') $search_keyword = stripslashes( strip_tags( $_REQUEST['rs'] ) );
 
-		$search_results .= WC_Predictive_Search_Shortcodes::display_search();
+		$search_results .= self::display_search();
     	return $search_results;	
     }
 						
@@ -33,7 +36,7 @@ class WC_Predictive_Search_Shortcodes
 		global $wpdb;
 		global $woocommerce_search_page_id;
 	
-		$items_search_default = WC_Predictive_Search_Widgets::get_items_search();
+		$items_search_default = Widgets::get_items_search();
 		$search_keyword = '';
 		$search_in = 'product';
 		$search_other = '';
@@ -125,4 +128,3 @@ class WC_Predictive_Search_Shortcodes
         }
 	}	
 }
-?>

@@ -11,7 +11,10 @@
  * update()
  * form()
  */
-class WC_Predictive_Search_Widgets extends WP_Widget 
+
+namespace A3Rev\WCPredictiveSearch;
+
+class Widgets extends \WP_Widget 
 {
 	
 	public static function get_items_search() {
@@ -75,7 +78,7 @@ class WC_Predictive_Search_Widgets extends WP_Widget
 
 		$row = 0;
 		if (!is_array($number_items) || count($number_items) < 1 || array_sum($number_items) < 1) {
-			$items_search_default = WC_Predictive_Search_Widgets::get_items_search();
+			$items_search_default = self::get_items_search();
 			$number_items_default = array();
 			foreach ($items_search_default as $key => $data) {
 				if ($data['number'] > 0) {
@@ -134,7 +137,7 @@ class WC_Predictive_Search_Widgets extends WP_Widget
 		wp_enqueue_script( 'jquery-ui-draggable' );
 
 		$global_search_box_text = get_option('woocommerce_search_box_text');
-		$items_search_default = WC_Predictive_Search_Widgets::get_items_search();
+		$items_search_default = self::get_items_search();
 		$items_search_default = array_merge( $items_search_default, array(
 				'p_sku'	=> array( 'number' => 0, 'name' => wc_ps_ict_t__( 'Product SKU', __( 'Product SKU', 'woocommerce-predictive-search' ) ) ),
 				'p_cat'	=> array( 'number' => 0, 'name' => wc_ps_ict_t__( 'Product Categories', __('Product Categories', 'woocommerce-predictive-search' ) ) ),
@@ -233,4 +236,3 @@ class WC_Predictive_Search_Widgets extends WP_Widget
 <?php
 	}
 }
-?>

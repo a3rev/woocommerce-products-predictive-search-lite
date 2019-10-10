@@ -435,7 +435,7 @@ class WC_Predictive_Search_Global_Settings extends WC_Predictive_Search_Admin_UI
 				'id' 		=> 'woocommerce_search_special_characters',
 				'type' 		=> 'multiselect',
 				'css'		=> 'width:600px; min-height:80px;',
-				'options'	=> WC_Predictive_Search_Functions::special_characters_list(),
+				'options'	=> \A3Rev\WCPredictiveSearch\Functions::special_characters_list(),
 			),
 
 			array(

@@ -7,7 +7,10 @@
  * plugins_loaded()
  * wpml_register_string()
  */
-class WC_Predictive_Search_WPML_Functions
+
+namespace A3Rev\WCPredictiveSearch;
+
+class WPML_Functions
 {	
 	public $plugin_wpml_name = 'WooCommerce Predictive Search';
 	
@@ -87,21 +90,3 @@ class WC_Predictive_Search_WPML_Functions
 
 
 }
-
-global $wc_predictive_search_wpml;
-$wc_predictive_search_wpml = new WC_Predictive_Search_WPML_Functions();
-
-function wc_ps_ict_t_e( $name, $string ) {
-	global $wc_predictive_search_wpml;
-	$string = ( function_exists('icl_t') ? icl_t( $wc_predictive_search_wpml->plugin_wpml_name, $name, $string ) : $string );
-	
-	echo $string;
-}
-
-function wc_ps_ict_t__( $name, $string ) {
-	global $wc_predictive_search_wpml;
-	$string = ( function_exists('icl_t') ? icl_t( $wc_predictive_search_wpml->plugin_wpml_name, $name, $string ) : $string );
-	
-	return $string;
-}
-?>

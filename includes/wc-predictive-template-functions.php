@@ -291,5 +291,3 @@ function wc_ps_get_product_categories() {
 
 	return $categories_list;
 }
-
-?>

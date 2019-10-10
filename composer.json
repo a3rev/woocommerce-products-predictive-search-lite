@@ -1,0 +1,22 @@
+{
+    "name": "a3rev/wc-predictive-search",
+    "description": "WooCommerce Predictive Search - featuring \"Smart Search\" technology. Give your store customers the most awesome search experience on the web via widgets, shortcodes, Search results pages and the Predictive Search function",
+    "license": "GPLv2 or later",
+    "authors": [
+        {
+            "name": "a3rev Software",
+            "email": "admin@a3rev.com"
+        }
+    ],
+    "config": {
+        "optimize-autoloader": true
+    },
+    "require": {
+        "php": ">=5.6|>=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "A3Rev\\WCPredictiveSearch\\": [ "includes/", "classes/", "widget/" ]
+        }
+    }
+}
