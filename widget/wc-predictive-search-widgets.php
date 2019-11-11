@@ -39,7 +39,7 @@ class Widgets extends \WP_Widget
 	function widget( $args, $instance ) {
 		extract($args);
 		$title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title'], $instance, $this->id_base);
-		$number_items = $instance['number_items'];
+		$number_items = isset( $instance['number_items'] ) ? $instance['number_items'] : array();
 		if (!is_array($number_items) || count($number_items) < 1 ) $number_items = array();
 		if(!isset($instance['text_lenght']) || $instance['text_lenght'] < 0) $text_lenght = 100; 
 		else $text_lenght = $instance['text_lenght'];

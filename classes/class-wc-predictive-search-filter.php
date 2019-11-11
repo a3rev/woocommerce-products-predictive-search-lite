@@ -33,7 +33,7 @@ class Hook_Filter
 
 	public static function yellow_message_dontshow() {
 		check_ajax_referer( 'wc_ps_yellow_message_dontshow', 'security' );
-		$option_name   = $_REQUEST['option_name'];
+		$option_name   = sanitize_text_field( $_REQUEST['option_name'] );
 		update_option( $option_name, 1 );
 		die();
 	}

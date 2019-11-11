@@ -233,7 +233,7 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 
 		$sync_button_text = __( 'Start Sync', 'woocommerce-predictive-search' );
 		$synced_full_data = false;
-		if ( isset( $_GET['page'] ) && 'woo-predictive-search' == $_GET['page'] && isset( $_GET['tab'] ) && $this->parent_tab == $_GET['tab'] ) {
+		if ( isset( $_GET['page'] ) && 'woo-predictive-search' == sanitize_key( $_GET['page'] ) && isset( $_GET['tab'] ) && $this->parent_tab == sanitize_key( $_GET['tab'] ) ) {
 			if ( ! isset( $_SESSION ) ) {
 				@session_start();
 			}

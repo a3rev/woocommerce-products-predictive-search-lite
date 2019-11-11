@@ -142,17 +142,17 @@ class WC_Predictive_Search_Global_Settings extends WC_Predictive_Search_Admin_UI
 			global $wc_ps_exclude_data;
 			if ( isset( $_POST['woocommerce_search_exclude_products'] ) && count( $_POST['woocommerce_search_exclude_products'] ) > 0 ) {
 				foreach ( $_POST['woocommerce_search_exclude_products'] as $item_id ) {
-					$wc_ps_exclude_data->insert_item( $item_id, 'product' );
+					$wc_ps_exclude_data->insert_item( absint( $item_id ), 'product' );
 				}
 			}
 			if ( isset( $_POST['woocommerce_search_exclude_posts'] ) && count( $_POST['woocommerce_search_exclude_posts'] ) > 0 ) {
 				foreach ( $_POST['woocommerce_search_exclude_posts'] as $item_id ) {
-					$wc_ps_exclude_data->insert_item( $item_id, 'post' );
+					$wc_ps_exclude_data->insert_item( absint( $item_id ), 'post' );
 				}
 			}
 			if ( isset( $_POST['woocommerce_search_exclude_pages'] ) && count( $_POST['woocommerce_search_exclude_pages'] ) > 0 ) {
 				foreach ( $_POST['woocommerce_search_exclude_pages'] as $item_id ) {
-					$wc_ps_exclude_data->insert_item( $item_id, 'page' );
+					$wc_ps_exclude_data->insert_item( absint( $item_id ), 'page' );
 				}
 			}
 		}
@@ -232,19 +232,19 @@ class WC_Predictive_Search_Global_Settings extends WC_Predictive_Search_Admin_UI
 		$posts_excluded        = array();
 		$pages_excluded        = array();
 		
-		if ( is_admin() && in_array (basename($_SERVER['PHP_SELF']), array('admin.php') ) && isset( $_GET['page'] ) && $_GET['page'] == 'woo-predictive-search' && ( ! isset( $_GET['tab'] ) || $_GET['tab'] == 'global-settings' ) ) {
+		if ( is_admin() && in_array (basename($_SERVER['PHP_SELF']), array('admin.php') ) && isset( $_GET['page'] ) && sanitize_key( $_GET['page'] ) == 'woo-predictive-search' && ( ! isset( $_GET['tab'] ) || sanitize_key( $_GET['tab'] ) == 'global-settings' ) ) {
 
 			if ( isset( $_POST['bt_save_settings'] ) )  {
-				if ( isset( $_POST['woocommerce_search_exclude_products'] ) ) {
-					$products_excluded     = $_POST['woocommerce_search_exclude_products'];
+				if ( isset( $_POST['woocommerce_search_exclude_products'] ) && is_array( $_POST['woocommerce_search_exclude_products'] ) ) {
+					$products_excluded     = array_map( 'absint', $_POST['woocommerce_search_exclude_products'] );
 				}
 				$posts_excluded = array();
-				if ( isset( $_POST['woocommerce_search_exclude_posts'] ) ) {
-					$posts_excluded        = $_POST['woocommerce_search_exclude_posts'];
+				if ( isset( $_POST['woocommerce_search_exclude_posts'] ) && is_array( $_POST['woocommerce_search_exclude_posts'] ) ) {
+					$posts_excluded        = array_map( 'absint', $_POST['woocommerce_search_exclude_posts'] );
 				}
 				$pages_excluded = array();
-				if ( isset( $_POST['woocommerce_search_exclude_pages'] ) ) {
-					$pages_excluded        = $_POST['woocommerce_search_exclude_pages'];
+				if ( isset( $_POST['woocommerce_search_exclude_pages'] ) && is_array( $_POST['woocommerce_search_exclude_pages'] ) ) {
+					$pages_excluded        = array_map( 'absint', $_POST['woocommerce_search_exclude_pages'] );
 				}
 			} else {
 				$products_excluded     = $wpdb->get_col( $wpdb->prepare( "SELECT object_id FROM {$wpdb->prefix}ps_exclude WHERE object_type = %s ", 'product' ) );

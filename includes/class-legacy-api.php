@@ -52,7 +52,7 @@ class Legacy_API {
 
 		$current_lang = '';
 		if ( class_exists('SitePress') ) {
-			$current_lang = $_REQUEST['ps_lang'];
+			$current_lang = sanitize_text_field( $_REQUEST['ps_lang'] );
 		}
 
 		$rs_items = array();
@@ -73,19 +73,19 @@ class Legacy_API {
 				$search_in_default[$key] = $data['number'];
 			}
 		}
-		if ( isset($_REQUEST['row']) && $_REQUEST['row'] > 0) $row = stripslashes( strip_tags( $_REQUEST['row'] ) );
-		if ( isset($_REQUEST['text_lenght']) && $_REQUEST['text_lenght'] >= 0) $text_lenght = stripslashes( strip_tags( $_REQUEST['text_lenght'] ) );
-		if ( isset($_REQUEST['show_price']) && trim($_REQUEST['show_price']) != '') $show_price = stripslashes( strip_tags( $_REQUEST['show_price'] ) );
+		if ( isset($_REQUEST['row']) && $_REQUEST['row'] > 0) $row = wp_unslash( wp_strip_all_tags( $_REQUEST['row'] ) );
+		if ( isset($_REQUEST['text_lenght']) && $_REQUEST['text_lenght'] >= 0) $text_lenght = wp_unslash( wp_strip_all_tags( $_REQUEST['text_lenght'] ) );
+		if ( isset($_REQUEST['show_price']) && trim($_REQUEST['show_price']) != '') $show_price = wp_unslash( wp_strip_all_tags( $_REQUEST['show_price'] ) );
 		if ( $show_price == 1 ) $show_price = true; else $show_price = false;
-		if ( isset($_REQUEST['show_in_cat']) && trim($_REQUEST['show_in_cat']) != '') $show_in_cat = stripslashes( strip_tags( $_REQUEST['show_in_cat'] ) );
+		if ( isset($_REQUEST['show_in_cat']) && trim($_REQUEST['show_in_cat']) != '') $show_in_cat = wp_unslash( wp_strip_all_tags( $_REQUEST['show_in_cat'] ) );
 		if ( $show_in_cat == 1 ) $show_in_cat = true; else $show_in_cat = false;
-		if ( isset($_REQUEST['q']) && trim($_REQUEST['q']) != '') $search_keyword = stripslashes( strip_tags( $_REQUEST['q'] ) );
-		if ( isset($_REQUEST['cat_in']) && trim($_REQUEST['cat_in']) != '') $cat_in = stripslashes( strip_tags( $_REQUEST['cat_in'] ) );
-		if ( isset($_REQUEST['search_in']) && trim($_REQUEST['search_in']) != '') $search_in = json_decode( stripslashes( $_REQUEST['search_in'] ), true );
+		if ( isset($_REQUEST['q']) && trim($_REQUEST['q']) != '') $search_keyword = wp_unslash( wp_strip_all_tags( $_REQUEST['q'] ) );
+		if ( isset($_REQUEST['cat_in']) && trim($_REQUEST['cat_in']) != '') $cat_in = wp_unslash( wp_strip_all_tags( $_REQUEST['cat_in'] ) );
+		if ( isset($_REQUEST['search_in']) && trim($_REQUEST['search_in']) != '') $search_in = json_decode( wp_unslash( wp_strip_all_tags( $_REQUEST['search_in'] ) ), true );
 		if ( ! is_array($search_in) || count($search_in) < 1 || array_sum($search_in) < 1) $search_in = $search_in_default;
-		if ( isset($_REQUEST['widget_template']) && trim($_REQUEST['widget_template']) != '' ) $widget_template = stripslashes( strip_tags( $_REQUEST['widget_template'] ) );
+		if ( isset($_REQUEST['widget_template']) && trim($_REQUEST['widget_template']) != '' ) $widget_template = wp_unslash( wp_strip_all_tags( $_REQUEST['widget_template'] ) );
 
-		if ( isset($_REQUEST['last_search_term']) && trim($_REQUEST['last_search_term']) != '') $last_found_search_term = stripslashes( strip_tags( $_REQUEST['last_search_term'] ) );
+		if ( isset($_REQUEST['last_search_term']) && trim($_REQUEST['last_search_term']) != '') $last_found_search_term = wp_unslash( wp_strip_all_tags( $_REQUEST['last_search_term'] ) );
 
 		if ( $search_keyword != '' ) {
 			$search_list = array();
@@ -206,7 +206,7 @@ class Legacy_API {
 
 		$current_lang = '';
 		if ( class_exists('SitePress') ) {
-			$current_lang = $_REQUEST['ps_lang'];
+			$current_lang = sanitize_text_field( $_REQUEST['ps_lang'] );
 		}
 
 		$psp = 1;
@@ -217,10 +217,10 @@ class Legacy_API {
 
 		if ( get_option('woocommerce_search_result_items') > 0  ) $row = get_option('woocommerce_search_result_items');
 
-		if ( isset( $_REQUEST['psp'] ) && $_REQUEST['psp'] > 0 ) $psp = stripslashes( strip_tags( $_REQUEST['psp'] ) );
-		if ( isset( $_REQUEST['q'] ) && trim( $_REQUEST['q'] ) != '' ) $search_keyword = stripslashes( strip_tags( $_REQUEST['q'] ) );
-		if ( isset( $_REQUEST['cat_in'] ) && trim( $_REQUEST['cat_in'] ) != '' ) $cat_in = stripslashes( strip_tags( $_REQUEST['cat_in'] ) );
-		if ( isset( $_REQUEST['search_in'] ) && trim( $_REQUEST['search_in'] ) != '' ) $search_in = stripslashes( strip_tags( $_REQUEST['search_in'] ) );
+		if ( isset( $_REQUEST['psp'] ) && $_REQUEST['psp'] > 0 ) $psp = wp_unslash( wp_strip_all_tags( $_REQUEST['psp'] ) );
+		if ( isset( $_REQUEST['q'] ) && trim( $_REQUEST['q'] ) != '' ) $search_keyword = wp_unslash( wp_strip_all_tags( $_REQUEST['q'] ) );
+		if ( isset( $_REQUEST['cat_in'] ) && trim( $_REQUEST['cat_in'] ) != '' ) $cat_in = wp_unslash( wp_strip_all_tags( $_REQUEST['cat_in'] ) );
+		if ( isset( $_REQUEST['search_in'] ) && trim( $_REQUEST['search_in'] ) != '' ) $search_in = wp_unslash( wp_strip_all_tags( $_REQUEST['search_in'] ) );
 
 		$item_list = array( 'total' => 0, 'items' => array() );
 

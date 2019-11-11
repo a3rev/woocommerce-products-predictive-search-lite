@@ -122,7 +122,7 @@ class WC_Predictive_Search_Input_Box_Settings extends WC_Predictive_Search_Admin
 	public function after_save_settings() {
 
 		if ( isset( $_REQUEST['woocommerce_search_box_text']) ) {
-			update_option('woocommerce_search_box_text',  $_REQUEST['woocommerce_search_box_text'] );
+			update_option('woocommerce_search_box_text',  sanitize_text_field( $_REQUEST['woocommerce_search_box_text'] ) );
 		}
 	}
 	

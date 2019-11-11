@@ -43,8 +43,8 @@ class Dashboard_AJAX
 
 		global $wpdb;
 
-		$keyword = isset( $_GET['keyword']) ? $_GET['keyword'] : '';
-		$type    = isset( $_GET['type'] ) ? $_GET['type'] : 'product';
+		$keyword = isset( $_GET['keyword']) ? sanitize_text_field( $_GET['keyword'] ) : '';
+		$type    = isset( $_GET['type'] ) ? sanitize_key( $_GET['type'] ) : 'product';
 
 		if ( empty( $keyword ) ) {
 			wp_send_json( array() );

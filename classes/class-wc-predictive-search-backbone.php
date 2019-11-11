@@ -145,17 +145,17 @@ class Hook_Backbone
 		$search_other = '';
 		$cat_in = 'all';
 		
-		if ( isset( $wp_query->query_vars['keyword'] ) ) $search_keyword = stripslashes( strip_tags( urldecode( $wp_query->query_vars['keyword'] ) ) );
-		elseif ( isset( $_REQUEST['rs'] ) && trim( $_REQUEST['rs'] ) != '' ) $search_keyword = stripslashes( strip_tags( $_REQUEST['rs'] ) );
+		if ( isset( $wp_query->query_vars['keyword'] ) ) $search_keyword = wp_unslash( wp_strip_all_tags( urldecode( $wp_query->query_vars['keyword'] ) ) );
+		elseif ( isset( $_REQUEST['rs'] ) && trim( $_REQUEST['rs'] ) != '' ) $search_keyword = wp_unslash( wp_strip_all_tags( $_REQUEST['rs'] ) );
 
-		if ( isset( $wp_query->query_vars['search-in'] ) ) $search_in = stripslashes( strip_tags( urldecode( $wp_query->query_vars['search-in'] ) ) );
-		elseif ( isset( $_REQUEST['search_in'] ) && trim( $_REQUEST['search_in'] ) != '' ) $search_in = stripslashes( strip_tags( $_REQUEST['search_in'] ) );
+		if ( isset( $wp_query->query_vars['search-in'] ) ) $search_in = wp_unslash( wp_strip_all_tags( urldecode( $wp_query->query_vars['search-in'] ) ) );
+		elseif ( isset( $_REQUEST['search_in'] ) && trim( $_REQUEST['search_in'] ) != '' ) $search_in = wp_unslash( wp_strip_all_tags( $_REQUEST['search_in'] ) );
 		
-		if ( isset( $wp_query->query_vars['search-other'] ) ) $search_other = stripslashes( strip_tags( urldecode( $wp_query->query_vars['search-other'] ) ) );
-		elseif ( isset( $_REQUEST['search_other'] ) && trim( $_REQUEST['search_other'] ) != '' ) $search_other = stripslashes( strip_tags( $_REQUEST['search_other'] ) );
+		if ( isset( $wp_query->query_vars['search-other'] ) ) $search_other = wp_unslash( wp_strip_all_tags( urldecode( $wp_query->query_vars['search-other'] ) ) );
+		elseif ( isset( $_REQUEST['search_other'] ) && trim( $_REQUEST['search_other'] ) != '' ) $search_other = wp_unslash( wp_strip_all_tags( $_REQUEST['search_other'] ) );
 
-		if ( isset( $wp_query->query_vars['cat-in'] ) ) $cat_in = stripslashes( strip_tags( urldecode( $wp_query->query_vars['cat-in'] ) ) );
-		elseif ( isset( $_REQUEST['cat_in'] ) && trim( $_REQUEST['cat_in'] ) != '' ) $cat_in = stripslashes( strip_tags( $_REQUEST['cat_in'] ) );
+		if ( isset( $wp_query->query_vars['cat-in'] ) ) $cat_in = wp_unslash( wp_strip_all_tags( urldecode( $wp_query->query_vars['cat-in'] ) ) );
+		elseif ( isset( $_REQUEST['cat_in'] ) && trim( $_REQUEST['cat_in'] ) != '' ) $cat_in = wp_unslash( wp_strip_all_tags( $_REQUEST['cat_in'] ) );
 		
 		$permalink_structure = get_option( 'permalink_structure' );
 
