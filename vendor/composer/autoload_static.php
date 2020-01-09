@@ -16,9 +16,10 @@ class ComposerStaticInit1cab9613ae92cedc4bff637cfe4e49be
     public static $prefixDirsPsr4 = array (
         'A3Rev\\WCPredictiveSearch\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/includes',
-            1 => __DIR__ . '/../..' . '/classes',
-            2 => __DIR__ . '/../..' . '/widget',
+            0 => __DIR__ . '/../..' . '/admin',
+            1 => __DIR__ . '/../..' . '/includes',
+            2 => __DIR__ . '/../..' . '/classes',
+            3 => __DIR__ . '/../..' . '/widget',
         ),
     );
 
@@ -29,6 +30,23 @@ class ComposerStaticInit1cab9613ae92cedc4bff637cfe4e49be
         'A3Rev\\WCPredictiveSearch\\Data\\Posts' => __DIR__ . '/../..' . '/classes/data/class-wc-ps-posts-data.php',
         'A3Rev\\WCPredictiveSearch\\Data\\SKU' => __DIR__ . '/../..' . '/classes/data/class-wc-ps-product-sku-data.php',
         'A3Rev\\WCPredictiveSearch\\Errors_Log' => __DIR__ . '/../..' . '/classes/class-wc-predictive-search-errors-log.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Admin_Init' => __DIR__ . '/../..' . '/admin/admin-init.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Admin_Interface' => __DIR__ . '/../..' . '/admin/admin-interface.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Admin_UI' => __DIR__ . '/../..' . '/admin/admin-ui.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Fonts_Face' => __DIR__ . '/../..' . '/admin/includes/fonts_face.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Less_Sass' => __DIR__ . '/../..' . '/admin/less/sass.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Pages\\Predictive_Search' => __DIR__ . '/../..' . '/admin/admin-pages/predictive-search-page.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Settings\\All_Results_Pages' => __DIR__ . '/../..' . '/admin/settings/all-results-page-settings.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Settings\\Global_Panel' => __DIR__ . '/../..' . '/admin/settings/global-settings.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Settings\\Performance' => __DIR__ . '/../..' . '/admin/settings/performance-settings.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Settings\\Search_Box' => __DIR__ . '/../..' . '/admin/settings/search-box-settings.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Settings\\Sidebar_Template' => __DIR__ . '/../..' . '/admin/settings/sidebar-template-settings.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Tabs\\All_Results_Pages' => __DIR__ . '/../..' . '/admin/tabs/all-results-pages-tab.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Tabs\\Global_Settings' => __DIR__ . '/../..' . '/admin/tabs/global-settings-tab.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Tabs\\Performance' => __DIR__ . '/../..' . '/admin/tabs/performance-settings-tab.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Tabs\\Search_Box' => __DIR__ . '/../..' . '/admin/tabs/search-box-tab.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Tabs\\Sidebar_Template' => __DIR__ . '/../..' . '/admin/tabs/sidebar-template-tab.php',
+        'A3Rev\\WCPredictiveSearch\\FrameWork\\Uploader' => __DIR__ . '/../..' . '/admin/includes/uploader/class-uploader.php',
         'A3Rev\\WCPredictiveSearch\\Functions' => __DIR__ . '/../..' . '/classes/class-wc-predictive-search-functions.php',
         'A3Rev\\WCPredictiveSearch\\Hook_Backbone' => __DIR__ . '/../..' . '/classes/class-wc-predictive-search-backbone.php',
         'A3Rev\\WCPredictiveSearch\\Hook_Filter' => __DIR__ . '/../..' . '/classes/class-wc-predictive-search-filter.php',

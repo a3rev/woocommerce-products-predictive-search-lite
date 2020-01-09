@@ -16,7 +16,7 @@
     },
     "autoload": {
         "psr-4": {
-          "A3Rev\\WCPredictiveSearch\\": [ "includes/", "classes/", "widget/" ]
+          "A3Rev\\WCPredictiveSearch\\": [ "admin/", "includes/", "classes/", "widget/" ]
         }
     }
 }

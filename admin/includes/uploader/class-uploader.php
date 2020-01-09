@@ -1,9 +1,11 @@
 <?php
 /* "Copyright 2012 a3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCPredictiveSearch\FrameWork {
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 A3rev Plugin Uploader
 
@@ -22,7 +24,7 @@ TABLE OF CONTENTS
 - inside_popup()
 
 -----------------------------------------------------------------------------------*/
-class WC_Predictive_Search_Uploader extends WC_Predictive_Search_Admin_UI
+class Uploader extends Admin_UI
 {
 
 	/**
@@ -135,7 +137,4 @@ class WC_Predictive_Search_Uploader extends WC_Predictive_Search_Admin_UI
 	}
 }
 
-global $wc_predictive_search_uploader;
-$wc_predictive_search_uploader = new WC_Predictive_Search_Uploader();
-
-?>
+}

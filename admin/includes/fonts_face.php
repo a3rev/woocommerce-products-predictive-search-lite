@@ -1,9 +1,11 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCPredictiveSearch\FrameWork {
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 A3rev Plugin Fonts Face
 
@@ -19,7 +21,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_Predictive_Search_Fonts_Face extends WC_Predictive_Search_Admin_UI
+class Fonts_Face extends Admin_UI
 {
 
 	/**
@@ -642,5 +644,4 @@ class WC_Predictive_Search_Fonts_Face extends WC_Predictive_Search_Admin_UI
 
 }
 
-global $wc_predictive_search_fonts_face;
-$wc_predictive_search_fonts_face = new WC_Predictive_Search_Fonts_Face();
+}

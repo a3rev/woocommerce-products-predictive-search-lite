@@ -1,9 +1,11 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCPredictiveSearch\FrameWork {
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 A3rev Plugin Admin Interface
 
@@ -32,7 +34,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
+class Admin_Interface extends Admin_UI
 {
 
 	/*-----------------------------------------------------------------------------------*/
@@ -214,7 +216,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 							$current_update_plugins = get_site_transient( 'update_plugins' );
 							if ( isset( $current_update_plugins->response ) ) {
 								if ( empty( $current_update_plugins->response[$this->plugin_path] ) ) {
-									$current_update_plugins->response[$this->plugin_path] = new stdClass();
+									$current_update_plugins->response[$this->plugin_path] = new \stdClass();
 								}
 								$current_update_plugins->response[$this->plugin_path]->url = "http://www.a3rev.com";
 								$current_update_plugins->response[$this->plugin_path]->slug = $this->plugin_name;
@@ -296,10 +298,12 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function admin_includes() {
 		// Includes Font Face Lib
-		include_once( 'includes/fonts_face.php' );
+		global ${$this->plugin_prefix.'fonts_face'};
+		${$this->plugin_prefix.'fonts_face'} = new Fonts_Face();
 		
 		// Includes Uploader Lib
-		include_once( 'includes/uploader/class-uploader.php' );
+		global ${$this->plugin_prefix.'uploader'};
+		${$this->plugin_prefix.'uploader'} = new Uploader();
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -745,6 +749,12 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 								} else {
 									$option_value = sanitize_hex_color( $_POST[ $id_attribute ][ $key ] );
 								}
+							} elseif ( 'textarea' === $value['type'] ) {
+								if ( is_array( $_POST[ $id_attribute ][ $key ] ) ) {
+									$option_value = array_map( 'sanitize_textarea_field', $_POST[ $id_attribute ][ $key ] );
+								} else {
+									$option_value = sanitize_textarea_field( $_POST[ $id_attribute ][ $key ] );
+								}
 							} else {
 								if ( is_array( $_POST[ $id_attribute ][ $key ] ) ) {
 									$option_value = array_map( 'sanitize_text_field', $_POST[ $id_attribute ][ $key ] );
@@ -773,6 +783,12 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 									$option_value = array_map( 'sanitize_hex_color', $_POST[ $id_attribute ] );
 								} else {
 									$option_value = sanitize_hex_color( $_POST[ $id_attribute ] );
+								}
+							} elseif ( 'textarea' === $value['type'] ) {
+								if ( is_array( $_POST[ $id_attribute ] ) ) {
+									$option_value = array_map( 'sanitize_textarea_field', $_POST[ $id_attribute ] );
+								} else {
+									$option_value = sanitize_textarea_field( $_POST[ $id_attribute ] );
 								}
 							} else {
 								if ( is_array( $_POST[ $id_attribute ] ) ) {
@@ -806,6 +822,12 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 								} else {
 									$option_value = sanitize_hex_color( $_POST[ $option_name ][ $id_attribute ][ $key ] );
 								}
+							} elseif ( 'textarea' === $value['type'] ) {
+								if ( is_array( $_POST[ $option_name ][ $id_attribute ][ $key ] ) ) {
+									$option_value = array_map( 'sanitize_textarea_field', $_POST[ $option_name ][ $id_attribute ][ $key ] );
+								} else {
+									$option_value = sanitize_textarea_field( $_POST[ $option_name ][ $id_attribute ][ $key ] );
+								}
 							} else {
 								if ( is_array( $_POST[ $option_name ][ $id_attribute ][ $key ] ) ) {
 									$option_value = array_map( 'sanitize_text_field', $_POST[ $option_name ][ $id_attribute ][ $key ] );
@@ -834,6 +856,12 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 									$option_value = array_map( 'sanitize_hex_color', $_POST[ $option_name ][ $id_attribute ] );
 								} else {
 									$option_value = sanitize_hex_color( $_POST[ $option_name ][ $id_attribute ] );
+								}
+							} elseif ( 'textarea' === $value['type'] ) {
+								if ( is_array( $_POST[ $option_name ][ $id_attribute ] ) ) {
+									$option_value = array_map( 'sanitize_textarea_field', $_POST[ $option_name ][ $id_attribute ] );
+								} else {
+									$option_value = sanitize_textarea_field( $_POST[ $option_name ][ $id_attribute ] );
 								}
 							} else {
 								if ( is_array( $_POST[ $option_name ][ $id_attribute ] ) ) {
@@ -1332,7 +1360,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 	 */
 	 
 	public function admin_forms( $options, $form_key, $option_name = '', $form_messages = array() ) {
-		global $wc_predictive_search_fonts_face, $wc_predictive_search_uploader, $current_subtab;
+		global ${$this->plugin_prefix.'fonts_face'}, ${$this->plugin_prefix.'uploader'}, $current_subtab;
 		
 		$new_settings = array(); $new_single_setting = ''; // :)
 		$admin_message = '';
@@ -1862,7 +1890,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 								<div class="a3rev-ui-google-api-key-description"><?php echo sprintf( __( "Enter your existing Google Fonts API Key below. Don't have a key? Visit <a href='%s' target='_blank'>Google Developer API</a> to create a key", 'woocommerce-predictive-search' ), 'https://developers.google.com/fonts/docs/developer_api#APIKey' ); ?></div>
 								<div class="a3rev-ui-google-api-key-inside 
 									<?php
-									if ( $wc_predictive_search_fonts_face->is_valid_google_api_key() ) {
+									if ( ${$this->plugin_prefix.'fonts_face'}->is_valid_google_api_key() ) {
 										echo 'a3rev-ui-google-valid-key';
 									} elseif ( '' != $google_api_key ) {
 										echo 'a3rev-ui-google-unvalid-key';
@@ -2684,7 +2712,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 								>
 								<optgroup label="<?php _e( '-- Default Fonts --', 'woocommerce-predictive-search' ); ?>">
                                 <?php
-									foreach ( $wc_predictive_search_fonts_face->get_default_fonts() as $val => $text ) {
+									foreach ( ${$this->plugin_prefix.'fonts_face'}->get_default_fonts() as $val => $text ) {
 										?>
                                         <option value="<?php echo esc_attr( $val ); ?>" <?php
 												selected( esc_attr( $val ), esc_attr( $face ) );
@@ -2695,7 +2723,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
                                 </optgroup>
                                 <optgroup label="<?php _e( '-- Google Fonts --', 'woocommerce-predictive-search' ); ?>">
                                 <?php
-									foreach ( $wc_predictive_search_fonts_face->get_google_fonts() as $font ) {
+									foreach ( ${$this->plugin_prefix.'fonts_face'}->get_google_fonts() as $font ) {
 										?>
                                         <option value="<?php echo esc_attr( $font['name'] ); ?>" <?php
 												selected( esc_attr( $font['name'] ), esc_attr( $face ) );
@@ -3368,7 +3396,7 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 						</th>
 						<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
                         	<?php echo $description; ?>
-                        	<?php echo $wc_predictive_search_uploader->upload_input( $name_attribute, $id_attribute, $option_value, $attachment_id, $value['default'], $value['name'], $class, esc_attr( $value['css'] ) , '', $strip_methods );?>
+                        	<?php echo ${$this->plugin_prefix.'uploader'}->upload_input( $name_attribute, $id_attribute, $option_value, $attachment_id, $value['default'], $value['name'], $class, esc_attr( $value['css'] ) , '', $strip_methods );?>
 						</td>
 					</tr><?php
 									
@@ -3903,7 +3931,4 @@ class WC_Predictive_Search_Admin_Interface extends WC_Predictive_Search_Admin_UI
 
 }
 
-global $wc_predictive_search_admin_interface;
-$wc_predictive_search_admin_interface = new WC_Predictive_Search_Admin_Interface();
-
-?>
+}

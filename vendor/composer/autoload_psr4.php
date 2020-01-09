@@ -6,5 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'A3Rev\\WCPredictiveSearch\\' => array($baseDir . '/includes', $baseDir . '/classes', $baseDir . '/widget'),
+    'A3Rev\\WCPredictiveSearch\\' => array($baseDir . '/admin', $baseDir . '/includes', $baseDir . '/classes', $baseDir . '/widget'),
 );

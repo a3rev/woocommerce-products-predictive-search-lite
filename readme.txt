@@ -2,9 +2,9 @@
 
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
-Requires at least: 4.5
-Tested up to: 5.3
-Stable tag: 5.1.1
+Requires at least: 4.9
+Tested up to: 5.3.2
+Stable tag: 5.2.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -174,6 +174,13 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.2.0 - 2020/01/09 =
+* This feature release completes the full refactor (frontend and backend) of the plugins PHP to Composer plus compatibility with WooCommerce 3.8.1 and WordPress 5.3.2
+* Feature - Plugin Framework fully refactored to Composer for cleaner code and faster PHP code on the admin panels
+* Tweak - Update plugin for compatibility with new version of plugin Framework
+* Tweak - Test for compatibility with WordPress 5.3.2
+* Tweak - Test for compatibility with WooCommerce 3.8.1
 
 = 5.1.1 - 2019/11/11 =
 * This maintenance release includes compatibility for WordPress 5.3.0, WooCommerce 3.8.0 plus a security review and hardening of the plugins code.
@@ -832,6 +839,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.2.0 =
+This feature release completes the full refactor (frontend and backend) of the plugins PHP to Composer plus compatibility with WooCommerce 3.8.1 and WordPress 5.3.2
 
 = 5.1.1 =
 This maintenance release includes compatibility for WordPress 5.3.0, WooCommerce 3.8.0 plus a security review and hardening of the plugins code.

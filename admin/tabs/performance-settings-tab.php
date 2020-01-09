@@ -1,9 +1,13 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCPredictiveSearch\FrameWork\Tabs {
+
+use A3Rev\WCPredictiveSearch\FrameWork;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 WC Predictive Search Performance Settings Tab
 
@@ -22,7 +26,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_Predictive_Search_Performance_Settings_Tab  extends WC_Predictive_Search_Admin_UI
+class Performance  extends FrameWork\Admin_UI
 {	
 	/**
 	 * @var string
@@ -103,7 +107,8 @@ class WC_Predictive_Search_Performance_Settings_Tab  extends WC_Predictive_Searc
 	public function settings_include() {
 		
 		// Includes Settings file
-		include_once( $this->admin_plugin_dir() . '/settings/performance-settings.php' );
+		global $wc_predictive_search_performance_settings;
+		$wc_predictive_search_performance_settings = new FrameWork\Settings\Performance();
 		
 	}
 	
@@ -121,8 +126,10 @@ class WC_Predictive_Search_Performance_Settings_Tab  extends WC_Predictive_Searc
 	}
 }
 
-global $wc_predictive_search_performance_settings_tab;
-$wc_predictive_search_performance_settings_tab = new WC_Predictive_Search_Performance_Settings_Tab ();
+}
+
+// global code
+namespace {
 
 /** 
  * wc_admin_ei_email_popup_tab_manager()
@@ -133,4 +140,4 @@ function wc_predictive_search_performance_settings_tab_manager() {
 	$wc_predictive_search_performance_settings_tab->tab_manager();
 }
 
-?>
+}

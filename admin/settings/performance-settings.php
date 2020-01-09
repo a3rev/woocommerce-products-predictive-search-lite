@@ -1,9 +1,13 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCPredictiveSearch\FrameWork\Settings {
+
+use A3Rev\WCPredictiveSearch\FrameWork;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 WC Predictive Search Performance Settings
 
@@ -28,7 +32,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Admin_UI
+class Performance extends FrameWork\Admin_UI
 {
 	
 	/**
@@ -110,9 +114,9 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 	/* Set default settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
 	public function set_default_settings() {
-		global $wc_predictive_search_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 		
-		$wc_predictive_search_admin_interface->reset_settings( $this->form_fields, $this->option_name, false );
+		${$this->plugin_prefix.'admin_interface'}->reset_settings( $this->form_fields, $this->option_name, false );
 	}
 
 	/*-----------------------------------------------------------------------------------*/
@@ -171,9 +175,9 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 	/* Get settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
 	public function get_settings() {
-		global $wc_predictive_search_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 		
-		$wc_predictive_search_admin_interface->get_settings( $this->form_fields, $this->option_name );
+		${$this->plugin_prefix.'admin_interface'}->get_settings( $this->form_fields, $this->option_name );
 	}
 	
 	/**
@@ -217,10 +221,10 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 	/* Call the form from Admin Interface
 	/*-----------------------------------------------------------------------------------*/
 	public function settings_form() {
-		global $wc_predictive_search_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 		
 		$output = '';
-		$output .= $wc_predictive_search_admin_interface->admin_forms( $this->form_fields, $this->form_key, $this->option_name, $this->form_messages );
+		$output .= ${$this->plugin_prefix.'admin_interface'}->admin_forms( $this->form_fields, $this->form_key, $this->option_name, $this->form_messages );
 		
 		return $output;
 	}
@@ -535,8 +539,8 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 	public function error_logs_container() {
 		if ( ! wp_script_is( 'bootstrap-modal', 'registered' ) 
 			&& ! wp_script_is( 'bootstrap-modal', 'enqueued' ) ) {
-			global $wc_predictive_search_admin_interface;
-			$wc_predictive_search_admin_interface->register_modal_scripts();
+			global ${$this->plugin_prefix.'admin_interface'};
+			${$this->plugin_prefix.'admin_interface'}->register_modal_scripts();
 		}
 
 		wp_enqueue_style( 'bootstrap-modal' );
@@ -652,8 +656,10 @@ class WC_Predictive_Search_Performance_Settings extends WC_Predictive_Search_Adm
 	}
 }
 
-global $wc_predictive_search_performance_settings;
-$wc_predictive_search_performance_settings = new WC_Predictive_Search_Performance_Settings();
+}
+
+// global code
+namespace {
 
 /** 
  * wc_predictive_search_performance_settings_form()
@@ -664,4 +670,4 @@ function wc_predictive_search_performance_settings_form() {
 	$wc_predictive_search_performance_settings->settings_form();
 }
 
-?>
+}

@@ -3,14 +3,14 @@
 Plugin Name: Predictive Search for WooCommerce
 Plugin URI: https://a3rev.com/shop/woocommerce-predictive-search/
 Description: With WooCommerce Predictive Search Lite you can add an awesome Predictive Products Search widget to any widgetized area on your site.
-Version: 5.1.1
+Version: 5.2.0
 Author: a3rev Software
 Author URI: https://www.a3rev.com/
-Requires at least: 4.5
-Tested up to: 5.3
+Requires at least: 4.9
+Tested up to: 5.3.2
 Text Domain: woocommerce-predictive-search
 WC requires at least: 2.0.0
-WC tested up to: 3.8
+WC tested up to: 3.8.1
 Domain Path: /languages
 License: GPLv2 or later
 
@@ -40,8 +40,11 @@ if(!defined("WOO_PREDICTIVE_SEARCH_DOCS_URI"))
     define("WOO_PREDICTIVE_SEARCH_DOCS_URI", "https://docs.a3rev.com/user-guides/woocommerce/woo-predictive-search/");
 
 define( 'WOOPS_KEY', 'woo_predictive_search' );
-define( 'WOOPS_VERSION', '5.1.1' );
+define( 'WOOPS_PREFIX', 'wc_predictive_search_' );
+define( 'WOOPS_VERSION', '5.2.0' );
 define( 'WOOPS_G_FONTS', true );
+
+use \A3Rev\WCPredictiveSearch\FrameWork;
 
 if ( version_compare( PHP_VERSION, '5.6.0', '>=' ) ) {
 	require __DIR__ . '/vendor/autoload.php';
@@ -57,6 +60,25 @@ if ( version_compare( PHP_VERSION, '5.6.0', '>=' ) ) {
 	// Predictive WPML
 	global $wc_predictive_search_wpml;
 	$wc_predictive_search_wpml = new \A3Rev\WCPredictiveSearch\WPML_Functions();
+
+
+	/**
+	 * Plugin Framework init
+	 */
+	global ${WOOPS_PREFIX.'admin_interface'};
+	${WOOPS_PREFIX.'admin_interface'} = new FrameWork\Admin_Interface();
+
+	global $wc_admin_predictive_search_page;
+	$wc_admin_predictive_search_page = new FrameWork\Pages\Predictive_Search();
+
+	global ${WOOPS_PREFIX.'admin_init'};
+	${WOOPS_PREFIX.'admin_init'} = new FrameWork\Admin_Init();
+
+	global ${WOOPS_PREFIX.'less'};
+	${WOOPS_PREFIX.'less'} = new FrameWork\Less_Sass();
+
+	// End - Plugin Framework init
+
 
 	// Predictive Datas
 	global $wc_ps_product_sku_data;
@@ -110,15 +132,6 @@ function wc_predictive_search_plugin_textdomain() {
 	load_textdomain( 'woocommerce-predictive-search', WP_LANG_DIR . '/woocommerce-predictive-search/woocommerce-predictive-search-' . $locale . '.mo' );
 	load_plugin_textdomain( 'woocommerce-predictive-search', false, WOOPS_FOLDER . '/languages/' );
 }
-
-
-include('admin/admin-ui.php');
-include('admin/admin-interface.php');
-
-include('admin/admin-pages/predictive-search-page.php');
-
-include('admin/admin-init.php');
-include('admin/less/sass.php');
 
 include 'includes/wc-predictive-template-functions.php';
 

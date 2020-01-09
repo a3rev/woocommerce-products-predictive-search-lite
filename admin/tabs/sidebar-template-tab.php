@@ -1,9 +1,13 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCPredictiveSearch\FrameWork\Tabs {
+
+use A3Rev\WCPredictiveSearch\FrameWork;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 WC Predictive Search Sidebar Template Tab
 
@@ -22,7 +26,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_Predictive_Search_Sidebar_Template_Settings_Tab  extends WC_Predictive_Search_Admin_UI
+class Sidebar_Template  extends FrameWork\Admin_UI
 {	
 	/**
 	 * @var string
@@ -103,7 +107,8 @@ class WC_Predictive_Search_Sidebar_Template_Settings_Tab  extends WC_Predictive_
 	public function settings_include() {
 		
 		// Includes Settings file
-		include_once( $this->admin_plugin_dir() . '/settings/sidebar-template-settings.php' );
+		global $wc_predictive_search_sidebar_template_settings_panel;
+		$wc_predictive_search_sidebar_template_settings_panel = new FrameWork\Settings\Sidebar_Template();
 		
 	}
 	
@@ -121,8 +126,10 @@ class WC_Predictive_Search_Sidebar_Template_Settings_Tab  extends WC_Predictive_
 	}
 }
 
-global $wc_predictive_search_sidebar_template_settings_tab;
-$wc_predictive_search_sidebar_template_settings_tab = new WC_Predictive_Search_Sidebar_Template_Settings_Tab ();
+}
+
+// global code
+namespace {
 
 /** 
  * wc_predictive_search_sidebar_template_settings_tab_manager()
@@ -133,4 +140,4 @@ function wc_predictive_search_sidebar_template_settings_tab_manager() {
 	$wc_predictive_search_sidebar_template_settings_tab->tab_manager();
 }
 
-?>
+}

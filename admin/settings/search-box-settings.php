@@ -1,9 +1,13 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCPredictiveSearch\FrameWork\Settings {
+
+use A3Rev\WCPredictiveSearch\FrameWork;
+
 // File Security Check
 if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+
 /*-----------------------------------------------------------------------------------
 WC Predictive Search Input Box Settings
 
@@ -28,7 +32,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_Predictive_Search_Input_Box_Settings extends WC_Predictive_Search_Admin_UI
+class Search_Box extends FrameWork\Admin_UI
 {
 	
 	/**
@@ -110,9 +114,9 @@ class WC_Predictive_Search_Input_Box_Settings extends WC_Predictive_Search_Admin
 	/* Set default settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
 	public function set_default_settings() {
-		global $wc_predictive_search_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 		
-		$wc_predictive_search_admin_interface->reset_settings( $this->form_fields, $this->option_name, false );
+		${$this->plugin_prefix.'admin_interface'}->reset_settings( $this->form_fields, $this->option_name, false );
 	}
 
 	/*-----------------------------------------------------------------------------------*/
@@ -131,9 +135,9 @@ class WC_Predictive_Search_Input_Box_Settings extends WC_Predictive_Search_Admin
 	/* Get settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
 	public function get_settings() {
-		global $wc_predictive_search_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 		
-		$wc_predictive_search_admin_interface->get_settings( $this->form_fields, $this->option_name );
+		${$this->plugin_prefix.'admin_interface'}->get_settings( $this->form_fields, $this->option_name );
 	}
 	
 	/**
@@ -177,10 +181,10 @@ class WC_Predictive_Search_Input_Box_Settings extends WC_Predictive_Search_Admin
 	/* Call the form from Admin Interface
 	/*-----------------------------------------------------------------------------------*/
 	public function settings_form() {
-		global $wc_predictive_search_admin_interface;
+		global ${$this->plugin_prefix.'admin_interface'};
 		
 		$output = '';
-		$output .= $wc_predictive_search_admin_interface->admin_forms( $this->form_fields, $this->form_key, $this->option_name, $this->form_messages );
+		$output .= ${$this->plugin_prefix.'admin_interface'}->admin_forms( $this->form_fields, $this->form_key, $this->option_name, $this->form_messages );
 		
 		return $output;
 	}
@@ -248,8 +252,10 @@ class WC_Predictive_Search_Input_Box_Settings extends WC_Predictive_Search_Admin
 	}
 }
 
-global $wc_predictive_search_input_box_settings_panel;
-$wc_predictive_search_input_box_settings_panel = new WC_Predictive_Search_Input_Box_Settings();
+}
+
+// global code
+namespace {
 
 /** 
  * wc_predictive_search_performance_settings_form()
@@ -260,4 +266,4 @@ function wc_predictive_search_input_box_settings_form() {
 	$wc_predictive_search_input_box_settings_panel->settings_form();
 }
 
-?>
+}

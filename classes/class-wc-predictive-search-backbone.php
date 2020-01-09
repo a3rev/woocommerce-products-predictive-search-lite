@@ -23,7 +23,7 @@ class Hook_Backbone
 	}
 
 	public function add_google_fonts() {
-		global $wc_predictive_search_fonts_face;
+		global ${WOOPS_PREFIX.'fonts_face'};
 
 		$google_fonts = array();
 
@@ -42,7 +42,7 @@ class Hook_Backbone
 		$google_fonts[] = $wc_predictive_search_sidebar_template_settings['sidebar_popup_more_link_font']['face'];
 
 
-		$wc_predictive_search_fonts_face->generate_google_webfonts( $google_fonts );
+		${WOOPS_PREFIX.'fonts_face'}->generate_google_webfonts( $google_fonts );
 	}
 
 	public function register_plugin_scripts() {
@@ -68,18 +68,18 @@ class Hook_Backbone
     <?php
     	// If don't have any plugin or theme register font awesome style then register it from plugin framework
 		if ( ! wp_style_is( 'font-awesome-styles', 'registered' ) ) {
-			global $wc_predictive_search_admin_interface;
-			$wc_predictive_search_admin_interface->register_fontawesome_style();
+			global ${WOOPS_PREFIX.'admin_interface'};
+			${WOOPS_PREFIX.'admin_interface'}->register_fontawesome_style();
 		}
 
     	wp_register_style( 'wc-predictive-search-style', WOOPS_CSS_URL . '/wc_predictive_search.css', array( 'font-awesome-styles' ), WOOPS_VERSION, 'all' );
 
     	$_upload_dir = wp_upload_dir();
-		global $wc_predictive_search_less;
+		global ${WOOPS_PREFIX.'less'};
 		$have_dynamic_style = false;
-		if ( file_exists( $_upload_dir['basedir'] . '/sass/'.$wc_predictive_search_less->css_file_name.'.min.css' ) ) {
+		if ( file_exists( $_upload_dir['basedir'] . '/sass/'.${WOOPS_PREFIX.'less'}->css_file_name.'.min.css' ) ) {
 			$have_dynamic_style = true;
-    		wp_register_style( 'wc-predictive-search-dynamic-style', str_replace(array('http:','https:'), '', $_upload_dir['baseurl'] ) . '/sass/'.$wc_predictive_search_less->css_file_name.'.min.css', array( 'wc-predictive-search-style' ), $wc_predictive_search_less->get_css_file_version(), 'all' );
+    		wp_register_style( 'wc-predictive-search-dynamic-style', str_replace(array('http:','https:'), '', $_upload_dir['baseurl'] ) . '/sass/'.${WOOPS_PREFIX.'less'}->css_file_name.'.min.css', array( 'wc-predictive-search-style' ), ${WOOPS_PREFIX.'less'}->get_css_file_version(), 'all' );
     	}
 
 		wp_register_script( 'backbone.localStorage', WOOPS_JS_URL . '/backbone.localStorage.js', array( 'jquery', 'underscore', 'backbone' ) , '1.1.9', true );

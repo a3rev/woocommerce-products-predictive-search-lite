@@ -1,9 +1,13 @@
 <?php
 /* "Copyright 2012 A3 Revolution Web Design" This software is distributed under the terms of GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007 */
+
+namespace A3Rev\WCPredictiveSearch\FrameWork\Pages {
+
+use A3Rev\WCPredictiveSearch\FrameWork;
+
 // File Security Check
-if ( ! defined( 'ABSPATH' ) ) exit;
-?>
-<?php
+if ( ! defined( 'ABSPATH' ) ) exit; 
+
 /*-----------------------------------------------------------------------------------
 WC Predictive Search Page
 
@@ -21,7 +25,7 @@ TABLE OF CONTENTS
 
 -----------------------------------------------------------------------------------*/
 
-class WC_Admin_Predictive_Search_Page extends WC_Predictive_Search_Admin_UI
+class Predictive_Search extends FrameWork\Admin_UI
 {	
 	/**
 	 * @var string
@@ -93,12 +97,23 @@ class WC_Admin_Predictive_Search_Page extends WC_Predictive_Search_Admin_UI
 	/* Include all tabs into this page
 	/*-----------------------------------------------------------------------------------*/
 	public function tabs_include() {
-		
-		include_once( $this->admin_plugin_dir() . '/tabs/global-settings-tab.php' );
-		include_once( $this->admin_plugin_dir() . '/tabs/search-box-tab.php' );
-		include_once( $this->admin_plugin_dir() . '/tabs/performance-settings-tab.php' );
-		include_once( $this->admin_plugin_dir() . '/tabs/sidebar-template-tab.php' );
-		include_once( $this->admin_plugin_dir() . '/tabs/all-results-pages-tab.php' );
+
+		global $wc_predictive_search_global_settings_tab;
+		$wc_predictive_search_global_settings_tab = new FrameWork\Tabs\Global_Settings();
+
+		global $wc_predictive_search_input_box_settings_tab;
+		$wc_predictive_search_input_box_settings_tab = new FrameWork\Tabs\Search_Box();
+
+		global $wc_predictive_search_performance_settings_tab;
+		$wc_predictive_search_performance_settings_tab = new FrameWork\Tabs\Performance();
+
+		global $wc_predictive_search_sidebar_template_settings_tab;
+		$wc_predictive_search_sidebar_template_settings_tab = new FrameWork\Tabs\Sidebar_Template();
+
+
+		global $wc_ps_all_results_page_tab;
+		$wc_ps_all_results_page_tab = new FrameWork\Tabs\All_Results_Pages();
+
 		
 	}
 	
@@ -107,15 +122,17 @@ class WC_Admin_Predictive_Search_Page extends WC_Predictive_Search_Admin_UI
 	/* Show Settings Page */
 	/*-----------------------------------------------------------------------------------*/
 	public function admin_settings_page() {
-		global $wc_predictive_search_admin_init;
+		global ${$this->plugin_prefix.'admin_init'};
 		
-		$wc_predictive_search_admin_init->admin_settings_page( $this->page_data() );
+		${$this->plugin_prefix.'admin_init'}->admin_settings_page( $this->page_data() );
 	}
 	
 }
 
-global $wc_admin_predictive_search_page;
-$wc_admin_predictive_search_page = new WC_Admin_Predictive_Search_Page();
+}
+
+// global code
+namespace {
 
 /** 
  * wc_admin_predictive_search_page_show()
@@ -126,4 +143,4 @@ function wc_admin_predictive_search_page_show() {
 	$wc_admin_predictive_search_page->admin_settings_page();
 }
 
-?>
+}
