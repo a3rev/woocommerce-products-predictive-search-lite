@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 4.9
 Tested up to: 5.3.2
-Stable tag: 5.2.0
+Stable tag: 5.2.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -117,9 +117,10 @@ Want to add a new language? You can contribute via [translate.wordpress.org](htt
 
 = Minimum Requirements =
 
-* WordPress 4.5 or greater
-* PHP version 5.6.20 or greater
-* MySQL version 5.5.0 or greater
+* WordPress 4.9 or greater
+* WooCommerce 3.0 or greater
+* PHP version 7.0 or greater
+* MySQL version 5.6.0 or greater
 
 = AUTOMATIC INSTALLATION =
 
@@ -174,6 +175,11 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.2.1 - 2020/02/15 =
+* This maintenance release has a bug fix for sites using WPML plus compatibility with WooCommerce 3.9.2
+* Tweak - Test for compatibility with WooCommerce 3.9.2
+* Fix - Save 'Global Search Box Text' for site is using WPML plugin
 
 = 5.2.0 - 2020/01/09 =
 * This feature release completes the full refactor (frontend and backend) of the plugins PHP to Composer plus compatibility with WooCommerce 3.8.1 and WordPress 5.3.2
@@ -839,6 +845,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.2.1 =
+This maintenance release has a bug fix for sites using WPML plus compatibility with WooCommerce 3.9.2
 
 = 5.2.0 =
 This feature release completes the full refactor (frontend and backend) of the plugins PHP to Composer plus compatibility with WooCommerce 3.8.1 and WordPress 5.3.2

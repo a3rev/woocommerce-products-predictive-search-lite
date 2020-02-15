@@ -126,7 +126,7 @@ class Search_Box extends FrameWork\Admin_UI
 	public function after_save_settings() {
 
 		if ( isset( $_REQUEST['woocommerce_search_box_text']) ) {
-			update_option('woocommerce_search_box_text',  sanitize_text_field( $_REQUEST['woocommerce_search_box_text'] ) );
+			update_option('woocommerce_search_box_text', is_array( $_REQUEST['woocommerce_search_box_text'] ) ? array_map( 'sanitize_text_field', $_REQUEST['woocommerce_search_box_text'] ) : sanitize_text_field( $_REQUEST['woocommerce_search_box_text'] ) );
 		}
 	}
 	
