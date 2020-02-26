@@ -142,6 +142,7 @@ function wc_ps_search_form_sidebar_tpl( $ps_id, $args = array() ) {
 	$args['popup_wide'] = $wc_predictive_search_sidebar_template_settings['popup_wide'];
 	$args['cat_align'] = $wc_predictive_search_sidebar_template_settings['sidebar_category_dropdown_align'];
 	$args['cat_max_wide'] = $wc_predictive_search_sidebar_template_settings['sidebar_category_dropdown_max_wide'];
+	$args['search_icon_mobile'] = isset( $wc_predictive_search_sidebar_template_settings['search_icon_mobile'] ) ? $wc_predictive_search_sidebar_template_settings['search_icon_mobile'] : 'no';
 
 	wc_ps_get_template( 'search-bar/predictive-search-form-sidebar.php',
 		apply_filters( 'wc_ps_search_form_sidebar_tpl_args', array(
@@ -167,6 +168,7 @@ function wc_ps_search_form_header_tpl( $ps_id, $args = array() ) {
 	$args['popup_wide'] = $wc_predictive_search_header_template_settings['popup_wide'];
 	$args['cat_align'] = $wc_predictive_search_header_template_settings['header_category_dropdown_align'];
 	$args['cat_max_wide'] = $wc_predictive_search_header_template_settings['header_category_dropdown_max_wide'];
+	$args['search_icon_mobile'] = isset( $wc_predictive_search_header_template_settings['search_icon_mobile'] ) ? $wc_predictive_search_header_template_settings['search_icon_mobile'] : 'yes';
 
 	wc_ps_get_template( 'search-bar/predictive-search-form-header.php',
 		apply_filters( 'wc_ps_search_form_header_tpl_args', array(

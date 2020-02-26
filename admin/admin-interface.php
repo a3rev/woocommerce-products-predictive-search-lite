@@ -298,12 +298,14 @@ class Admin_Interface extends Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function admin_includes() {
 		// Includes Font Face Lib
-		global ${$this->plugin_prefix.'fonts_face'};
-		${$this->plugin_prefix.'fonts_face'} = new Fonts_Face();
+		// global ${$this->plugin_prefix.'fonts_face'};
+		// ${$this->plugin_prefix.'fonts_face'} = new Fonts_Face();
+		$GLOBALS[$this->plugin_prefix.'fonts_face'] = new Fonts_Face();
 		
 		// Includes Uploader Lib
-		global ${$this->plugin_prefix.'uploader'};
-		${$this->plugin_prefix.'uploader'} = new Uploader();
+		// global ${$this->plugin_prefix.'uploader'};
+		// ${$this->plugin_prefix.'uploader'} = new Uploader();
+		$GLOBALS[$this->plugin_prefix.'uploader'] = new Uploader();
 	}
 	
 	/*-----------------------------------------------------------------------------------*/
@@ -1360,7 +1362,7 @@ class Admin_Interface extends Admin_UI
 	 */
 	 
 	public function admin_forms( $options, $form_key, $option_name = '', $form_messages = array() ) {
-		global ${$this->plugin_prefix.'fonts_face'}, ${$this->plugin_prefix.'uploader'}, $current_subtab;
+		global $current_subtab;
 		
 		$new_settings = array(); $new_single_setting = ''; // :)
 		$admin_message = '';
@@ -1890,7 +1892,7 @@ class Admin_Interface extends Admin_UI
 								<div class="a3rev-ui-google-api-key-description"><?php echo sprintf( __( "Enter your existing Google Fonts API Key below. Don't have a key? Visit <a href='%s' target='_blank'>Google Developer API</a> to create a key", 'woocommerce-predictive-search' ), 'https://developers.google.com/fonts/docs/developer_api#APIKey' ); ?></div>
 								<div class="a3rev-ui-google-api-key-inside 
 									<?php
-									if ( ${$this->plugin_prefix.'fonts_face'}->is_valid_google_api_key() ) {
+									if ( $GLOBALS[$this->plugin_prefix.'fonts_face']->is_valid_google_api_key() ) {
 										echo 'a3rev-ui-google-valid-key';
 									} elseif ( '' != $google_api_key ) {
 										echo 'a3rev-ui-google-unvalid-key';
@@ -2712,7 +2714,7 @@ class Admin_Interface extends Admin_UI
 								>
 								<optgroup label="<?php _e( '-- Default Fonts --', 'woocommerce-predictive-search' ); ?>">
                                 <?php
-									foreach ( ${$this->plugin_prefix.'fonts_face'}->get_default_fonts() as $val => $text ) {
+									foreach ( $GLOBALS[$this->plugin_prefix.'fonts_face']->get_default_fonts() as $val => $text ) {
 										?>
                                         <option value="<?php echo esc_attr( $val ); ?>" <?php
 												selected( esc_attr( $val ), esc_attr( $face ) );
@@ -2723,7 +2725,7 @@ class Admin_Interface extends Admin_UI
                                 </optgroup>
                                 <optgroup label="<?php _e( '-- Google Fonts --', 'woocommerce-predictive-search' ); ?>">
                                 <?php
-									foreach ( ${$this->plugin_prefix.'fonts_face'}->get_google_fonts() as $font ) {
+									foreach ( $GLOBALS[$this->plugin_prefix.'fonts_face']->get_google_fonts() as $font ) {
 										?>
                                         <option value="<?php echo esc_attr( $font['name'] ); ?>" <?php
 												selected( esc_attr( $font['name'] ), esc_attr( $face ) );
@@ -3396,7 +3398,7 @@ class Admin_Interface extends Admin_UI
 						</th>
 						<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
                         	<?php echo $description; ?>
-                        	<?php echo ${$this->plugin_prefix.'uploader'}->upload_input( $name_attribute, $id_attribute, $option_value, $attachment_id, $value['default'], $value['name'], $class, esc_attr( $value['css'] ) , '', $strip_methods );?>
+                        	<?php echo $GLOBALS[$this->plugin_prefix.'uploader']->upload_input( $name_attribute, $id_attribute, $option_value, $attachment_id, $value['default'], $value['name'], $class, esc_attr( $value['css'] ) , '', $strip_methods );?>
 						</td>
 					</tr><?php
 									

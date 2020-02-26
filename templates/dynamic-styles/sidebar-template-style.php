@@ -88,6 +88,17 @@ extract( $wc_predictive_search_sidebar_template_settings );
 @sidebar_close_icon_color: <?php echo $sidebar_close_icon_color; ?>;
 @sidebar_close_icon_margin: <?php echo $sidebar_close_icon_margin_top; ?>px <?php echo $sidebar_close_icon_margin_right; ?>px <?php echo $sidebar_close_icon_margin_bottom; ?>px <?php echo $sidebar_close_icon_margin_left; ?>px;
 
+/* Click Icon to Show Search Box */
+.sidebar_search_icon_mobile_align() {
+<?php if ( 'center' === $search_icon_mobile_align ) { ?>
+	margin: 0 auto;
+<?php } else { ?>
+	float: <?php echo $search_icon_mobile_align; ?>;
+<?php } ?>
+}
+@sidebar_search_icon_mobile_size: <?php echo $search_icon_mobile_size; ?>px;
+@sidebar_search_icon_mobile_color: <?php echo $search_icon_mobile_color; ?>;
+
 /* Sidebar PopUp Variables */
 .sidebar_popup_border() {
 	<?php echo ${WOOPS_PREFIX.'admin_interface'}->generate_border_css( $sidebar_popup_border ); ?>
@@ -152,6 +163,18 @@ extract( $wc_predictive_search_sidebar_template_settings );
 
 <style>
 /* Search Bar Sidebar Template */
+.wc_ps_bar {
+	.wc_ps_mobile_icon.sidebar_temp {
+		.sidebar_search_icon_mobile_align();
+		font-size: @sidebar_search_icon_mobile_size;
+		color: @sidebar_search_icon_mobile_color;
+
+		* {
+			color: @sidebar_search_icon_mobile_color;
+		}
+	}
+}
+
 .wc_ps_sidebar_container {
 	width: @sidebar_container_wide;
 	margin: @sidebar_container_margin;

@@ -109,20 +109,16 @@ class Sidebar_Template extends FrameWork\Admin_UI
 	/* set_default_settings()
 	/* Set default settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
-	public function set_default_settings() {
-		global ${$this->plugin_prefix.'admin_interface'};
-		
-		${$this->plugin_prefix.'admin_interface'}->reset_settings( $this->form_fields, $this->option_name, false );
+	public function set_default_settings() {		
+		$GLOBALS[$this->plugin_prefix.'admin_interface']->reset_settings( $this->form_fields, $this->option_name, false );
 	}
 
 	/*-----------------------------------------------------------------------------------*/
 	/* get_settings()
 	/* Get settings with function called from Admin Interface */
 	/*-----------------------------------------------------------------------------------*/
-	public function get_settings() {
-		global ${$this->plugin_prefix.'admin_interface'};
-		
-		${$this->plugin_prefix.'admin_interface'}->get_settings( $this->form_fields, $this->option_name );
+	public function get_settings() {		
+		$GLOBALS[$this->plugin_prefix.'admin_interface']->get_settings( $this->form_fields, $this->option_name );
 	}
 	
 	/**
@@ -165,11 +161,9 @@ class Sidebar_Template extends FrameWork\Admin_UI
 	/* settings_form() */
 	/* Call the form from Admin Interface
 	/*-----------------------------------------------------------------------------------*/
-	public function settings_form() {
-		global ${$this->plugin_prefix.'admin_interface'};
-		
+	public function settings_form() {		
 		$output = '';
-		$output .= ${$this->plugin_prefix.'admin_interface'}->admin_forms( $this->form_fields, $this->form_key, $this->option_name, $this->form_messages );
+		$output .= $GLOBALS[$this->plugin_prefix.'admin_interface']->admin_forms( $this->form_fields, $this->form_key, $this->option_name, $this->form_messages );
 		
 		return $output;
 	}
@@ -506,6 +500,56 @@ class Sidebar_Template extends FrameWork\Admin_UI
 			),
 
 			array(
+            	'name' 		=> __( 'Click Icon to Show Search Box (mobile only)', 'woocommerce-predictive-search' ),
+                'type' 		=> 'heading',
+                'id'		=> 'predictive_search_icon_mobile_box',
+                'is_box'	=> true,
+           	),
+           	array(
+				'name' 		=> __( 'Search Icon On Mobile', 'woocommerce-predictive-search' ),
+				'id' 		=> 'search_icon_mobile',
+				'class'		=> 'search_icon_mobile',
+				'type' 		=> 'onoff_checkbox',
+				'default'	=> 'no',
+				'checked_value'		=> 'yes',
+				'unchecked_value'	=> 'no',
+				'checked_label'		=> __( 'ON', 'woocommerce-predictive-search' ),
+				'unchecked_label' 	=> __( 'OFF', 'woocommerce-predictive-search' ),
+			),
+			array(
+                'type' 		=> 'heading',
+                'class'		=> 'search_icon_mobile_container',
+           	),
+           	array(
+				'name' 		=> __( 'Search Icon Alignment', 'woocommerce-predictive-search' ),
+				'id' 		=> 'search_icon_mobile_align',
+				'css' 		=> 'width:80px;',
+				'type' 		=> 'select',
+				'default'	=> 'center',
+				'options'	=> array(
+						'left'			=> __( 'Left', 'woocommerce-predictive-search' ) ,
+						'center'		=> __( 'Center', 'woocommerce-predictive-search' ) ,
+						'right'			=> __( 'Right', 'woocommerce-predictive-search' ) ,
+					),
+			),
+			array(
+				'name' 		=> __( 'Search Icon Size', 'woocommerce-predictive-search' ),
+				'desc' 		=> "px",
+				'id' 		=> 'search_icon_mobile_size',
+				'type' 		=> 'slider',
+				'default'	=> 25,
+				'min'		=> 8,
+				'max'		=> 50,
+				'increment'	=> 1,
+			),
+			array(
+				'name' 		=> __( 'Search Icon Colour', 'woocommerce-predictive-search' ),
+				'id' 		=> 'search_icon_mobile_color',
+				'type' 		=> 'color',
+				'default'	=> '#555555'
+			),
+
+			array(
             	'name' 		=> __( 'Results Dropdown Container', 'woocommerce-predictive-search' ),
                 'type' 		=> 'heading',
                 'id'		=> 'predictive_search_popup_result_box',
@@ -787,6 +831,19 @@ class Sidebar_Template extends FrameWork\Admin_UI
 (function($) {
 
 	$(document).ready(function() {
+
+		if ( $("input.search_icon_mobile:checked").val() != 'yes') {
+			$('.search_icon_mobile_container').css( {'visibility': 'hidden', 'height' : '0px', 'overflow' : 'hidden', 'margin-bottom' : '0px' } );
+		}
+
+		$(document).on( "a3rev-ui-onoff_checkbox-switch", '.search_icon_mobile', function( event, value, status ) {
+			$('.search_icon_mobile_container').attr('style','display:none;');
+			if ( status == 'true' ) {
+				$(".search_icon_mobile_container").slideDown();
+			} else {
+				$(".search_icon_mobile_container").slideUp();
+			}
+		});
 
 	});
 

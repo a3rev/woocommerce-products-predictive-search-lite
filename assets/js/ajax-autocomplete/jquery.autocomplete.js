@@ -242,6 +242,10 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 		select.unbind();
 		$input.unbind();
 		$(input.form).unbind(".autocomplete");
+	}).bind("ps_mobile_icon_click", function() {
+		previousValue = '';
+		$input.val( $input.data('ps-default_text') );
+		hideResultsNow();
 	});
 
 	$catdropdown.change(function() {
