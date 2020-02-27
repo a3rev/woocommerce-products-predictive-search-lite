@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 4.9
 Tested up to: 5.3.2
-Stable tag: 5.2.1
+Stable tag: 5.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -27,7 +27,7 @@ Predictive Search for WooCommerce engine delivers users instant and changing res
 
 = PAGE BUILDER / TEMPLATE COMPATIBLE =
 
-Predictive Search is compatibile with any WordPress themes that has widget areas, plus a growing number of page builders including:
+Predictive Search is compatible with any WordPress themes that has widget areas, plus a growing number of page builders including:
 
 * NEW - Elementor Premium Template Builder - add the search box via the Predictive Search Widget to any area in an Elementor Template.
 
@@ -47,11 +47,25 @@ More coming soon .....
 * Option show or not show Product prices 
 * Add any number of Predictive Search Widgets to widget areas around your site
 
+= STYLE & MOBILE =
+There are 2 customizable templates built in - Widget Template and Header Template. Style the Search Box and results dropdown then apply the template required from the Predictive Search Widget.
+
+= NEW FEATURES =
+Recently added features
+
+* Feb 2020 - Mobile Search Display. Option on Widget and Header Templates to just show search icon in mobiles when clicked the search box opens. Great for search boxes placed in headers and other areas where space is limited in mobile.
+* Feb 2020 - Second Search Box and results dropdown template (Header Template) added
+* Jan 2020 - Completed upgrade of plugin frontend and backend PHP to Composer PHP Dependency manager (Jan 2020)
+* Oct 2019 - Major re-write of the Search box dropdown user interface in mobile phones. As massive improvement in the user experience on mobiles.
+* Aug 2019 - Added Grid View of product results on All Search Results Page.
+* Aug 2019 - Upgraded PS widget to work with Elementor and Elementor Pro. Add search box by widget to any Elementor Template
+
+
 = ALL SEARCH RESULTS PAGE =
 
 * On install the plugin auto creates a Predictive Search page with shortcode
 * Page title and url can be edited to your liking
-* All results search page shows results in list format with Object sort
+* All results search page has option to show results in list format (Default) or Grid view for products
 * All results search page results show with endless scroll feature
 * Option to set the number of results to show per endless scroll action - default is 10
 * Option to show description extracts and set the number of description characters to show - default is 100 characters
@@ -84,13 +98,8 @@ More coming soon .....
 * Predictive Search Database is auto updated each time a Product, Post or Page is created, updated or deleted
 * Manual Database Sync option to manually sync Predictive Search database with WooCommerce and WordPress databases if required
 * No Conflict. Can be used in conjunction with any other Search plugin without conflicts occurring
-* Predictive Search front end JavaScript functions are built in backbone.js
-* Backbone makes Predictive Search an incredibly robust, powerful and lightweight application
-* All front end calls now via WooCommerce Legacy API instead of ajax-admin.php
-* The All Results Search Pages is a backbone.js (SPA) Single Page Application
-* Backbone stack backbone/underscore/router used for the All Results Search page
-* The Sort product by search object loads the results without loading a new page
-* Results are cached not on your server but on the user's machine via Backbone.localStorage.js
+* Results are cached not on your server but on the user's machine via Backbone.localStorage.js (saving you oon bandwidth)
+* NO-CACHE option - should be turned on when testing, OFF when not.
 
 
 = PREMIUM VERSION =
@@ -101,7 +110,6 @@ For those that want a deeper store search there is the [Premium Predictive Searc
 * Search in Product Category Feature. From Search box use can select a Product category and Search just within that category or select a category and click the search icon and will open the Product category page
 * Predictive Search PHP tag for adding search to your sites header (when header does not support widgets) or into theme templates
 * Shortcode - Add search box to any product post or page by shortcode
-* A second dynamic search box template (Header Template) for making different search box styles
 * Focus Keywords - Predictive Search meta section on each product page, post and page for setting 'Focus Keywords and Keyword Phrases'
 * Full integration with Yoast SEO and All in One SEO plugins
 * Full integration with the Google Analytics Site Search Feature
@@ -175,6 +183,15 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.3.0 - 2020/02/27 =
+* This feature release adds 2 new features. A second search box template has been added. Both templates now have the option to show the search as an icon on mobiles instead of the full search box. Click the icon and the search box opens.
+* Feature - Add second search box and dropdown template, tab is call Header Template
+* Feature - Define new ‘Click Icon to Show Search Box (mobile only)’ for both Widget & Header Template
+* Feature - Option to Show the Search box as just the search icon in mobile and when clicked the search box opens - great for areas that have space in desktop and Tablet to show the search box but have limited space in mobiles. 
+* Tweak - Update style and script to support show Click Icon on mobile
+* Tweak - Update search bar template to support Click Icon to Show Search Box on mobile
+* Fix - Change ‘global ${$this->…’ to ‘$GLOBALS[$this->…’ to resolve 7.0+ PHP warnings
 
 = 5.2.1 - 2020/02/15 =
 * This maintenance release has a bug fix for sites using WPML plus compatibility with WooCommerce 3.9.2
@@ -845,6 +862,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.3.0 =
+This feature release adds 2 new features. A second search box template has been added. Both templates now have the option to show the search as an icon on mobiles instead of the full search box. Click the icon and the search box opens.
 
 = 5.2.1 =
 This maintenance release has a bug fix for sites using WPML plus compatibility with WooCommerce 3.9.2

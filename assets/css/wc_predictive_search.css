@@ -194,6 +194,9 @@
 .wc_ps_container svg.wc_ps_searching_icon {
 	top: calc( 35px/2 - 14px/2 );
 }
+.wc_ps_container svg.wc_ps_searching_icon * {
+	color: #555;
+}
 
 /* Search Bar Sizes */
 .wc_ps_container .wc_ps_nav_left,

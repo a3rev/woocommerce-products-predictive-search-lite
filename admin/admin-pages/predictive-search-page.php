@@ -110,6 +110,8 @@ class Predictive_Search extends FrameWork\Admin_UI
 		global $wc_predictive_search_sidebar_template_settings_tab;
 		$wc_predictive_search_sidebar_template_settings_tab = new FrameWork\Tabs\Sidebar_Template();
 
+		global $wc_predictive_search_header_template_settings_tab;
+		$wc_predictive_search_header_template_settings_tab = new FrameWork\Tabs\Header_Template();
 
 		global $wc_ps_all_results_page_tab;
 		$wc_ps_all_results_page_tab = new FrameWork\Tabs\All_Results_Pages();

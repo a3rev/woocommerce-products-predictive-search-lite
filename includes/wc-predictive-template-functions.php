@@ -212,10 +212,11 @@ function wc_ps_get_popup_footer_sidebar_tpl() {
  * @return void
  */
 function wc_ps_get_popup_footer_header_tpl() {
+	global $wc_predictive_search_header_template_settings;
 
 	wc_ps_get_template( 'popup/footer-header.php',
 		apply_filters( 'wc_ps_popup_footer_header_tpl_args', array(
-			'popup_seemore_text' => ''
+			'popup_seemore_text' => $wc_predictive_search_header_template_settings['header_popup_seemore_text']
 		) )
 	);
 }

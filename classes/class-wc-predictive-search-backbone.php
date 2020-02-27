@@ -28,6 +28,7 @@ class Hook_Backbone
 		$google_fonts = array();
 
 		global $wc_predictive_search_sidebar_template_settings;
+		global $wc_predictive_search_header_template_settings;
 
 		$google_fonts[] = $wc_predictive_search_sidebar_template_settings['sidebar_category_dropdown_font']['face'];
 		$google_fonts[] = $wc_predictive_search_sidebar_template_settings['sidebar_input_font']['face'];
@@ -41,6 +42,17 @@ class Hook_Backbone
 		$google_fonts[] = $wc_predictive_search_sidebar_template_settings['sidebar_popup_seemore_font']['face'];
 		$google_fonts[] = $wc_predictive_search_sidebar_template_settings['sidebar_popup_more_link_font']['face'];
 
+		$google_fonts[] = $wc_predictive_search_header_template_settings['header_category_dropdown_font']['face'];
+		$google_fonts[] = $wc_predictive_search_header_template_settings['header_input_font']['face'];
+		$google_fonts[] = $wc_predictive_search_header_template_settings['header_popup_heading_font']['face'];
+		$google_fonts[] = $wc_predictive_search_header_template_settings['header_popup_product_name_font']['face'];
+		$google_fonts[] = $wc_predictive_search_header_template_settings['header_popup_product_sku_font']['face'];
+		$google_fonts[] = $wc_predictive_search_header_template_settings['header_popup_product_price_font']['face'];
+		$google_fonts[] = $wc_predictive_search_header_template_settings['header_popup_product_desc_font']['face'];
+		$google_fonts[] = $wc_predictive_search_header_template_settings['header_popup_product_stock_qty_font']['face'];
+		$google_fonts[] = $wc_predictive_search_header_template_settings['header_popup_product_category_font']['face'];
+		$google_fonts[] = $wc_predictive_search_header_template_settings['header_popup_seemore_font']['face'];
+		$google_fonts[] = $wc_predictive_search_header_template_settings['header_popup_more_link_font']['face'];
 
 		${WOOPS_PREFIX.'fonts_face'}->generate_google_webfonts( $google_fonts );
 	}

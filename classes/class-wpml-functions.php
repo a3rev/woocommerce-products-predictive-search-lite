@@ -38,6 +38,7 @@ class WPML_Functions
 		$plugin_name = WOOPS_KEY;
 
 		add_filter( $plugin_name . '_' . 'wc_predictive_search_sidebar_template_settings' . '_get_settings', array( $this, 'ict_t_sidebar_template_settings' ) );
+		add_filter( $plugin_name . '_' . 'wc_predictive_search_header_template_settings' . '_get_settings', array( $this, 'ict_t_header_template_settings' ) );
 		
 	}
 	
@@ -46,9 +47,11 @@ class WPML_Functions
 		global ${WOOPS_PREFIX.'admin_interface'};
 
 		$wc_predictive_search_sidebar_template_settings = array_map( array( ${WOOPS_PREFIX.'admin_interface'}, 'admin_stripslashes' ), get_option( 'wc_predictive_search_sidebar_template_settings', array() ) );
+		$wc_predictive_search_header_template_settings = array_map( array( ${WOOPS_PREFIX.'admin_interface'}, 'admin_stripslashes' ), get_option( 'wc_predictive_search_header_template_settings', array() ) );
 		
 		if ( function_exists('icl_register_string') ) {
 			icl_register_string($this->plugin_wpml_name, 'More result Text - Sidebar', $wc_predictive_search_sidebar_template_settings['sidebar_popup_seemore_text'] );
+			icl_register_string($this->plugin_wpml_name, 'More result Text - Header', $wc_predictive_search_header_template_settings['header_popup_seemore_text'] );
 		}
 	}
 	
@@ -88,5 +91,11 @@ class WPML_Functions
 		return $current_settings;
 	}
 
+	public function ict_t_header_template_settings( $current_settings = array() ) {
+		if ( is_array( $current_settings ) && isset( $current_settings['header_popup_seemore_text'] ) ) 
+			$current_settings['header_popup_seemore_text'] = ( function_exists('icl_t') ? icl_t( $this->plugin_wpml_name, 'More result Text - Header', $current_settings['header_popup_seemore_text'] ) : $current_settings['header_popup_seemore_text'] );
+
+		return $current_settings;
+	}
 
 }

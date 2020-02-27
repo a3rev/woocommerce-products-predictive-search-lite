@@ -158,6 +158,16 @@ function woo_ps_lite_upgrade_plugin() {
 		update_option( 'woocommerce_search_result_items', 12 );
 	}
 
+	if ( version_compare( get_option('wc_predictive_search_lite_version'), '5.3.0', '<' ) ) {
+		update_option('wc_predictive_search_lite_version', '5.3.0');
+
+		// Set Settings Default from Admin Init
+		${WOOPS_PREFIX.'admin_init'}->set_default_settings();
+		
+		// Build sass
+		${WOOPS_PREFIX.'less'}->plugin_build_sass();
+	}
+
     update_option('wc_predictive_search_lite_version', WOOPS_VERSION );
 }
 

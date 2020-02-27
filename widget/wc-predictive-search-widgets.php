@@ -45,7 +45,7 @@ class Widgets extends \WP_Widget
 		else $text_lenght = $instance['text_lenght'];
 		$show_catdropdown = 0;
 		$show_price = !isset( $instance['show_price'] ) || empty($instance['show_price']) ? 0 : $instance['show_price'];
-		$widget_template = 'sidebar';
+		$widget_template = !isset( $instance['widget_template'] ) || empty($instance['widget_template']) ? 'sidebar' : $instance['widget_template'];
 
 		$show_image = !isset( $instance['show_image'] ) || empty($instance['show_image']) ? 0 : $instance['show_image'];
 		$show_desc = !isset( $instance['show_desc'] ) || empty($instance['show_desc']) ? 0 : $instance['show_desc'];
@@ -125,6 +125,7 @@ class Widgets extends \WP_Widget
 		$instance['text_lenght'] = strip_tags($new_instance['text_lenght']);
 		$instance['show_price'] = !isset( $new_instance['show_price'] ) ? 0 : $new_instance['show_price'];
 		$instance['search_box_text'] = $new_instance['search_box_text'];
+		$instance['widget_template'] = $new_instance['widget_template'];
 		$instance['show_image'] = !isset( $new_instance['show_image'] ) ? 0 : $new_instance['show_image'];
 		$instance['show_desc'] = !isset( $new_instance['show_desc'] ) ? 0 : $new_instance['show_desc'];
 		$instance['show_in_cat'] = !isset( $new_instance['show_in_cat'] ) ? 0 : $new_instance['show_in_cat'];
@@ -197,10 +198,10 @@ class Widgets extends \WP_Widget
             </ul>
             <p>
             	<label for="<?php echo $this->get_field_id('widget_template'); ?>"><?php _e('Select Template:', 'woocommerce-predictive-search' ); ?></label>
-            	<select id="<?php echo $this->get_field_id('widget_template'); ?>" name="widget_template" disabled="disabled">
+            	<select id="<?php echo $this->get_field_id('widget_template'); ?>" name="<?php echo $this->get_field_name('widget_template'); ?>">
 					<option value="sidebar" selected="selected" ><?php _e('Widget', 'woocommerce-predictive-search' ); ?></option>
-					<option value="header"><?php _e('Header', 'woocommerce-predictive-search' ); ?></option>
-            	</select> <span style="color: #f00; font-size: 11px;">* <?php _e('Premium Feature!', 'woocommerce-predictive-search' ); ?></span>
+					<option value="header" <?php selected( 'header', $widget_template, true ); ?>><?php _e('Header', 'woocommerce-predictive-search' ); ?></option>
+            	</select>
             </p>
             <p>
             	<label><input type="checkbox" name="show_catdropdown" value="1" disabled="disabled" /> <?php _e('Search in Product Category Feature', 'woocommerce-predictive-search' ); ?></label>

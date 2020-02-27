@@ -149,6 +149,7 @@ class Less_Sass
 
         ob_start();
 		include( $this->plugin_dir. '/templates/dynamic-styles/sidebar-template-style.php' );
+        include( $this->plugin_dir. '/templates/dynamic-styles/header-template-style.php' );
 		$sass = ob_get_clean();
 		$sass = str_replace( '<style>', '', str_replace( '</style>', '', $sass ) );
 		$sass = str_replace( '<style type="text/css">', '', str_replace( '</style>', '', $sass ) );

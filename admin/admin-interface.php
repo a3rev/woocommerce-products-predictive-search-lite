@@ -298,13 +298,9 @@ class Admin_Interface extends Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function admin_includes() {
 		// Includes Font Face Lib
-		// global ${$this->plugin_prefix.'fonts_face'};
-		// ${$this->plugin_prefix.'fonts_face'} = new Fonts_Face();
 		$GLOBALS[$this->plugin_prefix.'fonts_face'] = new Fonts_Face();
 		
 		// Includes Uploader Lib
-		// global ${$this->plugin_prefix.'uploader'};
-		// ${$this->plugin_prefix.'uploader'} = new Uploader();
 		$GLOBALS[$this->plugin_prefix.'uploader'] = new Uploader();
 	}
 	
