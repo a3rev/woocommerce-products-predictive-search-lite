@@ -319,8 +319,6 @@ class Schedule
 		$from_email = get_option( 'admin_email' );
 		$from_name = get_option( 'blogname' );
 
-		global ${WOOPS_PREFIX.'admin_init'};
-
 		$headers = array();
 		$headers[] = 'MIME-Version: 1.0';
 		$headers[] = 'Content-type: text/html; charset='. get_option('blog_charset');
@@ -340,7 +338,7 @@ class Schedule
 		$content .= '</p>';
 
 		$content .= '<p>'. __( "If the manual sync won't complete or it fails again tomorrow, please open a support ticket and copy and paste the error log into the ticket.", 'woocommerce-predictive-search' );
-		$content .= sprintf( '<br><a href="%s" target="_blank">%s</a>', ${WOOPS_PREFIX.'admin_init'}->support_url, ${WOOPS_PREFIX.'admin_init'}->support_url );
+		$content .= sprintf( '<br><a href="%s" target="_blank">%s</a>', $GLOBALS[WOOPS_PREFIX.'admin_init']->support_url, $GLOBALS[WOOPS_PREFIX.'admin_init']->support_url );
 		$content .= '</p>';
 
 		wp_mail( $to_email, $subject, $content, $headers, '' );

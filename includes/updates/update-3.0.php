@@ -17,8 +17,7 @@ if ( is_array( $woocommerce_search_exclude_products ) && count( $woocommerce_sea
 	}
 }
 
-global ${WOOPS_PREFIX.'admin_init'};
-${WOOPS_PREFIX.'admin_init'}->set_default_settings();
+$GLOBALS[WOOPS_PREFIX.'admin_init']->set_default_settings();
 
 flush_rewrite_rules();
 

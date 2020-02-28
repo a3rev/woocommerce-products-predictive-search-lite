@@ -15,8 +15,7 @@ function wc_predictive_install(){
 
 	update_option('wc_predictive_search_lite_version', WOOPS_VERSION );
 
-	global ${WOOPS_PREFIX.'admin_init'};
-	delete_metadata( 'user', 0, ${WOOPS_PREFIX.'admin_init'}->plugin_name . '-' . 'plugin_framework_global_box' . '-' . 'opened', '', true );
+	delete_metadata( 'user', 0, $GLOBALS[WOOPS_PREFIX.'admin_init']->plugin_name . '-' . 'plugin_framework_global_box' . '-' . 'opened', '', true );
 
 	flush_rewrite_rules();
 
@@ -30,12 +29,10 @@ function woops_init() {
 		delete_option('wc_predictive_search_just_installed');
 
 		// Set Settings Default from Admin Init
-		global ${WOOPS_PREFIX.'admin_init'};
-		${WOOPS_PREFIX.'admin_init'}->set_default_settings();
+		$GLOBALS[WOOPS_PREFIX.'admin_init']->set_default_settings();
 
 		// Build sass
-		global ${WOOPS_PREFIX.'less'};
-		${WOOPS_PREFIX.'less'}->plugin_build_sass();
+		$GLOBALS[WOOPS_PREFIX.'less']->plugin_build_sass();
 
 		update_option( 'wc_predictive_search_just_confirm', 1 );
 	}
@@ -62,11 +59,10 @@ function register_widget_woops_predictive_search() {
 }
 
 // Need to call Admin Init to show Admin UI
-global ${WOOPS_PREFIX.'admin_init'};
-${WOOPS_PREFIX.'admin_init'}->init();
+$GLOBALS[WOOPS_PREFIX.'admin_init']->init();
 
 // Add upgrade notice to Dashboard pages
-add_filter( ${WOOPS_PREFIX.'admin_init'}->plugin_name . '_plugin_extension_boxes', array( '\A3Rev\WCPredictiveSearch\Hook_Filter', 'plugin_extension_box' ) );
+add_filter( $GLOBALS[WOOPS_PREFIX.'admin_init']->plugin_name . '_plugin_extension_boxes', array( '\A3Rev\WCPredictiveSearch\Hook_Filter', 'plugin_extension_box' ) );
 
 // Custom Rewrite Rules
 add_filter( 'query_vars', array( '\A3Rev\WCPredictiveSearch\Functions', 'add_query_vars' ) );
@@ -90,7 +86,6 @@ if(in_array(basename($_SERVER['PHP_SELF']), array('post.php', 'page.php', 'page-
 // Check upgrade functions
 add_action( 'init', 'woo_ps_lite_upgrade_plugin' );
 function woo_ps_lite_upgrade_plugin() {
-	global ${WOOPS_PREFIX.'less'}, ${WOOPS_PREFIX.'admin_init'};
 
     // Upgrade to 2.0
     if (version_compare(get_option('wc_predictive_search_lite_version'), '2.0') === -1) {
@@ -118,10 +113,10 @@ function woo_ps_lite_upgrade_plugin() {
 		update_option('wc_predictive_search_lite_version', '3.6.0');
 
 		// Set Settings Default from Admin Init
-		${WOOPS_PREFIX.'admin_init'}->set_default_settings();
+		$GLOBALS[WOOPS_PREFIX.'admin_init']->set_default_settings();
 
 		// Build sass
-		${WOOPS_PREFIX.'less'}->plugin_build_sass();
+		$GLOBALS[WOOPS_PREFIX.'less']->plugin_build_sass();
 	}
 
 	// Upgrade to 3.6.2
@@ -142,10 +137,10 @@ function woo_ps_lite_upgrade_plugin() {
 
 	if( version_compare(get_option('wc_predictive_search_lite_version'), '3.7.0') === -1 ){
 		// Set Settings Default from Admin Init
-		${WOOPS_PREFIX.'admin_init'}->set_default_settings();
+		$GLOBALS[WOOPS_PREFIX.'admin_init']->set_default_settings();
 		
 		// Build sass
-		${WOOPS_PREFIX.'less'}->plugin_build_sass();
+		$GLOBALS[WOOPS_PREFIX.'less']->plugin_build_sass();
 	}
 
 	if ( version_compare( get_option('wc_predictive_search_lite_version'), '4.0.0', '<' ) ) {
@@ -162,10 +157,10 @@ function woo_ps_lite_upgrade_plugin() {
 		update_option('wc_predictive_search_lite_version', '5.3.0');
 
 		// Set Settings Default from Admin Init
-		${WOOPS_PREFIX.'admin_init'}->set_default_settings();
+		$GLOBALS[WOOPS_PREFIX.'admin_init']->set_default_settings();
 		
 		// Build sass
-		${WOOPS_PREFIX.'less'}->plugin_build_sass();
+		$GLOBALS[WOOPS_PREFIX.'less']->plugin_build_sass();
 	}
 
     update_option('wc_predictive_search_lite_version', WOOPS_VERSION );

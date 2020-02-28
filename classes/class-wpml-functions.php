@@ -44,10 +44,9 @@ class WPML_Functions
 	
 	// Registry Dynamic String for WPML
 	public function wpml_register_dynamic_string() {
-		global ${WOOPS_PREFIX.'admin_interface'};
 
-		$wc_predictive_search_sidebar_template_settings = array_map( array( ${WOOPS_PREFIX.'admin_interface'}, 'admin_stripslashes' ), get_option( 'wc_predictive_search_sidebar_template_settings', array() ) );
-		$wc_predictive_search_header_template_settings = array_map( array( ${WOOPS_PREFIX.'admin_interface'}, 'admin_stripslashes' ), get_option( 'wc_predictive_search_header_template_settings', array() ) );
+		$wc_predictive_search_sidebar_template_settings = array_map( array( $GLOBALS[WOOPS_PREFIX.'admin_interface'], 'admin_stripslashes' ), get_option( 'wc_predictive_search_sidebar_template_settings', array() ) );
+		$wc_predictive_search_header_template_settings = array_map( array( $GLOBALS[WOOPS_PREFIX.'admin_interface'], 'admin_stripslashes' ), get_option( 'wc_predictive_search_header_template_settings', array() ) );
 		
 		if ( function_exists('icl_register_string') ) {
 			icl_register_string($this->plugin_wpml_name, 'More result Text - Sidebar', $wc_predictive_search_sidebar_template_settings['sidebar_popup_seemore_text'] );

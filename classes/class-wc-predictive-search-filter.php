@@ -47,13 +47,12 @@ class Hook_Filter
 	}
 
 	public static function plugin_extra_links($links, $plugin_name) {
-		global ${WOOPS_PREFIX.'admin_init'};
 
 		if ( $plugin_name != WOOPS_NAME) {
 			return $links;
 		}
 		$links[] = '<a href="'.WOO_PREDICTIVE_SEARCH_DOCS_URI.'" target="_blank">'.__('Documentation', 'woocommerce-predictive-search' ).'</a>';
-		$links[] = '<a href="'.${WOOPS_PREFIX.'admin_init'}->support_url.'" target="_blank">'.__('Support', 'woocommerce-predictive-search' ).'</a>';
+		$links[] = '<a href="'.$GLOBALS[WOOPS_PREFIX.'admin_init']->support_url.'" target="_blank">'.__('Support', 'woocommerce-predictive-search' ).'</a>';
 		return $links;
 	}
 
@@ -64,9 +63,8 @@ class Hook_Filter
 	}
 
 	public static function plugin_extension_box( $boxes = array() ) {
-		global ${WOOPS_PREFIX.'admin_init'};
 
-		$support_box = '<a href="'.${WOOPS_PREFIX.'admin_init'}->support_url.'" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-predictive-search' ).'"><img src="'.WOOPS_IMAGES_URL.'/go-to-support-forum.png" /></a>';
+		$support_box = '<a href="'.$GLOBALS[WOOPS_PREFIX.'admin_init']->support_url.'" target="_blank" alt="'.__('Go to Support Forum', 'woocommerce-predictive-search' ).'"><img src="'.WOOPS_IMAGES_URL.'/go-to-support-forum.png" /></a>';
 
 		$boxes[] = array(
 			'content' => $support_box,
@@ -81,7 +79,7 @@ class Hook_Filter
             'css' => 'border: none; padding: 0; background: none;'
         );
 
-		$pro_box = '<a href="'.${WOOPS_PREFIX.'admin_init'}->pro_plugin_page_url.'" target="_blank" alt="'.__('WooCommerce Predictive Search Pro', 'woocommerce-predictive-search' ).'"><img src="'.WOOPS_IMAGES_URL.'/pro-version.jpg" /></a>';
+		$pro_box = '<a href="'.$GLOBALS[WOOPS_PREFIX.'admin_init']->pro_plugin_page_url.'" target="_blank" alt="'.__('WooCommerce Predictive Search Pro', 'woocommerce-predictive-search' ).'"><img src="'.WOOPS_IMAGES_URL.'/pro-version.jpg" /></a>';
 
 		$boxes[] = array(
 			'content' => $pro_box,

@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 4.9
 Tested up to: 5.3.2
-Stable tag: 5.3.0
+Stable tag: 5.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -184,14 +184,21 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 == Changelog ==
 
+= 5.3.1 - 2020/02/28 =
+* This maintenance release contains various PHP code updates to resolve PHP warnings and depreciations in PHP 7.0 to 7.4 
+* Tweak - Test for compatibility with PHP 7.4
+* Fix - Update global ${$option} to $GLOBALS[$option] to resolve 7.0+ PHP warnings
+* Fix - Update less PHP lib that use square brackets [] instead of curly braces {} for Array , depreciated in PHP 7.4
+* Fix - Validate for do not use get_magic_quotes_gpc function for PHP 7.4
+
 = 5.3.0 - 2020/02/27 =
 * This feature release adds 2 new features. A second search box template has been added. Both templates now have the option to show the search as an icon on mobiles instead of the full search box. Click the icon and the search box opens.
 * Feature - Add second search box and dropdown template, tab is call Header Template
-* Feature - Define new ‘Click Icon to Show Search Box (mobile only)’ for both Widget & Header Template
+* Feature - Define new 'Click Icon to Show Search Box (mobile only)' for both Widget & Header Template
 * Feature - Option to Show the Search box as just the search icon in mobile and when clicked the search box opens - great for areas that have space in desktop and Tablet to show the search box but have limited space in mobiles. 
 * Tweak - Update style and script to support show Click Icon on mobile
 * Tweak - Update search bar template to support Click Icon to Show Search Box on mobile
-* Fix - Change ‘global ${$this->…’ to ‘$GLOBALS[$this->…’ to resolve 7.0+ PHP warnings
+* Fix - Change 'global ${$this->...' to '$GLOBALS[$this->...' to resolve 7.0+ PHP warnings
 
 = 5.2.1 - 2020/02/15 =
 * This maintenance release has a bug fix for sites using WPML plus compatibility with WooCommerce 3.9.2
@@ -862,6 +869,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.3.1 =
+This maintenance release contains various PHP code updates to resolve PHP warnings and depreciations in PHP 7.0 to 7.4
 
 = 5.3.0 =
 This feature release adds 2 new features. A second search box template has been added. Both templates now have the option to show the search as an icon on mobiles instead of the full search box. Click the icon and the search box opens.

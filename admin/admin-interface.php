@@ -423,9 +423,7 @@ class Admin_Interface extends Admin_UI
 		$new_settings = array(); $new_single_setting = ''; // :)
 		
 		// Get settings for option values is an array and it's in single option name for all settings
-		if ( trim( $option_name ) != '' ) {
-			global ${$option_name};
-			
+		if ( trim( $option_name ) != '' ) {			
 			$default_settings = $this->get_settings_default( $options, $option_name );
 			
 			$current_settings = get_option( $option_name );
@@ -435,7 +433,7 @@ class Admin_Interface extends Admin_UI
 			$current_settings = array_map( array( $this, 'admin_stripslashes' ), $current_settings );
 			$current_settings = apply_filters( $this->plugin_name . '_' . $option_name . '_get_settings' , $current_settings );
 			
-			$$option_name = $current_settings;
+			$GLOBALS[$option_name] = $current_settings;
 			
 		}
 		
@@ -463,7 +461,6 @@ class Admin_Interface extends Admin_UI
 			}
 			
 			if ( trim( $option_name ) == '' || $value['separate_option'] != false ) {
-				global ${$id_attribute};
 				
 				$current_setting = get_option( $id_attribute, $value['default'] );
 				
@@ -494,7 +491,7 @@ class Admin_Interface extends Admin_UI
 				
 				$current_setting = apply_filters( $this->plugin_name . '_' . $id_attribute . '_get_setting' , $current_setting );
 				
-				$$id_attribute = $current_setting;
+				$GLOBALS[$id_attribute] = $current_setting;
 			}
 		}
 		
@@ -513,7 +510,7 @@ class Admin_Interface extends Admin_UI
 
 				if ( trim( $option_name ) != '' ) {
 					update_option( $option_name, $new_settings );
-					$$option_name = $new_settings;
+					$GLOBALS[$option_name] = $new_settings;
 				}
 				
 				foreach ( $options as $value ) {
@@ -541,7 +538,7 @@ class Admin_Interface extends Admin_UI
 					
 					if ( trim( $option_name ) == '' || $value['separate_option'] != false ) {
 						update_option( $id_attribute,  $new_single_setting );
-						$$id_attribute = $new_single_setting;
+						$GLOBALS[$id_attribute] = $new_single_setting;
 					}
 				}
 			}
