@@ -22,7 +22,9 @@ class Hook_Filter
 		global $woocommerce_search_page_id;
 		global $predictive_search_mode;
 
-		$woocommerce_search_page_id = Functions::get_page_id_from_shortcode( 'woocommerce_search', 'woocommerce_search_page_id');
+		if ( ! defined( 'WOOPS_TRAVIS' ) ) {
+			$woocommerce_search_page_id = Functions::get_page_id_from_shortcode( 'woocommerce_search', 'woocommerce_search_page_id');
+		}
 
 		$predictive_search_mode = get_option( 'predictive_search_mode', 'strict' );
 	}

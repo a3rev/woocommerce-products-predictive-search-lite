@@ -101,7 +101,7 @@ function _manually_load_plugin() {
 
 	echo esc_html( 'Loading Predictive Search plugin' . PHP_EOL );
 	require dirname( dirname( __FILE__ ) ) . '/wc-predictive-search.php';
-	update_option('wc_predictive_search_version', WOOPS_VERSION);
+	update_option('wc_predictive_search_lite_version', WOOPS_VERSION);
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 
