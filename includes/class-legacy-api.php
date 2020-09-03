@@ -109,7 +109,7 @@ class Legacy_API {
 			$post_term_id = 0;
 
 			if ( isset( $search_in['product'] ) && $search_in['product'] > 0 ) {
-				$product_list = $wc_predictive_search->get_product_results( $search_keyword, $search_in['product'], 0, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $product_term_id, $text_lenght, $current_lang, true, $show_price, false, false, $show_in_cat );
+				$product_list = $wc_predictive_search->get_product_results( $search_keyword, $search_in['product'], 0, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $product_term_id, $text_lenght, $current_lang, true, $show_price, true, false, $show_in_cat );
 				$total_product = $product_list['total'];
 				if ( $total_product > 0 ) {
 					$found_items = true;

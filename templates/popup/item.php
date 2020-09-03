@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 		<div class="rs_content_popup">
 			<a href="{{= url }}">
 				<span class="rs_name">{{= title }}</span>
-				{{ if ( type == 'p_sku' ) { }}<span class="rs_sku"><?php wc_ps_ict_t_e( 'SKU', __('SKU', 'woocommerce-predictive-search' ) ); ?>: <strong>{{= sku }}</strong></span>{{ } }}
+				{{ if ( type == 'p_sku' && sku != null && sku != '' ) { }}<span class="rs_sku"><?php wc_ps_ict_t_e( 'SKU', __('SKU', 'woocommerce-predictive-search' ) ); ?>: <strong>{{= sku }}</strong></span>{{ } }}
 				{{ if ( price != null && price != '' ) { }}<span class="rs_price"><?php wc_ps_ict_t_e( 'Price', __('Price', 'woocommerce-predictive-search' ) ); ?>: {{= price }}</span>{{ } }}
 				{{ if ( stock != null && stock != '' ) { }}<span class="rs_stock">{{= stock }}</span>{{ } }}
 				{{ if ( description != null && description != '' ) { }}<span class="rs_description">{{= description }}</span>{{ } }}

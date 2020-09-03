@@ -3,8 +3,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 5.0
-Tested up to: 5.5
-Stable tag: 5.3.3
+Tested up to: 5.5.1
+Stable tag: 5.3.4
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -183,6 +183,13 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.3.4 - 2020/09/03 =
+* This maintenance release resolves a conflict with jQuery helper plugin and WordPress 5.5 and adds ability for developer to show SKU in Product Card Results plus compatibility with WordPress 5.5.1 and WooCommerce 4.4.1 
+* Dev - Include SKU in API response data for Product name so that dev can hook to show SKU in the product name results 
+* Tweak - Test for compatibility with WordPress 5.5.1
+* Tweak - Test for compatibility with WooCommerce 4.4.1
+* Fix - Update plugin framework script, remove jQuery.browser is deprecated to resolve conflict with jQuery Migrate Helper plugin
 
 = 5.3.3 - 2020/08/08 =
 * This maintenance release is for compatibility with WordPress major version 5.5 and WooCommerce 4.3.1.
@@ -880,6 +887,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.3.4 =
+This maintenance release resolves a conflict with jQuery helper plugin and WordPress 5.5.1 and adds ability for developer to show SKU in Product Card Results plus compatibility with WordPress 5.5.1 and WooCommerce 4.4.1
 
 = 5.3.3 =
 This maintenance release is for compatibility with WordPress major version 5.5 and WooCommerce 4.3.1.
