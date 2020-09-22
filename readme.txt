@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 5.0
 Tested up to: 5.5.1
-Stable tag: 5.3.4
+Stable tag: 5.3.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -183,6 +183,11 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.3.5 - 2020/09/22 =
+* This maintenance release adds tweaks to prevent theme styles over riding WooCommerce Price fonts in Search Box dropdown results plus compatibility with WooCommerce 4.5.2 
+* Tweak - Update the dynamic style on Widget & Header template adding a higher priority to Price font
+* Tweak - Test for compatibility with WooCommerce 4.5.2
 
 = 5.3.4 - 2020/09/03 =
 * This maintenance release resolves a conflict with jQuery helper plugin and WordPress 5.5 and adds ability for developer to show SKU in Product Card Results plus compatibility with WordPress 5.5.1 and WooCommerce 4.4.1 
@@ -887,6 +892,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.3.5 =
+This maintenance release adds tweaks to prevent theme styles over riding WooCommerce Price fonts in Search Box dropdown results plus compatibility with WooCommerce 4.5.2 
 
 = 5.3.4 =
 This maintenance release resolves a conflict with jQuery helper plugin and WordPress 5.5.1 and adds ability for developer to show SKU in Product Card Results plus compatibility with WordPress 5.5.1 and WooCommerce 4.4.1

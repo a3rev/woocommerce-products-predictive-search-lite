@@ -320,7 +320,9 @@ extract( $wc_predictive_search_sidebar_template_settings );
 			.sidebar_popup_product_sku_font();
 		}
 
-		.rs_price {
+		.rs_price,
+		.rs_price .woocommerce-Price-amount,
+		.rs_price .woocommerce-Price-currencySymbol {
 			.sidebar_popup_product_price_font();
 		}
 
@@ -373,7 +375,9 @@ extract( $wc_predictive_search_sidebar_template_settings );
 			color: @sidebar_popup_product_sku_hover_color !important;
 		}
 
-		.rs_price {
+		.rs_price,
+		.rs_price .woocommerce-Price-amount,
+		.rs_price .woocommerce-Price-currencySymbol {
 			color: @sidebar_popup_product_price_hover_color !important;
 		}
 
