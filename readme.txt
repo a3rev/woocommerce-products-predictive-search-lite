@@ -3,8 +3,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 5.0
-Tested up to: 5.5.1
-Stable tag: 5.3.5
+Tested up to: 5.5.3
+Stable tag: 5.3.6
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -183,6 +183,12 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.3.6 - 2020/10/31 =
+* This maintenance release resolves a JS conflict with the WPMU Hustle plugin plus compatibility with WooCommerce 4.7.0 and WordPress 5.5.3
+* Tweak - Make backbone.localstorage script load after front script of Hustle plugin to resolve the scripts conflict
+* Tweak - Test for compatibility with WooCommerce 4.7.0
+* Tweak - Test for compatibility with WordPress 5.5.3
 
 = 5.3.5 - 2020/09/22 =
 * This maintenance release adds tweaks to prevent theme styles over riding WooCommerce Price fonts in Search Box dropdown results plus compatibility with WooCommerce 4.5.2 
@@ -892,6 +898,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.3.6 =
+This maintenance release resolves a JS conflict with the WPMU Hustle plugin plus compatibility with WooCommerce 4.7.0 and WordPress 5.5.3
 
 = 5.3.5 =
 This maintenance release adds tweaks to prevent theme styles over riding WooCommerce Price fonts in Search Box dropdown results plus compatibility with WooCommerce 4.5.2 

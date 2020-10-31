@@ -15,8 +15,8 @@ class Hook_Backbone
 	public function __construct() {
 		
 		// Add script into footer to hanlde the event from widget, popup
-		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
-		add_action( 'wp_enqueue_scripts', array( $this, 'include_result_shortcode_script' ), 11 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'register_plugin_scripts' ), 11 );
+		add_action( 'wp_enqueue_scripts', array( $this, 'include_result_shortcode_script' ), 12 );
 
 		// Include google fonts into header
 		add_action( 'wp_enqueue_scripts', array( $this, 'add_google_fonts'), 9 );
