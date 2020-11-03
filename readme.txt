@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 5.0
 Tested up to: 5.5.3
-Stable tag: 5.3.6
+Stable tag: 5.3.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -183,6 +183,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.3.7 - 2020/11/03 =
+* This maintenance release has a fix for the mobile dropdown close icon is not showing on frontend for not logged in users.
+* Fix - show the close icon of result dropdown on mobile for not logged in users
 
 = 5.3.6 - 2020/10/31 =
 * This maintenance release resolves a JS conflict with the WPMU Hustle plugin plus compatibility with WooCommerce 4.7.0 and WordPress 5.5.3
@@ -898,6 +902,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.3.7 =
+This maintenance release has a fix for the mobile dropdown close icon is not showing on frontend for not logged in users.
 
 = 5.3.6 =
 This maintenance release resolves a JS conflict with the WPMU Hustle plugin plus compatibility with WooCommerce 4.7.0 and WordPress 5.5.3
