@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 5.0
 Tested up to: 5.5.3
-Stable tag: 5.3.7
+Stable tag: 5.3.8
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -183,6 +183,11 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.3.8 - 2020/11/25 =
+* This maintenance release fixes a PHP 7.4 fatal error
+* Tweak - Test for compatibility with PHP 7.4.8
+* Fix - Add \ before WC() inside namespace file for it call to correct WC() of WooCommerce instead of A3Rev\WCPredictiveSearch\WC()
 
 = 5.3.7 - 2020/11/03 =
 * This maintenance release has a fix for the mobile dropdown close icon is not showing on frontend for not logged in users.
@@ -902,6 +907,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.3.8 =
+This maintenance release fixes a PHP 7.4 fatal error
 
 = 5.3.7 =
 This maintenance release has a fix for the mobile dropdown close icon is not showing on frontend for not logged in users.

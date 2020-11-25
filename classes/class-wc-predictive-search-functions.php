@@ -486,7 +486,7 @@ class Functions
 			$current_db_version = get_option( 'woocommerce_db_version', null );
 			if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
 				$product = new \WC_Product( $product_id );
-			} elseif ( version_compare( WC()->version, '2.2.0', '<' ) ) {
+			} elseif ( version_compare( \WC()->version, '2.2.0', '<' ) ) {
 				$product = get_product( $product_id );
 			} else {
 				$product = wc_get_product( $product_id );
@@ -511,7 +511,7 @@ class Functions
 			$current_db_version = get_option( 'woocommerce_db_version', null );
 			if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
 				$product = new \WC_Product( $product_id );
-			} elseif ( version_compare( WC()->version, '2.2.0', '<' ) ) {
+			} elseif ( version_compare( \WC()->version, '2.2.0', '<' ) ) {
 				$product = get_product( $product_id );
 			} else {
 				$product = wc_get_product( $product_id );
@@ -542,7 +542,7 @@ class Functions
 			$current_db_version = get_option( 'woocommerce_db_version', null );
 			if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
 				$variation = new \WC_Product_Variation( $variation_id );
-			} elseif ( version_compare( WC()->version, '2.2.0', '<' ) ) {
+			} elseif ( version_compare( \WC()->version, '2.2.0', '<' ) ) {
 				$variation = get_product( $variation_id );
 			} else {
 				$variation = wc_get_product( $variation_id );

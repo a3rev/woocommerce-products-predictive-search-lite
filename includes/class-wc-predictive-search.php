@@ -265,7 +265,7 @@ class Main
 
 					if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
 						$product = new \WC_Product( $product_id );
-					} elseif ( version_compare( WC()->version, '2.2.0', '<' ) ) {
+					} elseif ( version_compare( \WC()->version, '2.2.0', '<' ) ) {
 						$product = get_product( $product_id );
 					} else {
 						$product = wc_get_product( $product_id );

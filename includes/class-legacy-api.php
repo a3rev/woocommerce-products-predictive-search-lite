@@ -24,7 +24,7 @@ class Legacy_API {
 
 	public function get_legacy_api_url() {
 
-		$legacy_api_url = WC()->api_request_url( $this->base_tag );
+		$legacy_api_url = \WC()->api_request_url( $this->base_tag );
 		$legacy_api_url = str_replace( array( 'https:', 'http:' ), '', $legacy_api_url );
 
 		return apply_filters( 'wc_ps_legacy_api_url', $legacy_api_url );
