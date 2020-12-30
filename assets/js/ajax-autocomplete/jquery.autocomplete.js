@@ -73,7 +73,7 @@ $.fn.extend({
 		});
 	},
 	result: function(handler) {
-		return this.bind("result", handler);
+		return this.on("result", handler);
 	},
 	search: function(handler) {
 		return this.trigger("search", [handler]);
@@ -122,7 +122,7 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 	var blockSubmit;
 	
 	// prevent form submit in opera when selecting with return key
-	window.opera && $(input.form).bind("submit.autocomplete", function() {
+	window.opera && $(input.form).on("submit.autocomplete", function() {
 		if (blockSubmit) {
 			blockSubmit = false;
 			return false;
@@ -136,7 +136,7 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 	});
 
 	// only opera doesn't trigger keydown multiple times while pressed, others don't work with keypress at all
-	$input.bind((window.opera ? "keypress" : "keydown") + ".autocomplete", function(event) {
+	$input.on((window.opera ? "keypress" : "keydown") + ".autocomplete", function(event) {
 		// a keypress means the input has focus
 		// avoids issue where input had focus before the autocomplete was applied
 		hasFocus = 1;
@@ -181,7 +181,7 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 				break;
 			
 			// matches also semicolon
-			case options.multiple && $.trim(options.multipleSeparator) == "," && KEY.COMMA:
+			case options.multiple && options.multipleSeparator.trim() == "," && KEY.COMMA:
 			case KEY.TAB:
 			//case KEY.RETURN:
 				if( selectCurrent() ) {
@@ -216,7 +216,7 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 			$(this).select();
 			select.show(false);
 		}
-	}).bind("search", function() {
+	}).on("search", function() {
 		// TODO why not just specifying both arguments?
 		var fn = (arguments.length > 1) ? arguments[1] : null;
 		function findValueCallback(q, data) {
@@ -233,16 +233,16 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 			else $input.trigger("result", result && [result.keyword, result.url]);
 		}
 		$.each(trimWords($input.val()), function(i, value) {
-			request( $.trim(value), findValueCallback, findValueCallback);
+			request( value.trim(), findValueCallback, findValueCallback);
 		});
-	}).bind("setOptions", function() {
+	}).on("setOptions", function() {
 		$.extend(options, arguments[1]);
 		// if we've updated the data, repopulate
-	}).bind("ps_unautocomplete", function() {
-		select.unbind();
-		$input.unbind();
-		$(input.form).unbind(".autocomplete");
-	}).bind("ps_mobile_icon_click", function() {
+	}).on("ps_unautocomplete", function() {
+		select.off();
+		$input.off();
+		$(input.form).off(".autocomplete");
+	}).on("ps_mobile_icon_click", function() {
 		previousValue = '';
 		$input.val( $input.data('ps-default_text') );
 		hideResultsNow();
@@ -311,8 +311,8 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 			select.hide();
 			return;
 		}
-		
-		var currentValue = $.trim( $input.val() );
+
+		var currentValue = $input.val().trim();
 		var leftcurrentValue = ltrim( $input.val() );
 		
 		if ( !skipPrevCheck && leftcurrentValue == previousValue )
@@ -341,9 +341,9 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 		if (!value)
 			return [""];
 		if (!options.multiple)
-			return [$.trim(value)];
+			return [value.trim()];
 		return $.map(value.split(options.multipleSeparator), function(word) {
-			return $.trim(value).length ? $.trim(word) : null;
+			return value.trim().length ? word.trim() : null;
 		});
 	}
 	
@@ -753,8 +753,8 @@ $.PS_Autocompleter.Select = function (options, input, select, config, wc_psearch
 	function movePosition(step) {
 		active += step;
 		if (active < 0) {
-			active = listItems.size() - 1;
-		} else if (active >= listItems.size()) {
+			active = listItems.length - 1;
+		} else if (active >= listItems.length) {
 			active = 0;
 		}
 	}
@@ -811,8 +811,8 @@ $.PS_Autocompleter.Select = function (options, input, select, config, wc_psearch
 			}
 		},
 		pageDown: function() {
-			if (active != listItems.size() - 1 && active + 8 > listItems.size()) {
-				moveSelect( listItems.size() - 1 - active );
+			if (active != listItems.length - 1 && active + 8 > listItems.length) {
+				moveSelect( listItems.length - 1 - active );
 			} else {
 				moveSelect(8);
 			}
@@ -867,7 +867,7 @@ $.PS_Autocompleter.Select = function (options, input, select, config, wc_psearch
 				});
 				
 				// for IE
-                if(!$.support.opacity && typeof document.body.style.maxHeight === "undefined") {
+                if(typeof document.body.style.maxHeight === "undefined") {
 					var listHeight = 0;
 					listItems.each(function() {
 						listHeight += this.offsetHeight;
