@@ -3,14 +3,14 @@
 Plugin Name: Predictive Search for WooCommerce
 Plugin URI: https://a3rev.com/shop/woocommerce-predictive-search/
 Description: With WooCommerce Predictive Search Lite you can add an awesome Predictive Products Search widget to any widgetized area on your site.
-Version: 5.3.10
+Version: 5.3.11
 Author: a3rev Software
 Author URI: https://www.a3rev.com/
 Requires at least: 5.0
 Tested up to: 5.6
 Text Domain: woocommerce-predictive-search
 WC requires at least: 3.0.0
-WC tested up to: 4.8.0
+WC tested up to: 4.9.0
 Domain Path: /languages
 License: GPLv2 or later
 
@@ -41,7 +41,7 @@ if(!defined("WOO_PREDICTIVE_SEARCH_DOCS_URI"))
 
 define( 'WOOPS_KEY', 'woo_predictive_search' );
 define( 'WOOPS_PREFIX', 'wc_predictive_search_' );
-define( 'WOOPS_VERSION', '5.3.10' );
+define( 'WOOPS_VERSION', '5.3.11' );
 define( 'WOOPS_G_FONTS', true );
 
 use \A3Rev\WCPredictiveSearch\FrameWork;
