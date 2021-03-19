@@ -129,7 +129,7 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 		}
 	});
 
-	$( window ).resize(function() {
+	$( window ).on('resize', function() {
 		if ( select.visible() ) {
 			select.show(true);
 		}
@@ -201,19 +201,19 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 				timeout = setTimeout(onChange, options.delay);
 				break;
 		}
-	}).focus(function(){
+	}).on('focus', function(){
 		// track whether the field has focus, we shouldn't process any
 		// results if the field no longer has focus
 		hasFocus++;
-	}).blur(function() {
+	}).on('blur', function() {
 		hasFocus = 0;
 		if (!config.mouseDownOnSelect && getWidth() > 1024 ) {
 			hideResults();
 		}
-	}).click(function() {
+	}).on('click', function() {
 		// show select when clicking in a focused field
 		if ( '' != $(this).val() && !select.visible() && !select.haveChangeCat() ) {
-			$(this).select();
+			$(this).trigger('select');
 			select.show(false);
 		}
 	}).on("search", function() {
@@ -248,7 +248,7 @@ $.PS_Autocompleter = function(input, options, wc_psearch_popup ) {
 		hideResultsNow();
 	});
 
-	$catdropdown.change(function() {
+	$catdropdown.on('change', function() {
 		previousValue = '';
 		$input.val( $input.data('ps-default_text') );
 		select.changeCategory(true);
@@ -689,27 +689,27 @@ $.PS_Autocompleter.Select = function (options, input, select, config, wc_psearch
 		.css("position", "absolute")
 		.appendTo(document.body);
 
-		closeIcon = $("<span/>").addClass("ps_close dashicons dashicons-dismiss").appendTo(element).mousedown(function() {
+		closeIcon = $("<span/>").addClass("ps_close dashicons dashicons-dismiss").appendTo(element).on('mousedown', function() {
 			element.hide();
 			active = -1;
 		});
 	
-		list = $("<ul/>").addClass("predictive_search_results").appendTo(element).mouseover( function(event) {
+		list = $("<ul/>").addClass("predictive_search_results").appendTo(element).on('mouseover', function(event) {
 			if(target(event).nodeName && target(event).nodeName.toUpperCase() == 'LI') {
 	            active = $("li", list).removeClass(CLASSES.ACTIVE).index(target(event));
 			    $(target(event)).addClass(CLASSES.ACTIVE);            
 	        }
-		}).click(function(event) {
+		}).on('click', function(event) {
 			if ( event.toElement.className != 'rs_cat_link' && $(target(event)).children('div').attr('rel') != 'more_result' ) {
 				$(target(event)).addClass(CLASSES.ACTIVE);
 				select();
 				// TODO provide option to avoid setting focus again after selection? useful for cleanup-on-focus
-				input.focus();
+				input.trigger('focus');
 				return false;
 			}
-		}).mousedown(function() {
+		}).on('mousedown', function() {
 			config.mouseDownOnSelect = true;
-		}).mouseup(function() {
+		}).on('mouseup', function() {
 			config.mouseDownOnSelect = false;
 		});
 		
