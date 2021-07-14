@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 5.0
 Tested up to: 5.7
-Stable tag: 5.3.13
+Stable tag: 5.3.14
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -183,6 +183,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.3.14 - 2021/07/14 =
+* This maintenance release has a fix for endless scroll not working on the Search Results page
+* Fix - Search Results page endless scroll script updated for compatibility with the latest jQuery version
 
 = 5.3.13 - 2021/03/19 =
 * This maintenance release updates 23 deprecated jQuery functions for compatibility with the latest version of jQuery in WordPress 5.7
@@ -970,6 +974,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.3.14 =
+This maintenance release has a fix for endless scroll not working on the Search Results page
 
 = 5.3.13 =
 This maintenance release updates 23 deprecated jQuery functions for compatibility with the latest version of jQuery in WordPress 5.7
