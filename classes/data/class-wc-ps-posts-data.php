@@ -52,7 +52,7 @@ class Posts
 	 *
 	 * @return void
 	 */
-	public function get_sql( $search_keyword = '', $search_keyword_nospecial = '', $post_type = 'product', $number_row, $start = 0, $check_existed = false ) {
+	public function get_sql( $search_keyword = '', $search_keyword_nospecial = '', $post_type = 'product', $number_row = 6, $start = 0, $check_existed = false ) {
 		if ( '' == $search_keyword && '' == $search_keyword_nospecial ) {
 			return false;
 		}

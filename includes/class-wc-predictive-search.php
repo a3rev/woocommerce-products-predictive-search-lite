@@ -146,7 +146,7 @@ class Main
 		return $sql;
 	}
 
-	public function get_product_search_sql( $search_keyword, $row, $start = 0, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $post_type = 'product', $term_id = 0, $current_lang = '', $check_exsited = false ) {
+	public function get_product_search_sql( $search_keyword, $row, $start = 0, $woocommerce_search_focus_enable = '', $woocommerce_search_focus_plugin = '', $post_type = 'product', $term_id = 0, $current_lang = '', $check_exsited = false ) {
 		global $wpdb;
 
 		$row += 1;
@@ -200,7 +200,7 @@ class Main
 	/**
 	 * Get array product list
 	 */
-	public function get_product_results( $search_keyword, $row, $start = 0, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $product_term_id = 0, $text_lenght = 100, $current_lang = '', $include_header = true , $show_price = true, $show_sku = false, $show_addtocart = false, $show_categories = false, $show_tags = false, $in_results_page = false ) {
+	public function get_product_results( $search_keyword, $row, $start = 0, $woocommerce_search_focus_enable = '', $woocommerce_search_focus_plugin = '', $product_term_id = 0, $text_lenght = 100, $current_lang = '', $include_header = true , $show_price = true, $show_sku = false, $show_addtocart = false, $show_categories = false, $show_tags = false, $in_results_page = false ) {
 		global $wpdb;
 
 		$results_display_type = get_option( 'woocommerce_search_result_display_type', 'grid' );
@@ -312,7 +312,7 @@ class Main
 	/**
 	 * Get array post list
 	 */
-	public function get_post_results( $search_keyword, $row, $start = 0, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $post_term_id = 0, $text_lenght = 100, $current_lang = '', $post_type = 'post', $include_header = true , $show_categories = false, $show_tags = false ) {
+	public function get_post_results( $search_keyword, $row, $start = 0, $woocommerce_search_focus_enable = '', $woocommerce_search_focus_plugin = '', $post_term_id = 0, $text_lenght = 100, $current_lang = '', $post_type = 'post', $include_header = true , $show_categories = false, $show_tags = false ) {
 		global $wpdb;
 
 		$total_post = 0;

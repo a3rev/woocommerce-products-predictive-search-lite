@@ -244,7 +244,7 @@ class Functions
 		}
 	}
 
-	public static function woops_limit_words($str='',$len=100,$more) {
+	public static function woops_limit_words($str='',$len=100,$more=true) {
 		if (trim($len) == '' || $len < 0) $len = 100;
 	   if ( $str=="" || $str==NULL ) return $str;
 	   if ( is_array($str) ) return $str;
