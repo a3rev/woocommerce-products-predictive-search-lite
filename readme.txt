@@ -2,9 +2,9 @@
 
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
-Requires at least: 5.0
-Tested up to: 5.8
-Stable tag: 5.3.16
+Requires at least: 5.6
+Tested up to: 5.9
+Stable tag: 5.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -125,10 +125,8 @@ Want to add a new language? You can contribute via [translate.wordpress.org](htt
 
 = Minimum Requirements =
 
-* WordPress 5.0 or greater
-* WooCommerce 3.0 or greater
-* PHP version 7.0 or greater
-* MySQL version 5.6.0 or greater
+* PHP version 7.4 or greater is recommended
+* MySQL version 5.6 or greater is recommended
 
 = AUTOMATIC INSTALLATION =
 
@@ -183,6 +181,14 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.4.0 - 2022/01/21 =
+* This release has a new Google Fonts API Validation feature plus compatibility with WordPress 5.9 and WooCommerce 6.1 
+* Feature - Add Ajax Validate button for Google Fonts API, for quick and easy Validation of API key.
+* Dev - Add dynamic help text to Google Font API field
+* Tweak - Test for compatibility with WordPress 5.9
+* Tweak - Test for compatibility with WooCommerce 6.1
+* Framework - Update a3rev Plugin Framework to version 2.5.0
 
 = 5.3.16 - 2021/11/16 =
 * This maintenance release has fixes for compatibility with PHP version 8.x and WooCommerce 5.9 
@@ -986,6 +992,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.4.0 =
+This release has a new Google Fonts API Validation feature plus compatibility with WordPress 5.9 and WooCommerce 6.1
 
 = 5.3.16 =
 This maintenance release has fixes for compatibility with PHP version 8.x and WooCommerce 5.9
