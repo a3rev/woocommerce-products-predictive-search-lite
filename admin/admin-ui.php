@@ -33,7 +33,7 @@ class Admin_UI
 	 * You must change to correct plugin name that you are working
 	 */
 
-	public $framework_version      = '2.5.0';
+	public $framework_version      = '2.6.0';
 	public $plugin_name            = WOOPS_KEY;
 	public $plugin_path            = WOOPS_NAME;
 	public $google_api_key_option  = '';
@@ -182,13 +182,20 @@ class Admin_UI
 	}
 
 	public function update_google_map_api_key() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return false;
+		}
+
+		check_admin_referer( 'save_settings_' . $this->plugin_name );
+
 		// Enable Google Map API Key
 		if ( isset( $_POST[ $this->google_map_api_key_option . '_enable' ] ) ) {
+
 			$old_google_map_api_key_enable = get_option( $this->google_map_api_key_option . '_enable', 0 );
 
 			update_option( $this->google_map_api_key_option . '_enable', 1 );
 
-			$option_value = trim( sanitize_text_field( $_POST[ $this->google_map_api_key_option ] ) );
+			$option_value = trim( sanitize_text_field( wp_unslash( $_POST[ $this->google_map_api_key_option ] ) ) );
 			update_option( $this->google_map_api_key_option, $option_value );
 
 			if ( 1 != $old_google_map_api_key_enable ) {
@@ -203,7 +210,7 @@ class Admin_UI
 
 			update_option( $this->google_map_api_key_option . '_enable', 0 );
 
-			$option_value = trim( sanitize_text_field( $_POST[ $this->google_map_api_key_option ] ) );
+			$option_value = trim( sanitize_text_field( wp_unslash( $_POST[ $this->google_map_api_key_option ] ) ) );
 			update_option( $this->google_map_api_key_option, $option_value );
 
 			if ( 0 != $old_google_map_api_key_enable ) {
@@ -254,7 +261,7 @@ class Admin_UI
 		$output = apply_filters( $this->plugin_name . '_plugin_premium_video', $output );
 
 		if ( $echo )
-			echo $output;
+			echo wp_kses_post( $output );
 		else
 			return $output;
 	}
@@ -275,7 +282,7 @@ class Admin_UI
 		$output .= '</div>';
 
 		if ( $echo )
-			echo $output;
+			echo wp_kses_post( $output );
 		else
 			return $output;
 	}
@@ -293,7 +300,7 @@ class Admin_UI
 		}
 
 		if ( $echo )
-			echo $output;
+			echo wp_kses_post( $output );
 		else
 			return $output;
 	}
@@ -327,7 +334,7 @@ class Admin_UI
 		}
 
 		if ( $echo )
-			echo $output;
+			echo wp_kses_post( $output );
 		else
 			return $output;
 	}
@@ -348,7 +355,7 @@ class Admin_UI
 		$output = apply_filters( $this->plugin_name . '_plugin_extension_start', $output );
 
 		if ( $echo )
-			echo $output;
+			echo wp_kses_post( $output );
 		else
 			return $output;
 	}
@@ -364,7 +371,7 @@ class Admin_UI
 		$output = apply_filters( $this->plugin_name . '_plugin_extension_end', $output );
 
 		if ( $echo )
-			echo $output;
+			echo wp_kses_post( $output );
 		else
 			return $output;
 
@@ -384,7 +391,7 @@ class Admin_UI
 
 		$upgrade_top_message = apply_filters( $this->plugin_name . '_upgrade_top_message', $upgrade_top_message, $setting_id );
 
-		if ( $echo ) echo $upgrade_top_message;
+		if ( $echo ) echo wp_kses_post( $upgrade_top_message );
 		else return $upgrade_top_message;
 
 	}
