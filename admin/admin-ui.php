@@ -87,8 +87,6 @@ class Admin_UI
 		}
 
 		$this->support_url = 'https://wordpress.org/support/plugin/woocommerce-predictive-search/';
-
-		$this->update_google_map_api_key();
 	}
 	
 	
