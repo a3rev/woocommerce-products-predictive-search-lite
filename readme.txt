@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 5.6
 Tested up to: 6.1
-Stable tag: 5.5.2
+Stable tag: 5.5.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -181,6 +181,10 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.5.3 - 2022/11/16 =
+* This maintenance release removes dashicons and replaces it with svg icon for faster script load.
+* Tweak - Remove use dashicons on frontend and replace with svg icon for faster script load
 
 = 5.5.2 - 2022/11/01 =
 * This maintenance release has a security vulnerability patch, plus compatibility with WordPress major version 6.1.0 and WooCommerce version 7.0
@@ -1014,6 +1018,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.5.3 =
+This maintenance release removes dashicons and replaces it with svg icon for faster script load.
 
 = 5.5.2 =
 This maintenance release has a security vulnerability patch, plus compatibility with WordPress major version 6.1.0 and WooCommerce version 7.0

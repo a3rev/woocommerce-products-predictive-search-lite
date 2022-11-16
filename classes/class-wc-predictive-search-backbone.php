@@ -82,7 +82,7 @@ class Hook_Backbone
 			$GLOBALS[WOOPS_PREFIX.'admin_interface']->register_fontawesome_style();
 		}
 
-    	wp_register_style( 'wc-predictive-search-style', WOOPS_CSS_URL . '/wc_predictive_search.css', array( 'dashicons', 'font-awesome-styles' ), WOOPS_VERSION, 'all' );
+    	wp_register_style( 'wc-predictive-search-style', WOOPS_CSS_URL . '/wc_predictive_search.css', array( 'font-awesome-styles' ), WOOPS_VERSION, 'all' );
 
     	$_upload_dir = wp_upload_dir();
 		$have_dynamic_style = false;
