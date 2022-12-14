@@ -174,7 +174,7 @@ class Legacy_API {
 							$link_search = get_permalink( $woocommerce_search_page_id ).'&rs='. urlencode($search_keyword) .$search_in_parameter.'&search_other='.implode(",", $search_other).'&cat_in='.$cat_in;
 						else
 							$link_search = rtrim( get_permalink( $woocommerce_search_page_id ), '/' ).'/keyword/'. urlencode($search_keyword) .$search_in_parameter.'/cat-in/'.$cat_in.'/search-other/'.implode(",", $search_other);
-						$rs_item = '<a href="'.$link_search.'">'.$items_search_default[$other_rs]['name'].' <i class="fa fa-caret-right see_more_arrow" aria-hidden="true"></i></a>';
+						$rs_item = '<a href="'.$link_search.'">'.$items_search_default[$other_rs]['name'].'<div class="see_more_arrow" aria-label="'.__( 'View More', 'woocommerce-predictive-search' ).'"><svg viewBox="0 0 256 512" height="12" width="12" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle;"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg></div></a>';
 						$rs_footer_html .= "$rs_item";
 					}
 

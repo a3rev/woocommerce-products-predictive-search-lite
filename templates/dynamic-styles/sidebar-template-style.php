@@ -80,7 +80,6 @@ extract( $wc_predictive_search_sidebar_template_settings );
 }
 @sidebar_loading_icon_size: <?php echo $sidebar_loading_icon_size; ?>px;
 @sidebar_loading_icon_color: <?php echo $sidebar_loading_icon_color; ?>;
-@sidebar_loading_icon_top_postition: ~"calc( <?php echo $sidebar_search_box_height; ?>px/2 - <?php echo $sidebar_loading_icon_size; ?>px/2 )";
 
 /* Sidebar Close Icon Variables */
 @sidebar_close_icon_size: <?php echo $sidebar_close_icon_size; ?>px;
@@ -227,8 +226,12 @@ extract( $wc_predictive_search_sidebar_template_settings );
 		}
 
 		.wc_ps_nav_submit_icon {
-			font-size: @sidebar_search_icon_size;
 			color: @sidebar_search_icon_color;
+
+			svg {
+				width: @sidebar_search_icon_size;
+				height: @sidebar_search_icon_size;
+			}
 
 			* {
 				color: @sidebar_search_icon_color;
@@ -246,12 +249,11 @@ extract( $wc_predictive_search_sidebar_template_settings );
 		}
 
 		.wc_ps_searching_icon {
-			font-size: @sidebar_loading_icon_size;
-			color: @sidebar_loading_icon_color;
+			width: @sidebar_loading_icon_size;
+			fill: @sidebar_loading_icon_color;
 		}
 
 		svg.wc_ps_searching_icon {
-			top: @sidebar_loading_icon_top_postition;
 
 			* {
 				color: @sidebar_loading_icon_color;
@@ -266,7 +268,6 @@ extract( $wc_predictive_search_sidebar_template_settings );
 	.wc_ps_nav_right,
 	.wc_ps_nav_fill,
 	.wc_ps_nav_scope,
-	.wc_ps_category_selector,
 	.wc_ps_nav_submit,
 	.wc_ps_nav_field,
 	.wc_ps_search_keyword {
@@ -356,8 +357,12 @@ extract( $wc_predictive_search_sidebar_template_settings );
 		}
 
 		.see_more_arrow {
-			font-size: @sidebar_popup_more_icon_size !important;
 			color: @sidebar_popup_more_icon_color !important;
+
+			svg {
+				width: @sidebar_popup_more_icon_size !important;
+				height: @sidebar_popup_more_icon_size !important;
+			}
 		}
 	}
 

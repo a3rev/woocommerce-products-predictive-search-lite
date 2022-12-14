@@ -269,28 +269,3 @@ function wc_ps_error_modal_tpl( $args = array() ) {
 		apply_filters( 'wc_ps_error_modal_tpl_args', $args )
 	);
 }
-
-function wc_ps_get_product_categories() {
-	global $wc_predictive_search_cache;
-	$categories_list       = false;
-	$append_transient_name = '';
-
-	if ( $wc_predictive_search_cache->enable_cat_cache() ) {
-		if ( class_exists('SitePress') ) {
-			$current_lang = apply_filters( 'wpml_current_language', NULL );
-			$append_transient_name = $current_lang;
-		}
-
-		$categories_list = $wc_predictive_search_cache->get_product_categories_dropdown_cache( $append_transient_name );
-
-		if ( false === $categories_list ) {
-			$language = trim( $append_transient_name );
-			if ( '' != $language ) {
-				$language = '_' . $language;
-			}
-			update_option( 'predictive_search_have_cat_cache' . $language, 'no' );
-		}
-	}
-
-	return $categories_list;
-}

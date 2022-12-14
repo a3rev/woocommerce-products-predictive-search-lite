@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 5.6
 Tested up to: 6.1
-Stable tag: 5.5.3
+Stable tag: 5.6.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -181,6 +181,19 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.6.0 - 2022/12/14 =
+* This feature release adds insert by shortcode and removes the fontawesome lib and replaces icons with SVGs plus adds Default Topography option to font controls and has compatibility with WooCommerce 7.1
+* Feature - Add Search Box shortcode for insert into page Builders
+* Feature - Add Shortcode option box on the plugins settings tab
+* Feature - Convert icon from font awesome to svg
+* Feature - Update styling for new svg icons
+* Tweak - Test for compatibility with WooCommerce 7.1
+* Plugin Framework - Remove fontawesome lib
+* Plugin Framework - Update typography control from plugin framework to add support for Default value
+* Plugin Framework - Default value will get fonts set in the theme.
+* Plugin Framework - Change generate typography style for change on typography control
+* Fix - Correct html structure for show properly the total of Data Sync on Performance page
 
 = 5.5.3 - 2022/11/16 =
 * This maintenance release removes dashicons and replaces it with svg icon for faster script load.
@@ -1018,6 +1031,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.6.0 =
+This feature release adds insert by shortcode and removes the fontawesome lib and replaces icons with SVGs plus adds Default Topography option to font controls and has compatibility with WooCommerce 7.1
 
 = 5.5.3 =
 This maintenance release removes dashicons and replaces it with svg icon for faster script load.

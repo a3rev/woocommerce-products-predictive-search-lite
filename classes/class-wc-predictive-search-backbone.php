@@ -77,12 +77,7 @@ class Hook_Backbone
     ?>
 
     <?php
-    	// If don't have any plugin or theme register font awesome style then register it from plugin framework
-		if ( ! wp_style_is( 'font-awesome-styles', 'registered' ) ) {
-			$GLOBALS[WOOPS_PREFIX.'admin_interface']->register_fontawesome_style();
-		}
-
-    	wp_register_style( 'wc-predictive-search-style', WOOPS_CSS_URL . '/wc_predictive_search.css', array( 'font-awesome-styles' ), WOOPS_VERSION, 'all' );
+    	wp_register_style( 'wc-predictive-search-style', WOOPS_CSS_URL . '/wc_predictive_search.css', array(), WOOPS_VERSION, 'all' );
 
     	$_upload_dir = wp_upload_dir();
 		$have_dynamic_style = false;

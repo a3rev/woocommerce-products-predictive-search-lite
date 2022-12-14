@@ -485,6 +485,14 @@ class Global_Panel extends FrameWork\Admin_UI
 				'options_url' => admin_url( 'admin-ajax.php?action=wc_ps_get_exclude_options&type=page&keyword=', 'relative' ),
 			),
 
+			array(
+            	'name' 		=> __( 'Shortcode', 'woocommerce-predictive-search' ),
+            	'desc'		=> __( 'You can add the Predictive Search Box by shortcode anywhere in a theme or page builder that accepts shortcodes. <a href="https://docs.a3rev.com/woocommerce/woo-predictive-search/#Shortcodes" target="blank">Click here</a> to go to the plugins docs to get the shortcode.', 'woocommerce-predictive-search' ),
+                'type' 		=> 'heading',
+                'id'		=> 'predictive_search_shortcode_box',
+                'is_box'	=> true,
+           	),
+
         ));
 	}
 

@@ -74,12 +74,21 @@ add_action('widgets_init', 'register_widget_woops_predictive_search');
 // Add shortcode [woocommerce_search]
 add_shortcode('woocommerce_search', array('\A3Rev\WCPredictiveSearch\Shortcodes', 'parse_shortcode_search_result'));
 
+// Add shortcode [woocommerce_widget_search]
+add_shortcode('woocommerce_search_widget', array('\A3Rev\WCPredictiveSearch\Shortcodes', 'parse_shortcode_search_widget'));
+
 // Add Predictive Search Meta Box to all post type
 add_action( 'add_meta_boxes', array('\A3Rev\WCPredictiveSearch\MetaBox','create_custombox'), 9 );
 
 // Save Predictive Search Meta Box to all post type
 if(in_array(basename($_SERVER['PHP_SELF']), array('post.php', 'page.php', 'page-new.php', 'post-new.php'))){
 	add_action( 'save_post', array('\A3Rev\WCPredictiveSearch\MetaBox','save_custombox' ), 11 );
+}
+
+// Add search widget icon to Page Editor
+if (in_array (basename($_SERVER['PHP_SELF']), array('post.php', 'page.php', 'page-new.php', 'post-new.php') ) ) {
+	add_action('media_buttons_context', array('\A3Rev\WCPredictiveSearch\Shortcodes', 'add_search_widget_icon') );
+	add_action('admin_footer', array('\A3Rev\WCPredictiveSearch\Shortcodes', 'add_search_widget_mce_popup'));
 }
 
 
@@ -158,6 +167,13 @@ function woo_ps_lite_upgrade_plugin() {
 
 		// Set Settings Default from Admin Init
 		$GLOBALS[WOOPS_PREFIX.'admin_init']->set_default_settings();
+		
+		// Build sass
+		$GLOBALS[WOOPS_PREFIX.'less']->plugin_build_sass();
+	}
+
+	if ( version_compare( get_option('wc_predictive_search_lite_version'), '5.5.4', '<' ) ) {
+		update_option('wc_predictive_search_lite_version', '5.5.4');
 		
 		// Build sass
 		$GLOBALS[WOOPS_PREFIX.'less']->plugin_build_sass();
