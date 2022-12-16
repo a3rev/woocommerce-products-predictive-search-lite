@@ -90,10 +90,14 @@ class Global_Panel extends FrameWork\Admin_UI
 
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_end', array( $this, 'include_script' ) );
 
+		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_end', array( $this, 'include_modal_script' ) );
+
 		add_action( $this->plugin_name . '_set_default_settings' , array( $this, 'set_default_settings' ) );
 
 		add_action( $this->plugin_name . '-' . $this->form_key . '_settings_init' , array( $this, 'after_save_settings' ) );
 		//add_action( $this->plugin_name . '_get_all_settings' , array( $this, 'get_settings' ) );
+
+		add_action( $this->plugin_name . '_settings_' . 'predictive_search_shortcode_box' . '_start', array( $this, 'predictive_search_shortcode_box' ) );
 	}
 
 	/*-----------------------------------------------------------------------------------*/
@@ -487,13 +491,171 @@ class Global_Panel extends FrameWork\Admin_UI
 
 			array(
             	'name' 		=> __( 'Shortcode', 'woocommerce-predictive-search' ),
-            	'desc'		=> __( 'You can add the Predictive Search Box by shortcode anywhere in a theme or page builder that accepts shortcodes. <a href="https://docs.a3rev.com/woocommerce/woo-predictive-search/#Shortcodes" target="blank">Click here</a> to go to the plugins docs to get the shortcode.', 'woocommerce-predictive-search' ),
                 'type' 		=> 'heading',
                 'id'		=> 'predictive_search_shortcode_box',
                 'is_box'	=> true,
            	),
 
         ));
+	}
+
+	public function predictive_search_shortcode_box() {
+	?>
+		<tr valign="top" class="">
+			<td class="forminp" colspan="2">
+            	<?php _e( 'You can add the Predictive Search Box by shortcode anywhere in a theme or page builder that accepts shortcodes.', 'woocommerce-predictive-search' ); ?>
+            	<br />
+            	<div style="text-align: center; margin-top: 20px;"><a data-toggle="modal" href="#ps_generate_shortcode-modal" class="button button-primary"><?php _e( 'Create Shortcode', 'woocommerce-predictive-search' ); ?></a></div>
+			</td>
+		</tr>
+	<?php
+	}
+
+	public function include_modal_script() {
+		$disabled_cat_dropdown = false;
+		$product_categories = false;
+
+		$items_search_default = \A3Rev\WCPredictiveSearch\Widgets::get_items_search();
+	?>
+		<script type="text/javascript">
+
+			function woo_search_widget_add_shortcode(){
+				var number_items = '';
+				<?php foreach ($items_search_default as $key => $data) {?>
+				var woo_search_<?php echo $key ?>_items = '<?php echo $key ?>_items="' + jQuery("#woo_search_<?php echo $key ?>_items").val() + '" ';
+				number_items += woo_search_<?php echo $key ?>_items;
+				<?php } ?>
+				var woo_search_widget_template = jQuery("#woo_search_widget_template").val();
+				var woo_search_show_image = 0;
+				if ( jQuery('#woo_search_show_image').is(":checked") ) {
+					woo_search_show_image = 1;
+				}
+				var woo_search_show_price = 0;
+				if ( jQuery('#woo_search_show_price').is(":checked") ) {
+					woo_search_show_price = 1;
+				}
+				var woo_search_show_desc = 0;
+				if ( jQuery('#woo_search_show_desc').is(":checked") ) {
+					woo_search_show_desc = 1;
+				}
+				var woo_search_show_in_cat = 0;
+				if ( jQuery('#woo_search_show_in_cat').is(":checked") ) {
+					woo_search_show_in_cat = 1;
+				}
+				var woo_search_text_lenght = jQuery("#woo_search_text_lenght").val();
+				var woo_search_align = jQuery("#woo_search_align").val();
+				var woo_search_width = jQuery("#woo_search_width").val();
+				var woo_search_padding_top = jQuery("#woo_search_padding_top").val();
+				var woo_search_padding_bottom = jQuery("#woo_search_padding_bottom").val();
+				var woo_search_padding_left = jQuery("#woo_search_padding_left").val();
+				var woo_search_padding_right = jQuery("#woo_search_padding_right").val();
+				var woo_search_box_text = jQuery("#woo_search_box_text").val();
+				var woo_search_style = '';
+				var wrap = '';
+				if (woo_search_align == 'center') woo_search_style += 'float:none;margin:auto;display:table;';
+				else if (woo_search_align == 'left-wrap') woo_search_style += 'float:left;';
+				else if (woo_search_align == 'right-wrap') woo_search_style += 'float:right;';
+				else woo_search_style += 'float:'+woo_search_align+';';
+				
+				if(woo_search_align == 'left-wrap' || woo_search_align == 'right-wrap') wrap = 'wrap="true"';
+				
+				if (parseInt(woo_search_width) > 0) woo_search_style += 'width:'+parseInt(woo_search_width)+'px;';
+				if (parseInt(woo_search_padding_top) >= 0) woo_search_style += 'padding-top:'+parseInt(woo_search_padding_top)+'px;';
+				if (parseInt(woo_search_padding_bottom) >= 0) woo_search_style += 'padding-bottom:'+parseInt(woo_search_padding_bottom)+'px;';
+				if (parseInt(woo_search_padding_left) >= 0) woo_search_style += 'padding-left:'+parseInt(woo_search_padding_left)+'px;';
+				if (parseInt(woo_search_padding_right) >= 0) woo_search_style += 'padding-right:'+parseInt(woo_search_padding_right)+'px;';
+				var win = window.dialogArguments || opener || parent || top;
+				var shortcode_output = '[woocommerce_search_widget ' + number_items + ' widget_template="'+woo_search_widget_template+'" show_image="'+woo_search_show_image+'" show_price="'+woo_search_show_price+'" show_desc="'+woo_search_show_desc+'" show_in_cat="'+woo_search_show_in_cat+'" character_max="'+woo_search_text_lenght+'" style="'+woo_search_style+'" '+wrap+' search_box_text="'+woo_search_box_text+'" ]';
+
+				jQuery(".shortcode_container").html( shortcode_output );
+			}
+		</script>
+		<style type="text/css">
+			.field_content {
+				padding:0 40px;
+			}
+			.field_content label{
+				width:150px;
+				float:left;
+				text-align:left;
+			}
+			.field_content p {
+				clear: both;
+			}
+			.shortcode_container {
+				background: rgba(0, 0, 0, 0.07);
+			    color: #fc2323;
+			    padding: 30px 20px;
+			    margin-top: 20px;
+			}
+			body.mobile.modal-open #wpwrap {
+				position:  inherit;
+			}
+			@media screen and ( max-width: 782px ) {
+				#woo_search_box_text {
+					width:100% !important;	
+				}
+				label[for="woo_search_padding"] {
+					width: 100%;
+				}
+			}
+		</style>
+
+    	<div class="modal fade wc-ps-modal" id="ps_generate_shortcode-modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title"><?php echo __( 'Generate Shortcode', 'woocommerce-predictive-search' ); ?></h5>
+					</div>
+					<div class="modal-body m-3">
+						<div class="field_content">
+			                <?php foreach ($items_search_default as $key => $data) { ?>
+			                <p><label for="woo_search_<?php echo $key ?>_items"><?php echo $data['name']; ?>:</label> <input style="width:100px;" size="10" id="woo_search_<?php echo $key ?>_items" name="woo_search_<?php echo $key ?>_items" type="text" value="<?php echo $data['number'] ?>" /> <span class="description"><?php _e('Number of', 'woocommerce-predictive-search' ); echo ' '.$data['name'].' '; _e('results to show in dropdown', 'woocommerce-predictive-search' ); ?></span></p> 
+			                <?php } ?>
+			                <p><label for="woo_search_widget_template"><?php _e('Select Template', 'woocommerce-predictive-search' ); ?>:</label> <select style="width:100px" id="woo_search_widget_template" name="woo_search_widget_template"><option value="sidebar" selected="selected"><?php _e('Widget', 'woocommerce-predictive-search' ); ?></option><option value="header"><?php _e('Header', 'woocommerce-predictive-search' ); ?></option></select></p>
+
+			                <p><label for="woo_search_show_image"><?php _e('Image', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_image" name="woo_search_show_image" value="1" /> <span class="description"><?php _e('Show Results Images', 'woocommerce-predictive-search' ); ?></span></p>
+			                <p><label for="woo_search_show_price"><?php _e('Price', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_price" name="woo_search_show_price" value="1" /> <span class="description"><?php _e('Product Results - Show Prices', 'woocommerce-predictive-search' ); ?></span></p>
+			            	<p><label for="woo_search_show_desc"><?php _e('Description', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_desc" name="woo_search_show_desc" value="1" /> <span class="description"><?php _e('Show Results Description', 'woocommerce-predictive-search' ); ?></span></p>
+			            	<p><label for="woo_search_text_lenght"><?php _e('Characters Count', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:100px;" size="10" id="woo_search_text_lenght" name="woo_search_text_lenght" type="text" value="100" /> <span class="description"><?php _e('Number of results description characters', 'woocommerce-predictive-search' ); ?></span></p>
+			            	<p><label for="woo_search_show_in_cat"><?php _e('Product Categories', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_in_cat" name="woo_search_show_in_cat" value="1" /> <span class="description"><?php _e('Product Results - Show Categories', 'woocommerce-predictive-search' ); ?></span></p>
+			                <p><label for="woo_search_align"><?php _e('Alignment', 'woocommerce-predictive-search' ); ?>:</label> <select style="width:100px" id="woo_search_align" name="woo_search_align"><option value="none" selected="selected"><?php _e('None', 'woocommerce-predictive-search' ); ?></option><option value="left-wrap"><?php _e('Left - wrap', 'woocommerce-predictive-search' ); ?></option><option value="left"><?php _e('Left - no wrap', 'woocommerce-predictive-search' ); ?></option><option value="center"><?php _e('Center', 'woocommerce-predictive-search' ); ?></option><option value="right-wrap"><?php _e('Right - wrap', 'woocommerce-predictive-search' ); ?></option><option value="right"><?php _e('Right - no wrap', 'woocommerce-predictive-search' ); ?></option></select> <span class="description"><?php _e('Horizontal aliginment of search box', 'woocommerce-predictive-search' ); ?></span></p>
+			                <p><label for="woo_search_width"><?php _e('Search box width', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:100px;" size="10" id="woo_search_width" name="woo_search_width" type="text" value="200" />px</p>
+			                <p><label for="woo_search_box_text"><?php _e('Search box text message', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:300px;" size="10" id="woo_search_box_text" name="woo_search_box_text" type="text" value="" /></p>
+			                <p><label for="woo_search_padding"><strong><?php _e('Padding', 'woocommerce-predictive-search' ); ?></strong>:</label>
+							<label for="woo_search_padding_top" style="width:auto; float:none"><?php _e('Above', 'woocommerce-predictive-search' ); ?>:</label><input style="width:50px;" size="10" id="woo_search_padding_top" name="woo_search_padding_top" type="text" value="10" />px &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			                <label for="woo_search_padding_bottom" style="width:auto; float:none"><?php _e('Below', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:50px;" size="10" id="woo_search_padding_bottom" name="woo_search_padding_bottom" type="text" value="10" />px &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			                <label for="woo_search_padding_left" style="width:auto; float:none"><?php _e('Left', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:50px;" size="10" id="woo_search_padding_left" name="woo_search_padding_left" type="text" value="0" />px &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			                <label for="woo_search_padding_right" style="width:auto; float:none"><?php _e('Right', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:50px;" size="10" id="woo_search_padding_right" name="woo_search_padding_right" type="text" value="0" />px
+			                </p>
+						</div>
+						<div class="shortcode_container"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" onclick="woo_search_widget_add_shortcode();"><?php echo __( 'Get Shortcode', 'woocommerce-predictive-search' ); ?></button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal"><?php echo __( 'Close', 'woocommerce-predictive-search' ); ?></button>
+					</div>
+				</div>
+			</div>
+		</div>
+	<?php
+		if ( ! wp_script_is( 'bootstrap-modal', 'registered' ) 
+			&& ! wp_script_is( 'bootstrap-modal', 'enqueued' ) ) {
+			$GLOBALS[$this->plugin_prefix.'admin_interface']->register_modal_scripts();
+		}
+
+		wp_enqueue_style( 'bootstrap-modal' );
+
+		// Don't include modal script if bootstrap is loaded by theme or plugins
+		if ( wp_script_is( 'bootstrap', 'registered' ) 
+			|| wp_script_is( 'bootstrap', 'enqueued' ) ) {
+			
+			wp_enqueue_script( 'bootstrap' );
+			
+			return;
+		}
+
+		wp_enqueue_script( 'bootstrap-modal' );
 	}
 
 	public function include_script() {

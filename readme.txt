@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 5.6
 Tested up to: 6.1
-Stable tag: 5.6.0
+Stable tag: 5.7.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -181,6 +181,11 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.7.0 - 2022/12/16 =
+* This feature release adds a Predictive Search Box shortcode generator to the plugins setting tab, Shortcode option box.
+* Feature - Add Predictive Search Box Shortcode creation from the Settings tab, Shortcode Option Box
+* Feature - Add Create Shortcode button with Pop up form and shortcode generator
 
 = 5.6.0 - 2022/12/14 =
 * This feature release adds insert by shortcode and removes the fontawesome lib and replaces icons with SVGs plus adds Default Topography option to font controls and has compatibility with WooCommerce 7.1
@@ -1031,6 +1036,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.7.0 =
+This feature release adds a Predictive Search Box shortcode generator to the plugins setting tab, Shortcode option box.
 
 = 5.6.0 =
 This feature release adds insert by shortcode and removes the fontawesome lib and replaces icons with SVGs plus adds Default Topography option to font controls and has compatibility with WooCommerce 7.1

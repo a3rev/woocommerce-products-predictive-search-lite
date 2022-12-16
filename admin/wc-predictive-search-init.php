@@ -172,8 +172,8 @@ function woo_ps_lite_upgrade_plugin() {
 		$GLOBALS[WOOPS_PREFIX.'less']->plugin_build_sass();
 	}
 
-	if ( version_compare( get_option('wc_predictive_search_lite_version'), '5.5.4', '<' ) ) {
-		update_option('wc_predictive_search_lite_version', '5.5.4');
+	if ( version_compare( get_option('wc_predictive_search_lite_version'), '5.6.0', '<' ) ) {
+		update_option('wc_predictive_search_lite_version', '5.6.0');
 		
 		// Build sass
 		$GLOBALS[WOOPS_PREFIX.'less']->plugin_build_sass();

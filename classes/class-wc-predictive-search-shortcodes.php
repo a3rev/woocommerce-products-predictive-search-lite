@@ -157,7 +157,7 @@ class Shortcodes
 				}
 				var woo_search_show_image = 0;
 				if ( jQuery('#woo_search_show_image').is(":checked") ) {
-					vwoo_search_show_image = 1;
+					woo_search_show_image = 1;
 				}
 				var woo_search_show_price = 0;
 				if ( jQuery('#woo_search_show_price').is(":checked") ) {
