@@ -2,9 +2,9 @@
 
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
-Requires at least: 5.6
+Requires at least: 6.0
 Tested up to: 6.2
-Stable tag: 5.7.0
+Stable tag: 5.8.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -181,6 +181,12 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.8.0 - 2023/04/25 =
+* This release has compatibility with WordPress 6.2.0, WooCommerce 7.6.0 plus declared compatibility with WooCommerce HPOS.
+* Tweak - Test for compatibility with WordPress 6.2
+* Tweak - Test for compatibility with WooCommerce 7.6.0
+* Tweak - Test and declare plugin compatibility with WooCommerce HPOS Custom Tables.
 
 = 5.7.0 - 2022/12/16 =
 * This feature release adds a Predictive Search Box shortcode generator to the plugins setting tab, Shortcode option box.
@@ -1036,6 +1042,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.8.0 =
+This release has compatibility with WordPress 6.2.0, WooCommerce 7.6.0 plus declared compatibility with WooCommerce HPOS.
 
 = 5.7.0 =
 This feature release adds a Predictive Search Box shortcode generator to the plugins setting tab, Shortcode option box.
