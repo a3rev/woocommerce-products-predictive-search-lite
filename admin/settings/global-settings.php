@@ -226,6 +226,9 @@ class Global_Panel extends FrameWork\Admin_UI
 	public function init_form_fields() {
 
 		global $wpdb;
+
+		$get_exclude_options_nonce = wp_create_nonce( 'wc_predictive_search_get_exclude_options' );
+
 		$all_products     = array();
 		$all_posts        = array();
 		$all_pages        = array();
@@ -466,7 +469,7 @@ class Global_Panel extends FrameWork\Admin_UI
 				'css'		=> 'width:600px; min-height:80px;',
 				'options'	=> $all_products,
 				'default'	=> $products_excluded,
-				'options_url' => admin_url( 'admin-ajax.php?action=wc_ps_get_exclude_options&type=product&keyword=', 'relative' ),
+				'options_url' => admin_url( 'admin-ajax.php?action=wc_ps_get_exclude_options&security='.$get_exclude_options_nonce.'&type=product&keyword=', 'relative' ),
 			),
 			array(  
 				'name' 		=> __( 'Exclude Posts', 'woocommerce-predictive-search' ),
@@ -476,7 +479,7 @@ class Global_Panel extends FrameWork\Admin_UI
 				'css'		=> 'width:600px; min-height:80px;',
 				'options'	=> $all_posts,
 				'default'	=> $posts_excluded,
-				'options_url' => admin_url( 'admin-ajax.php?action=wc_ps_get_exclude_options&type=post&keyword=', 'relative' ),
+				'options_url' => admin_url( 'admin-ajax.php?action=wc_ps_get_exclude_options&security='.$get_exclude_options_nonce.'&type=post&keyword=', 'relative' ),
 			),
 			array(  
 				'name' 		=> __( 'Exclude Pages', 'woocommerce-predictive-search' ),
@@ -486,7 +489,7 @@ class Global_Panel extends FrameWork\Admin_UI
 				'css'		=> 'width:600px; min-height:80px;',
 				'options'	=> $all_pages,
 				'default'	=> $pages_excluded,
-				'options_url' => admin_url( 'admin-ajax.php?action=wc_ps_get_exclude_options&type=page&keyword=', 'relative' ),
+				'options_url' => admin_url( 'admin-ajax.php?action=wc_ps_get_exclude_options&security='.$get_exclude_options_nonce.'&type=page&keyword=', 'relative' ),
 			),
 
 			array(

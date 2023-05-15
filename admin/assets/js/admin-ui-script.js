@@ -450,7 +450,7 @@
 
 				type: submit_data.ajax_type,
 				url: submit_data.ajax_url,
-				data: submit_data.data,
+				data: $.extend( submit_data.data, { security: a3_admin_ui_script_params.security } ),
 				success: function ( response ) {
 					data = JSON.parse( response );
 					$('#' + bt_ajax_submit.attr('id') ).trigger("a3rev-ui-ajax_submit-completed", [ bt_ajax_submit, data ]);
@@ -555,7 +555,7 @@
 
 				type: submit_data.ajax_type,
 				url: submit_data.ajax_url,
-				data: submit_data.data,
+				data: $.extend( submit_data.data, { security: a3_admin_ui_script_params.security } ),
 				success: function ( response ) {
 					result = JSON.parse( response );
 

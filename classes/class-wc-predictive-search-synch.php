@@ -182,6 +182,8 @@ class Sync
 	}
 
 	public function wc_predictive_search_start_sync_ajax() {
+		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+
 		$result = $this->wc_predictive_search_start_sync( $this->error_id );
 
 		echo json_encode( $result );
@@ -190,6 +192,8 @@ class Sync
 	}
 
 	public function wc_predictive_search_sync_products_ajax() {
+		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+
 		$result = $this->wc_predictive_search_sync_posts( 'product', $this->error_id );
 
 		echo json_encode( $result );
@@ -198,6 +202,8 @@ class Sync
 	}
 
 	public function wc_predictive_search_sync_product_skus_ajax() {
+		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+
 		$result = $this->wc_predictive_search_sync_product_skus( $this->error_id );
 
 		echo json_encode( $result );
@@ -206,6 +212,7 @@ class Sync
 	}
 
 	public function wc_predictive_search_sync_categories_ajax() {
+		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
 		$status = 'completed';
 
 		echo json_encode( array( 'status' => $status, 'current_items' => 0, 'total_items' => 0 ) );
@@ -214,6 +221,7 @@ class Sync
 	}
 
 	public function wc_predictive_search_sync_tags_ajax() {
+		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
 		$status = 'completed';
 
 		echo json_encode( array( 'status' => $status, 'current_items' => 0, 'total_items' => 0 ) );
@@ -222,6 +230,7 @@ class Sync
 	}
 
 	public function wc_predictive_search_sync_relationships_ajax() {
+		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
 		$status = 'completed';
 
 		echo json_encode( array( 'status' => $status, 'current_items' => 0, 'total_items' => 0 ) );
@@ -230,6 +239,8 @@ class Sync
 	}
 
 	public function wc_predictive_search_sync_posts_ajax() {
+		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+
 		$result = $this->wc_predictive_search_sync_posts( 'post', $this->error_id );
 
 		echo json_encode( $result );
@@ -238,6 +249,8 @@ class Sync
 	}
 
 	public function wc_predictive_search_sync_pages_ajax() {
+		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+
 		$result = $this->wc_predictive_search_sync_posts( 'page', $this->error_id );
 
 		echo json_encode( $result );
@@ -246,6 +259,8 @@ class Sync
 	}
 
 	public function wc_predictive_search_manual_sync_error_ajax() {
+		check_ajax_referer( 'wc_predictive_search_manual_sync_error', 'security' );
+
 		global $wc_ps_errors_log;
 
 		$manual_synced_error_log = trim( $wc_ps_errors_log->get_error( 'manual_sync' ) );
@@ -254,6 +269,8 @@ class Sync
 	}
 
 	public function wc_predictive_search_sync_end_ajax() {
+		check_ajax_referer( 'wc_predictive_search_sync_end', 'security' );
+
 		update_option( 'wc_predictive_search_synced_posts_data', 1 );
 		update_option( 'wc_predictive_search_manual_synced_completed_time', current_time( 'timestamp' ) );
 

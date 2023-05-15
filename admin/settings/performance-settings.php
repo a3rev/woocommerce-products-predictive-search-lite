@@ -577,7 +577,10 @@ class Performance extends FrameWork\Admin_UI
 			$.ajax({
 				type: 'POST',
 				url: '<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>',
-				data: { action: 'wc_predictive_search_manual_sync_error' },
+				data: {
+					action: 'wc_predictive_search_manual_sync_error',
+					security: '<?php echo wp_create_nonce( 'wc_predictive_search_manual_sync_error' ); ?>',
+				},
 				success: function ( response ) {
 					$('.manual_sync_error_container').html( response );
 				}
@@ -634,7 +637,10 @@ class Performance extends FrameWork\Admin_UI
 			$.ajax({
 				type: 'POST',
 				url: '<?php echo admin_url( 'admin-ajax.php', 'relative' ); ?>',
-				data: { action: 'wc_predictive_search_sync_end' },
+				data: {
+					action: 'wc_predictive_search_sync_end',
+					security: '<?php echo wp_create_nonce( 'wc_predictive_search_sync_end' ); ?>',
+				},
 				success: function ( response ) {
 					$('#predictive_search_synch_data_box_inside').find('.built-time').html( response.date );
 				}
