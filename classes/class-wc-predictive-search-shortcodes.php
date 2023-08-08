@@ -305,6 +305,11 @@ class Shortcodes
 		// Don't show content for shortcode on Dashboard, still support for admin ajax
 		if ( is_admin() && ( ! defined( 'DOING_AJAX' ) || ! DOING_AJAX ) ) return;
 
+		if ( wcps_current_theme_is_fse_theme() ) {
+			global $wc_ps_hook_backbone;
+			$wc_ps_hook_backbone->include_result_shortcode_script();
+		}
+
 		$search_results = '';
 		global $woocommerce_search_page_id;
 		global $wp_query;

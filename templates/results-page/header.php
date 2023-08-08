@@ -8,7 +8,7 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 ?>
 
-<?php if ( count( $ps_search_list ) > 0 ) { ?>
+<?php if ( ! empty( $ps_search_list ) && count( $ps_search_list ) > 0 ) { ?>
 	<p class="rs_result_heading">
 		<?php wc_ps_ict_t_e( 'Viewing all', __('Viewing all', 'woocommerce-predictive-search' ) ); ?> 
 		<strong><span class="ps_heading_search_in_name"><?php echo $items_search_default[$ps_current_search_in]['name']; ?></span></strong> 
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 <?php } ?>
 
 <?php
-if ( count( $ps_search_list ) > 1 ) {
+if ( ! empty( $ps_search_list ) && count( $ps_search_list ) > 1 ) {
 	if ( $permalink_structure == '')
 		$other_link_search = get_permalink( $woocommerce_search_page_id ).'&rs='. urlencode($search_keyword);
 	else
