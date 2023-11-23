@@ -248,12 +248,7 @@ class Main
 
 			} else {
 
-				if ( version_compare( WC_VERSION, '3.3.0', '<' ) ) {
-					// bw compat. for less than WC 3.3.0
-					$thumbnail_size_name = 'shop_catalog';
-				} else {
-					$thumbnail_size_name = 'woocommerce_thumbnail';
-				}
+				$thumbnail_size_name = 'woocommerce_thumbnail';
 
 				$current_db_version = get_option( 'woocommerce_db_version', null );
 
@@ -263,14 +258,7 @@ class Main
 					global $product;
 					global $post;
 
-					if ( version_compare( $current_db_version, '2.0', '<' ) && null !== $current_db_version ) {
-						$product = new \WC_Product( $product_id );
-					} elseif ( version_compare( \WC()->version, '2.2.0', '<' ) ) {
-						$product = get_product( $product_id );
-					} else {
-						$product = wc_get_product( $product_id );
-					}
-
+					$product = wc_get_product( $product_id );
 					$post = get_post( $product_id );
 
 					$product_description = Functions::woops_limit_words( strip_tags( Functions::strip_shortcodes( strip_shortcodes ( $post->post_content ) ) ), $text_lenght, '...' );
@@ -339,12 +327,7 @@ class Main
 				);
 			}
 
-			if ( version_compare( WC_VERSION, '3.3.0', '<' ) ) {
-				// bw compat. for less than WC 3.3.0
-				$thumbnail_size_name = 'shop_catalog';
-			} else {
-				$thumbnail_size_name = 'woocommerce_thumbnail';
-			}
+			$thumbnail_size_name = 'woocommerce_thumbnail';
 
 			foreach ( $search_posts as $item ) {
 
