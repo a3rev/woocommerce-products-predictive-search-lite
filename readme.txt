@@ -4,7 +4,7 @@ Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 6.0
 Tested up to: 6.4.1
-Stable tag: 5.9.0
+Stable tag: 5.9.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -181,6 +181,11 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 5.9.1 - 2023/12/11 =
+* This release has a search results page bug fix plus compatibility with WooCommerce version 8.3.1
+* Tweak - Test for compatibility with WooCommerce 8.3.1
+* Fix - Correct compress script version of search result page from version 6.3.0
 
 = 5.9.0 - 2023/12/08 =
 * This release adds a new developer trigger for firing custom scripts on Product Cards on search results pages. 
@@ -1071,6 +1076,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 5.9.1 =
+This release has a search results page bug fix plus compatibility with WooCommerce version 8.3.1
 
 = 5.9.0 =
 This release adds a new developer trigger for firing custom scripts on Product Cards on search results pages.
