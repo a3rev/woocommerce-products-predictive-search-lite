@@ -536,6 +536,10 @@ class Global_Panel extends FrameWork\Admin_UI
 				if ( jQuery('#woo_search_show_price').is(":checked") ) {
 					woo_search_show_price = 1;
 				}
+				var woo_search_show_addtocart = 0;
+				if ( jQuery('#woo_search_show_addtocart').is(":checked") ) {
+					woo_search_show_addtocart = 1;
+				}
 				var woo_search_show_desc = 0;
 				if ( jQuery('#woo_search_show_desc').is(":checked") ) {
 					woo_search_show_desc = 1;
@@ -567,7 +571,7 @@ class Global_Panel extends FrameWork\Admin_UI
 				if (parseInt(woo_search_padding_left) >= 0) woo_search_style += 'padding-left:'+parseInt(woo_search_padding_left)+'px;';
 				if (parseInt(woo_search_padding_right) >= 0) woo_search_style += 'padding-right:'+parseInt(woo_search_padding_right)+'px;';
 				var win = window.dialogArguments || opener || parent || top;
-				var shortcode_output = '[woocommerce_search_widget ' + number_items + ' widget_template="'+woo_search_widget_template+'" show_image="'+woo_search_show_image+'" show_price="'+woo_search_show_price+'" show_desc="'+woo_search_show_desc+'" show_in_cat="'+woo_search_show_in_cat+'" character_max="'+woo_search_text_lenght+'" style="'+woo_search_style+'" '+wrap+' search_box_text="'+woo_search_box_text+'" ]';
+				var shortcode_output = '[woocommerce_search_widget ' + number_items + ' widget_template="'+woo_search_widget_template+'" show_image="'+woo_search_show_image+'" show_price="'+woo_search_show_price+'" show_addtocart="'+woo_search_show_addtocart+'" show_desc="'+woo_search_show_desc+'" show_in_cat="'+woo_search_show_in_cat+'" character_max="'+woo_search_text_lenght+'" style="'+woo_search_style+'" '+wrap+' search_box_text="'+woo_search_box_text+'" ]';
 
 				jQuery(".shortcode_container").html( shortcode_output );
 			}
@@ -618,6 +622,7 @@ class Global_Panel extends FrameWork\Admin_UI
 
 			                <p><label for="woo_search_show_image"><?php _e('Image', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_image" name="woo_search_show_image" value="1" /> <span class="description"><?php _e('Show Results Images', 'woocommerce-predictive-search' ); ?></span></p>
 			                <p><label for="woo_search_show_price"><?php _e('Price', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_price" name="woo_search_show_price" value="1" /> <span class="description"><?php _e('Product Results - Show Prices', 'woocommerce-predictive-search' ); ?></span></p>
+			                <p><label for="woo_search_show_addtocart"><?php _e('Add to cart', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" id="woo_search_show_addtocart" name="woo_search_show_addtocart" value="1" /> <span class="description"><?php _e('Show Results Add to cart button', 'woocommerce-predictive-search' ); ?></span></p>
 			            	<p><label for="woo_search_show_desc"><?php _e('Description', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_desc" name="woo_search_show_desc" value="1" /> <span class="description"><?php _e('Show Results Description', 'woocommerce-predictive-search' ); ?></span></p>
 			            	<p><label for="woo_search_text_lenght"><?php _e('Characters Count', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:100px;" size="10" id="woo_search_text_lenght" name="woo_search_text_lenght" type="text" value="100" /> <span class="description"><?php _e('Number of results description characters', 'woocommerce-predictive-search' ); ?></span></p>
 			            	<p><label for="woo_search_show_in_cat"><?php _e('Product Categories', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_in_cat" name="woo_search_show_in_cat" value="1" /> <span class="description"><?php _e('Product Results - Show Categories', 'woocommerce-predictive-search' ); ?></span></p>

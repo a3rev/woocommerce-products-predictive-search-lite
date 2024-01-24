@@ -45,6 +45,7 @@ class Widgets extends \WP_Widget
 		else $text_lenght = $instance['text_lenght'];
 		$show_catdropdown = 0;
 		$show_price = !isset( $instance['show_price'] ) || empty($instance['show_price']) ? 0 : $instance['show_price'];
+		$show_addtocart = !isset( $instance['show_addtocart'] ) || empty($instance['show_addtocart']) ? 0 : $instance['show_addtocart'];
 		$widget_template = !isset( $instance['widget_template'] ) || empty($instance['widget_template']) ? 'sidebar' : $instance['widget_template'];
 
 		$show_image = !isset( $instance['show_image'] ) || empty($instance['show_image']) ? 0 : $instance['show_image'];
@@ -66,11 +67,11 @@ class Widgets extends \WP_Widget
 		echo $before_widget;
 		if ( $title )
 			echo $before_title . $title . $after_title;
-		echo $this->woops_results_search_form($widget_id, $number_items, $text_lenght, $search_box_text, $show_catdropdown, $show_image, $show_price, $show_desc, $show_in_cat, $widget_template );
+		echo $this->woops_results_search_form($widget_id, $number_items, $text_lenght, $search_box_text, $show_catdropdown, $show_image, $show_price, $show_addtocart, $show_desc, $show_in_cat, $widget_template );
 		echo $after_widget;
 	}
 	
-	public static function woops_results_search_form($widget_id, $number_items=array(), $text_lenght=100, $search_box_text = '', $show_catdropdown = 1, $show_image = 1, $show_price = 1, $show_desc = 1, $show_in_cat = 1, $widget_template = 'sidebar' ) {
+	public static function woops_results_search_form($widget_id, $number_items=array(), $text_lenght=100, $search_box_text = '', $show_catdropdown = 1, $show_image = 1, $show_price = 1, $show_addtocart = 0, $show_desc = 1, $show_in_cat = 1, $widget_template = 'sidebar' ) {
 		
 		global $woocommerce_search_page_id;
 		
@@ -107,6 +108,7 @@ class Widgets extends \WP_Widget
 			'widget_template'  => $widget_template,
 			'show_image'       => $show_image,
 			'show_price'       => $show_price,
+			'show_addtocart'   => $show_addtocart,
 			'show_desc'        => $show_desc,
 			'show_in_cat'      => $show_in_cat,
 			'search_in'        => $search_in,
@@ -124,6 +126,7 @@ class Widgets extends \WP_Widget
 		$instance['number_items'] = $new_instance['number_items'];
 		$instance['text_lenght'] = strip_tags($new_instance['text_lenght']);
 		$instance['show_price'] = !isset( $new_instance['show_price'] ) ? 0 : $new_instance['show_price'];
+		$instance['show_addtocart'] = !isset( $new_instance['show_addtocart'] ) ? 0 : $new_instance['show_addtocart'];
 		$instance['search_box_text'] = $new_instance['search_box_text'];
 		$instance['widget_template'] = $new_instance['widget_template'];
 		$instance['show_image'] = !isset( $new_instance['show_image'] ) ? 0 : $new_instance['show_image'];
@@ -150,12 +153,13 @@ class Widgets extends \WP_Widget
 		}
 		unset($key);
 		unset($data);
-		$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'number_items' => $number_items_default, 'text_lenght' => 100, 'show_price' => 1, 'show_catdropdown' => 1, 'show_image' => 1, 'show_desc' => 1, 'show_in_cat' => 1, 'widget_template' => 'sidebar', 'search_box_text' => $global_search_box_text ) );
+		$instance = wp_parse_args( (array) $instance, array( 'title' => '', 'number_items' => $number_items_default, 'text_lenght' => 100, 'show_price' => 1, 'show_addtocart' => 0, 'show_catdropdown' => 1, 'show_image' => 1, 'show_desc' => 1, 'show_in_cat' => 1, 'widget_template' => 'sidebar', 'search_box_text' => $global_search_box_text ) );
 		$title = strip_tags($instance['title']);
 		$number_items = $instance['number_items'];
 		if (!is_array($number_items) || count($number_items) < count($items_search_default) ) $number_items = $number_items_default;
 		$text_lenght = strip_tags($instance['text_lenght']);
 		$show_price = $instance['show_price'];
+		$show_addtocart = $instance['show_addtocart'];
 		$show_catdropdown = $instance['show_catdropdown'];
 		$search_box_text = $instance['search_box_text'];
 		$widget_template = $instance['widget_template'];
@@ -212,6 +216,9 @@ class Widgets extends \WP_Widget
             </p>
             <p>
             	<label><input type="checkbox" name="<?php echo $this->get_field_name('show_price'); ?>" value="1" <?php checked( $show_price, 1 ); ?>  /> <?php _e('Product Results - Show Prices', 'woocommerce-predictive-search' ); ?></label>
+            </p>
+            <p>
+            	<label><input type="checkbox" name="<?php echo $this->get_field_name('show_addtocart'); ?>" value="1" <?php checked( $show_addtocart, 1 ); ?>  /> <?php _e('Show Results Add to cart button', 'woocommerce-predictive-search' ); ?></label>
             </p>
             <p>
             	<label><input class="wc_ps_show_desc" type="checkbox" name="<?php echo $this->get_field_name('show_desc'); ?>" value="1" <?php checked( $show_desc, 1 ); ?>  /> <?php _e('Show Results Description', 'woocommerce-predictive-search' ); ?></label>

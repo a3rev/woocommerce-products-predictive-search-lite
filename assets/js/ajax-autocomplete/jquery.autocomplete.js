@@ -20,6 +20,7 @@ $.fn.extend({
 		var ps_text_lenght = this.data('ps-text_lenght');
 		var ps_popup_search_in = this.data('ps-popup_search_in');
 		var ps_show_price = this.data('ps-show_price');
+		var ps_show_addtocart = this.data('ps-show_addtocart');
 		var ps_show_in_cat = this.data('ps-show_in_cat');
 		var ps_lang = this.data('ps-lang');
 
@@ -38,6 +39,7 @@ $.fn.extend({
 			'row': ps_row, 
 			'text_lenght': ps_text_lenght,
 			'show_price': ps_show_price,
+			'show_addtocart': ps_show_addtocart,
 			'show_in_cat': ps_show_in_cat
 		};
 		
@@ -700,12 +702,15 @@ $.PS_Autocompleter.Select = function (options, input, select, config, wc_psearch
 			    $(target(event)).addClass(CLASSES.ACTIVE);            
 	        }
 		}).on('click', function(event) {
-			if ( event.toElement.className != 'rs_cat_link' && $(target(event)).children('div').attr('rel') != 'more_result' ) {
+			if ( 'A' !== event.target.parentNode.nodeName && 'A' !== event.target.nodeName ) {
 				$(target(event)).addClass(CLASSES.ACTIVE);
 				select();
 				// TODO provide option to avoid setting focus again after selection? useful for cleanup-on-focus
-				input.trigger('focus');
+				$(input).trigger('focus');
 				return false;
+			} else {
+				$(target(event)).addClass(CLASSES.ACTIVE);
+				$(input).trigger('focus');
 			}
 		}).on('mousedown', function() {
 			config.mouseDownOnSelect = true;

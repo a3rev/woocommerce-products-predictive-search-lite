@@ -59,6 +59,7 @@ class Legacy_API {
 		$row = 6;
 		$text_lenght = 100;
 		$show_price = 0;
+		$show_addtocart = 0;
 		$show_in_cat = 0;
 		$search_keyword = '';
 		$last_found_search_term = '';
@@ -77,6 +78,8 @@ class Legacy_API {
 		if ( isset($_REQUEST['text_lenght']) && $_REQUEST['text_lenght'] >= 0) $text_lenght = wp_unslash( wp_strip_all_tags( $_REQUEST['text_lenght'] ) );
 		if ( isset($_REQUEST['show_price']) && trim($_REQUEST['show_price']) != '') $show_price = wp_unslash( wp_strip_all_tags( $_REQUEST['show_price'] ) );
 		if ( $show_price == 1 ) $show_price = true; else $show_price = false;
+		if ( isset($_REQUEST['show_addtocart']) && trim($_REQUEST['show_addtocart']) != '') $show_addtocart = wp_unslash( wp_strip_all_tags( $_REQUEST['show_addtocart'] ) );
+		if ( $show_addtocart == 1 ) $show_addtocart = true; else $show_addtocart = false;
 		if ( isset($_REQUEST['show_in_cat']) && trim($_REQUEST['show_in_cat']) != '') $show_in_cat = wp_unslash( wp_strip_all_tags( $_REQUEST['show_in_cat'] ) );
 		if ( $show_in_cat == 1 ) $show_in_cat = true; else $show_in_cat = false;
 		if ( isset($_REQUEST['q']) && trim($_REQUEST['q']) != '') $search_keyword = wp_unslash( wp_strip_all_tags( $_REQUEST['q'] ) );
@@ -109,7 +112,7 @@ class Legacy_API {
 			$post_term_id = 0;
 
 			if ( isset( $search_in['product'] ) && $search_in['product'] > 0 ) {
-				$product_list = $wc_predictive_search->get_product_results( $search_keyword, $search_in['product'], 0, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $product_term_id, $text_lenght, $current_lang, true, $show_price, true, false, $show_in_cat );
+				$product_list = $wc_predictive_search->get_product_results( $search_keyword, $search_in['product'], 0, $woocommerce_search_focus_enable, $woocommerce_search_focus_plugin, $product_term_id, $text_lenght, $current_lang, true, $show_price, true, $show_addtocart, $show_in_cat );
 				$total_product = $product_list['total'];
 				if ( $total_product > 0 ) {
 					$found_items = true;

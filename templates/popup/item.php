@@ -16,8 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 				{{ if ( type == 'p_sku' && sku != null && sku != '' ) { }}<span class="rs_sku"><?php wc_ps_ict_t_e( 'SKU', __('SKU', 'woocommerce-predictive-search' ) ); ?>: <strong>{{= sku }}</strong></span>{{ } }}
 				{{ if ( price != null && price != '' ) { }}<span class="rs_price"><?php wc_ps_ict_t_e( 'Price', __('Price', 'woocommerce-predictive-search' ) ); ?>: {{= price }}</span>{{ } }}
 				{{ if ( stock != null && stock != '' ) { }}<span class="rs_stock">{{= stock }}</span>{{ } }}
-				{{ if ( description != null && description != '' ) { }}<span class="rs_description">{{= description }}</span>{{ } }}
 			</a>
+			{{ if ( addtocart != null && addtocart != '' ) { }}<div class="rs_addtocart">{{= addtocart }}</div>{{ } }}
+			{{ if ( description != null && description != '' ) { }}<span class="rs_description">{{= description }}</span>{{ } }}
 			{{ if ( categories.length > 0 ) { }}
 				<span class="rs_cat posted_in">
 					<?php wc_ps_ict_t_e( 'Category', __('Category', 'woocommerce-predictive-search' ) ); ?>:

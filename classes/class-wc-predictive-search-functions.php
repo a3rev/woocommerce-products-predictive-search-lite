@@ -495,7 +495,7 @@ class Functions
 	/**
 	 * Get product add to cart
 	 */
-	public static function get_product_addtocart( $product ) {
+	public static function get_product_addtocart( $product, $in_results_page = true ) {
 
 		if ( ! is_object( $product ) ) {
 			$product_id = absint( $product );
@@ -506,6 +506,12 @@ class Functions
 
 		ob_start();
 		if (function_exists('woocommerce_template_loop_add_to_cart') ) {
+			if ( ! $in_results_page ) {
+				remove_all_actions( 'woocommerce_before_template_part' );
+				remove_all_actions( 'woocommerce_after_shop_loop_item' );
+				remove_all_filters( 'woocommerce_loop_add_to_cart_link' );
+			}
+			
 			add_filter( 'woocommerce_product_add_to_cart_url', array( __CLASS__, 'change_add_to_cart_url' ), 10, 2 );
 			woocommerce_template_loop_add_to_cart();
 			remove_filter( 'woocommerce_product_add_to_cart_url', array( __CLASS__, 'change_add_to_cart_url' ), 10, 2 );

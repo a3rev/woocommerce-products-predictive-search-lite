@@ -282,7 +282,7 @@ class Main
 						global $wc_ps_product_sku_data;
 						$item_data['sku'] = stripslashes( $wc_ps_product_sku_data->get_item( $product_id ) );
 					}
-					if ( $show_addtocart ) $item_data['addtocart']   = Functions::get_product_addtocart( $product );
+					if ( $show_addtocart ) $item_data['addtocart']   = Functions::get_product_addtocart( $product, $in_results_page );
 					if ( $show_categories ) $item_data['categories'] = Functions::get_terms_object( $product_id, 'product_cat' );
 					if ( $show_tags ) $item_data['tags']             = Functions::get_terms_object( $product_id, 'product_tag' );
 

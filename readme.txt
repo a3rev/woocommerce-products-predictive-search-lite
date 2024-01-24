@@ -3,8 +3,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 6.0
-Tested up to: 6.4.1
-Stable tag: 5.9.1
+Tested up to: 6.4.2
+Stable tag: 6.0.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -17,7 +17,7 @@ Predictive Search for WooCommerce engine delivers users instant and changing res
 = KEY FEATURES =
 
 * Search objects include Product name, Post name, Page name
-* Add Predictive Search box via the Predictive Search Widget to any widgetized area on your site
+* Add Predictive Search box via the Predictive Search Widget or Predictive Search Shortcodes.
 * Predictive Search engine delivers 100% accurate results, 100% of the time.
 * Super-fast results even on sites with 1,000's of products, posts and pages
 * Results show in search box dropdown as soon as you start to type.
@@ -27,32 +27,29 @@ Predictive Search for WooCommerce engine delivers users instant and changing res
 
 = PAGE BUILDER / TEMPLATE COMPATIBLE =
 
-Predictive Search is compatible with any WordPress themes that has widget areas, plus a growing number of page builders including:
+Predictive Search is compatible with any WordPress theme or page builder that supports widgets or shortcodes. 
 
-* NEW - Elementor Premium Template Builder - add the search box via the Predictive Search Widget to any area in an Elementor Template.
+= PREDICTIVE SEARCH BOX =
 
-More coming soon .....
-
-= PREDICTIVE SEARCH WIDGET =
-
-* Add Predictive Search box via the Predictive Search Widget
-* Set Placeholder text that shows in the search box on front end - example 'Type your search here'
+* Add Predictive Search box via the Predictive Search Widget or shortcode
+* Set Placeholder text that shows in the search box on front end - example 'Search Here'
 * Choose which objects- Products, Posts, Pages should be included in the search
 * Set the number of results to show for each object type e.g. Products 6
 * When there are more results than can show in the dropdown a link is added to the dropdown footer to see all results
 * Set order that the search object shows in the dropdown and on the All Results Search page.
 * Option to show just product, post, page title in results
-* Option to show or not show Product, Post or page feature image thumbnail with results
-* Option to show or not show description extract with results including the length in characters
-* Option show or not show Product prices 
-* Add any number of Predictive Search Widgets to widget areas around your site
+* Option to show Product, Post or page feature image thumbnail with results
+* Option to show description extract with results including the length in characters
+* Option to show Product prices 
+* Option to show Add to Cart Button on serach box results.
 
 = STYLE & MOBILE =
-There are 2 customizable templates built in - Widget Template and Header Template. Style the Search Box and results dropdown then apply the template required from the Predictive Search Widget.
+There are 2 customizable templates built in - Widget Template and Header Template. Style the Search Box and results dropdown then apply the template required from the Predictive Search Widget or shortcode.
 
 = NEW FEATURES =
 Recently added features
-
+* Jan 2024 - Option to Add to Cart right from the search box dropdown product results. 
+* Dec 2022 - Add Search box by shortcode, with built in shortcode generator. Supports all page builders.
 * Feb 2020 - Mobile Search Display. Option on Widget and Header Templates to just show search icon in mobiles when clicked the search box opens. Great for search boxes placed in headers and other areas where space is limited in mobile.
 * Feb 2020 - Second Search Box and results dropdown template (Header Template) added
 * Jan 2020 - Completed upgrade of plugin frontend and backend PHP to Composer PHP Dependency manager (Jan 2020)
@@ -69,11 +66,11 @@ Recently added features
 * All results search page results show with endless scroll feature
 * Option to set the number of results to show per endless scroll action - default is 10
 * Option to show description extracts and set the number of description characters to show - default is 100 characters
-* Option to show or not show product SKU with Products search results
-* Option to show or not show product prices with Product search results
-* Option to show or not show Add to cart button with Product search results
-* Option to show or not show Categories meta for each Product and Post result
-* Option to show or not show the Tags meta for each Product and Post result
+* Option to show product SKU with Products search results
+* Option to show product prices with Product search results
+* Option to show Add to cart button with Product search results
+* Option to show Categories meta for each Product and Post result
+* Option to show Tags meta for each Product and Post result
 * All results show with featured image thumbnails
 
 = EXCLUDE FROM SEARCH RESULTS =
@@ -109,7 +106,6 @@ For those that want a deeper store search there is the [Premium Predictive Searc
 * Additional Search objects - Product Attributes, Product SKU, Variation SKU's, Product Category and Product Tags
 * Search in Product Category Feature. From Search box use can select a Product category and Search just within that category or select a category and click the search icon and will open the Product category page
 * Predictive Search PHP tag for adding search to your sites header (when header does not support widgets) or into theme templates
-* Shortcode - Add search box to any product post or page by shortcode
 * Focus Keywords - Predictive Search meta section on each product page, post and page for setting 'Focus Keywords and Keyword Phrases'
 * Full integration with Yoast SEO and All in One SEO plugins
 * Full integration with the Google Analytics Site Search Feature
@@ -145,15 +141,15 @@ The manual installation method involves downloading our plugin and uploading it 
 
 == Screenshots ==
 
-1. Predictive Search.
+1. Search Box
 
-2. Predictive Search - Widget.
+2. Widget Settings.
 
-3. Predictive Search - Settings.
+3. Dashboard Menu
 
-4. Predictive Search - All Results Page.
+4. Shortcode Generator
 
-5. Predictive Search - All Results Page Setting.
+5. All Search Results Page
 
 
 == USAGE ==
@@ -181,6 +177,14 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 6.0.0 - 2024/01/23 =
+* This feature release adds support for Add to Cart functionality from search box results, a code tweak and compatibility with WordPress 6.4.2 and WooCommerce 8.5.1.
+* Feature - Add support for Add to Cart button to show on the Search Box dropdown results.
+* Feature - New Add to Cart button feature can be added by search widget, search PHP function, predictive search shortcode and predictive search block.
+* Tweak - Test for compatibility with WooCommerce 8.5.1
+* Tweak - Test for compatibility with WordPress 6.4.2
+* Tweak - Change depreciated media_buttons_context hook to media_buttons.
 
 = 5.9.1 - 2023/12/11 =
 * This release has a search results page bug fix plus compatibility with WooCommerce version 8.3.1
@@ -1076,6 +1080,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 6.0.0 =
+This feature release adds support for Add to Cart functionality from search box results, a code tweak and compatibility with WordPress 6.4.2 and WooCommerce 8.5.1.
 
 = 5.9.1 =
 This release has a search results page bug fix plus compatibility with WooCommerce version 8.3.1

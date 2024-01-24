@@ -87,7 +87,7 @@ if(in_array(basename($_SERVER['PHP_SELF']), array('post.php', 'page.php', 'page-
 
 // Add search widget icon to Page Editor
 if (in_array (basename($_SERVER['PHP_SELF']), array('post.php', 'page.php', 'page-new.php', 'post-new.php') ) ) {
-	add_action('media_buttons_context', array('\A3Rev\WCPredictiveSearch\Shortcodes', 'add_search_widget_icon') );
+	add_action('media_buttons', array('\A3Rev\WCPredictiveSearch\Shortcodes', 'add_search_widget_icon') );
 	add_action('admin_footer', array('\A3Rev\WCPredictiveSearch\Shortcodes', 'add_search_widget_mce_popup'));
 }
 

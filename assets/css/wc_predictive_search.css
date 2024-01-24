@@ -25,14 +25,17 @@
 .predictive_results ul li .rs_content_popup.no_image{width:100%;}
 .rs_result_row .rs_content.no_image{margin-left: 0 !important;}
 .rs_name{margin-left:0px;}
-.predictive_results ul li, .predictive_results ul li a, .predictive_results ul li p{font-family:Arial, Helvetica, sans-serif;font-size:12px;line-height:14px; color:#000 !important;}
-.predictive_results ul li a:hover{opacity:1 !important; color:#FFF !important;}
+.predictive_results ul li, .predictive_results ul li a:not(.button, .added_to_cart), .predictive_results ul li p{font-family:Arial, Helvetica, sans-serif;font-size:12px;line-height:14px; color:#000 !important;}
+.predictive_results ul li a:not(.button, .added_to_cart):hover{opacity:1 !important; color:#FFF !important;}
 .predictive_results ul li .rs_name{width:100%;color: #3B5998 !important; font-weight:bold !important; padding-bottom:2px !important; float:left !important;}
 .predictive_results ul li .rs_sku{width:100%;color: #3B5998 !important; padding-bottom:2px !important; float:left !important;}
 .predictive_results ul li .rs_description{width:100%; float:left !important;}
+.predictive_results ul li .rs_addtocart{display:block !important; margin: 10px 0;}
+.predictive_results ul li .rs_addtocart a{display:table !important; font-size:initial;}
+.predictive_results ul li .rs_addtocart a.added_to_cart{margin-top:10px !important;}
 .predictive_results ul li .rs_stock{width:100%; float:left !important;}
 .predictive_results ul li .rs_cat{width:100%; float:left !important;}
-.predictive_results ul li.ac_over a, .predictive_results ul li.ac_over a .rs_name, .predictive_results ul li.ac_over a .rs_sku{color:#FFF !important;}
+.predictive_results ul li.ac_over a:not(.button, .added_to_cart), .predictive_results ul li.ac_over a .rs_name, .predictive_results ul li.ac_over a .rs_sku{color:#FFF !important;}
 .ajax_search_content_title{ background:#F2F2F2; padding:3px 10px; font-weight:bold; color:#000000; }
 .more_result{width:100%;float:left;background:#F7F7F7;padding:8px 5%;text-align:center;}
 .predictive_results ul li .more_result a{float:left;width:100%; font-weight:bold; color:#3B5998 !important; margin:2px 0;}
@@ -346,6 +349,7 @@
 	.predictive_results .ps_close {
 	    display: table !important;
 	}
+	.predictive_results ul li .rs_addtocart{margin: 10px 0;}
 }
 @media screen and (max-device-width : 1024px) {
 	.wc_ps_container .wc_ps_nav_field input.wc_ps_search_keyword {

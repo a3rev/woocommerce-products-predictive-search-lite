@@ -75,6 +75,7 @@ $search_results_page = str_replace( array( 'http:', 'https:' ), '', get_permalin
 						<?php } ?>
 
 						data-ps-show_price="<?php echo $ps_args['show_price']; ?>"
+						data-ps-show_addtocart="<?php echo $ps_args['show_addtocart']; ?>"
 						data-ps-show_in_cat="<?php echo $ps_args['show_in_cat']; ?>"
 					/>
 					<svg aria-hidden="true" viewBox="0 0 512 512" class="wc_ps_searching_icon" style="display: none;" aria-label="<?php _e( 'Searching', 'woocommerce-predictive-search' ); ?>">
