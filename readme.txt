@@ -3,8 +3,8 @@
 Contributors: a3rev, nguyencongtuan
 Tags: WooCommerce search, Predictive Search, WooCommerce, Predictive Search, Live Search, Elementor WooCommerce Search
 Requires at least: 6.0
-Tested up to: 6.4.2
-Stable tag: 6.0.0
+Tested up to: 6.4.3
+Stable tag: 6.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -177,6 +177,12 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Changelog ==
+
+= 6.0.1 - 2024/03/16 =
+* This maintenance release has a bug fix on the search box dropdown results not redirecting to the item.
+* Tweak - Test for compatibility with WooCommerce 8.6.0
+* Tweak - Test for compatibility with WordPress 6.4.3
+* Fix - Redirect to item link when click on the description item, same for item image and item name
 
 = 6.0.0 - 2024/01/23 =
 * This feature release adds support for Add to Cart functionality from search box results, a code tweak and compatibility with WordPress 6.4.2 and WooCommerce 8.5.1.
@@ -1080,6 +1086,9 @@ You can use this plugin only when you have installed the WooCommerce plugin.
 
 
 == Upgrade Notice ==
+
+= 6.0.1 =
+This maintenance release has a bug fix on the search box dropdown results not redirecting to the item.
 
 = 6.0.0 =
 This feature release adds support for Add to Cart functionality from search box results, a code tweak and compatibility with WordPress 6.4.2 and WooCommerce 8.5.1.

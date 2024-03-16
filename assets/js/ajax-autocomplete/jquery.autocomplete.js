@@ -704,7 +704,7 @@ $.PS_Autocompleter.Select = function (options, input, select, config, wc_psearch
 		}).on('click', function(event) {
 			if ( 'A' !== event.target.parentNode.nodeName && 'A' !== event.target.nodeName ) {
 				$(target(event)).addClass(CLASSES.ACTIVE);
-				select();
+				// select();
 				// TODO provide option to avoid setting focus again after selection? useful for cleanup-on-focus
 				$(input).trigger('focus');
 				return false;
