@@ -518,7 +518,7 @@ class Functions
 		}
 		$product_addtocart_output = ob_get_clean();
 
-		return $product_addtocart_output;
+		return apply_filters( 'wc_ps_addtocart', $product_addtocart_output, $product, $in_results_page );
 	}
 
 	/**

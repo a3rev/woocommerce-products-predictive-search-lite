@@ -265,7 +265,7 @@ class Main
 					if ( trim( $product_description ) == '' ) $product_description = Functions::woops_limit_words( strip_tags( Functions::strip_shortcodes( strip_shortcodes( $post->post_excerpt ) ) ), $text_lenght, '...' );
 
 					$availability      = $product->get_availability();
-					$availability_html = empty( $availability['availability'] ) ? '' : '<span class="stock ' . esc_attr( $availability['class'] ) . '">' . esc_html( $availability['availability'] ) . '</span>';
+					$availability_html = empty( $availability['availability'] ) ? '' : '<span class="stock ' . esc_attr( $availability['class'] ) . '">' . wp_kses_post( $availability['availability'] ) . '</span>';
 
 					$item_data = array(
 						'title'       => $current_product->post_title,
