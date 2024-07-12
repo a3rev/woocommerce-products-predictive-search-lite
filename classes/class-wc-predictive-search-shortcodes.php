@@ -89,7 +89,7 @@ class Shortcodes
 				}
 			} elseif ( $data['number'] > 0 ) {
 				$number_items[$key] = $data['number'];
-				$row += $attr[$item_key];
+				$row += $data['number'];
 				$row++;
 				$search_list[] = $key;
 			}
