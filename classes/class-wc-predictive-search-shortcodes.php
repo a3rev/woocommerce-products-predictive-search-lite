@@ -147,8 +147,8 @@ class Shortcodes
 			function woo_search_widget_add_shortcode(){
 				var number_items = '';
 				<?php foreach ($items_search_default as $key => $data) {?>
-				var woo_search_<?php echo $key ?>_items = '<?php echo $key ?>_items="' + jQuery("#woo_search_<?php echo $key ?>_items").val() + '" ';
-				number_items += woo_search_<?php echo $key ?>_items;
+				var woo_search_<?php echo esc_js( $key ); ?>_items = '<?php echo esc_js( $key ); ?>_items="' + jQuery("#woo_search_<?php echo esc_js( $key ); ?>_items").val() + '" ';
+				number_items += woo_search_<?php echo esc_js( $key ); ?>_items;
 				<?php } ?>
 				var woo_search_widget_template = jQuery("#woo_search_widget_template").val();
 				var woo_search_set_default_cat = jQuery('#woo_search_set_default_cat').val();
@@ -254,53 +254,53 @@ class Shortcodes
 		</style>
 		<div id="woo_search_widget_shortcode" style="display:none;">
 		  <div style="height: 98%; overflow: auto;">
-			<h3><?php _e('Customize the Predictive Search Shortcode', 'woocommerce-predictive-search' ); ?> <a class="add-new-h2 a3-view-docs-button" target="_blank" href="<?php echo WOO_PREDICTIVE_SEARCH_DOCS_URI; ?>#section-16" ><?php _e('View Docs', 'woocommerce-predictive-search' ); ?></a></h3>
+			<h3><?php esc_html_e('Customize the Predictive Search Shortcode', 'woocommerce-predictive-search' ); ?> <a class="add-new-h2 a3-view-docs-button" target="_blank" href="<?php echo esc_url( WOO_PREDICTIVE_SEARCH_DOCS_URI ); ?>#section-16" ><?php esc_html_e('View Docs', 'woocommerce-predictive-search' ); ?></a></h3>
 			<div style="clear:both"></div>
 			<div class="field_content">
                 <?php foreach ($items_search_default as $key => $data) { ?>
-                <p><label for="woo_search_<?php echo $key ?>_items"><?php echo $data['name']; ?>:</label> <input style="width:100px;" size="10" id="woo_search_<?php echo $key ?>_items" name="woo_search_<?php echo $key ?>_items" type="text" value="<?php echo $data['number'] ?>" /> <span class="description"><?php _e('Number of', 'woocommerce-predictive-search' ); echo ' '.$data['name'].' '; _e('results to show in dropdown', 'woocommerce-predictive-search' ); ?></span></p> 
+                <p><label for="woo_search_<?php echo esc_attr( $key ); ?>_items"><?php esc_html_e( $data['name'] ); ?>:</label> <input style="width:100px;" size="10" id="woo_search_<?php echo esc_attr( $key  ); ?>_items" name="woo_search_<?php echo esc_attr( $key ); ?>_items" type="text" value="<?php echo esc_attr( $data['number'] ); ?>" /> <span class="description"><?php esc_html_e('Number of', 'woocommerce-predictive-search' ); esc_html_e( ' '.$data['name'].' ' ); esc_html_e('results to show in dropdown', 'woocommerce-predictive-search' ); ?></span></p> 
                 <?php } ?>
-                <p><label for="woo_search_widget_template"><?php _e('Select Template', 'woocommerce-predictive-search' ); ?>:</label> <select style="width:100px" id="woo_search_widget_template" name="woo_search_widget_template"><option value="sidebar" selected="selected"><?php _e('Widget', 'woocommerce-predictive-search' ); ?></option><option value="header"><?php _e('Header', 'woocommerce-predictive-search' ); ?></option></select></p>
+                <p><label for="woo_search_widget_template"><?php esc_html_e('Select Template', 'woocommerce-predictive-search' ); ?>:</label> <select style="width:100px" id="woo_search_widget_template" name="woo_search_widget_template"><option value="sidebar" selected="selected"><?php esc_html_e('Widget', 'woocommerce-predictive-search' ); ?></option><option value="header"><?php esc_html_e('Header', 'woocommerce-predictive-search' ); ?></option></select></p>
                 <p>
-                	<label for="woo_search_show_catdropdown"><?php _e('Category Dropdown', 'woocommerce-predictive-search' ); ?>:</label> <input <?php echo ( $disabled_cat_dropdown ) ? 'disabled="disabled"' : ''; ?> type="checkbox" checked="checked" id="woo_search_show_catdropdown" name="woo_search_show_catdropdown" value="1" /> <span class="description"><?php _e('Search in Product Category Feature', 'woocommerce-predictive-search' ); ?></span>
+                	<label for="woo_search_show_catdropdown"><?php esc_html_e('Category Dropdown', 'woocommerce-predictive-search' ); ?>:</label> <input <?php echo ( $disabled_cat_dropdown ) ? 'disabled="disabled"' : ''; ?> type="checkbox" checked="checked" id="woo_search_show_catdropdown" name="woo_search_show_catdropdown" value="1" /> <span class="description"><?php esc_html_e('Search in Product Category Feature', 'woocommerce-predictive-search' ); ?></span>
                 	<?php if ( $disabled_cat_dropdown ) { ?>
                 	<br>
-            		<label>&nbsp;</label><span><?php echo sprintf( __( 'Activate and build <a href="%s" target="_blank">Category Cache</a> to activate this feature', 'woocommerce-predictive-search' ), admin_url( 'admin.php?page=woo-predictive-search&tab=search-box-settings&box_open=predictive_search_category_cache_box#predictive_search_category_cache_box', 'relative' ) ); ?></span>
+            		<label>&nbsp;</label><span><?php esc_html_e( sprintf( __( 'Activate and build <a href="%s" target="_blank">Category Cache</a> to activate this feature', 'woocommerce-predictive-search' ), admin_url( 'admin.php?page=woo-predictive-search&tab=search-box-settings&box_open=predictive_search_category_cache_box#predictive_search_category_cache_box', 'relative' ) ) ); ?></span>
             		<?php } ?>
             	</p>
 
             	
             	<p class="woo_search_set_default_cat_container" style="<?php if ( $disabled_cat_dropdown || false === $product_categories ) { ?>display: none;<?php } ?>">
-            		<label for="woo_search_set_default_cat"><?php _e('Default Category', 'woocommerce-predictive-search' ); ?>:</label> 
+            		<label for="woo_search_set_default_cat"><?php esc_html_e('Default Category', 'woocommerce-predictive-search' ); ?>:</label> 
             		<select style="width:100px" id="woo_search_set_default_cat" name="woo_search_set_default_cat">
-            			<option value="" selected="selected"><?php _e('All', 'woocommerce-predictive-search' ); ?></option>
+            			<option value="" selected="selected"><?php esc_html_e('All', 'woocommerce-predictive-search' ); ?></option>
             		<?php if ( $product_categories ) { ?>
 						<?php foreach ( $product_categories as $category_data ) { ?>
 						<option value="<?php echo esc_attr( $category_data['slug'] ); ?>"><?php echo esc_html( $category_data['name'] ); ?></option>
 						<?php } ?>
             		<?php } ?>
             		</select> 
-            		<span class="description"><?php _e('Set category as default selected category for Category Dropdown', 'woocommerce-predictive-search' ); ?></span>
+            		<span class="description"><?php esc_html_e('Set category as default selected category for Category Dropdown', 'woocommerce-predictive-search' ); ?></span>
             	</p>
 
-                <p><label for="woo_search_show_image"><?php _e('Image', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_image" name="woo_search_show_image" value="1" /> <span class="description"><?php _e('Show Results Images', 'woocommerce-predictive-search' ); ?></span></p>
-                <p><label for="woo_search_show_price"><?php _e('Price', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_price" name="woo_search_show_price" value="1" /> <span class="description"><?php _e('Product Results - Show Prices', 'woocommerce-predictive-search' ); ?></span></p>
-                <p><label for="woo_search_show_addtocart"><?php _e('Add to cart', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" id="woo_search_show_addtocart" name="woo_search_show_addtocart" value="1" /> <span class="description"><?php _e('Show Results Add to cart button', 'woocommerce-predictive-search' ); ?></span></p>
-            	<p><label for="woo_search_show_desc"><?php _e('Description', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_desc" name="woo_search_show_desc" value="1" /> <span class="description"><?php _e('Show Results Description', 'woocommerce-predictive-search' ); ?></span></p>
-            	<p><label for="woo_search_text_lenght"><?php _e('Characters Count', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:100px;" size="10" id="woo_search_text_lenght" name="woo_search_text_lenght" type="text" value="100" /> <span class="description"><?php _e('Number of results description characters', 'woocommerce-predictive-search' ); ?></span></p>
-            	<p><label for="woo_search_show_in_cat"><?php _e('Product Categories', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_in_cat" name="woo_search_show_in_cat" value="1" /> <span class="description"><?php _e('Product Results - Show Categories', 'woocommerce-predictive-search' ); ?></span></p>
-                <p><label for="woo_search_align"><?php _e('Alignment', 'woocommerce-predictive-search' ); ?>:</label> <select style="width:100px" id="woo_search_align" name="woo_search_align"><option value="none" selected="selected"><?php _e('None', 'woocommerce-predictive-search' ); ?></option><option value="left-wrap"><?php _e('Left - wrap', 'woocommerce-predictive-search' ); ?></option><option value="left"><?php _e('Left - no wrap', 'woocommerce-predictive-search' ); ?></option><option value="center"><?php _e('Center', 'woocommerce-predictive-search' ); ?></option><option value="right-wrap"><?php _e('Right - wrap', 'woocommerce-predictive-search' ); ?></option><option value="right"><?php _e('Right - no wrap', 'woocommerce-predictive-search' ); ?></option></select> <span class="description"><?php _e('Horizontal aliginment of search box', 'woocommerce-predictive-search' ); ?></span></p>
-                <p><label for="woo_search_width"><?php _e('Search box width', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:100px;" size="10" id="woo_search_width" name="woo_search_width" type="text" value="200" />px</p>
-                <p><label for="woo_search_box_text"><?php _e('Search box text message', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:300px;" size="10" id="woo_search_box_text" name="woo_search_box_text" type="text" value="" /></p>
-                <p><label for="woo_search_padding"><strong><?php _e('Padding', 'woocommerce-predictive-search' ); ?></strong>:</label><br /> 
-				<label for="woo_search_padding_top" style="width:auto; float:none"><?php _e('Above', 'woocommerce-predictive-search' ); ?>:</label><input style="width:50px;" size="10" id="woo_search_padding_top" name="woo_search_padding_top" type="text" value="10" />px &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <label for="woo_search_padding_bottom" style="width:auto; float:none"><?php _e('Below', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:50px;" size="10" id="woo_search_padding_bottom" name="woo_search_padding_bottom" type="text" value="10" />px &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <label for="woo_search_padding_left" style="width:auto; float:none"><?php _e('Left', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:50px;" size="10" id="woo_search_padding_left" name="woo_search_padding_left" type="text" value="0" />px &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <label for="woo_search_padding_right" style="width:auto; float:none"><?php _e('Right', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:50px;" size="10" id="woo_search_padding_right" name="woo_search_padding_right" type="text" value="0" />px
+                <p><label for="woo_search_show_image"><?php esc_html_e('Image', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_image" name="woo_search_show_image" value="1" /> <span class="description"><?php esc_html_e('Show Results Images', 'woocommerce-predictive-search' ); ?></span></p>
+                <p><label for="woo_search_show_price"><?php esc_html_e('Price', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_price" name="woo_search_show_price" value="1" /> <span class="description"><?php esc_html_e('Product Results - Show Prices', 'woocommerce-predictive-search' ); ?></span></p>
+                <p><label for="woo_search_show_addtocart"><?php esc_html_e('Add to cart', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" id="woo_search_show_addtocart" name="woo_search_show_addtocart" value="1" /> <span class="description"><?php esc_html_e('Show Results Add to cart button', 'woocommerce-predictive-search' ); ?></span></p>
+            	<p><label for="woo_search_show_desc"><?php esc_html_e('Description', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_desc" name="woo_search_show_desc" value="1" /> <span class="description"><?php esc_html_e('Show Results Description', 'woocommerce-predictive-search' ); ?></span></p>
+            	<p><label for="woo_search_text_lenght"><?php esc_html_e('Characters Count', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:100px;" size="10" id="woo_search_text_lenght" name="woo_search_text_lenght" type="text" value="100" /> <span class="description"><?php esc_html_e('Number of results description characters', 'woocommerce-predictive-search' ); ?></span></p>
+            	<p><label for="woo_search_show_in_cat"><?php esc_html_e('Product Categories', 'woocommerce-predictive-search' ); ?>:</label> <input type="checkbox" checked="checked" id="woo_search_show_in_cat" name="woo_search_show_in_cat" value="1" /> <span class="description"><?php esc_html_e('Product Results - Show Categories', 'woocommerce-predictive-search' ); ?></span></p>
+                <p><label for="woo_search_align"><?php esc_html_e('Alignment', 'woocommerce-predictive-search' ); ?>:</label> <select style="width:100px" id="woo_search_align" name="woo_search_align"><option value="none" selected="selected"><?php esc_html_e('None', 'woocommerce-predictive-search' ); ?></option><option value="left-wrap"><?php esc_html_e('Left - wrap', 'woocommerce-predictive-search' ); ?></option><option value="left"><?php esc_html_e('Left - no wrap', 'woocommerce-predictive-search' ); ?></option><option value="center"><?php esc_html_e('Center', 'woocommerce-predictive-search' ); ?></option><option value="right-wrap"><?php esc_html_e('Right - wrap', 'woocommerce-predictive-search' ); ?></option><option value="right"><?php esc_html_e('Right - no wrap', 'woocommerce-predictive-search' ); ?></option></select> <span class="description"><?php esc_html_e('Horizontal aliginment of search box', 'woocommerce-predictive-search' ); ?></span></p>
+                <p><label for="woo_search_width"><?php esc_html_e('Search box width', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:100px;" size="10" id="woo_search_width" name="woo_search_width" type="text" value="200" />px</p>
+                <p><label for="woo_search_box_text"><?php esc_html_e('Search box text message', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:300px;" size="10" id="woo_search_box_text" name="woo_search_box_text" type="text" value="" /></p>
+                <p><label for="woo_search_padding"><strong><?php esc_html_e('Padding', 'woocommerce-predictive-search' ); ?></strong>:</label><br /> 
+				<label for="woo_search_padding_top" style="width:auto; float:none"><?php esc_html_e('Above', 'woocommerce-predictive-search' ); ?>:</label><input style="width:50px;" size="10" id="woo_search_padding_top" name="woo_search_padding_top" type="text" value="10" />px &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="woo_search_padding_bottom" style="width:auto; float:none"><?php esc_html_e('Below', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:50px;" size="10" id="woo_search_padding_bottom" name="woo_search_padding_bottom" type="text" value="10" />px &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="woo_search_padding_left" style="width:auto; float:none"><?php esc_html_e('Left', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:50px;" size="10" id="woo_search_padding_left" name="woo_search_padding_left" type="text" value="0" />px &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <label for="woo_search_padding_right" style="width:auto; float:none"><?php esc_html_e('Right', 'woocommerce-predictive-search' ); ?>:</label> <input style="width:50px;" size="10" id="woo_search_padding_right" name="woo_search_padding_right" type="text" value="0" />px
                 </p>
 			</div>
-            <p><input type="button" class="button-primary" value="<?php _e('Insert Shortcode', 'woocommerce-predictive-search' ); ?>" onclick="woo_search_widget_add_shortcode();"/>&nbsp;&nbsp;&nbsp;
-            <a class="button" style="" href="#" onclick="tb_remove(); return false;"><?php _e('Cancel', 'woocommerce-predictive-search' ); ?></a>
+            <p><input type="button" class="button-primary" value="<?php esc_html_e('Insert Shortcode', 'woocommerce-predictive-search' ); ?>" onclick="woo_search_widget_add_shortcode();"/>&nbsp;&nbsp;&nbsp;
+            <a class="button" style="" href="#" onclick="tb_remove(); return false;"><?php esc_html_e('Cancel', 'woocommerce-predictive-search' ); ?></a>
 			</p>
             <div style="clear:both;"></div>
 		  </div>
@@ -400,15 +400,15 @@ class Shortcodes
             </div>
             <div style="clear:both"></div>
             <div class="ps_more_result" id="ps_more_result_popup">
-                <img src="<?php echo WOOPS_IMAGES_URL; ?>/more-results-loader.gif" />
-                <div><em><?php wc_ps_ict_t_e( 'Loading Text', __('Loading More Results...', 'woocommerce-predictive-search' ) ); ?></em></div>
+                <img src="<?php echo esc_url( WOOPS_IMAGES_URL . '/more-results-loader.gif' ); ?>" />
+                <div><em><?php esc_html_e( wc_ps_ict_t__( 'Loading Text', __('Loading More Results...', 'woocommerce-predictive-search' ) ) ); ?></em></div>
             </div>
-            <div class="ps_more_result" id="ps_no_more_result_popup"><em><?php wc_ps_ict_t_e( 'No More Result Text', __('No More Results to Show', 'woocommerce-predictive-search' ) ); ?></em></div>
+            <div class="ps_more_result" id="ps_no_more_result_popup"><em><?php esc_html_e( wc_ps_ict_t__( 'No More Result Text', __('No More Results to Show', 'woocommerce-predictive-search' ) ) ); ?></em></div>
             <div class="ps_more_result" id="ps_fetching_result_popup">
-                <img src="<?php echo WOOPS_IMAGES_URL; ?>/more-results-loader.gif" />
-                <div><em><?php wc_ps_ict_t_e( 'Fetching Text', __('Fetching search results...', 'woocommerce-predictive-search' ) ); ?></em></div>
+                <img src="<?php echo esc_url( WOOPS_IMAGES_URL .'/more-results-loader.gif' ); ?>" />
+                <div><em><?php esc_html_e( wc_ps_ict_t__( 'Fetching Text', __('Fetching search results...', 'woocommerce-predictive-search' ) ) ); ?></em></div>
             </div>
-            <div class="ps_more_result" id="ps_no_result_popup"><em><?php wc_ps_ict_t_e( 'No Fetching Result Text', __('No Results to Show', 'woocommerce-predictive-search' ) ); ?></em></div>
+            <div class="ps_more_result" id="ps_no_result_popup"><em><?php esc_html_e( wc_ps_ict_t__( 'No Fetching Result Text', __('No Results to Show', 'woocommerce-predictive-search' ) ) ); ?></em></div>
             <div id="ps_footer_container">
             </div>
 		</div>

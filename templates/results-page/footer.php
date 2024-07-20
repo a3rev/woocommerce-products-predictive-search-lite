@@ -11,6 +11,6 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 	{{ if ( next_page_number > 1 ) { }}
 	<div id="ps_more_check"></div>
 	{{ } else if ( total_items == 0 && first_load ) { }}
-	<p style="text-align:center"><?php wc_ps_ict_t_e( 'No Result Text', __('Nothing Found! Please refine your search and try again.', 'woocommerce-predictive-search' ) ); ?></p>
+	<p style="text-align:center"><?php echo esc_js( wc_ps_ict_t__( 'No Result Text', __('Nothing Found! Please refine your search and try again.', 'woocommerce-predictive-search' ) ) ); ?></p>
 	{{ } }}
 </script>

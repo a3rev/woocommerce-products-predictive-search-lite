@@ -87,11 +87,11 @@ class Sync
 	?>
 		<div class="message error wc_ps_sync_data_warning">
     		<p>
-    			<strong><?php echo $heading_text; ?></strong>
-    			- <?php echo $warning_text; ?>
+    			<strong><?php esc_html_e( $heading_text ); ?></strong>
+    			- <?php esc_html_e( $warning_text ); ?>
     		</p>
     		<p>
-    			<a class="button button-primary" href="<?php echo $sync_data_url; ?>" target="_parent"><?php echo __( 'Sync Now' , 'woocommerce-predictive-search' ); ?></a>
+    			<a class="button button-primary" href="<?php echo esc_url( $sync_data_url ); ?>" target="_parent"><?php esc_html_e( 'Sync Now' , 'woocommerce-predictive-search' ); ?></a>
     		</p>
     	</div>
 	<?php

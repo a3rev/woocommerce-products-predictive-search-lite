@@ -10,39 +10,40 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 <?php if ( ! empty( $ps_search_list ) && count( $ps_search_list ) > 0 ) { ?>
 	<p class="rs_result_heading">
-		<?php wc_ps_ict_t_e( 'Viewing all', __('Viewing all', 'woocommerce-predictive-search' ) ); ?> 
-		<strong><span class="ps_heading_search_in_name"><?php echo $items_search_default[$ps_current_search_in]['name']; ?></span></strong> 
-		<?php wc_ps_ict_t_e( 'Search Result Text', __('search results for your search query', 'woocommerce-predictive-search' ) ); ?> 
-		<strong><?php echo $search_keyword; ?></strong>
+		<?php esc_html_e( wc_ps_ict_t__( 'Viewing all', __('Viewing all', 'woocommerce-predictive-search' ) ) ); ?> 
+		<strong><span class="ps_heading_search_in_name"><?php echo esc_html( $items_search_default[$ps_current_search_in]['name'] ); ?></span></strong> 
+		<?php esc_html_e( wc_ps_ict_t__( 'Search Result Text', __('search results for your search query', 'woocommerce-predictive-search' ) ) ); ?> 
+		<strong><?php echo esc_html( $search_keyword ); ?></strong>
 	</p>
 <?php } ?>
 
 <?php
 if ( ! empty( $ps_search_list ) && count( $ps_search_list ) > 1 ) {
-	if ( $permalink_structure == '')
-		$other_link_search = get_permalink( $woocommerce_search_page_id ).'&rs='. urlencode($search_keyword);
-	else
-		$other_link_search = rtrim( get_permalink( $woocommerce_search_page_id ), '/' ).'/keyword/'. urlencode($search_keyword);
 	$line_vertical = '';
 ?>
 	<div class="rs_result_others">
-		<div class="rs_result_others_heading"><?php wc_ps_ict_t_e( 'Sort Text', __('Sort Search Results by', 'woocommerce-predictive-search' ) ); ?></div>
+		<div class="rs_result_others_heading"><?php esc_html_e( wc_ps_ict_t__( 'Sort Text', __('Sort Search Results by', 'woocommerce-predictive-search' ) ) ); ?></div>
 <?php
 	foreach ( $ps_search_list as $search_other_item ) {
 		if ( ! isset( $items_search_default[$search_other_item] ) ) continue;
 
 		if ( $permalink_structure == '' ) {
+			$parameters = '&rs='. urlencode($search_keyword) .'&search_in='. $search_other_item .'&cat_in='. $cat_in .'&search_other='. $search_other;
+			$other_link_search = get_permalink( $woocommerce_search_page_id ) . $parameters;
+			$data_href = '?page_id='. $woocommerce_search_page_id . $parameters;
 ?>
-		<?php echo $line_vertical; ?>
+		<?php echo esc_html( $line_vertical ); ?>
 		<span class="rs_result_other_item">
-			<a class="ps_navigation ps_navigation<?php echo $search_other_item; ?>" href="<?php echo $other_link_search; ?>&search_in=<?php echo $search_other_item; ?>&cat_in=<?php echo $cat_in; ?>&search_other=<?php echo $search_other; ?>" data-href="?page_id=<?php echo $woocommerce_search_page_id; ?>&rs=<?php echo urlencode($search_keyword); ?>&search_in=<?php echo $search_other_item; ?>&cat_in=<?php echo $cat_in; ?>&search_other=<?php echo $search_other; ?>" alt=""><?php echo $items_search_default[$search_other_item]['name']; ?></a>
+			<a class="ps_navigation ps_navigation<?php echo esc_attr( $search_other_item ); ?>" href="<?php echo esc_url( $other_link_search ); ?>" data-href="<?php echo esc_attr( $data_href ); ?>" alt=""><?php echo esc_html( $items_search_default[$search_other_item]['name'] ); ?></a>
 		</span>
 <?php
 		} else {
+			$parameters = 'keyword/'. urlencode($search_keyword) .'/search-in/'. $search_other_item .'/cat-in/'. $cat_in .'/search-other/'. $search_other;
+			$other_link_search = rtrim( get_permalink( $woocommerce_search_page_id ), '/' ) .'/'. $parameters;
 ?>
-		<?php echo $line_vertical; ?>
+		<?php echo esc_html( $line_vertical ); ?>
 		<span class="rs_result_other_item">
-			<a class="ps_navigation ps_navigation<?php echo $search_other_item; ?>" href="<?php echo $other_link_search; ?>/search-in/<?php echo $search_other_item; ?>/cat-in/<?php echo $cat_in; ?>/search-other/<?php echo $search_other; ?>" data-href="keyword/<?php echo urlencode($search_keyword); ?>/search-in/<?php echo $search_other_item; ?>/cat-in/<?php echo $cat_in; ?>/search-other/<?php echo $search_other; ?>" alt=""><?php echo $items_search_default[$search_other_item]['name']; ?></a>
+			<a class="ps_navigation ps_navigation<?php echo esc_attr( $search_other_item ); ?>" href="<?php echo esc_url( $other_link_search ); ?>" data-href="<?php echo esc_attr( $parameters ); ?>" alt=""><?php echo esc_html( $items_search_default[$search_other_item]['name'] ); ?></a>
 		</span>
 <?php
 		}

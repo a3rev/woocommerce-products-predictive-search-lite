@@ -40,7 +40,7 @@ class MetaBox
 		<div class="misc-pub-section">
 			<label>
 				<input type="checkbox" <?php checked( true, $is_excluded, true ); ?> value="1" name="ps_exclude_item" class="a3_ps_exclude_item" />
-				<?php echo __( 'Hide from Predictive Search results', 'woocommerce-predictive-search' ); ?>
+				<?php esc_html_e( 'Hide from Predictive Search results', 'woocommerce-predictive-search' ); ?>
 			</label>
 		</div>
 	<?php
