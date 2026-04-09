@@ -54,6 +54,7 @@ class ComposerStaticInit1cab9613ae92cedc4bff637cfe4e49be
         'A3Rev\\WCPredictiveSearch\\Hook_Filter' => __DIR__ . '/../..' . '/classes/class-wc-predictive-search-filter.php',
         'A3Rev\\WCPredictiveSearch\\Legacy_API' => __DIR__ . '/../..' . '/includes/class-legacy-api.php',
         'A3Rev\\WCPredictiveSearch\\Main' => __DIR__ . '/../..' . '/includes/class-wc-predictive-search.php',
+        'A3Rev\\WCPredictiveSearch\\EditorSidebar' => __DIR__ . '/../..' . '/classes/class-wc-predictive-search-editor-sidebar.php',
         'A3Rev\\WCPredictiveSearch\\MetaBox' => __DIR__ . '/../..' . '/classes/class-wc-predictive-search-metabox.php',
         'A3Rev\\WCPredictiveSearch\\Schedule' => __DIR__ . '/../..' . '/classes/class-wc-predictive-search-schedule.php',
         'A3Rev\\WCPredictiveSearch\\Shortcodes' => __DIR__ . '/../..' . '/classes/class-wc-predictive-search-shortcodes.php',

@@ -38,6 +38,7 @@ class Admin_UI
 	public $plugin_path            = WOOPS_NAME;
 	public $google_api_key_option  = '';
 	public $google_map_api_key_option = '';
+	public $google_map_api_key       = '';
 	public $toggle_box_open_option = '';
 	public $version_transient      = '';
 	public $is_free_plugin         = true;

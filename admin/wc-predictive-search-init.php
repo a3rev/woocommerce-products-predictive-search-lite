@@ -12,6 +12,7 @@ function wc_predictive_install(){
 
 	global $wc_predictive_search;
 	$wc_predictive_search->install_databases();
+	$wc_predictive_search->set_tables_wpdbfix();
 
 	update_option('wc_predictive_search_lite_version', WOOPS_VERSION );
 
@@ -36,11 +37,10 @@ function woops_init() {
 
 		update_option( 'wc_predictive_search_just_confirm', 1 );
 	}
-
-	wc_predictive_search_plugin_textdomain();
 }
 
 // Add language
+add_action( 'after_setup_theme', 'wc_predictive_search_plugin_textdomain', 5 );
 add_action('init', 'woops_init');
 
 // Add custom style to dashboard
@@ -77,10 +77,12 @@ add_shortcode('woocommerce_search', array('\A3Rev\WCPredictiveSearch\Shortcodes'
 // Add shortcode [woocommerce_widget_search]
 add_shortcode('woocommerce_search_widget', array('\A3Rev\WCPredictiveSearch\Shortcodes', 'parse_shortcode_search_widget'));
 
-// Add Predictive Search Meta Box to all post type
+// Block Editor: Plugin Document Setting Panel (replaces legacy meta box)
+\A3Rev\WCPredictiveSearch\EditorSidebar::init();
+
+// Classic Editor: Legacy meta box (backward compatibility)
 add_action( 'add_meta_boxes', array('\A3Rev\WCPredictiveSearch\MetaBox','create_custombox'), 9 );
 
-// Save Predictive Search Meta Box to all post type
 if(in_array(basename($_SERVER['PHP_SELF']), array('post.php', 'page.php', 'page-new.php', 'post-new.php'))){
 	add_action( 'save_post', array('\A3Rev\WCPredictiveSearch\MetaBox','save_custombox' ), 11 );
 }

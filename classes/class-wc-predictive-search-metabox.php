@@ -18,7 +18,12 @@ class MetaBox
 	public static function create_custombox() {
 		global $post;
 
-		add_action( 'post_submitbox_misc_actions', array( __CLASS__, 'hide_from_results_box' ) );
+		$current_screen = get_current_screen();
+		$is_block_editor = ( $current_screen && method_exists( $current_screen, 'is_block_editor' ) && $current_screen->is_block_editor() );
+
+		if ( ! $is_block_editor ) {
+			add_action( 'post_submitbox_misc_actions', array( __CLASS__, 'hide_from_results_box' ) );
+		}
 	}
 
 	public static function hide_from_results_box() {

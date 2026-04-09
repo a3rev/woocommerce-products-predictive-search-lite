@@ -78,7 +78,11 @@ class Global_Panel extends FrameWork\Admin_UI
 	/* Settings Constructor */
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
-		add_action( 'plugins_loaded', array( $this, 'init_form_fields' ), 1 );
+		if ( did_action( 'plugins_loaded' ) ) {
+			$this->init_form_fields();
+		} else {
+			add_action( 'plugins_loaded', array( $this, 'init_form_fields' ), 1 );
+		}
 		$this->subtab_init();
 
 		$this->form_messages = array(

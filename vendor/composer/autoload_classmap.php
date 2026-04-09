@@ -36,6 +36,7 @@ return array(
     'A3Rev\\WCPredictiveSearch\\Hook_Filter' => $baseDir . '/classes/class-wc-predictive-search-filter.php',
     'A3Rev\\WCPredictiveSearch\\Legacy_API' => $baseDir . '/includes/class-legacy-api.php',
     'A3Rev\\WCPredictiveSearch\\Main' => $baseDir . '/includes/class-wc-predictive-search.php',
+    'A3Rev\\WCPredictiveSearch\\EditorSidebar' => $baseDir . '/classes/class-wc-predictive-search-editor-sidebar.php',
     'A3Rev\\WCPredictiveSearch\\MetaBox' => $baseDir . '/classes/class-wc-predictive-search-metabox.php',
     'A3Rev\\WCPredictiveSearch\\Schedule' => $baseDir . '/classes/class-wc-predictive-search-schedule.php',
     'A3Rev\\WCPredictiveSearch\\Shortcodes' => $baseDir . '/classes/class-wc-predictive-search-shortcodes.php',

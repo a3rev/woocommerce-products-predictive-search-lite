@@ -79,7 +79,11 @@ class Performance extends FrameWork\Admin_UI
 	/*-----------------------------------------------------------------------------------*/
 	public function __construct() {
 		
-		add_action( 'plugins_loaded', array( $this, 'init_form_fields' ), 1 );
+		if ( did_action( 'plugins_loaded' ) ) {
+			$this->init_form_fields();
+		} else {
+			add_action( 'plugins_loaded', array( $this, 'init_form_fields' ), 1 );
+		}
 		$this->subtab_init();
 		
 		$this->form_messages = array(
@@ -315,7 +319,7 @@ class Performance extends FrameWork\Admin_UI
 
 		// If have Error log on Sync
 		global $wc_ps_errors_log;
-		$auto_synced_error_log   = trim( $wc_ps_errors_log->get_error( 'auto_sync' ) );
+		$auto_synced_error_log   = isset( $wc_ps_errors_log ) ? trim( $wc_ps_errors_log->get_error( 'auto_sync' ) ) : '';
 
   		// Define settings
      	$this->form_fields = apply_filters( $this->option_name . '_settings_fields', array(
@@ -550,15 +554,17 @@ class Performance extends FrameWork\Admin_UI
 		wp_enqueue_script( 'bootstrap-modal' );
 
 		global $wc_ps_errors_log;
-		$auto_synced_error_log   = trim( $wc_ps_errors_log->get_error( 'auto_sync' ) );
-		$manual_synced_error_log = trim( $wc_ps_errors_log->get_error( 'manual_sync' ) );
+		$auto_synced_error_log   = isset( $wc_ps_errors_log ) ? trim( $wc_ps_errors_log->get_error( 'auto_sync' ) ) : '';
+		$manual_synced_error_log = isset( $wc_ps_errors_log ) ? trim( $wc_ps_errors_log->get_error( 'manual_sync' ) ) : '';
 
-		if ( '' != $auto_synced_error_log ) {
+		if ( '' != $auto_synced_error_log && isset( $wc_ps_errors_log ) ) {
 			echo $wc_ps_errors_log->error_modal( 'auto_sync', $auto_synced_error_log );
 		}
 
 		echo '<div class="manual_sync_error_container">';
-		echo $wc_ps_errors_log->error_modal( 'manual_sync', $manual_synced_error_log );
+		if ( isset( $wc_ps_errors_log ) ) {
+			echo $wc_ps_errors_log->error_modal( 'manual_sync', $manual_synced_error_log );
+		}
 		echo '</div>';
 ?>
 <style type="text/css">
