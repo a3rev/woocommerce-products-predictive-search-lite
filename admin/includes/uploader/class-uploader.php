@@ -107,9 +107,9 @@ class Uploader extends Admin_UI
 			$strip_methods = 1;
 		}
 
-		$output .= '<input type="hidden" name="'.$attachment_id_name_attribute.'" id="'.$id_attribute.'_attachment_id" value="'.$attachment_id.'" class=" a3_upload_attachment_id" />';
-		$output .= '<input type="hidden" name="'.$attachment_size_name_attribute.'" id="'.$id_attribute.'_attachment_size" value="'.$size.'" class=" a3_upload_attachment_size" />';
-		$output .= '<input data-strip-methods="'.$strip_methods.'" type="text" name="'.$name_attribute.'" id="'.$id_attribute.'" value="'.esc_attr( $value ).'" class="'.$id_attribute. ' ' .$class.' a3_upload" style="'.$css.'" rel="'.$field_name.'" /> ';
+		$output .= '<input type="hidden" name="'.esc_attr( $attachment_id_name_attribute ).'" id="'.esc_attr( $id_attribute ).'_attachment_id" value="'.esc_attr( $attachment_id ).'" class=" a3_upload_attachment_id" />';
+		$output .= '<input type="hidden" name="'.esc_attr( $attachment_size_name_attribute ).'" id="'.esc_attr( $id_attribute ).'_attachment_size" value="'.esc_attr( $size ).'" class=" a3_upload_attachment_size" />';
+		$output .= '<input data-strip-methods="'.esc_attr( $strip_methods ).'" type="text" name="'.esc_attr( $name_attribute ).'" id="'.esc_attr( $id_attribute ).'" value="'.esc_attr( $value ).'" class="'.esc_attr( $id_attribute ). ' ' .esc_attr( $class ).' a3_upload" style="'.esc_attr( $css ).'" rel="'.esc_attr( $field_name ).'" /> ';
 		$output .= '<input id="upload_'.$id_attribute.'" class="a3rev-ui-upload-button a3_upload_button button" type="button" value="'.__( 'Upload', 'woocommerce-predictive-search' ).'" /> '.$description;
 		
 		$output .= '<div style="clear:both;"></div><div class="a3_screenshot" id="'.$id_attribute.'_image" style="'.( ( $value == '' ) ? 'display:none;' : 'display:block;' ).'">';

@@ -8,8 +8,6 @@
  *
  * plugins_loaded()
  * a3_wp_admin()
- * yellow_message_dontshow()
- * yellow_message_dismiss()
  * plugin_extra_links()
  */
 
@@ -31,21 +29,6 @@ class Hook_Filter
 
 	public static function a3_wp_admin() {
 		wp_enqueue_style( 'a3rev-wp-admin-style', WOOPS_CSS_URL . '/a3_wp_admin.css' );
-	}
-
-	public static function yellow_message_dontshow() {
-		check_ajax_referer( 'wc_ps_yellow_message_dontshow', 'security' );
-		$option_name   = sanitize_text_field( $_REQUEST['option_name'] );
-		update_option( $option_name, 1 );
-		die();
-	}
-
-	public static function yellow_message_dismiss() {
-		check_ajax_referer( 'wc_ps_yellow_message_dismiss', 'security' );
-		$session_name   = $_REQUEST['session_name'];
-		if ( !isset($_SESSION) ) { @session_start(); }
-		$_SESSION[$session_name] = 1 ;
-		die();
 	}
 
 	public static function plugin_extra_links($links, $plugin_name) {

@@ -42,6 +42,11 @@ class Dashboard_AJAX
 	public function get_exclude_options_ajax() {
 		check_ajax_referer( 'wc_predictive_search_get_exclude_options', 'security' );
 
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json( array() );
+			die();
+		}
+
 		global $wpdb;
 
 		$keyword = isset( $_GET['keyword']) ? sanitize_text_field( $_GET['keyword'] ) : '';
@@ -52,22 +57,23 @@ class Dashboard_AJAX
 			die();
 		}
 
+		$keyword_like = '%' . $wpdb->esc_like( $keyword ) . '%';
 		$options_data = array();
 
 		switch ( $type ) {
 			case 'product':
 			case 'post':
 			case 'page':
-				$search_results = $wpdb->get_results( "SELECT post_id, post_title FROM ".$wpdb->prefix."ps_posts WHERE post_type='{$type}' AND post_title LIKE '%". $keyword . "%' ORDER BY post_title ASC" );
+				$search_results = $wpdb->get_results( $wpdb->prepare( "SELECT post_id, post_title FROM {$wpdb->prefix}ps_posts WHERE post_type=%s AND post_title LIKE %s ORDER BY post_title ASC", $type, $keyword_like ) );
 				if ( $search_results ) {
 					foreach( $search_results as $item_data ) {
 						$options_data[] = array( 'value' => $item_data->post_id, 'caption' => $item_data->post_title );
 					}
 				}
 				break;
-			
+
 			case 'product-category':
-				$search_results = $wpdb->get_results( "SELECT term_id, name FROM ".$wpdb->prefix."ps_product_categories WHERE name LIKE '%". $keyword . "%' ORDER BY name ASC" );
+				$search_results = $wpdb->get_results( $wpdb->prepare( "SELECT term_id, name FROM {$wpdb->prefix}ps_product_categories WHERE name LIKE %s ORDER BY name ASC", $keyword_like ) );
 				if ( $search_results ) {
 					foreach( $search_results as $item_data ) {
 						$options_data[] = array( 'value' => $item_data->term_id, 'caption' => $item_data->name );
@@ -76,7 +82,7 @@ class Dashboard_AJAX
 				break;
 
 			case 'product-tag':
-				$search_results = $wpdb->get_results( "SELECT term_id, name FROM ".$wpdb->prefix."ps_product_tags WHERE name LIKE '%". $keyword . "%' ORDER BY name ASC" );
+				$search_results = $wpdb->get_results( $wpdb->prepare( "SELECT term_id, name FROM {$wpdb->prefix}ps_product_tags WHERE name LIKE %s ORDER BY name ASC", $keyword_like ) );
 				if ( $search_results ) {
 					foreach( $search_results as $item_data ) {
 						$options_data[] = array( 'value' => $item_data->term_id, 'caption' => $item_data->name );
