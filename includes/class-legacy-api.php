@@ -32,7 +32,7 @@ class Legacy_API {
 
 	public function wc_ps_api_handler() {
 		if ( isset( $_REQUEST['action'] ) ) {
-			$action = addslashes( trim( $_REQUEST['action'] ) );
+			$action = sanitize_key( trim( wp_unslash( $_REQUEST['action'] ) ) );
 			switch ( $action ) {
 				case 'get_result_popup' :
 					$this->get_result_popup();
@@ -84,6 +84,7 @@ class Legacy_API {
 		if ( $show_in_cat == 1 ) $show_in_cat = true; else $show_in_cat = false;
 		if ( isset($_REQUEST['q']) && trim($_REQUEST['q']) != '') $search_keyword = sanitize_text_field( wp_unslash( $_REQUEST['q'] ) );
 		if ( isset($_REQUEST['cat_in']) && trim($_REQUEST['cat_in']) != '') $cat_in = sanitize_text_field( wp_unslash( $_REQUEST['cat_in'] ) );
+		$search_in = array();
 		if ( isset($_REQUEST['search_in']) && trim($_REQUEST['search_in']) != '') $search_in = json_decode( sanitize_text_field( wp_unslash( $_REQUEST['search_in'] ) ), true );
 		if ( ! is_array($search_in) || count($search_in) < 1 || array_sum($search_in) < 1) $search_in = $search_in_default;
 		if ( isset($_REQUEST['widget_template']) && trim($_REQUEST['widget_template']) != '' ) $widget_template = sanitize_key( wp_unslash( $_REQUEST['widget_template'] ) );
@@ -174,10 +175,10 @@ class Legacy_API {
 						else
 							$search_in_parameter = '/search-in/'.$other_rs;
 						if ( $permalink_structure == '')
-							$link_search = get_permalink( $woocommerce_search_page_id ).'&rs='. urlencode($search_keyword) .$search_in_parameter.'&search_other='.implode(",", $search_other).'&cat_in='.$cat_in;
+							$link_search = get_permalink( $woocommerce_search_page_id ).'&rs='. urlencode($search_keyword) .$search_in_parameter.'&search_other='.implode(",", $search_other).'&cat_in='.rawurlencode($cat_in);
 						else
-							$link_search = rtrim( get_permalink( $woocommerce_search_page_id ), '/' ).'/keyword/'. urlencode($search_keyword) .$search_in_parameter.'/cat-in/'.$cat_in.'/search-other/'.implode(",", $search_other);
-						$rs_item = '<a href="'.$link_search.'">'.$items_search_default[$other_rs]['name'].'<div class="see_more_arrow" aria-label="'.__( 'View More', 'woocommerce-predictive-search' ).'"><svg viewBox="0 0 256 512" height="12" width="12" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle;"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg></div></a>';
+							$link_search = rtrim( get_permalink( $woocommerce_search_page_id ), '/' ).'/keyword/'. urlencode($search_keyword) .$search_in_parameter.'/cat-in/'.rawurlencode($cat_in).'/search-other/'.implode(",", $search_other);
+						$rs_item = '<a href="'.esc_url($link_search).'">'.esc_html( $items_search_default[$other_rs]['name'] ).'<div class="see_more_arrow" aria-label="'.__( 'View More', 'woocommerce-predictive-search' ).'"><svg viewBox="0 0 256 512" height="12" width="12" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle;"><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"></path></svg></div></a>';
 						$rs_footer_html .= "$rs_item";
 					}
 

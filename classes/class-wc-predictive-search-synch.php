@@ -29,33 +29,23 @@ class Sync
 		if ( is_admin() ) {
 			// AJAX sync data
 			add_action('wp_ajax_wc_predictive_search_start_sync', array( $this, 'wc_predictive_search_start_sync_ajax' ) );
-			add_action('wp_ajax_nopriv_wc_predictive_search_start_sync', array( $this, 'wc_predictive_search_start_sync_ajax' ) );
 			add_action('wp_ajax_wc_predictive_search_sync_products', array( $this, 'wc_predictive_search_sync_products_ajax' ) );
-			add_action('wp_ajax_nopriv_wc_predictive_search_sync_products', array( $this, 'wc_predictive_search_sync_products_ajax' ) );
 
 			add_action('wp_ajax_wc_predictive_search_sync_product_skus', array( $this, 'wc_predictive_search_sync_product_skus_ajax' ) );
-			add_action('wp_ajax_nopriv_wc_predictive_search_sync_product_skus', array( $this, 'wc_predictive_search_sync_product_skus_ajax' ) );
 
 			add_action('wp_ajax_wc_predictive_search_sync_categories', array( $this, 'wc_predictive_search_sync_categories_ajax' ) );
-			add_action('wp_ajax_nopriv_wc_predictive_search_sync_categories', array( $this, 'wc_predictive_search_sync_categories_ajax' ) );
 
 			add_action('wp_ajax_wc_predictive_search_sync_tags', array( $this, 'wc_predictive_search_sync_tags_ajax' ) );
-			add_action('wp_ajax_nopriv_wc_predictive_search_sync_tags', array( $this, 'wc_predictive_search_sync_tags_ajax' ) );
 
 			add_action('wp_ajax_wc_predictive_search_sync_relationships', array( $this, 'wc_predictive_search_sync_relationships_ajax' ) );
-			add_action('wp_ajax_nopriv_wc_predictive_search_sync_relationships', array( $this, 'wc_predictive_search_sync_relationships_ajax' ) );
 
 			add_action('wp_ajax_wc_predictive_search_sync_posts', array( $this, 'wc_predictive_search_sync_posts_ajax' ) );
-			add_action('wp_ajax_nopriv_wc_predictive_search_sync_posts', array( $this, 'wc_predictive_search_sync_posts_ajax' ) );
 
 			add_action('wp_ajax_wc_predictive_search_sync_pages', array( $this, 'wc_predictive_search_sync_pages_ajax' ) );
-			add_action('wp_ajax_nopriv_wc_predictive_search_sync_pages', array( $this, 'wc_predictive_search_sync_pages_ajax' ) );
 
 			add_action('wp_ajax_wc_predictive_search_sync_end', array( $this, 'wc_predictive_search_sync_end_ajax' ) );
-			add_action('wp_ajax_nopriv_wc_predictive_search_sync_end', array( $this, 'wc_predictive_search_sync_end_ajax' ) );
 
 			add_action('wp_ajax_wc_predictive_search_manual_sync_error', array( $this, 'wc_predictive_search_manual_sync_error_ajax' ) );
-			add_action('wp_ajax_nopriv_wc_predictive_search_manual_sync_error', array( $this, 'wc_predictive_search_manual_sync_error_ajax' ) );
 		}
 	}
 
@@ -183,6 +173,9 @@ class Sync
 
 	public function wc_predictive_search_start_sync_ajax() {
 		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 
 		$result = $this->wc_predictive_search_start_sync( $this->error_id );
 
@@ -193,6 +186,9 @@ class Sync
 
 	public function wc_predictive_search_sync_products_ajax() {
 		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 
 		$result = $this->wc_predictive_search_sync_posts( 'product', $this->error_id );
 
@@ -203,6 +199,9 @@ class Sync
 
 	public function wc_predictive_search_sync_product_skus_ajax() {
 		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 
 		$result = $this->wc_predictive_search_sync_product_skus( $this->error_id );
 
@@ -213,6 +212,9 @@ class Sync
 
 	public function wc_predictive_search_sync_categories_ajax() {
 		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 		$status = 'completed';
 
 		echo json_encode( array( 'status' => $status, 'current_items' => 0, 'total_items' => 0 ) );
@@ -222,6 +224,9 @@ class Sync
 
 	public function wc_predictive_search_sync_tags_ajax() {
 		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 		$status = 'completed';
 
 		echo json_encode( array( 'status' => $status, 'current_items' => 0, 'total_items' => 0 ) );
@@ -231,6 +236,9 @@ class Sync
 
 	public function wc_predictive_search_sync_relationships_ajax() {
 		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 		$status = 'completed';
 
 		echo json_encode( array( 'status' => $status, 'current_items' => 0, 'total_items' => 0 ) );
@@ -240,6 +248,9 @@ class Sync
 
 	public function wc_predictive_search_sync_posts_ajax() {
 		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 
 		$result = $this->wc_predictive_search_sync_posts( 'post', $this->error_id );
 
@@ -250,6 +261,9 @@ class Sync
 
 	public function wc_predictive_search_sync_pages_ajax() {
 		check_ajax_referer( WOOPS_KEY . '_a3_admin_ui_event', 'security' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 
 		$result = $this->wc_predictive_search_sync_posts( 'page', $this->error_id );
 
@@ -260,6 +274,9 @@ class Sync
 
 	public function wc_predictive_search_manual_sync_error_ajax() {
 		check_ajax_referer( 'wc_predictive_search_manual_sync_error', 'security' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 
 		global $wc_ps_errors_log;
 
@@ -270,6 +287,9 @@ class Sync
 
 	public function wc_predictive_search_sync_end_ajax() {
 		check_ajax_referer( 'wc_predictive_search_sync_end', 'security' );
+		if ( ! current_user_can( 'manage_woocommerce' ) ) {
+			wp_send_json_error( null, 403 );
+		}
 
 		update_option( 'wc_predictive_search_synced_posts_data', 1 );
 		update_option( 'wc_predictive_search_manual_synced_completed_time', current_time( 'timestamp' ) );
