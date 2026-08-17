@@ -265,7 +265,7 @@ class Shortcodes
                 	<label for="woo_search_show_catdropdown"><?php esc_html_e('Category Dropdown', 'woocommerce-predictive-search' ); ?>:</label> <input <?php echo ( $disabled_cat_dropdown ) ? 'disabled="disabled"' : ''; ?> type="checkbox" checked="checked" id="woo_search_show_catdropdown" name="woo_search_show_catdropdown" value="1" /> <span class="description"><?php esc_html_e('Search in Product Category Feature', 'woocommerce-predictive-search' ); ?></span>
                 	<?php if ( $disabled_cat_dropdown ) { ?>
                 	<br>
-            		<label>&nbsp;</label><span><?php esc_html_e( sprintf( __( 'Activate and build <a href="%s" target="_blank">Category Cache</a> to activate this feature', 'woocommerce-predictive-search' ), admin_url( 'admin.php?page=woo-predictive-search&tab=search-box-settings&box_open=predictive_search_category_cache_box#predictive_search_category_cache_box', 'relative' ) ) ); ?></span>
+            		<label>&nbsp;</label><span><?php printf( wp_kses_post( __( 'Activate and build <a href="%s" target="_blank">Category Cache</a> to activate this feature', 'woocommerce-predictive-search' ) ), esc_url( admin_url( 'admin.php?page=woo-predictive-search&tab=search-box-settings&box_open=predictive_search_category_cache_box#predictive_search_category_cache_box', 'relative' ) ) ); ?></span>
             		<?php } ?>
             	</p>
 
